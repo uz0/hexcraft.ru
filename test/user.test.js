@@ -1,10 +1,19 @@
 'use strict';
 
 var expect = require('expect.js');
-var User = require('../src/api/models').User;
+var models = require('../src/api/models');
+var User = models.User;
+
 var testName = 'johndoe';
 
 describe('User', () => {
+  before((done) => {
+    models.sequelize.sync().then(() => {
+      done();
+    });
+  })
+
+
   it('create', () => {
     return User.create({ username: testName }).then((user) => {
       expect(user.username).to.equal(testName);

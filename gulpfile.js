@@ -1,35 +1,77 @@
-var gulp = require('gulp');
-var sass = require('gulp-sass');
-var autoprefixer = require('gulp-autoprefixer');
-var jshint = require('gulp-jshint');
-var concat = require('gulp-concat');
+const gulp = require('gulp');
+const sass = require('gulp-sass');
+const autoprefixer = require('gulp-autoprefixer');
+const jshint = require('gulp-jshint');
+const concat = require('gulp-concat');
+const jade = require('gulp-jade');
+const marked = require('marked');
+const sourcemaps = require('gulp-sourcemaps');
+const babel = require('gulp-babel');
+const nodemon = require('gulp-nodemon')
+
+const path = {
+  styles: {
+    from: 'src/site/stylesheets/**/*.scss',
+    to: 'public/stylesheets'
+  },
+  scripts: {
+    from: 'src/site/javascripts/**/*.js',
+    to: 'public/javascripts'
+  },
+  templates: {
+    from: 'src/site/templates/**/*.jade',
+    exclude: ['!**/layout.jade', '!**/_header.jade', '!**/_footer.jade'],
+    to: 'public/'
+  }
+}
 
 // Styles
 gulp.task('styles', () => {
-  return gulp.src('src/site/stylesheets/**/*.scss')
+  return gulp.src(path.styles.from)
+    .pipe(sourcemaps.init())
     .pipe(sass())
-    .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
-    .pipe(gulp.dest('public/stylesheets'))
+    .pipe(autoprefixer('last 2 version'))
+    .pipe(sourcemaps.write('./maps'))
+    .pipe(gulp.dest(path.styles.to))
 });
 
 // Scripts
 gulp.task('scripts', () => {
-  return gulp.src('src/javascripts/**/*.js')
+  return gulp.src(path.scripts.from)
+    .pipe(sourcemaps.init())
     .pipe(jshint('.jshintrc'))
     .pipe(jshint.reporter('default'))
+    .pipe(babel({
+        presets: ['es2015']
+    }))
     .pipe(concat('bundle.js'))
-    .pipe(gulp.dest('public/javascripts'))
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest(path.scripts.to))
 });
 
-// Default task
-gulp.task('default', ['styles', 'scripts']);
+// Templates
+gulp.task('templates', () => {
+  return gulp.src(path.templates.exclude.concat([path.templates.from]))
+    .pipe(jade({
+      pretty: false
+    }))
+    .pipe(gulp.dest(path.templates.to))
+});
 
 // Watch
 gulp.task('watch', () => {
-  // Watch .scss files
-  gulp.watch('src/site/stylesheets/**/*.scss', ['styles']);
-
-  // Watch .js files
-  gulp.watch('src/javascripts/**/*.js', ['scripts']);
-
+  gulp.watch(path.styles.from, ['styles']);
+  gulp.watch(path.scripts.from, ['scripts']);
+  gulp.watch(path.templates.from, ['templates']);
+  nodemon({ script: 'app.js', ext: 'js'}).on('restart', () => {
+    console.log('restarted');
+  })
 });
+
+// CLR
+gulp.task('clr', () => {
+  process.stdout.write('\x1Bc');
+});
+
+// Default task
+gulp.task('default', ['clr', 'styles', 'scripts', 'templates', 'watch']);

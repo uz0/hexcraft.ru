@@ -32,10 +32,6 @@ app.use((err, req, res, next) => {
 models.sequelize.sync().then(() => {
   var port = process.env.PORT || 3000;
   var server = app.listen(port, () => {
-
-    // clear console
-    process.stdout.write('\x1Bc');
-
     console.log(`Express server http://localhost:${port}/`);
   });
 });

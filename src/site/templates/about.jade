@@ -1,0 +1,11 @@
+extends layout
+
+block vars
+  - var title = 'About'
+
+block content
+  include ./_header.jade
+
+  include:markdown ./about.md
+
+  include ./_footer.jade

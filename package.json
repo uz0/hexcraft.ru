@@ -18,6 +18,11 @@
     "bower": "^1.7.7",
     "expect.js": "^0.3.1",
     "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-jshint": "^2.0.0",
+    "gulp-sass": "^2.2.0",
+    "jshint": "^2.9.1",
     "mocha": "^2.2.5",
     "nodemon": "^1.9.1",
     "sequelize-cli": "^2.3.1"

@@ -11,8 +11,6 @@ var config = {
     exclude: ['.git', 'tmp/*']
 };
 
-console.log(config);
-
 ftpDeploy.deploy(config, function (err, fileName) {
     if (err) console.log("error " + err);
     else console.log("Completed uploading");

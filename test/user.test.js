@@ -7,12 +7,12 @@ var User = models.User;
 var testName = 'johndoe';
 
 describe('User', () => {
+  // WORKAROUND wait db connection established
   before((done) => {
     models.sequelize.sync().then(() => {
       done();
     });
   })
-
 
   it('create', () => {
     return User.create({ username: testName }).then((user) => {

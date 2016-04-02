@@ -11,11 +11,11 @@ var config = {
   exclude: ['.git', 'tmp/*']
 };
 
+ftpDeploy.on('uploading', (data) => {
+  console.log(data.percentComplete);
+});
+
 ftpDeploy.deploy(config, (err, fileName) => {
   if (err) console.log("error " + err);
   else console.log("Completed uploading");
-});
-
-ftpDeploy.on('uploading', (data) => {
-  console.log(data.percentComplete);
 });

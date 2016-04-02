@@ -1,0 +1,7 @@
+node_modules
+bower_components
+npm-debug.log
+*.sqlite
+public
+*.sublime-project
+*.sublime-workspace

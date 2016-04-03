@@ -57,7 +57,7 @@ gulp.task('templates', () => {
   var styles = [];
 
   glob.sync(path.styles.end).forEach(function(file) {
-    styles.push(file);
+    styles.push(file.replace("public", ""));
   })
 
   return gulp.src(path.templates.exclude.concat([path.templates.from]))

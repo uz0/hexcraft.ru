@@ -1,10 +1,10 @@
-
 doctype html
 block vars
 
 html(ng-app="newsApp")
   head
     title= title
+    link(rel="stylesheet", href='/vendor/normalize-css/normalize.css')
     each val in styles
       link(rel="stylesheet", href= val)
 

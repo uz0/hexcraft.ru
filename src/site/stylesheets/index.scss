@@ -1,57 +1,57 @@
-body{
-  background-color: #f2f2f2;
-  padding: 5% 0;
-  width: 100%;
-  height: 100%;
-}
-
+// for inline blocks
 .inl{
   display: inline-block;
   vertical-align: top;
 }
-
+// Container index page
 .index-wrap{
+  background-color: #f2f2f2;
+  width: 100%;
+  height: 100%;
   text-align: center;
-  margin-top: 5%;
-  
-  .logo{
-    width: 30vh;
-    height: 30vh;
-    background-color: #999;
-    margin-right: 2%;
-  }
-  .desc-wrap{
-    text-align: left;
-
-    .name{
-      font-size: 6vh;
-      color: #5f5f5f;
-
-    }
-    .description{
-      font-size: 4vh;
-      color: #999;
-      max-width: 40vw;
-      line-height: 5vh;
-    }
-  }
-  .wrap-button{
-    margin-top: 25vh;
-    padding: 4vh 0;
-
-    .button-game{
-      padding: 2vh 8vw;
-      border: 2px solid #999;
-      font-weight: bold;
-      color: #999;
-      text-decoration: none;
-      cursor: pointer;
-      font-size: 3vh;
-    }
-  }
-  .link{
-    margin: 0 .6vw;
-    font-size: 2vh;
-    color: #999;
-  }
+  padding: 15vh 0;
+  overflow: hidden;
+}
+// Logo
+.index-wrap .logo{
+  width: 30vh;
+  height: 30vh;
+  background-color: #999;
+  margin-right: 2%;
+} 
+// Wrapper the main information about the game
+.index-wrap .desc-wrap{
+  text-align: left;
+}
+// Name 
+.index-wrap .desc-wrap .name{
+  font-size: 6vh;
+  color: #5f5f5f;
+}
+// Description
+.index-wrap .desc-wrap .description{
+  font-size: 4vh;
+  color: #999;
+  max-width: 40vw;
+  line-height: 5vh;
+}
+// Wrapper button game 
+.index-wrap .wrap-button{
+  margin: 29vh 0 4vh 0;
+}
+// Button game
+.index-wrap .button-game{
+  padding: 2vh 8vw;
+  border: 2px solid #999;
+  font-weight: bold;
+  color: #999;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 3vh;
+}
+// Links
+.index-wrap .link{
+  margin: 0 .6vw;
+  font-size: 2vh;
+  color: #999;
 }

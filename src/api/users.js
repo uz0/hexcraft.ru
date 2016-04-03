@@ -10,7 +10,7 @@ router.get('/', function(req, res) {
   });
 });
 
-router.post('/create', function(req, res) {
+router.post('/', function(req, res) {
   models.User.create({
     username: req.body.username
   }).then(function() {

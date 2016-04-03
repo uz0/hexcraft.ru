@@ -7,12 +7,15 @@ const jade = require('gulp-jade');
 const marked = require('marked');
 const sourcemaps = require('gulp-sourcemaps');
 const babel = require('gulp-babel');
-const nodemon = require('gulp-nodemon')
+const nodemon = require('gulp-nodemon');
+const glob = require('glob');
+const Path = require('path');
 
 const path = {
   styles: {
     from: 'src/site/stylesheets/**/*.scss',
-    to: 'public/stylesheets'
+    to: 'public/stylesheets',
+    end: 'public/stylesheets/*.css'
   },
   scripts: {
     from: 'src/site/javascripts/**/*.js',
@@ -51,9 +54,16 @@ gulp.task('scripts', () => {
 
 // Templates
 gulp.task('templates', () => {
+  var styles = [];
+
+  glob.sync(path.styles.end).forEach(function(file) {
+    styles.push(file);
+  })
+
   return gulp.src(path.templates.exclude.concat([path.templates.from]))
     .pipe(jade({
-      pretty: false
+      pretty: false,
+      locals: {styles: styles}
     }))
     .pipe(gulp.dest(path.templates.to))
 });

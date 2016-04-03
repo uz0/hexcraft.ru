@@ -11,6 +11,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // init routes here
 app.use('/users', require('./src/api/users'));
+app.use('/news', require('./src/api/news'));
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -22,8 +23,7 @@ app.use((req, res, next) => {
 // error handler
 // no stacktraces leaked to user unless in development environment
 app.use((err, req, res, next) => {
-  res.status(err.status || 500);
-  res.json('error', {
+  res.status(err.status || 500).json({
     message: err.message,
     error: (app.get('env') === 'development') ? err : {}
   });

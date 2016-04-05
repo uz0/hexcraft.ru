@@ -130,7 +130,8 @@ gulp.task('watch', () => {
   gulp.watch(site.styles.from, ['styles:site']);
   gulp.watch(site.scripts.from, ['scripts:site']);
   gulp.watch(site.templates.from, ['templates:site']);
-  gulp.watch(site.assets.from, ['assets:site']);
+  gulp.watch(site.assets, ['assets:site']);
+  gulp.watch(game.assets, ['assets:game']);
 
   nodemon({
     script: 'app.js',
@@ -151,4 +152,4 @@ gulp.task('clr', () => {
 gulp.task('site', ['styles:site', 'scripts:site', 'templates:site', 'assets:site']);
 gulp.task('api', ['lint:api']);
 gulp.task('game', ['assets:game', 'scripts:game']);
-gulp.task('default', ['clr', 'site', 'api', 'watch']);
+gulp.task('default', ['clr', 'site', 'api', 'game', 'watch']);

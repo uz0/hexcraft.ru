@@ -132,6 +132,7 @@ gulp.task('watch', () => {
   gulp.watch(site.templates.from, ['templates:site']);
   gulp.watch(site.assets.from, ['assets:site']);
   gulp.watch(game.assets, ['assets:game']);
+  gulp.watch(game.scripts, ['scripts:game']);
 
   nodemon({
     script: 'app.js',

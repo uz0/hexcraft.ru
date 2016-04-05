@@ -69,7 +69,8 @@ gulp.task('scripts:site', () => {
     .pipe(jshint('.jshintrc'))
     .pipe(jshint.reporter('default'))
     .pipe(babel({
-        presets: ['es2015']
+        presets: ['es2015'],
+        plugins: ["transform-class-properties"]
     }))
     .pipe(concat('bundle.js'))
     .pipe(sourcemaps.write('.'))
@@ -82,7 +83,8 @@ gulp.task('scripts:game', () => {
     .pipe(jshint('.jshintrc'))
     .pipe(jshint.reporter('default'))
     .pipe(babel({
-        presets: ['es2015']
+        presets: ['es2015'],
+        plugins: ["transform-class-properties"]
     }))
     .pipe(concat('bundle.js'))
     .pipe(sourcemaps.write('.'))

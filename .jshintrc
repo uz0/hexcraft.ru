@@ -20,5 +20,11 @@
   "trailing": true,
   "smarttabs": true,
   "white": true,
-  "globals": { "angular": false, "app": true }
+  "globals": {
+    "angular": false,
+    "app": true,
+    "PIXI": false,
+    "window": false,
+    "document": false
+  }
 }

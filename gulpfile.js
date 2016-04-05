@@ -46,9 +46,9 @@ const api = {
 }
 
 const game = {
-  scripts: 'src/api/**/*.js',
-  assets:  'src/api/**/*.*',
-  ex:      '!src/api/**/*.js',
+  scripts: 'src/game/**/*.js',
+  assets:  'src/game/**/*.*',
+  ex:      '!src/game/**/*.js',
   to:      'public/game/'
 }
 
@@ -130,7 +130,7 @@ gulp.task('watch', () => {
   gulp.watch(site.styles.from, ['styles:site']);
   gulp.watch(site.scripts.from, ['scripts:site']);
   gulp.watch(site.templates.from, ['templates:site']);
-  gulp.watch(site.assets, ['assets:site']);
+  gulp.watch(site.assets.from, ['assets:site']);
   gulp.watch(game.assets, ['assets:game']);
 
   nodemon({

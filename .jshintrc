@@ -1,5 +1,7 @@
 {
   "node": true,
+  "nonew": true,
+  "iterator": true,
   "esnext": true,
   "bitwise": true,
   "camelcase": true,
@@ -18,5 +20,5 @@
   "trailing": true,
   "smarttabs": true,
   "white": true,
-  "globals": { "angular": false }
+  "globals": { "angular": false, "app": true }
 }

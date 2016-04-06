@@ -1,46 +1,53 @@
-// for inline blocks
-.inl{
-  display: inline-block;
-  vertical-align: top;
+.html, .body{
+  height: 100%;
 }
-// Container index page
-.index-wrap{
+// The main container of index page
+.index-page{
   background-color: #f2f2f2;
   width: 100%;
   height: 100%;
-  text-align: center;
-  padding: 15vh 0;
   overflow: hidden;
+  text-align: center;
+}
+// Header
+.index-page .header{
+  padding-top: 12vh;
 }
 // Logo
-.index-wrap .logo{
+.index-page .header .logo{
   width: 30vh;
   height: 30vh;
   background-color: #999;
-  margin-right: 2%;
-} 
-// Wrapper the main information about the game
-.index-wrap .desc-wrap{
-  text-align: left;
+  margin-right: 2vw;
+  display: inline-block;
+  vertical-align: top;
 }
-// Name 
-.index-wrap .desc-wrap .name{
+// Wrapper the main information about the game
+.index-page .header .description{
+  text-align: left;
+  display: inline-block;
+  vertical-align: top;
+  width: 30vw;
+}
+// Name
+.index-page .header .description h1{
+  margin: 0;
   font-size: 6vh;
   color: #5f5f5f;
 }
 // Description
-.index-wrap .desc-wrap .description{
+.index-page .header .description p{
+  margin: 3vh 0 0 0;
   font-size: 4vh;
   color: #999;
-  max-width: 40vw;
-  line-height: 5vh;
+  line-height: 1.5;
 }
-// Wrapper button game 
-.index-wrap .wrap-button{
-  margin: 29vh 0 4vh 0;
+// Footer
+.index-page .footer{
+  margin-top: 22vh;
 }
-// Button game
-.index-wrap .button-game{
+// Button play
+.index-page .footer .button-play a{
   padding: 2vh 8vw;
   border: 2px solid #999;
   font-weight: bold;
@@ -49,8 +56,12 @@
   cursor: pointer;
   font-size: 3vh;
 }
-// Links
-.index-wrap .link{
+// Wrapper of links
+.index-page .footer .links{
+  margin-top: 4vh;
+}
+// Link
+.index-page .footer .links a{
   margin: 0 .6vw;
   font-size: 2vh;
   color: #999;

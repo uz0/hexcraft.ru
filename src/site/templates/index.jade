@@ -4,14 +4,18 @@ block vars
   - var title = 'Home'
 
 block content
-  .index-wrap
-    .inl.logo
-    .inl.desc-wrap
-      h1.name Hexcraft
-      p.description Игра для настоящих мужчин, бла бла бла бла ба бла ы
-    .wrap-button
-      a(class='button-game', href='#') Играть
-    a(class='link', href='#') Об игре
-    a(class='link', href='#') Новости
-    a(class='link', href='#') Гитхаб
-    a(class='link', href='#') Авторы 
+  .index-page
+    header.header
+      .logo
+      .description
+        h1 Hexcraft
+        p Игра для настоящих мужчин, бла бла бла бла ба бла ы
+    footer.footer
+      .button-play
+        a(href='#') Играть
+      .links
+        a(href='#') Об игре
+        a(href='#') Новости
+        a(href='#') Гитхаб
+        a(href='#') Авторы 
+  

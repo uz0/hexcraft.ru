@@ -1,14 +1,14 @@
 doctype html
 block vars
 
-html(ng-app="newsApp")
+html(ng-app="newsApp" class="html")
   head
     title= title
     link(rel="stylesheet", href='/vendor/normalize-css/normalize.css')
     each val in styles
       link(rel="stylesheet", href= val)
 
-  body(ng-controller= ctrl)
+  body(ng-controller= ctrl class="body")
 
     block content
 

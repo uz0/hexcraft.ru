@@ -60,8 +60,8 @@ $unit: 16px;
 
 .footer{
   border-top: 1px solid $layoutBorderColor;
-  line-height: 50px;
-  padding: 5px 0;
+  line-height: $unit * 3.125;
+  padding: $unit / 2 0;
 }
 .footer .links a{
   color: $textColorLinks;

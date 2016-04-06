@@ -6,13 +6,22 @@ block vars
 
 block content
   include ./_header.jade
-  h1 News
-  .news(ng-if="news.list.length")
-    .oneNews(ng-repeat="oneNews in news.list")
-      h2(ng-bind="oneNews.title")
-      p(ng-bind="oneNews.content" ng-show="oneNews.content")
 
-  .news.empty(ng-if="!news.list.length")
-    p EMPTY
+  .news-page
+    .wrap
+      .news(ng-if="news.list.length")
+        .vertical-line
+        .one-news(ng-repeat="oneNews in news.list")
+          label(ng-bind="oneNews.createdAt | date: 'dd.MM.yyyy'")
+
+          .news-content(ng-if="oneNews.content")
+            h2.title(ng-bind="oneNews.title")
+            p(ng-bind="oneNews.content" ng-show="oneNews.content")
+
+          .news-content(ng-if="!oneNews.content")
+            a.title(ng-bind="oneNews.title" href='#')
+
+      .news.empty(ng-if="!news.list.length")
+        p EMPTY
 
   include ./_footer.jade

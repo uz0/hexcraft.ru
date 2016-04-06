@@ -1,3 +1,99 @@
+// Colors
+$colorLinks: #999;
+$layoutBorderColor: #b2b2b2;
+
+
+// Wrap
+.wrap{
+  width: 1050px;
+  margin: 0 auto;
+  position: relative;
+}
+
+
+// Header
 .header{
-  
+  padding: 3vh 0;
+  line-height: 10vh;
+  border-bottom: 1px solid $layoutBorderColor;
+}
+// Logo
+.header .logo{
+  background-color: #999;
+  width: 10vh;
+  height: 10vh;
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 3vw;
+}
+// Navigation
+.header .navigation{
+  display: inline-block;
+  vertical-align: top;
+}
+// Link
+.header .navigation a{
+  color: $colorLinks;
+  text-decoration: none;
+  margin-right: 5vw;
+  font-size: 3vh;
+}
+// Active link
+.header .navigation a.active{
+  text-decoration: underline;
+}
+// Wrap of button-play
+.header .wrap-button-play{
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+// Button play
+.header .wrap-button-play a{
+  padding: 1vh 3vw;
+  border: 2px solid #999;
+  font-weight: bold;
+  color: $colorLinks;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 3vh;
+  border-radius: 4px;
+}
+
+
+// Footer
+.footer{
+  border-top: 1px solid $layoutBorderColor;
+  line-height: 5vh;
+  padding: 1vh 0;
+}
+// Link
+.footer .links a{
+  color: $colorLinks;
+  text-decoration: none;
+  margin-right: 2vw;
+  font-size: 3vh;
+}
+// Wrap of link uz0
+.footer .link-uz0{
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+// Link uz0
+.footer .link-uz0 a{
+  width: 5vh;
+  height: 5vh;
+  background-color: #999;
+  text-decoration: none;
+  display: block;
+}
+// 'uz0' text link
+.footer .link-uz0 a:before{
+  content: "uz0";
+  color: $colorLinks;
+  font-weight: bold;
+  font-size: 3vh;
+  position: absolute;
+  right: 110%;
 }

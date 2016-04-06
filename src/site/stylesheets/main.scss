@@ -5,10 +5,9 @@ body {
   min-height: 100%;
 }
 
-
 $textColorLinks: #999;
 $layoutBorderColor: #b2b2b2;
-
+$unit: 16px;
 
 .wrap{
   width: 1050px;
@@ -16,63 +15,59 @@ $layoutBorderColor: #b2b2b2;
   position: relative;
 }
 
-
 .header{
-  padding: 3vh 0;
-  line-height: 10vh;
+  padding: $unit 0;
+  line-height: $unit * 3.75;
   border-bottom: 1px solid $layoutBorderColor;
 }
 .header .logo{
   background-color: #999;
-  width: 10vh;
-  height: 10vh;
+  width: $unit * 3.75;
+  height: $unit * 3.75;
   display: inline-block;
   vertical-align: top;
-  margin-right: 3vw;
+  margin-right: $unit * 1.2;
 }
 .header .navigation{
   display: inline-block;
   vertical-align: top;
 }
-// Link
 .header .navigation a{
   color: $textColorLinks;
   text-decoration: none;
-  margin-right: 5vw;
-  font-size: 3vh;
+  margin-right: $unit * 3.125;
+  font-size: $unit * 1.125;
 }
-// Active link
 .header .navigation a.active{
   text-decoration: underline;
 }
-// Wrap of button-play
 .header .wrap-button-play{
   position: absolute;
   top: 0;
   right: 0;
 }
 .header .wrap-button-play a{
-  padding: 1vh 3vw;
+  padding: $unit * 0.625 $unit * 1.875;
   border: 2px solid #999;
   font-weight: bold;
   color: $textColorLinks;
   text-decoration: none;
   cursor: pointer;
-  font-size: 3vh;
+  font-size: $unit;
   border-radius: 4px;
 }
 
 
 .footer{
   border-top: 1px solid $layoutBorderColor;
-  line-height: 5vh;
-  padding: 1vh 0;
+  line-height: 50px;
+  padding: 5px 0;
 }
 .footer .links a{
   color: $textColorLinks;
   text-decoration: none;
-  margin-right: 2vw;
-  font-size: 3vh;
+  margin-right: $unit * 2;
+  font-size: $unit;
 }
 .footer .link-uz0{
   position: absolute;
@@ -80,18 +75,15 @@ $layoutBorderColor: #b2b2b2;
   top: 0;
 }
 .footer .link-uz0 a{
-  width: 5vh;
-  height: 5vh;
+  padding: $unit / 2 $unit;
   background-color: #999;
   text-decoration: none;
-  display: block;
 }
-// Text 'uz0'
 .footer .link-uz0 a:before{
   content: "uz0";
   color: $textColorLinks;
   font-weight: bold;
-  font-size: 3vh;
+  font-size: $unit;
   position: absolute;
   right: 110%;
 }

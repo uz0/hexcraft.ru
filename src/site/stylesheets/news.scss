@@ -1,30 +1,33 @@
+$unit: 16px;
+
+
 .news-page .news .vertical-line{
   width: 1px;
   height: 100%;
   background-color: #999;
   position: absolute;
-  left: 150px;
+  left: $unit * 9.375;
 }
-// Date
+
 .news-page .news .one-news label{
   display: inline-block;
   vertical-align: middle;
   color: #555;
-  margin-left: 20px;
-  font-size: 3vh;
+  margin-left: $unit * 1.25;
+  font-size: $unit;
   width: 90px;
 }
+
 .news-page .news .one-news .news-content{
   display: inline-block;
   vertical-align: middle;
-  margin-left: 90px;
+  margin-left: $unit * 5.625;
   width: 50vw;
   border: 1px solid #b2b2b2;
-  margin: 20px 0px 20px 90px;
-  padding: 3vh 1vw;
+  margin: $unit * 1.25 0px $unit * 1.25 $unit * 5.625;
+  padding: $unit;
   position: relative;
 }
-// Icon news
 .news-page .news .one-news .news-content:before{
   content: '';
   position: absolute;
@@ -32,35 +35,35 @@
   top: 0;
   width: 45px;
   height: 100%;
-  margin-right: 27px;
+  margin-right: $unit * 1.6875;
   background-color: transparent;
   background-image: url(/images/news-icon.jpg);
   background-repeat: no-repeat;
-  background-size: 5vh;
+  background-size: $unit * 2;
   background-position: 50% 50%;
   z-index: 1;
 }
-// Horisontal line
 .news-page .news .one-news .news-content:after{
   content: '';
   position: absolute;
   right: 100%;
-  width: 50px;
+  width: $unit * 3.125;
   height: 1px;
   top: 49%;
   background-color: #b2b2b2;
   z-index: 0;
 }
+
 .news-page .news .one-news .news-content .title{
   color: #000;
   margin: 0;
-  font-size: 3vh;
+  font-size: $unit * 1.5;
   font-weight: bold;
-  margin-bottom: 10px;
+  margin-bottom: $unit * 0.625;
   text-decoration: none;
 }
 .news-page .news .one-news .news-content p{
   color: #555;
   margin: 0;
-  font-size: 3vh;
+  font-size: $unit;
 }

@@ -1,13 +1,12 @@
 extends layout
 
 block vars
-  - var title = 'News'
-  - var ctrl = 'newsCtrl as news'
+  - var title = 'Новости - HexCraft'
 
 block content
   include ./_header.jade
 
-  .news-page
+  .news-page(ng-app="newsApp" ng-controller="newsCtrl as news")
     .wrap
       .news(ng-if="news.list.length")
         .vertical-line
@@ -25,3 +24,6 @@ block content
         p EMPTY
 
   include ./_footer.jade
+
+  script(src='/vendor/angular/angular.min.js')
+  script(src='/javascripts/bundle.js')

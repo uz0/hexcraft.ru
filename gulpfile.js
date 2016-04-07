@@ -6,9 +6,11 @@ const concat       = require('gulp-concat');
 const jade         = require('gulp-jade');
 const marked       = require('marked');
 const sourcemaps   = require('gulp-sourcemaps');
-const babel        = require('gulp-babel');
 const nodemon      = require('gulp-nodemon');
 const glob         = require('glob');
+const browserify   = require('browserify');
+const babelify     = require('babelify');
+const source       = require('vinyl-source-stream');
 
 const site = {
   styles: {
@@ -17,6 +19,7 @@ const site = {
     end:  'public/stylesheets/*.css'
   },
   scripts: {
+    main: 'src/site/javascripts/app.js',
     from: 'src/site/javascripts/**/*.js',
     to:   'public/javascripts'
   },
@@ -47,9 +50,10 @@ const api = {
 
 const game = {
   scripts: 'src/game/**/*.js',
+  main:    'src/game/app.js',
   assets:  'src/game/**/*.*',
   ex:      '!src/game/**/*.js',
-  to:      'public/game/'
+  to:      'public/game'
 }
 
 // Styles
@@ -64,31 +68,36 @@ gulp.task('styles:site', () => {
 
 // Scripts
 gulp.task('scripts:site', () => {
-  return gulp.src(site.scripts.from)
-    .pipe(sourcemaps.init())
+  gulp.src(site.scripts.from)
     .pipe(jshint('.jshintrc'))
     .pipe(jshint.reporter('default'))
-    .pipe(babel({
-        presets: ['es2015'],
-        plugins: ["transform-class-properties"]
-    }))
-    .pipe(concat('bundle.js'))
-    .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest(site.scripts.to))
+
+  return browserify({
+        entries: site.scripts.main,
+        extensions: ['.js'],
+        debug: true
+      })
+      .transform(babelify)
+      .bundle()
+      .pipe(source('bundle.js'))
+      .pipe(gulp.dest(site.scripts.to));
+
 });
 
 gulp.task('scripts:game', () => {
-  return gulp.src(game.scripts)
-    .pipe(sourcemaps.init())
+  gulp.src(game.scripts)
     .pipe(jshint('.jshintrc'))
     .pipe(jshint.reporter('default'))
-    .pipe(babel({
-        presets: ['es2015'],
-        plugins: ["transform-class-properties"]
-    }))
-    .pipe(concat('bundle.js'))
-    .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest(game.to))
+
+  return browserify({
+        entries: game.main,
+        extensions: ['.js'],
+        debug: true
+      })
+      .transform(babelify)
+      .bundle()
+      .pipe(source('bundle.js'))
+      .pipe(gulp.dest(game.to));
 });
 
 gulp.task('lint:api', function () {

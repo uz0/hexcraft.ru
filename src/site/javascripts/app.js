@@ -1,7 +1,6 @@
 'use strict';
 
-var app = angular.module('newsApp', []);
+import newsCtrl from './news.ctrl.js';
 
-app.config([function () {
-
-}]);
+angular.module('newsApp', [])
+       .controller('newsCtrl', newsCtrl);

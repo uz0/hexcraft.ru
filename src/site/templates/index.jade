@@ -2,19 +2,21 @@ extends layout
 
 block vars
   - var title = 'Home'
+  - var bodyClass = 'index-page'
 
 block content
-  .index-page
-    header
+  header
+    .wrap-blocks.top
       .logo
       .description
         h1 Hexcraft
-        p Игра для настоящих мужчин, бла бла бла бла ба бла ы
-    footer
+        p Логическая игра
+  footer
+    .wrap-blocks
       a(href='#' class='button-play') Играть
       .links
         a(href='/about.html') Об игре
         a(href='/news.html') Новости
         a(href='#') Гитхаб
         a(href='/humans.txt') Авторы 
-  
+

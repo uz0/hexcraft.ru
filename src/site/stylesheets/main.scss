@@ -1,13 +1,14 @@
+@import "config.scss";
+
 html{
   height: 100%;
 }
 body {
   min-height: 100%;
+  font-family: Roboto;
+  font-weight: 400;
+  color: #333;
 }
-
-$textColorLinks: #999;
-$layoutBorderColor: #b2b2b2;
-$unit: 16px;
 
 .wrap{
   width: 1050px;

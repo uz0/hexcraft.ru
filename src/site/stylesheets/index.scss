@@ -1,57 +1,101 @@
-// for inline blocks
-.inl{
-  display: inline-block;
-  vertical-align: top;
-}
-// Container index page
-.index-wrap{
+@import "config.scss";
+
+.index-page{
   background-color: #f2f2f2;
   width: 100%;
   height: 100%;
-  text-align: center;
-  padding: 15vh 0;
   overflow: hidden;
 }
-// Logo
-.index-wrap .logo{
-  width: 30vh;
-  height: 30vh;
-  background-color: #999;
-  margin-right: 2%;
-} 
-// Wrapper the main information about the game
-.index-wrap .desc-wrap{
-  text-align: left;
+.wrap-blocks{
+  width: 449px;
+  white-space: nowrap;
+  margin: 0 auto;
+  text-align: center;
 }
-// Name 
-.index-wrap .desc-wrap .name{
-  font-size: 6vh;
+.wrap-blocks.top{
+  display: flex;
+}
+
+.index-page header{
+  padding-top: $unit * 6;
+  min-height: 100%;
+  box-sizing: border-box;
+  padding-bottom: $unit * 5.625;
+}
+.index-page header .logo{
+  width: $unit * 12;
+  height: $unit * 12;
+  background-color: #999;
+  margin-right: $unit * 2;
+}
+.index-page header .description{
+  text-align: left;
+  margin: auto;
+}
+.index-page header .description h1{
+  margin: 0;
+  font-size: $unit * 3.5;
   color: #5f5f5f;
 }
-// Description
-.index-wrap .desc-wrap .description{
-  font-size: 4vh;
+.index-page header .description p{
+  margin: $unit 0 0 0;
+  font-size: $unit * 1.8;
   color: #999;
-  max-width: 40vw;
-  line-height: 5vh;
+  line-height: 1.5;
 }
-// Wrapper button game 
-.index-wrap .wrap-button{
-  margin: 29vh 0 4vh 0;
+
+.index-page footer{
+  margin-top: -$unit * 10;
+  height: $unit * 9;
+  width: 100%;
 }
-// Button game
-.index-wrap .button-game{
-  padding: 2vh 8vw;
-  border: 2px solid #999;
+.index-page footer .button-play{
+  padding: $unit 0;
+  outline: 2px solid #999;
   font-weight: bold;
   color: #999;
   text-decoration: none;
   cursor: pointer;
-  font-size: 3vh;
+  font-size: $unit * 2;
+  display: block;
+  width: 100%;
 }
-// Links
-.index-wrap .link{
-  margin: 0 .6vw;
-  font-size: 2vh;
+.index-page footer .links{
+  margin-top: $unit * 1.5;
+}
+.index-page footer .links a{
+  margin: 0 $unit / 2;
+  font-size: $unit * 1.5;
   color: #999;
+}
+
+
+@media (max-width: 600px) {
+  .wrap-blocks.top{
+    display: block;
+  }
+  .wrap-blocks{
+    width: 90%;
+  }
+  .index-page header{
+    padding-top: $unit * 3;
+  }
+  .index-page header .logo{
+    margin: 0 auto;
+  }
+  .index-page header .description{
+    text-align: center;
+  }
+  .index-page header .description h1{
+    font-size: $unit * 3;
+  }
+  .index-page header .description p{
+    font-size: $unit * 2;
+  }
+  .index-page footer .button-play{
+    font-size: $unit * 1.5;
+  }
+  .index-page footer .links a{
+    font-size: $unit;
+  }
 }

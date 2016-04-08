@@ -1,16 +1,14 @@
 doctype html
 block vars
 
-html(ng-app="newsApp")
+html
   head
     title= title
     link(rel="stylesheet", href='/vendor/normalize-css/normalize.css')
+    link(href='https://fonts.googleapis.com/css?family=Roboto:400,300,700' rel='stylesheet' type='text/css')
     each val in styles
       link(rel="stylesheet", href= val)
 
-  body(ng-controller= ctrl)
+  body(class= bodyClass)
 
     block content
-
-    script(src='/vendor/angular/angular.min.js')
-    script(src='/javascripts/bundle.js')

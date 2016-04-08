@@ -1,0 +1,90 @@
+@import "config.scss";
+
+html{
+  height: 100%;
+}
+body {
+  min-height: 100%;
+  font-family: Roboto;
+  font-weight: 400;
+  color: #333;
+}
+
+.wrap{
+  width: 1050px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.header{
+  padding: $unit 0;
+  line-height: $unit * 3.75;
+  border-bottom: 1px solid $layoutBorderColor;
+}
+.header .logo{
+  background-color: #999;
+  width: $unit * 3.75;
+  height: $unit * 3.75;
+  display: inline-block;
+  vertical-align: top;
+  margin-right: $unit * 1.2;
+}
+.header .navigation{
+  display: inline-block;
+  vertical-align: top;
+}
+.header .navigation a{
+  color: $textColorLinks;
+  text-decoration: none;
+  margin-right: $unit * 3.125;
+  font-size: $unit * 1.125;
+}
+.header .navigation a.active{
+  text-decoration: underline;
+}
+.header .wrap-button-play{
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.header .wrap-button-play a{
+  padding: $unit * 0.625 $unit * 1.875;
+  border: 2px solid #999;
+  font-weight: bold;
+  color: $textColorLinks;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: $unit;
+  border-radius: 4px;
+}
+
+
+.footer{
+  border-top: 1px solid $layoutBorderColor;
+  line-height: $unit * 3.125;
+  padding: $unit / 2 0;
+}
+.footer .links a{
+  color: $textColorLinks;
+  text-decoration: none;
+  margin-right: $unit * 2;
+  font-size: $unit;
+}
+.footer .link-uz0{
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.footer .link-uz0 a{
+  padding: $unit / 2 $unit;
+  background-color: #999;
+  text-decoration: none;
+}
+.footer .link-uz0 a:before{
+  content: "uz0";
+  color: $textColorLinks;
+  font-weight: bold;
+  font-size: $unit;
+  position: absolute;
+  right: 110%;
+}

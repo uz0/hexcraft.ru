@@ -2,16 +2,21 @@ extends layout
 
 block vars
   - var title = 'Home'
+  - var bodyClass = 'index-page'
 
 block content
-  .index-wrap
-    .inl.logo
-    .inl.desc-wrap
-      h1.name Hexcraft
-      p.description Игра для настоящих мужчин, бла бла бла бла ба бла ы
-    .wrap-button
-      a(class='button-game', href='#') Играть
-    a(class='link', href='#') Об игре
-    a(class='link', href='#') Новости
-    a(class='link', href='#') Гитхаб
-    a(class='link', href='#') Авторы 
+  header
+    .wrap-blocks.top
+      .logo
+      .description
+        h1 Hexcraft
+        p Логическая игра
+  footer
+    .wrap-blocks
+      a(href='#' class='button-play') Играть
+      .links
+        a(href='/about.html') Об игре
+        a(href='/news.html') Новости
+        a(href='#') Гитхаб
+        a(href='/humans.txt') Авторы 
+

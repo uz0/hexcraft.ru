@@ -8,6 +8,7 @@
     "test": "mocha test/*.test.js"
   },
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "~1.13.2",
     "express": "~4.13.1",
     "sequelize": "^3.3.2",

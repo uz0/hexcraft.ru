@@ -12,6 +12,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // init routes here
 app.use('/users', require('./src/api/users'));
 app.use('/news', require('./src/api/news'));
+app.use('/auth', require('./src/api/auth'));
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

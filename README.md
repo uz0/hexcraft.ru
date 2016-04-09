@@ -3,24 +3,31 @@
 ## Разработка
 
 ### Первый запуск
-Для удобной работы предварительно установите bower, sequelize-cli и gulp глобально
+Для удобной работы предварительно установите apidoc, bower, sequelize-cli и gulp глобально
 
 ```
-npm i -g bower
-npm i -g sequelize-cli
-npm i -g gulp
+npm i -g bower sequelize-cli gulp apidoc
 ```
 
 Затем установите зависимости проекта и начинайте работать
 
 ```
 npm i
+bower i
 npm start
 ```
 
 ### Тесты
-Для запуска unit тестов наберите (TODO e2e тесты)
+Для запуска unit тестов наберите
 
 ```
 npm test
 ```
+
+### Документация
+Для сборки документации api наберите
+
+```
+npm run doc
+```
+

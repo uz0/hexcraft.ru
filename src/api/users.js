@@ -3,20 +3,72 @@ var models = require('./models');
 var express = require('express');
 var router = express.Router();
 
+
+/**
+* @api {get} users/ Request user info
+* @apiName getUsers
+* @apiGroup User
+*
+* @apiSuccess {json} allUsers All users' info
+*/
+
 router.get('/', function(req, res) {
   models.User.findAll().then(function(users) {
     res.send(users);
   });
 });
 
+
+/**
+* @api {post} users/ create new user
+* @apiName createUser
+* @apiGroup User
+*
+* @apiSuccess {json} token User's Token
+* @apiSuccess {json} user User info
+*/
+
 router.post('/', function(req, res) {
+
+    req.status(200).send({
+    status: 'ok',
+    user: {
+    id: req.body.id,
+    username: req.body.username,
+    password: req.body.password,
+    createdAt: '2016-04-09T10:44:46.502Z',
+    updatedAt: '2016-04-09T10:44:46.502Z'
+    },
+    token:{
+      token: 1875178345,
+      validThrough: 17537163513,
+      createdAt: '2016-04-09T10:44:46.502Z',
+      updatedAt: '2016-04-09T10:44:46.502Z'
+    }});
+  /*
   models.User.create({
     username: req.body.username,
-    password: req.body.password
+    password: req.body.password,
   }).then(function(user) {
-    res.send(user);
+    user.addToken({
+        token: 1412512152,
+        validThrough: 101240192
+    }).then(function(token){
+        res.send(token);
+    });
   });
+  */
 });
+
+
+/**
+* @api {delete} game/:id Delete this user
+* @apiName deleteUser
+* @apiGroup User
+*
+* @apiParam {Number} id User id
+* @apiSuccess {json} status Operation status
+*/
 
 router.delete('/:userId', function(req, res) {
   models.User.destroy({
@@ -24,7 +76,7 @@ router.delete('/:userId', function(req, res) {
       id: req.params.userId
     }
   }).then(function() {
-    res.send('ok');
+    res.send({status: 'ok'});
   });
 });
 

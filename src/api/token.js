@@ -1,10 +1,26 @@
 'use strict';
 var models = require('./models');
 var express = require('express');
-var sequelize = require('sequelize');
+//var sequelize = require('sequelize');
 var router = express.Router();
 
-router.post('/verify', function(req, res) {
+/**
+* @api {get} users/verify/ Request map info
+* @apiName verifyToken
+* @apiGroup auth
+*
+* @apiParam {Number} id User ID
+* @apiParam {String} token token
+*
+* @apiSuccess {json} status success message
+*/
+
+router.post('users/verify', function(req, res) {
+//{user: req.body.user,token: {token: 1875178345, validThrough: 17537163513} }
+  res.status(200).send({status: 'ok'});
+
+ 
+/*
   models.Token.find({
     where: {
       userId: req.body.userId,
@@ -18,5 +34,7 @@ router.post('/verify', function(req, res) {
       res.status(500).send({ error: 'invalid token/user pair or token old' });
     }
   });
+*/
 });
 
+module.exports = router;

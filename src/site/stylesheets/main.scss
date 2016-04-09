@@ -27,7 +27,7 @@ body {
   height: $unit * 3.75;
   display: inline-block;
   vertical-align: top;
-  margin-right: $unit * 1.2;
+  margin-right: $unit * 6.1;
 }
 .header .navigation{
   display: inline-block;
@@ -76,15 +76,18 @@ body {
   top: 0;
 }
 .footer .link-uz0 a{
-  padding: $unit / 2 $unit;
-  background-color: #999;
+  padding: $unit / 2 $unit / 1.3;
+  background-color: rgb(255, 163, 102);
   text-decoration: none;
+  color: #fff;
+  font-size: $unit;
+  font-family: 'Red October-Regular';
 }
 .footer .link-uz0 a:before{
   content: "uz0";
   color: $textColorLinks;
   font-weight: bold;
-  font-size: $unit;
+  font-size: $unit / 1.2;
   position: absolute;
   right: 110%;
 }

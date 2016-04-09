@@ -1,68 +1,58 @@
 @import "config.scss";
 
-.news-page .news .vertical-line{
-  width: 1px;
+.news-page{
+  width: 100%;
   height: 100%;
-  background-color: #999;
-  position: absolute;
-  left: $unit * 9.375;
 }
-
-.news-page .news .one-news label{
-  display: inline-block;
-  vertical-align: middle;
-  color: #555;
-  margin-left: $unit * 1.25;
-  font-size: $unit;
-  width: 90px;
+.news-content{
+  overflow: hidden;
 }
-
-.news-page .news .one-news .news-content{
-  display: inline-block;
-  vertical-align: middle;
-  margin-left: $unit * 5.625;
-  width: 50vw;
+.news-content .inner .one-news{
+  margin: $unit * 2 0 $unit * 2 $unit * 10;
   border: 1px solid #b2b2b2;
-  margin: $unit * 1.25 0px $unit * 1.25 $unit * 5.625;
+  box-sizing: border-box;
   padding: $unit;
   position: relative;
 }
-.news-page .news .one-news .news-content:before{
+.news-content .inner .one-news:before{
   content: '';
   position: absolute;
-  right: 100%;
-  top: 0;
-  width: 45px;
-  height: 100%;
-  margin-right: $unit * 1.6875;
-  background-color: transparent;
-  background-image: url(/images/news-icon.jpg);
-  background-repeat: no-repeat;
-  background-size: $unit * 2;
-  background-position: 50% 50%;
-  z-index: 1;
+  width: $unit * 4;
+  height: 1000%;
+  border-left: 1px solid #b2b2b2;
+  border-bottom: 1px solid #b2b2b2;
+  bottom: 50%;
+  left: -$unit * 4;
 }
-.news-page .news .one-news .news-content:after{
+.news-content .inner .one-news:after{
   content: '';
   position: absolute;
-  right: 100%;
-  width: $unit * 3.125;
-  height: 1px;
-  top: 49%;
+  width: $unit;
+  height: $unit;
   background-color: #b2b2b2;
-  z-index: 0;
+  bottom: calc(50% - 7px);
+  left: -$unit * 4.45;
+  border-radius: 100%;
 }
-
-.news-page .news .one-news .news-content .title{
-  color: #000;
-  margin: 0;
-  font-size: $unit * 1.5;
-  font-weight: bold;
-  margin-bottom: $unit * 0.625;
-  text-decoration: none;
+.news-content .inner .one-news .date{
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 5px 10px;
+  background-color: #f2f2f2;
 }
-.news-page .news .one-news .news-content p{
+.news-content .inner .one-news .date label{
   color: #555;
+}
+.news-content .inner .one-news .main-content .title{
+  font-size: $unit * 2;
+  color: #000;
+  font-weight: bold;
   margin: 0;
+  width: 90%;
+}
+.news-content .inner .one-news .main-content p{
+  margin: $unit 0 0 0;
   font-size: $unit;
+  color: #000;
 }

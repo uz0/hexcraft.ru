@@ -82,7 +82,7 @@ router.post('/login', function(req, res) {
 * @apiSuccess {json} token User's token (if status ok)
 */
 
-route.post('/register', function (req, res){
+router.post('/register', function (req, res){
   req.status(200).send({
     status: 'ok',
     user: {

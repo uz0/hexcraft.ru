@@ -7,7 +7,7 @@ module.exports = function(sequelize, DataTypes) {
     levelId: DataTypes.INTEGER,
     player1: DataTypes.INTEGER,
     player2: DataTypes.INTEGER,
-    stage: DataTypes.ENUM('Not started','Started','Over')
+    stage: DataTypes.ENUM('Not started', 'Started', 'Over')
   }, {
     classMethods: {
 

@@ -1,11 +1,11 @@
 'use strict';
 
-module.exports = function(sequelize, DataTypes){
-  var Token = sequelize.define('Token',{
+module.exports = function(sequelize, DataTypes) {
+  var Token = sequelize.define('Token', {
     token: DataTypes.STRING,
     validThrough: DataTypes.DATE
-  },{
-    classMethods:{
+  }, {
+    classMethods: {
       associate: function(models) {
         Token.belongsTo(models.User, {
           onDelete: 'CASCADE',
@@ -14,7 +14,7 @@ module.exports = function(sequelize, DataTypes){
           }
         });
       },
-      checkToken: function(){
+      checkToken: function() {
 
       }
     }

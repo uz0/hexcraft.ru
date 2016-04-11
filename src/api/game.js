@@ -4,7 +4,7 @@ var express = require('express');
 var router = express.Router();
 
 /**
-* @api {get} game/map/:id Request map info
+* @api {get} /map/:id Request map info
 * @apiName getMap
 * @apiGroup Game
 *
@@ -16,15 +16,14 @@ var router = express.Router();
 
 router.get('/map/:id', function(req,res){
   res.status(200).send({
-        status: 'ok',
     mapId: req.params.id,
-    map: [{x:0,y:0},{x:0,y:-1},{x:0,y:1},{x:1,y:-1},{x:1,y:-1}]
+    map: [{x:0,y:0,v:0},{x:0,y:-1,v:0},{x:0,y:1,v:0},,{x:1,y:-1,v:0},{x:1,y:-1,v:0}]
   });
 });
 
 
 /**
-* @api {get} game/battle start battle
+* @api {get} /battle Start battle
 * @apiName getBattle
 * @apiGroup Game
 *
@@ -36,7 +35,6 @@ router.get('/map/:id', function(req,res){
 
 router.get('/battle', function(req, res){
   res.status(200).send({
-    status: 'ok',
     user: {
       id: req.body.id,
       username: req.body.username
@@ -46,6 +44,25 @@ router.get('/battle', function(req, res){
       username: req.body.username
     },
     mapId: 1
+  });
+});
+
+
+/**
+* @api {get} /battle/:gameId Register action
+* @apiName Register
+* @apiGroup Auth
+*
+* @apiParam {String} username Username
+* @apiParam {String} password Password
+* @apiSuccess {json} status Status of operation
+* @apiSuccess {json} user User info (if status ok)
+* @apiSuccess {json} token User's token (if status ok)
+*/
+
+router.get('/battle/:gameId', function(req, res){
+  res.status(200).send({
+    updatedFields: [{x:0,y:0,v:1}]
   });
 });
 

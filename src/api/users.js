@@ -5,8 +5,8 @@ var router = express.Router();
 
 
 /**
-* @api {get} users/ Request user info
-* @apiName getUsers
+* @api {get} / Request all online users
+* @apiName getOnlineUsers
 * @apiGroup User
 *
 * @apiSuccess {json} allUsers All users' info
@@ -18,9 +18,30 @@ router.get('/', function(req, res) {
   });
 });
 
+/**
+* @api {get} /:userId Get this user's data
+* @apiName getUserData
+* @apiGroup User
+*
+* @apiParam {Number} userId User's id
+* @apiSuccess {json} data User's data
+*/
+
+
+router.get('/:userId', function(req, res){
+  res.status(200).send({
+    user: {
+    id: req.body.id,
+    username: 'NYI',
+    password: 'NYI',
+    createdAt: '2016-04-09T10:44:46.502Z',
+    updatedAt: '2016-04-09T10:44:46.502Z'
+    }
+  });
+});
 
 /**
-* @api {post} users/ create new user
+* @api {post} / Create new user
 * @apiName createUser
 * @apiGroup User
 *
@@ -31,9 +52,8 @@ router.get('/', function(req, res) {
 router.post('/', function(req, res) {
 
     req.status(200).send({
-    status: 'ok',
     user: {
-    id: req.body.id,
+    id: req.params.userId,
     username: req.body.username,
     password: req.body.password,
     createdAt: '2016-04-09T10:44:46.502Z',
@@ -61,8 +81,10 @@ router.post('/', function(req, res) {
 });
 
 
+
+
 /**
-* @api {delete} game/:id Delete this user
+* @api {delete} /:userId Delete this user
 * @apiName deleteUser
 * @apiGroup User
 *
@@ -70,13 +92,14 @@ router.post('/', function(req, res) {
 * @apiSuccess {json} status Operation status
 */
 
+
 router.delete('/:userId', function(req, res) {
   models.User.destroy({
     where: {
       id: req.params.userId
     }
   }).then(function() {
-    res.send({status: 'ok'});
+    res.status(200).send();
   });
 });
 

@@ -4,9 +4,42 @@ var express = require('express');
 //var sequelize = require('sequelize');
 var router = express.Router();
 
+/**
+* @api {get} /verify Verify token
+* @apiName verifyToken
+* @apiGroup auth
+*
+* @apiParam {Number} id User ID
+* @apiParam {String} token token
+*
+* @apiSuccess (200) {Nothing} If valid
+* @apiSuccess (500) {Nothing} If invalid
+*/
+
+router.post('users/verify', function(req, res) {
+//{user: req.body.user,token: {token: 1875178345, validThrough: 17537163513} }
+  res.status(200).send();
+
+ 
+/*
+  models.Token.find({
+    where: {
+      userId: req.body.userId,
+      token: req.body.token,
+      validThrough: { gt: sequelize.fn('NOW') } // if token still valid
+    }
+  }).then(function(token) {
+    if (token) {
+      res.status(200).send(token);
+    } else {
+      res.status(500).send({ error: 'invalid token/user pair or token old' });
+    }
+  });
+*/
+});
 
 /**
-* @api {post} auth/login Login action
+* @api {post} /login Login action
 * @apiName Login
 * @apiGroup Auth
 *
@@ -23,17 +56,17 @@ router.post('/login', function(req, res) {
   req.status(200).send({
     status: 'ok',
     user: {
-    "id": req.body.id,
-    "username": req.body.username,
-    "password": req.body.password,
-    "createdAt": "2016-04-09T10:44:46.502Z",
-    "updatedAt": "2016-04-09T10:44:46.502Z"
+    'id': req.body.id,
+    'username': req.body.username,
+    'password': req.body.password,
+    'createdAt': '2016-04-09T10:44:46.502Z',
+    'updatedAt': '2016-04-09T10:44:46.502Z'
     },
     token:{
       token: 1875178345,
       validThrough: 17537163513,
-      "createdAt": "2016-04-09T10:44:46.502Z",
-      "updatedAt": "2016-04-09T10:44:46.502Z"
+      'createdAt': '2016-04-09T10:44:46.502Z',
+      'updatedAt': '2016-04-09T10:44:46.502Z'
     }
   });
 
@@ -71,7 +104,7 @@ router.post('/login', function(req, res) {
 });
 
 /**
-* @api {post} auth/register Register action
+* @api {post} /register Register action
 * @apiName Register
 * @apiGroup Auth
 *
@@ -86,17 +119,17 @@ router.post('/register', function (req, res){
   req.status(200).send({
     status: 'ok',
     user: {
-    "id": req.body.id,
-    "username": req.body.username,
-    "password": req.body.password,
-    "createdAt": "2016-04-09T10:44:46.502Z",
-    "updatedAt": "2016-04-09T10:44:46.502Z"
+    'id': req.body.id,
+    'username': req.body.username,
+    'password': req.body.password,
+    'createdAt': '2016-04-09T10:44:46.502Z',
+    'updatedAt': '2016-04-09T10:44:46.502Z'
     },
     token:{
       token: 1875178345,
       validThrough: 17537163513,
-      "createdAt": "2016-04-09T10:44:46.502Z",
-      "updatedAt": "2016-04-09T10:44:46.502Z"
+      'createdAt': '2016-04-09T10:44:46.502Z',
+      'updatedAt': '2016-04-09T10:44:46.502Z'
     }
   });
 });

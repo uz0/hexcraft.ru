@@ -109,7 +109,7 @@ router.post('/login', function(req, res) {
  *
  * @apiParam {String} token user's token
  * @apiSuccess (200) {Nothing}
- * @apiError (500) {Nothing}
+ * @apiError (400) {Nothing}
  */
 
 router.post('/logout', function(req, res) {
@@ -117,7 +117,7 @@ router.post('/logout', function(req, res) {
     res.status(200).send();
     return;
   }
-  res.status(500).send();
+  res.status(400).send();
 });
 
 /**

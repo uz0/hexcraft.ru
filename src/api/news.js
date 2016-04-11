@@ -26,14 +26,14 @@ router.get('/', function(req, res) {
  * @apiParam {String} token User's token 
  * @apiParam {Boolean} admin If user is admin
  *
- * @apiError (500) {Nothing}
+ * @apiError (400) {Nothing}
  * @apiSuccess (200) {Nothing} 
  */
 
 router.post('/', function(req, res) {
   if (req.body.token !== 0 && req.body.admin == true) {
     console.log(req.body.userId);
-    res.status(500).send({ error: 'wrong user token!' });
+    res.status(400).send({ error: 'wrong user token!' });
     return;
   }
 
@@ -53,13 +53,13 @@ router.post('/', function(req, res) {
  * @apiParam {String} token User's token 
  * @apiParam {Boolean} admin If user is admin
  *
- * @apiError (500) {Nothing}
+ * @apiError (400) {Nothing}
  * @apiSuccess (200) {Nothing} 
  */
 
 router.delete('/:newsId', function(req, res) {
   if (req.body.userId !== '0' && req.body.admin == true) {
-    res.status(500).send({ error: 'wrong user Id!' });
+    res.status(400).send({ error: 'wrong user Id!' });
     return;
   }
 

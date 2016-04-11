@@ -103,19 +103,19 @@ router.post('/login', function(req, res) {
 });
 
 /**
-* @api {post} /logout Logout action
-* @apiName Logout
-* @apiGroup Auth
-*
-* @apiParam {String} token user's token
-* @apiSuccess (200) {Nothing}
-* @apiError (500) {Nothing}
-*/
+ * @api {post} /logout Logout action
+ * @apiName Logout
+ * @apiGroup Auth
+ *
+ * @apiParam {String} token user's token
+ * @apiSuccess (200) {Nothing}
+ * @apiError (500) {Nothing}
+ */
 
-router.post('/logout', function(req, res){
-  if (req.body.token != 0){
-  res.status(200).send();
-  return;  
+router.post('/logout', function(req, res) {
+  if (req.body.token != 0) {
+    res.status(200).send();
+    return;
   }
   res.status(500).send();
 });

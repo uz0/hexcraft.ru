@@ -75,6 +75,7 @@ router.get('/map/:id', function(req, res) {
 
 router.post('/', function(req, res) {
   res.status(200).send({
+    gameId: 1,
     user: {
       id: req.body.id,
       username: req.body.username
@@ -99,8 +100,8 @@ router.post('/', function(req, res) {
 
 /**
  * @api {get} /:gameId 
- * @apiName gameStep
- * @apiGroup Game 
+ * @apiName gameUpdate
+ * @apiGroup Game
  *
  * @apiParam {Number} gameId Game's Id
  * @apiSuccess {json} updatedFields hexes that have changed
@@ -112,6 +113,18 @@ router.get('/:gameId', function(req, res) {
   });
 });
 
-//router.post();
+/**
+ * @api {post} /:gameId 
+ * @apiName gameStep
+ * @apiGroup Game
+ *
+ * @apiParam {Number} gameId Game's Id
+ * @apiParam {json} updatedFields Fields that have changed
+ * @apiSuccess (200) {Nothing}
+ */
+
+router.post('/:gameId', function(req, res) {
+  res.status(200).send();
+});
 
 module.exports = router;

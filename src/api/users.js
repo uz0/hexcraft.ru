@@ -51,7 +51,7 @@ router.get('/:userId', function(req, res) {
 
 router.post('/', function(req, res) {
 
-  req.status(200).send({
+  res.status(200).send({
     user: {
       id: req.params.userId,
       username: req.body.username,

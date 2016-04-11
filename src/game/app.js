@@ -9,6 +9,7 @@ import DEMO from './stages/demo.js';
 class HC {
   constructor() {
     this.renderer = new PIXI.WebGLRenderer(window.innerWidth, window.innerHeight);
+    this.renderer.backgroundColor = 0xFFFFFF;;
     document.body.appendChild(this.renderer.view);
 
     var loader = new LOADER();

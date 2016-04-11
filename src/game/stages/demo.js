@@ -3,17 +3,17 @@
 export default class DEMO extends PIXI.Stage {
   constructor(resources) {
     super();
-    this.rabbit = new PIXI.Sprite(resources.rabbit.texture);
+    this.logo = new PIXI.Sprite(resources.logo.texture);
 
-    this.rabbit.position.x = window.innerWidth/2;
-    this.rabbit.position.y = window.innerHeight/2;
+    this.logo.position.x = window.innerWidth/2;
+    this.logo.position.y = window.innerHeight/2;
 
-    this.rabbit.scale.set(0.1);
-    this.rabbit.anchor.set(0.5);
-    this.rabbit.interactive = true;
-    this.rabbit.buttonMode = true;
+    this.logo.scale.set(0.1);
+    this.logo.anchor.set(0.5);
+    this.logo.interactive = true;
+    this.logo.buttonMode = true;
 
-    this.rabbit
+    this.logo
         .on('mousedown', this.onDragStart)
         .on('touchstart', this.onDragStart)
         .on('mouseup', this.onDragEnd)
@@ -23,7 +23,7 @@ export default class DEMO extends PIXI.Stage {
         .on('mousemove', this.onDragMove)
         .on('touchmove', this.onDragMove);
 
-    this.addChild(this.rabbit);
+    this.addChild(this.logo);
   }
 
   onDragStart(event){
@@ -49,6 +49,6 @@ export default class DEMO extends PIXI.Stage {
   }
 
   update() {
-    this.rabbit.rotation += 0.001;
+    this.logo.rotation += 0.005;
   }
 }

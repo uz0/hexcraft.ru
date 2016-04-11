@@ -4,14 +4,47 @@ var express = require('express');
 var router = express.Router();
 
 /**
+ * @api {get} /map Get all available maps
+ * @apiName getMaps
+ * @apiGroup Game
+ * 
+ * @apiSuccess {json} maps Array of all maps
+ */
+
+router.get('/map', function(req, res) {
+  res.status.send({
+    maps: [{
+      mapId: 1,
+      map: [
+        { x: 0, y: 0, v: 0 },
+        { x: 0, y: -1, v: 0 },
+        { x: 0, y: 1, v: 0 },
+        { x: 1, y: -1, v: 0 },
+        { x: 1, y: -1, v: 0 }
+      ]
+    }, {
+      mapId: 2,
+      map: [
+        { x: 0, y: 0, v: 0 },
+        { x: 0, y: -1, v: 0 },
+        { x: 0, y: 1, v: 0 },
+        { x: 1, y: -1, v: 0 },
+        { x: 1, y: -1, v: 0 }
+      ]
+    }]
+  });
+});
+
+
+/**
  * @api {get} /map/:id Request map info
  * @apiName getMap
  * @apiGroup Game
  *
  * @apiParam {Number} id Map ID.
  *
- * @apiSuccess {Number} mapId id of map
- * @apiSuccess {json} map  all poins with hex positions.
+ * @apiSuccess {Number} mapId Id of map
+ * @apiSuccess {json} map All poins with hex positions.
  */
 
 router.get('/map/:id', function(req, res) {
@@ -29,17 +62,18 @@ router.get('/map/:id', function(req, res) {
 
 
 /**
- * @api {get} / Start game
- * @apiName getGame
+ * @api {post} / Start game
+ * @apiName startGame
  * @apiGroup Game
  *
- * @apiSuccess {Number} mapId id of map
- * @apiSuccess {json} user your info
- * @apiSuccess {json} enemy opponent's info
+ * @apiSuccess {Number} mapId Id of map
+ * @apiSuccess {json} user Your info
+ * @apiSuccess {json} enemy Opponent's info
+ * @paiSuccess {json} map Game's map
  */
 
 
-router.get('/', function(req, res) {
+router.post('/', function(req, res) {
   res.status(200).send({
     user: {
       id: req.body.id,
@@ -49,7 +83,16 @@ router.get('/', function(req, res) {
       id: req.body.id + 1,
       username: req.body.username
     },
-    mapId: 1
+    map: {
+      mapId: req.params.id,
+      map: [
+        { x: 0, y: 0, v: 0 },
+        { x: 0, y: -1, v: 0 },
+        { x: 0, y: 1, v: 0 },
+        { x: 1, y: -1, v: 0 },
+        { x: 1, y: -1, v: 0 }
+      ]
+    }
   });
 });
 
@@ -57,7 +100,7 @@ router.get('/', function(req, res) {
 /**
  * @api {get} /:gameId 
  * @apiName gameStep
- * @apiGroup Game
+ * @apiGroup Game 
  *
  * @apiParam {Number} gameId Game's Id
  * @apiSuccess {json} updatedFields hexes that have changed

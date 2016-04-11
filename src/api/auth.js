@@ -5,7 +5,7 @@ var express = require('express');
 var router = express.Router();
 
 /**
- * @api {get} /verify Verify token
+ * @api {post} /verify Verify token
  * @apiName verifyToken
  * @apiGroup auth
  *
@@ -16,7 +16,7 @@ var router = express.Router();
  * @apiSuccess (500) {Nothing} If invalid
  */
 
-router.post('users/verify', function(req, res) {
+router.post('/verify', function(req, res) {
   //{user: req.body.user,token: {token: 1875178345, validThrough: 17537163513} }
   res.status(200).send();
 
@@ -54,9 +54,8 @@ router.post('/login', function(req, res) {
 
 
   req.status(200).send({
-    status: 'ok',
     user: {
-      'id': req.body.id,
+      'id': 1,
       'username': req.body.username,
       'password': req.body.password,
       'createdAt': '2016-04-09T10:44:46.502Z',

@@ -21,7 +21,7 @@ router.post('/', function(req, res) {
     title: req.body.title,
     content: req.body.content
   }).then(function() {
-    res.status(200).send('done');
+    res.status(200).send();
   });
 });
 
@@ -32,7 +32,7 @@ router.delete('/:newsId', function(req, res) {
   }
 
   models.News.destroy({ where: { id: req.params.newsId } }).then(function() {
-    res.status(200).send('done');
+    res.status(200).send();
   });
 });
 

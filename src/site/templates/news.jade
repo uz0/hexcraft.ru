@@ -5,19 +5,24 @@ block vars
   - var bodyClass = 'news-page'
 
 block content
-    include ./_header.jade
     .wrapper
+      include ./_header.jade
       .news-content(ng-app="newsApp" ng-controller="newsCtrl as news")
         .inner.wrap(ng-if="news.list.length")
           .one-news(ng-repeat="oneNews in news.list")
             .main-content(ng-if="oneNews.content.length")
-              h2.title(ng-bind="oneNews.title")
-              p(ng-bind="oneNews.content")
+              .title-wrapper
+                h2.title(ng-bind="oneNews.title")
+                .date
+                  label(ng-bind="oneNews.createdAt | newsDateFilter")
+                p(ng-bind="oneNews.content")
+
 
             .main-content(ng-if="!oneNews.content.length && oneNews.title.length")
-              a.title(ng-bind="oneNews.title")
-            .date
-              label(ng-bind="oneNews.createdAt | newsDateFilter")
+              .only-title
+                h2.title(ng-bind="oneNews.title")
+                .date
+                  label(ng-bind="oneNews.createdAt | newsDateFilter")
 
         .inner(ng-if="!news.list.length")
           p empty

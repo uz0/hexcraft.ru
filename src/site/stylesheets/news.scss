@@ -1,20 +1,24 @@
 @import "config.scss";
 
-.news-page{
+.wrapper{
+  min-height: 100%;
+}
+.wrapper .news-page{
   width: 100%;
   height: 100%;
 }
-.news-content{
+.wrapper .news-content{
   overflow: hidden;
+  padding-bottom: 90px;
 }
-.news-content .inner .one-news{
+.wrapper .news-content .inner .one-news{
   margin: $unit * 2 0 $unit * 2 $unit * 10;
   border: 1px solid #b2b2b2;
   box-sizing: border-box;
   padding: $unit;
   position: relative;
 }
-.news-content .inner .one-news:before{
+.wrapper .news-content .inner .one-news:before{
   content: '';
   position: absolute;
   width: $unit * 4;
@@ -24,7 +28,7 @@
   bottom: 50%;
   left: -$unit * 4;
 }
-.news-content .inner .one-news:after{
+.wrapper .news-content .inner .one-news:after{
   content: '';
   position: absolute;
   width: $unit;
@@ -34,24 +38,24 @@
   left: -$unit * 4.45;
   border-radius: 100%;
 }
-.news-content .inner .one-news .date{
+.wrapper .news-content .inner .one-news .date{
   position: absolute;
   top: 0;
   right: 0;
   padding: 5px 10px;
   background-color: #f2f2f2;
 }
-.news-content .inner .one-news .date label{
+.wrapper .news-content .inner .one-news .date label{
   color: #555;
 }
-.news-content .inner .one-news .main-content .title{
+.wrapper .news-content .inner .one-news .main-content .title{
   font-size: $unit * 2;
   color: #000;
   font-weight: bold;
   margin: 0;
   width: 90%;
 }
-.news-content .inner .one-news .main-content p{
+.wrapper .news-content .inner .one-news .main-content p{
   margin: $unit 0 0 0;
   font-size: $unit;
   color: #000;

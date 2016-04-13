@@ -55,14 +55,17 @@ body {
   text-decoration: none;
   cursor: pointer;
   font-size: $unit;
-  border-radius: 4px;
 }
 
-
 .footer{
+  width: 100%;
+  height: 80px;
   border-top: 1px solid $layoutBorderColor;
   line-height: $unit * 3.125;
   padding: $unit / 2 0;
+  position: absolute;
+  left: 0;
+  bottom: 0;
 }
 .footer .links a{
   color: $textColorLinks;

@@ -9,12 +9,12 @@ var router = express.Router();
  * @apiName getAllNews
  * @apiGroup News
  *
- * @apiSuccess (200) {json} news Array of all news   
+ * @apiSuccess (200) {json} news Array of all news
  */
 
 router.get('/', function(req, res) {
   models.News.findAll().then(function(news) {
-    res.staus(200).json(news);
+    res.status(200).json(news);
   });
 });
 
@@ -23,11 +23,11 @@ router.get('/', function(req, res) {
  * @apiName createNews
  * @apiGroup News
  *
- * @apiParam {String} token User's token 
+ * @apiParam {String} token User's token
  * @apiParam {Boolean} admin If user is admin
  *
  * @apiError (400) {Nothing}
- * @apiSuccess (200) {Nothing} 
+ * @apiSuccess (200) {Nothing}
  */
 
 router.post('/', function(req, res) {
@@ -50,11 +50,11 @@ router.post('/', function(req, res) {
  * @apiName deleteNews
  * @apiGroup News
  *
- * @apiParam {String} token User's token 
+ * @apiParam {String} token User's token
  * @apiParam {Boolean} admin If user is admin
  *
  * @apiError (400) {Nothing}
- * @apiSuccess (200) {Nothing} 
+ * @apiSuccess (200) {Nothing}
  */
 
 router.delete('/:newsId', function(req, res) {

@@ -16,37 +16,37 @@ body {
   position: relative;
 }
 
-.wrapper .header{
+.header{
   padding: $unit 0;
   line-height: $unit * 3.75;
   border-bottom: 1px solid $layoutBorderColor;
 }
-.wrapper .header .logo{
+.header .logo{
   width: $unit * 3.75;
   height: $unit * 3.75;
   display: inline-block;
   vertical-align: top;
   margin-right: $unit * 6.1;
 }
-.wrapper .header .navigation{
+.header .navigation{
   display: inline-block;
   vertical-align: top;
 }
-.wrapper .header .navigation a{
+.header .navigation a{
   color: $textColorLinks;
   text-decoration: none;
   margin-right: $unit * 3.125;
   font-size: $unit * 1.125;
 }
-.wrapper .header .navigation a.active{
+.header .navigation a.active{
   text-decoration: underline;
 }
-.wrapper .header .wrap-button-play{
+.header .wrap-button-play{
   position: absolute;
   top: 0;
   right: 0;
 }
-.wrapper .header .wrap-button-play a{
+.header .wrap-button-play a{
   padding: $unit * 0.625 $unit * 1.875;
   border: 2px solid #999;
   font-weight: bold;
@@ -57,8 +57,6 @@ body {
 }
 
 .footer{
-  height: 80px;
-  margin-top: -80px;
   width: 100%;
   padding: $unit / 2 0;
   border-top: 1px solid $layoutBorderColor;

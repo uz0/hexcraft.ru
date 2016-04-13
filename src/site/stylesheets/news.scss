@@ -10,8 +10,7 @@
 .wrapper .news-content{
   overflow: hidden;
   box-sizing: border-box;
-  min-height: 100%;
-  padding-bottom: 90px;
+  height: 100%;
 }
 .wrapper .news-content .inner .one-news{
   margin: $unit * 2 0 $unit * 2 $unit * 10;

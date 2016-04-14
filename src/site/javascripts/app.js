@@ -3,6 +3,6 @@
 import newsCtrl from './news.ctrl.js';
 import newsDateFilter from './newsDate.filter.js';
 
-angular.module('newsApp', [])
+angular.module('hexcraft', [])
        .controller('newsCtrl', newsCtrl)
        .filter('newsDateFilter', newsDateFilter);

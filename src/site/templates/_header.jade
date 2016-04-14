@@ -2,9 +2,9 @@ header.header
   .wrap
     a(href="/index.html")
       img(src='/images/logo.svg' class="logo")
-    nav.navigation
+    nav.navigation(ng-class="{open: mobileMenu}")
       a(href='/') Главная
       a(href='/about.html') Об игре
       a(href='/news.html') Новости
-    .wrap-button-play
-      a(href='/game') Играть
+      a.button-play(href='/game') Играть
+    a.mobile.menu(ng-click="mobileMenu=!mobileMenu")

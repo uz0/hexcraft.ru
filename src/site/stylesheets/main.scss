@@ -1,8 +1,9 @@
 @import "config.scss";
 
-html{
+html {
   height: 100%;
 }
+
 body {
   display: block;
   min-height: 100%;
@@ -12,19 +13,23 @@ body {
   position: relative;
   box-sizing: border-box;
 }
-.wrap{
+
+.wrap {
   width: 1050px;
   margin: 0 auto;
   position: relative;
 }
+
 .wrapper {
   min-height: calc(100vh - 95px - 85px);
 }
+
 .header{
   padding: $unit 0;
   line-height: $unit * 3.75;
   border-bottom: 1px solid $layoutBorderColor;
 }
+
 .header .logo {
   width: $unit * 3.75;
   height: $unit * 3.75;
@@ -32,48 +37,54 @@ body {
   vertical-align: top;
   margin-right: $unit * 4;
 }
-.header .navigation{
+
+.header .navigation {
   display: inline-block;
   vertical-align: top;
 }
-.header .navigation a{
+
+.header .navigation a {
   color: $textColorLinks;
   text-decoration: none;
   margin-right: $unit * 3.125;
   font-size: $unit * 1.125;
 }
-.header .navigation a.active{
+
+.header .navigation a.active {
   text-decoration: underline;
 }
-.header .wrap-button-play{
+
+.header .wrap a.button-play {
   position: absolute;
-  top: 0;
+  top: $unit;
   right: 0;
-}
-.header .wrap-button-play a{
-  padding: $unit * 0.625 $unit * 1.875;
+  padding: 0 $unit * 2;
   border: 2px solid #999;
   font-weight: bold;
   color: $textColorLinks;
   text-decoration: none;
   cursor: pointer;
   font-size: $unit;
+  margin: 0;
+  line-height: 2;
 }
 
-.footer{
+.footer {
   width: 100%;
   padding: $unit / 2 0;
   border-top: 1px solid $layoutBorderColor;
   line-height: $unit * 3.125;
   color: #fff;
 }
-.footer .links a{
+
+.footer .links a {
   color: $textColorLinks;
   text-decoration: none;
   margin-right: $unit * 4;
   font-size: $unit;
 }
-.footer .link-uz0{
+
+.footer .link-uz0 {
   position: absolute;
   bottom: $unit * 0.5;
   right: 0;
@@ -82,10 +93,95 @@ body {
   background-color: rgb(255, 163, 102);
   text-align: center;
 }
-.footer .link-uz0 a img{
+.footer .link-uz0 a img {
   height: $unit;
   width: $unit;
   position: absolute;
   top: 25%;
   left: 25%;
+}
+
+@media (max-width: 768px)  {
+
+  .navigation {
+    display: none !important;
+  }
+
+  .mobile.menu {
+    position: absolute;
+    right: 0;
+    top: $unit;
+    width: $unit * 2;
+    height: $unit * 2;
+    background-image: url(/images/menu.svg);
+    background-repeat: no-repeat;
+  }
+
+  .navigation.open {
+    display: block !important;
+    background-color: #fff;
+    position: relative;
+    top: $unit;
+    padding-bottom: $unit;
+    text-align: left;
+  }
+
+  .header .navigation a {
+    display: block;
+    color: $textColorLinks;
+    text-decoration: none;
+    text-align: left;
+    padding: 0;
+    margin: $unit * 0.5 0 $unit * 0.5 $unit * 2;
+    font-size: $unit * 1.125;
+    line-height: 2;
+    padding-left: $unit * 2;
+    border-left: 1px solid #b2b2b2;
+  }
+
+  .header .wrap a.button-play {
+    position: static;
+    border: none;    text-align: left;
+    padding: 0;
+    margin: $unit * 0.5 0 $unit * 0.5 $unit * 2;
+    font-size: $unit * 1.125;
+    line-height: 2;
+    font-weight: 400;
+    padding-left: $unit * 2;
+    border-left: 1px solid #b2b2b2;
+  }
+
+  .footer .links a {
+    color: #999;
+    text-decoration: none;
+    margin-right: $unit * 2;
+    font-size: 16px;
+  }
+
+}
+
+@media (max-width: 425px) {
+
+  .footer .links a {
+    margin-right: $unit;
+  }
+
+  .footer .link-uz0 {
+    position: static;
+    margin: 0 auto;
+    line-height: 2.5;
+  }
+
+  .footer .link-uz0 a img {
+    position: static;
+  }
+
+}
+
+@media (max-width: 390px) {
+
+  .news-content .inner .one-news .date label {
+    margin-left: $unit * 0.5;
+  }
+
 }

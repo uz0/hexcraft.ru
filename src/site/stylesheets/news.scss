@@ -73,9 +73,21 @@
   border-top: 1px solid #b2b2b2;
 }
 @media (max-width: 1024px)  {
-
+  .wrap{
+    width: 90%;
+  }
 }
-
-@media (max-width: 600px) {
-
+@media (max-width: 768px) {
+  .news-content .inner .one-news:before, .news-content .inner .one-news:after{
+    display: none;
+  }
+  .news-content .inner .one-news:first-of-type {
+    margin: $unit * 2 0 $unit 0px;
+  }
+  .news-content .inner .one-news:last-of-type {
+    margin: $unit * 2 0 $unit * 2 0px;
+  }
+  .news-content .inner .one-news {
+    margin: $unit 0 $unit  0px;
+  }
 }

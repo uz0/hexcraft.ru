@@ -30,7 +30,7 @@ body {
   height: $unit * 3.75;
   display: inline-block;
   vertical-align: top;
-  margin-right: $unit * 6.1;
+  margin-right: $unit * 4;
 }
 .header .navigation{
   display: inline-block;
@@ -70,7 +70,7 @@ body {
 .footer .links a{
   color: $textColorLinks;
   text-decoration: none;
-  margin-right: $unit * 2;
+  margin-right: $unit * 4;
   font-size: $unit;
 }
 .footer .link-uz0{

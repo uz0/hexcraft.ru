@@ -75,10 +75,17 @@ body {
 }
 .footer .link-uz0{
   position: absolute;
+  bottom: $unit * 0.5;
   right: 0;
-  top: 0;
-}
-.footer .link-uz0 a{
   height: $unit * 2;
   width: $unit * 2;
+  background-color: rgb(255, 163, 102);
+  text-align: center;
+}
+.footer .link-uz0 a img{
+  height: $unit;
+  width: $unit;
+  position: absolute;
+  top: 25%;
+  left: 25%;
 }

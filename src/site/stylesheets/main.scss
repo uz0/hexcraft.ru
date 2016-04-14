@@ -4,18 +4,22 @@ html{
   height: 100%;
 }
 body {
+  display: block;
   min-height: 100%;
   font-family: Roboto;
   font-weight: 400;
   color: #333;
+  position: relative;
+  box-sizing: border-box;
 }
-
 .wrap{
   width: 1050px;
   margin: 0 auto;
   position: relative;
 }
-
+.wrapper {
+  min-height: calc(100vh - 95px - 85px);
+}
 .header{
   padding: $unit 0;
   line-height: $unit * 3.75;

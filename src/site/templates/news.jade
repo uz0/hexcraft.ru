@@ -5,9 +5,8 @@ block vars
   - var bodyClass = 'news-page'
 
 block content
-  include ./_header.jade
-  .wrapper
-    .news-content(ng-app="newsApp" ng-controller="newsCtrl as news")
+    include ./_header.jade
+    .news-content.wrapper(ng-app="newsApp" ng-controller="newsCtrl as news")
       .inner.wrap(ng-if="news.list.length")
         .one-news(ng-repeat="oneNews in news.list")
           .main-content(ng-if="oneNews.content.length")
@@ -27,7 +26,7 @@ block content
         .inner(ng-if="!news.list.length")
           p empty
 
-      include ./_footer.jade
+    include ./_footer.jade
 
       script(src='/vendor/angular/angular.min.js')
       script(src='/javascripts/bundle.js')

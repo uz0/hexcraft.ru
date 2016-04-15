@@ -1,7 +1,7 @@
 'use strict';
 
 import LOADER from './loader.js';
-// import AUTH from './stages/auth.js';
+import AUTH from './stages/auth.js';
 // import LOBBY from './stages/lobby.js';
 // import GAME from './stages/game.js';
 import DEMO from './stages/demo.js';
@@ -24,8 +24,8 @@ class HC {
   }
 
   loaded (loader, resources) {
-    var demo = new DEMO(resources);
-    this.stage = demo;
+    var auth = new AUTH(resources);
+    this.stage = auth;
   }
 
   loop () {

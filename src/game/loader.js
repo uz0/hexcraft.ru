@@ -1,6 +1,6 @@
 'use strict';
 
-export default class LOADER extends PIXI.loaders.Loader {
+export default class Loader extends PIXI.loaders.Loader {
   constructor() {
     super();
     

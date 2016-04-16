@@ -1,21 +1,24 @@
 'use strict';
 
-import LOADER from './loader.js';
-import AUTH from './stages/auth.js';
+import Loader from './loader.js';
+import Auth from './stages/auth.js';
 // import LOBBY from './stages/lobby.js';
 // import GAME from './stages/game.js';
-import DEMO from './stages/demo.js';
+import Demo from './stages/demo.js';
 
 class HC {
   constructor() {
     this.renderer = new PIXI.WebGLRenderer(window.innerWidth, window.innerHeight);
-    this.renderer.backgroundColor = 0xFFFFFF;;
+    this.renderer.backgroundColor = 0xFFFFFF;
     document.body.appendChild(this.renderer.view);
 
-    var loader = new LOADER();
+    var loader = new Loader();
     loader.once('complete', this.loaded.bind(this));
-    loader.load();
-    window.addEventListener('resize', this.rescale.bind(this), false);
+
+    EZGUI.Theme.load(['/vendor/ezgui/assets/kenney-theme/kenney-theme.json'], () => {
+      loader.load();
+    });
+
     this.loop();
   }
 
@@ -24,7 +27,7 @@ class HC {
   }
 
   loaded (loader, resources) {
-    var auth = new AUTH(resources);
+    var auth = new Auth(resources);
     this.stage = auth;
   }
 

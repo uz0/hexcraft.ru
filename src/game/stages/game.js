@@ -1,6 +1,6 @@
 'use strict';
 
-export default class GAME {
+export default class Game {
   constructor() {
 
   }

@@ -1,6 +1,6 @@
 'use strict';
 
-export default class LOBBY {
+export default class Lobby {
   constructor() {
 
   }

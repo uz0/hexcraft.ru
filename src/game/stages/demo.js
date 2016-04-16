@@ -1,6 +1,6 @@
 'use strict';
 
-export default class DEMO extends PIXI.Stage {
+export default class Demo extends PIXI.Stage {
   constructor(resources) {
     super();
     this.logo = new PIXI.Sprite(resources.logo.texture);

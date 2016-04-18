@@ -50,6 +50,7 @@ const api = {
 
 const game = {
   scripts: 'src/game/**/*.js',
+  configs: 'src/game/**/*.json',
   main:    'src/game/app.js',
   assets:  'src/game/**/*.*',
   ex:      '!src/game/**/*.js',
@@ -151,7 +152,7 @@ gulp.task('watch', () => {
   gulp.watch(site.templates.from, ['templates:site']);
   gulp.watch(site.assets.from, ['assets:site']);
   gulp.watch(game.assets, ['assets:game']);
-  gulp.watch(game.scripts, ['scripts:game']);
+  gulp.watch([game.scripts, game.configs], ['scripts:game']);
 
   nodemon({
     script: 'app.js',

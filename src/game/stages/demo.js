@@ -1,9 +1,11 @@
 'use strict';
 
+import hexcraft from '../app.js';
+
 export default class Demo extends PIXI.Stage {
-  constructor(resources) {
+  constructor() {
     super();
-    this.logo = new PIXI.Sprite(resources.logo.texture);
+    this.logo = new PIXI.Sprite(hexcraft.resources.logo.texture);
 
     this.logo.position.x = window.innerWidth/2;
     this.logo.position.y = window.innerHeight/2;

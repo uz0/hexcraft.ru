@@ -52,7 +52,18 @@ var authGui = {
     text: 'Вход',
     component: 'Button',
     position: {
-      x: 150,
+      x: 90,
+      y: 300
+    },
+    width: 100,
+    height: 50
+  },
+  {
+    id: 'demo',
+    text: 'Демо',
+    component: 'Button',
+    position: {
+      x: 210,
       y: 300
     },
     width: 100,

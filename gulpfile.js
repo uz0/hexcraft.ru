@@ -79,6 +79,10 @@ gulp.task('scripts:site', () => {
       })
       .transform(babelify)
       .bundle()
+      .on('error', function(err){
+        console.log(err.message);
+        this.emit('end');
+      })
       .pipe(source('bundle.js'))
       .pipe(gulp.dest(site.scripts.to));
 
@@ -96,6 +100,10 @@ gulp.task('scripts:game', () => {
       })
       .transform(babelify)
       .bundle()
+      .on('error', function(err){
+        console.log(err.message);
+        this.emit('end');
+      })
       .pipe(source('bundle.js'))
       .pipe(gulp.dest(game.to));
 });

@@ -24,6 +24,7 @@
     "angular": false,
     "app": true,
     "PIXI": false,
+    "EZGUI": false,
     "window": false,
     "document": false
   }

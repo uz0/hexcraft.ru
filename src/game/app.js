@@ -1,10 +1,6 @@
 'use strict';
 
-import Loader from './loader.js';
-import Auth from './stages/auth.js';
-// import LOBBY from './stages/lobby.js';
-// import GAME from './stages/game.js';
-// import Demo from './stages/demo.js';
+import Load from './stages/load.js';
 
 class Hexcraft {
   constructor() {
@@ -12,20 +8,8 @@ class Hexcraft {
     this.renderer.backgroundColor = 0xFFFFFF;
     document.body.appendChild(this.renderer.view);
 
-    var loader = new Loader();
-    loader.once('complete', this.loaded.bind(this));
-
-    EZGUI.Theme.load(['/vendor/ezgui/assets/kenney-theme/kenney-theme.json'], () => {
-      loader.load();
-    });
-
+    this.setStage(Load);
     this.loop();
-  }
-
-  loaded (loader, resources) {
-    this.resources = resources;
-
-    this.setStage(Auth);
   }
 
   setStage (Stage) {

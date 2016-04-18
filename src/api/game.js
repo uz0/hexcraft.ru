@@ -7,7 +7,7 @@ var router = express.Router();
  * @api {get} /map Get all available maps
  * @apiName getMaps
  * @apiGroup Game
- * 
+ *
  * @apiSuccess {json} maps Array of all maps
  */
 
@@ -62,6 +62,20 @@ router.get('/map/:id', function(req, res) {
 
 
 /**
+ * @api {get} / get list games
+ * @apiName getGame
+ * @apiGroup Game
+ *
+ */
+
+router.get('/', function(req, res) {
+  models.Game.findAll().then(function(games) {
+    res.send(games);
+  });
+})
+
+
+/**
  * @api {post} / Start game
  * @apiName startGame
  * @apiGroup Game
@@ -99,7 +113,7 @@ router.post('/', function(req, res) {
 
 
 /**
- * @api {get} /:gameId 
+ * @api {get} /:gameId
  * @apiName gameUpdate
  * @apiGroup Game
  *
@@ -114,7 +128,7 @@ router.get('/:gameId', function(req, res) {
 });
 
 /**
- * @api {post} /:gameId 
+ * @api {post} /:gameId
  * @apiName gameStep
  * @apiGroup Game
  *

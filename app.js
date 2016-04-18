@@ -12,7 +12,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/users', require('./src/api/users'));
 app.use('/news', require('./src/api/news'));
 app.use('/auth', require('./src/api/auth'));
-app.use('/game', require('./src/api/game'));
+app.use('/games', require('./src/api/game'));
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

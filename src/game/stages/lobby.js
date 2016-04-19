@@ -12,9 +12,7 @@ export default class Lobby extends PIXI.Stage {
       this.addChild(EZGUI.create(element, 'kenney'));
     })
 
-    EZGUI.components.gameSubmit.on('click', () => {
-      hexcraft.setStage(Game);
-    });
+    EZGUI.components.gameSubmit.on('click', this.startGame);
 
     // user list
     // TODO: online user list!
@@ -50,6 +48,10 @@ export default class Lobby extends PIXI.Stage {
       });
     });
 
+  }
+
+  startGame() {
+    hexcraft.setStage(Game);
   }
 
   update(){}

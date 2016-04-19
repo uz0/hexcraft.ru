@@ -26,7 +26,7 @@ var authGui = {
     height: 50
   },
   {
-    id: 'authLogin',
+    id: 'authUsername',
     text: '',
     component: 'Input',
     position: {
@@ -37,7 +37,7 @@ var authGui = {
     height: 50
   },
   {
-    id: 'authPass',
+    id: 'authPassword',
     text: '',
     component: 'Input',
     position: {

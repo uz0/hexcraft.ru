@@ -9,7 +9,7 @@ var authGui = {
     y: window.innerHeight / 2 - 200
   },
   width: 400,
-  height: 450,
+  height: 400,
   children: [{
     id: 'textAuth',
     text: 'Авторизация',
@@ -67,6 +67,20 @@ var authGui = {
       y: 300
     },
     width: 100,
+    height: 50
+  },
+  {
+    id: 'ErrorMessage',
+    font: {
+      size: '15px',
+      color: '#000'
+    },
+    component: 'Label',
+    position: {
+      x: 100,
+      y: 350
+    },
+    width: 200,
     height: 50
   }]
 };

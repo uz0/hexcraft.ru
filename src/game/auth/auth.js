@@ -17,11 +17,17 @@ export default class Auth extends PIXI.Stage {
 
     this.guiElt = EZGUI.create(authGui, 'kenney');
 
-    /*
-    * Если вызывать как EZGUI.components.authSubmit.on('click', this.login), то
-    * из this.login, при попытке вызова методов класса Auth через this, выдает ошибку, т.к.
-    * в этом случае this-ом является кнопка входа. Поэтому вызываю так
-    */
+    var pixilate = new PIXI.filters.PixelateFilter();
+
+    EZGUI.components.authPassword.filters = [pixilate];
+
+    EZGUI.components.authPassword._filters[0].size = {
+      x: 3,
+      y: 3
+    }
+
+    EZGUI.components.authSubmit.on('click', this.login.bind(this));
+
     EZGUI.components.authSubmit.on('click', () => {
       this.login();
     });
@@ -38,7 +44,7 @@ export default class Auth extends PIXI.Stage {
     var password = EZGUI.components.authPassword.text;
 
     if (!username || !password) {
-      this.createErrorMessage('Заполните все поля');
+      EZGUI.components.ErrorMessage.text = 'Заполните все поля';
       return false;
     }
 
@@ -72,40 +78,17 @@ export default class Auth extends PIXI.Stage {
         token: token
       })
     })
-    .then((data) => {
+    .then(response => { 
 
-      if (data.ok){
+      if (response.status === 200){
         hexcraft.setStage(Lobby); 
       } else {
-        this.createErrorMessage('Ваша авторизация устарела. Войдите снова');
+        EZGUI.components.ErrorMessage.text = 'Ваша авторизация устарела. Войдите снова';
       }
 
-    })
-    .catch((error) => {
+    }, error => {
       console.log('Error: ' + error);
     });
-  }
-
-  createErrorMessage(text) {
-    if (EZGUI.components.ErrorMessage) {
-      EZGUI.components.ErrorMessage.text = text;
-    } else {
-      EZGUI.components.authBg.addChild(EZGUI.create({
-        id: 'ErrorMessage',
-        text: text,
-        font: {
-          size: '15px',
-          color: '#000'
-        },
-        component: 'Label',
-        position: {
-          x: 100,
-          y: 350
-        },
-        width: 200,
-        height: 50
-      }, 'kenney'));
-    }
   }
 
   update() {}

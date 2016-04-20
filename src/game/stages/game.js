@@ -2,7 +2,7 @@
 
 export default class Game extends PIXI.Stage {
   constructor() {
-    super()
+    super();
   }
 
   update(){}

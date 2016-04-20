@@ -64,6 +64,6 @@ var lobbyGui = [{
   },
   width: 100,
   height: 50
-}]
+}];
 
 export default lobbyGui;

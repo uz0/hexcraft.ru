@@ -2,15 +2,20 @@
 
 import hexcraft from '../app.js';
 import Game from './game.js';
+import StatusBar from './statusbar.js';
 import lobbyGui from './lobby.gui.js';
 
 export default class Lobby extends PIXI.Stage {
   constructor() {
+    var Bar = new StatusBar();
+
     super();
 
     lobbyGui.forEach(element => {
       this.addChild(EZGUI.create(element, 'kenney'));
-    })
+    });
+
+    this.addChild(Bar);
 
     EZGUI.components.gameSubmit.on('click', this.startGame);
 
@@ -47,6 +52,12 @@ export default class Lobby extends PIXI.Stage {
         }, 'kenney'));
       });
     });
+
+    //hide surrender button
+    Bar.showExit();
+
+    //Show user status
+    Bar.statusLog();
 
   }
 

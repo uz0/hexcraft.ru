@@ -9,6 +9,10 @@ export default class Auth extends PIXI.Stage {
   constructor() {
     super();
 
+    var token = window.localStorage.getItem('token');
+
+    this.verify(token);
+
     this.guiElt = EZGUI.create(authGui, 'kenney');
 
     EZGUI.components.authSubmit.on('click', this.login);
@@ -28,7 +32,7 @@ export default class Auth extends PIXI.Stage {
     var username = EZGUI.components.authUsername.text;
     var password = EZGUI.components.authPassword.text;
 
-    if(!username || !password) {
+    if (!username || !password) {
       return false;
     }
 
@@ -50,5 +54,26 @@ export default class Auth extends PIXI.Stage {
     });
   }
 
-  update(){}
+  verify(token) {
+
+    window.fetch('/auth/verify', {
+      method: 'get',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      params: JSON.stringify({
+        token: token
+      })
+    })
+    .then(() => {
+      hexcraft.setStage(Lobby);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+    
+  }
+
+  update() {}
 }

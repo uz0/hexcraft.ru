@@ -7,12 +7,13 @@ import lobbyGui from './lobby.gui.js';
 
 export default class Lobby extends PIXI.Stage {
   constructor() {
+    super();
+
     var Bar = new StatusPanel();
 
-    EZGUI.components.surrenderButton.visible = false;
-    EZGUI.components.logoutButton.visible = false;
+    Bar.log('боль и страдание');
 
-    super();
+    Bar.showExit();
 
     lobbyGui.forEach(element => {
       this.addChild(EZGUI.create(element, 'kenney'));
@@ -55,9 +56,6 @@ export default class Lobby extends PIXI.Stage {
         }, 'kenney'));
       });
     });
-
-
-    Bar.log('боль и страдание');
 
   }
 

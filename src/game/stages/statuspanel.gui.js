@@ -21,7 +21,7 @@ var statusPanel = {
     width: 250,
     height: 50,
     position: {
-      x: window.innerWidth - 600,
+      x: window.innerWidth - 200,
       y: 10
     }
   },{

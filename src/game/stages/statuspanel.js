@@ -2,7 +2,7 @@
 
 import statusPanel from './statuspanel.gui.js';
 
-export default class StatusBar extends PIXI.Stage {
+export default class StatusPanel extends PIXI.Stage {
   constructor() {
     super();
 
@@ -10,6 +10,10 @@ export default class StatusBar extends PIXI.Stage {
 
     this.guiElt = EZGUI.create(statusPanel, 'kenney');
     EZGUI.components.userName.text = username;
+
+    //workaround: cant setup visible from config file
+    EZGUI.components.surrenderButton.visible = false;
+    EZGUI.components.logoutButton.visible = false;
 
     this.addChild(this.guiElt);
 

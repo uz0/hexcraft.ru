@@ -2,12 +2,15 @@
 
 import hexcraft from '../app.js';
 import Game from './game.js';
-import StatusBar from './statusbar.js';
+import StatusPanel from './statuspanel.js';
 import lobbyGui from './lobby.gui.js';
 
 export default class Lobby extends PIXI.Stage {
   constructor() {
-    var Bar = new StatusBar();
+    var Bar = new StatusPanel();
+
+    EZGUI.components.surrenderButton.visible = false;
+    EZGUI.components.logoutButton.visible = false;
 
     super();
 
@@ -53,11 +56,8 @@ export default class Lobby extends PIXI.Stage {
       });
     });
 
-    //hide surrender button
-    Bar.showExit();
 
-    //Show user status
-    Bar.statusLog();
+    Bar.log('боль и страдание');
 
   }
 

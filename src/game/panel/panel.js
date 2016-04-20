@@ -1,14 +1,14 @@
 'use strict';
 
-import statusPanel from './statuspanel.gui.js';
+import panelGui from './panel.gui.js';
 
-export default class StatusPanel extends PIXI.Stage {
+export default class Panel extends PIXI.Stage {
   constructor() {
     super();
 
     var username = window.localStorage.getItem('user');
 
-    this.guiElt = EZGUI.create(statusPanel, 'kenney');
+    this.guiElt = EZGUI.create(panelGui, 'kenney');
     EZGUI.components.userName.text = username;
 
     //workaround: cant setup visible from config file
@@ -16,7 +16,6 @@ export default class StatusPanel extends PIXI.Stage {
     EZGUI.components.logoutButton.visible = false;
 
     this.addChild(this.guiElt);
-
   }
 
   showExit() {

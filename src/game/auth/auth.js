@@ -2,8 +2,8 @@
 
 import authGui from './auth.gui.js';
 import hexcraft from '../app.js';
-import Demo from './demo.js';
-import Lobby from './lobby.js';
+import Demo from '../demo.js';
+import Lobby from '../lobby/lobby.js';
 
 export default class Auth extends PIXI.Stage {
   constructor() {
@@ -19,10 +19,6 @@ export default class Auth extends PIXI.Stage {
 
     EZGUI.components.demo.on('click', () => {
       hexcraft.setStage(Demo);
-    });
-
-    EZGUI.components.lobby.on('click', () => {
-      hexcraft.setStage(Lobby);
     });
 
     this.addChild(this.guiElt);
@@ -51,11 +47,11 @@ export default class Auth extends PIXI.Stage {
     .then(response => {
       window.localStorage.setItem('user', response.user.username);
       window.localStorage.setItem('token', response.token.token);
+      hexcraft.setStage(Lobby);
     });
   }
 
   verify(token) {
-
     window.fetch('/auth/verify', {
       method: 'get',
       headers: {
@@ -71,8 +67,8 @@ export default class Auth extends PIXI.Stage {
     })
     .catch((error) => {
       console.log(error);
-    })
-    
+    });
+
   }
 
   update() {}

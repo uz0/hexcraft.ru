@@ -2,7 +2,7 @@
 
 import resources from '../resources.json';
 import hexcraft from '../app.js';
-import Auth from './auth.js';
+import Auth from '../auth/auth.js';
 
 // load all from resources.json
 class Loader extends PIXI.loaders.Loader {

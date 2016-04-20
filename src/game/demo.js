@@ -1,6 +1,6 @@
 'use strict';
 
-import hexcraft from '../app.js';
+import hexcraft from './app.js';
 
 export default class Demo extends PIXI.Stage {
   constructor() {

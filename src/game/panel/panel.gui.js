@@ -1,7 +1,7 @@
 'use strict';
 
-var statusPanel = {
-  id: 'statusPanel',
+var panelGui = {
+  id: 'panel',
   component: 'Window',
   padding: 2,
   position: {
@@ -63,4 +63,4 @@ var statusPanel = {
    }]
 };
 
-export default statusPanel;
+export default panelGui;

@@ -68,17 +68,6 @@ var authGui = {
     },
     width: 100,
     height: 50
-  },
-  {
-    id: 'lobby',
-    text: 'Лобби',
-    component: 'Button',
-    position: {
-      x: 150,
-      y: 370
-    },
-    width: 100,
-    height: 50
   }]
 };
 

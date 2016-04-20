@@ -1,6 +1,6 @@
 'use strict';
 
-export default class Game extends PIXI.Stage {
+export default class Board extends PIXI.Stage {
   constructor() {
     super();
   }

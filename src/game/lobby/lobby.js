@@ -1,25 +1,22 @@
 'use strict';
 
 import hexcraft from '../app.js';
-import Game from './game.js';
-import StatusPanel from './statuspanel.js';
+import Board from '../board/board.js';
+import Panel from '../panel/panel.js';
 import lobbyGui from './lobby.gui.js';
 
 export default class Lobby extends PIXI.Stage {
   constructor() {
     super();
 
-    var Bar = new StatusPanel();
-
-    Bar.log('боль и страдание');
-
-    Bar.showExit();
+    var panel = new Panel();
+    panel.log('боль и страдание');
+    panel.showExit();
+    this.addChild(panel);
 
     lobbyGui.forEach(element => {
       this.addChild(EZGUI.create(element, 'kenney'));
     });
-
-    this.addChild(Bar);
 
     EZGUI.components.gameSubmit.on('click', this.startGame);
 
@@ -60,7 +57,7 @@ export default class Lobby extends PIXI.Stage {
   }
 
   startGame() {
-    hexcraft.setStage(Game);
+    hexcraft.setStage(Board);
   }
 
   update(){}

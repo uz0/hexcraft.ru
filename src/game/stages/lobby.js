@@ -1,49 +1,66 @@
 'use strict';
 
-// import hexcraft from '../app.js';
+import hexcraft from '../app.js';
+import Game from './game.js';
+import StatusPanel from './statuspanel.js';
 import lobbyGui from './lobby.gui.js';
 
 export default class Lobby extends PIXI.Stage {
   constructor() {
     super();
 
-    var users = window.fetch('/users')
-    .then(r => r.json())
+    var Bar = new StatusPanel();
+
+    Bar.log('боль и страдание');
+
+    Bar.showExit();
+
+    lobbyGui.forEach(element => {
+      this.addChild(EZGUI.create(element, 'kenney'));
+    });
+
+    this.addChild(Bar);
+
+    EZGUI.components.gameSubmit.on('click', this.startGame);
+
+    // user list
+    // TODO: online user list!
+    window.fetch('/users')
+    .then(response => response.json())
     .then(users => {
-      lobbyGui.children = users.map(user => {
-        return {
-          id: 'lvl6',
+      users.forEach(user => {
+        EZGUI.components.usersList.addChild(EZGUI.create({
+          id: user.id,
           text: user.username,
-          userData: 'level 6',
-          component: 'Button',
-          position: 'right',
+          component: 'Label',
+          position: 'left',
           width: 100,
           height: 100
-        };
+        }, 'kenney'));
       });
     });
 
-    var games = window.fetch('/games')
-    .then(r => r.json())
+    // all games
+    // TODO: need label formater
+    window.fetch('/games')
+    .then(response => response.json())
     .then(games => {
-      lobbyGui.children = games.map(game => {
-        return {
-          id: 'lvl6',
+      games.forEach(game => {
+        EZGUI.components.gamesList.addChild(EZGUI.create({
+          id: game.id,
           text: game.player1,
-          userData: 'level 6',
-          component: 'Button',
+          component: 'Label',
           position: 'right',
           width: 100,
           height: 100
-        };
+        }, 'kenney'));
       });
     });
 
-    Promise.all([games, users]).then(() => {
-      this.guiElt = EZGUI.create(lobbyGui, 'kenney');
-      this.addChild(this.guiElt);
-    });
+  }
 
+  startGame() {
+    hexcraft.setStage(Game);
   }
 
   update(){}

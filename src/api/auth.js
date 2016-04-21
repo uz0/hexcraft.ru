@@ -18,7 +18,7 @@ var router = express.Router();
 
 router.get('/verify', function(req, res) {
   //{user: req.body.user,token: {token: 1875178345, validThrough: 17537163513} }
-  res.status(400).send();
+  res.status(200).send();
 
 
   /*

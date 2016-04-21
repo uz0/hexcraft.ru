@@ -1,29 +1,16 @@
 extends layout
 
 block vars
-  - var title = 'Новости - HexCraft'
+  - var title = 'Новости'
   - var bodyClass = 'news-page'
 
 block content
     include ./_header.jade
-    .news-content.wrapper(ng-controller="newsCtrl as news")
-      .inner.wrap(ng-if="news.list.length")
-        .one-news(ng-repeat="oneNews in news.list")
-          .main-content(ng-if="oneNews.content.length")
-            .title-wrapper
-              h2.title(ng-bind="oneNews.title")
-              .date
-                label(ng-bind="oneNews.createdAt | newsDateFilter")
-              p(ng-bind="oneNews.content")
-
-
-          .main-content(ng-if="!oneNews.content.length && oneNews.title.length")
-            .only-title
-              h2.title(ng-bind="oneNews.title")
-              .date
-                label(ng-bind="oneNews.createdAt | newsDateFilter")
-
-        .inner(ng-if="!news.list.length")
-          p empty
+    .news-content.wrapper.wrap(ng-controller="newsCtrl as news")
+      .item(ng-repeat="item in news.list")
+        .title-wrapper(ng-class="{'only-title': !item.content}")
+          h2.title(ng-bind="item.title")
+          label.date(ng-bind="item.createdAt | newsDateFilter")
+        p(ng-bind="item.content" ng-if="item.content")
 
     include ./_footer.jade

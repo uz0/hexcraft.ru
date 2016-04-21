@@ -1,4 +1,6 @@
-h2, h3, h4 {font-weight: 300; color: #85BAB4;}
-h1 {font-weight: 700; color: #85BAB4;}
+@import "config.scss";
+
+h2, h3, h4 {font-weight: 300; color: $themeColor;}
+h1 {font-weight: 700; color: $themeColor;}
 label {font-weight: 300;}
-a {cursor: pointer;white-space: nowrap; text-decoration: none; color: #F9690E;}
+a {cursor: pointer; white-space: nowrap; text-decoration: none; color: $themeColor;}

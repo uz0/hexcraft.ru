@@ -1,8 +1,8 @@
 @import "config.scss";
 
-::selection {color:white; background:#85BAB4}
-::-webkit-selection {color:white; background:#85BAB4}
-::-moz-selection {color:white; background:#85BAB4}
+::selection {color:white; background:$themeColor}
+::-webkit-selection {color:white; background:$themeColor}
+::-moz-selection {color:white; background:$themeColor}
 
 html {
   height: 100%;
@@ -33,8 +33,8 @@ body {
 .header{
   padding: $unit 0;
   line-height: $unit * 3.75;
-  border-bottom: 1px solid $layoutBorderColor;
-  background: #fdfdfd;
+  border-bottom: 1px solid $themeColor;
+  background: $coverColor;
 }
 
 .header .logo {
@@ -54,7 +54,7 @@ body {
 }
 
 .header .navigation a {
-  color: $textColorLinks;
+  color: $themeColor;
   text-decoration: none;
   margin-right: $unit * 3.125;
   font-size: $unit * 1.125;
@@ -69,9 +69,9 @@ body {
   top: $unit;
   right: 0;
   padding: 0 $unit * 2;
-  border: 1px solid #85BAB4;
+  border: 1px solid $themeColor;
   font-weight: bold;
-  color: $textColorLinks;
+  color: $themeColor;
   text-decoration: none;
   cursor: pointer;
   font-size: $unit;
@@ -83,14 +83,14 @@ body {
 .footer {
   width: 100%;
   padding: $unit / 2 0;
-  border-top: 1px solid $layoutBorderColor;
+  border-top: 1px solid $themeColor;
   line-height: $unit * 3.125;
   color: #fff;
-  background: #fdfdfd;
+  background: $coverColor;
 }
 
 .footer .links a {
-  color: $textColorLinks;
+  color: $themeColor;
   text-decoration: none;
   margin-right: $unit * 4;
   font-size: $unit;
@@ -139,7 +139,7 @@ body {
 
   .header .navigation a {
     display: block;
-    color: $textColorLinks;
+    color: $themeColor;
     text-decoration: none;
     text-align: left;
     padding: 0;
@@ -147,7 +147,7 @@ body {
     font-size: $unit * 1.125;
     line-height: 2;
     padding-left: $unit * 2;
-    border-left: 1px solid #85BAB4;
+    border-left: 1px solid $themeColor;
   }
 
   .header .wrap a.button-play {
@@ -159,11 +159,11 @@ body {
     line-height: 2;
     font-weight: 400;
     padding-left: $unit * 2;
-    border-left: 1px solid #85BAB4;
+    border-left: 1px solid $themeColor;
   }
 
   .footer .links a {
-    color: #85BAB4;
+    color: $themeColor;
     text-decoration: none;
     margin-right: $unit * 2;
     font-size: 16px;
@@ -189,7 +189,7 @@ body {
 }
 
 @media (max-width: 390px) {
-  .news-content .inner .one-news .date label {
+  .news-content .inner .item .date label {
     margin-left: $unit * 0.5;
   }
 }

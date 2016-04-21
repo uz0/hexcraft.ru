@@ -6,11 +6,10 @@ block vars
 
 block content
   header
-    .wrap-blocks.top
-      a(href="/index.html")
-        img(src="/images/logo.svg" alt="logo" class="logo")
+    .wrap-blocks.top(ng-controller="indexCtrl as index")
+      a(href="/index.html" class="logo")
       .description
-        h1 Hexcraft
+        h1 HEXCRAFT
         p Логическая игра
   footer
     .wrap-blocks

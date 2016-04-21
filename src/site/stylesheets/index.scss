@@ -32,12 +32,16 @@
   min-height: 100%;
   box-sizing: border-box;
   padding-bottom: $unit * 5.625;
+  -webkit-filter: drop-shadow(2px 2px 5px #333);
+  filter: drop-shadow(2px 2px 5px #000);
 }
 
 .index-page header .logo {
+  display: block;
   width: $unit * 10;
   height: $unit * 10;
   margin-right: $unit * 2;
+  background: url("/images/logo.svg") center / contain no-repeat;
 }
 
 .index-page header .description {
@@ -47,14 +51,14 @@
 
 .index-page header .description h1 {
   margin: 0;
-  font-size: $unit * 3.5;
-  color: #5f5f5f;
+  font-size: $unit * 3;
+  color: #fff;
 }
 
 .index-page header .description p {
-  margin: $unit 0 0 0;
-  font-size: $unit * 1.8;
-  color: #999;
+  margin: 0;
+  font-size: $unit * 1.5;
+  color: #fff;
   line-height: 1.5;
 }
 
@@ -62,18 +66,21 @@
   margin-top: -$unit * 10;
   height: $unit * 9;
   width: 100%;
+  -webkit-filter: drop-shadow(0 0 50px #333);
+  filter: drop-shadow(0 0 50px #333);
 }
 
 .index-page footer .button-play {
   padding: $unit 0;
-  outline: 2px solid #999;
   font-weight: bold;
-  color: #999;
+  color: #333;
+  background: #fff;
   text-decoration: none;
   cursor: pointer;
   font-size: $unit * 2;
   display: block;
-  width: 100%;
+  width: 90%;
+  margin: 0 auto;
 }
 
 .index-page footer .links {
@@ -82,8 +89,8 @@
 
 .index-page footer .links a {
   margin: 0 $unit / 2;
-  font-size: $unit * 1.5;
-  color: #999;
+  font-size: $unit;
+  color: #fff;
 }
 
 @media (max-width: 1367px)  {

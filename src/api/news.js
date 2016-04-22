@@ -31,7 +31,7 @@ router.get('/', function(req, res) {
  */
 
 router.post('/', function(req, res) {
-  if (req.body.token !== 0 && req.body.admin == true) {
+  if (req.body.token !== 0 && req.body.admin === true) {
     console.log(req.body.userId);
     res.status(400).send({ error: 'wrong user token!' });
     return;
@@ -58,7 +58,7 @@ router.post('/', function(req, res) {
  */
 
 router.delete('/:newsId', function(req, res) {
-  if (req.body.userId !== '0' && req.body.admin == true) {
+  if (req.body.userId !== '0' && req.body.admin === true) {
     res.status(400).send({ error: 'wrong user Id!' });
     return;
   }

@@ -21,7 +21,7 @@ var panelGui = {
     width: 250,
     height: 50,
     position: {
-      x: window.innerWidth - 200,
+      x: window.innerWidth - 400,
       y: 10
     }
   },{

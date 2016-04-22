@@ -29,14 +29,12 @@ router.get('/', function(req, res) {
 
 
 router.get('/:userId', function(req, res) {
-  res.status(200).send({
-    user: {
-      id: req.body.id,
-      username: 'NYI',
-      password: 'NYI',
-      createdAt: '2016-04-09T10:44:46.502Z',
-      updatedAt: '2016-04-09T10:44:46.502Z'
+  models.User.findAll({
+    where: {
+      id: req.params.userId
     }
+  }).then(function(users) {
+    res.send(users);
   });
 });
 
@@ -98,6 +96,16 @@ router.delete('/:userId', function(req, res) {
   models.User.destroy({
     where: {
       id: req.params.userId
+    }
+  }).then(function() {
+    res.status(200).send();
+  });
+});
+
+router.delete('/logout', function(req, res) {
+  models.User.destroy({
+    where: {
+      id: req.params.token
     }
   }).then(function() {
     res.status(200).send();

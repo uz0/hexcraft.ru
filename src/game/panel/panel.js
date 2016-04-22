@@ -18,8 +18,22 @@ export default class Panel extends PIXI.Stage {
     this.addChild(this.guiElt);
   }
 
+  logout () {
+   window.localStorage.removeItem('user');
+   window.localStorage.removeItem('token');
+   window.fetch('/auth/logout', {
+     method: 'DELETE',
+     body: JSON.stringify({
+        token: ''
+       })
+     })
+   document.location.href = '/';
+  }
+
+
   showExit() {
     EZGUI.components.logoutButton.visible = true;
+    EZGUI.components.logoutButton.on('click', this.logout);
   }
 
   showCapitulation() {

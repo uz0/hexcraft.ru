@@ -72,7 +72,7 @@ router.get('/', function(req, res) {
   models.Game.findAll().then(function(games) {
     res.send(games);
   });
-})
+});
 
 
 /**

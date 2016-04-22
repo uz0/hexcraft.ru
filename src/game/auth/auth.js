@@ -24,7 +24,7 @@ export default class Auth extends PIXI.Stage {
     EZGUI.components.authPassword._filters[0].size = {
       x: 3,
       y: 3
-    }
+    };
 
     EZGUI.components.authSubmit.on('click', this.login.bind(this));
 

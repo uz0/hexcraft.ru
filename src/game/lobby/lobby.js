@@ -14,6 +14,9 @@ export default class Lobby extends PIXI.Stage {
     panel.showExit();
     this.addChild(panel);
 
+    EZGUI.components.logoutButton.on('click', panel.logout);
+
+
     lobbyGui.forEach(element => {
       this.addChild(EZGUI.create(element, 'kenney'));
     });

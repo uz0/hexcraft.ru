@@ -32,8 +32,8 @@
   min-height: 100%;
   box-sizing: border-box;
   padding-bottom: $unit * 5.625;
-  -webkit-filter: drop-shadow(2px 2px 5px #333);
-  filter: drop-shadow(2px 2px 5px #000);
+  -webkit-filter: drop-shadow(0 20px 15px #333);
+  filter: drop-shadow(0 20px 15px #333);
 }
 
 .index-page header .logo {
@@ -66,8 +66,8 @@
   margin-top: -$unit * 10;
   height: $unit * 9;
   width: 100%;
-  -webkit-filter: drop-shadow(0 0 50px #333);
-  filter: drop-shadow(0 0 50px #333);
+  -webkit-filter: drop-shadow(0 40px 40px #333);
+  filter: drop-shadow(0 40px 40px #333);
 }
 
 .index-page footer .button-play {

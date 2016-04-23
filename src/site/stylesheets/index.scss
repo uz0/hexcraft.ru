@@ -94,7 +94,7 @@
 }
 
 @media (max-width: 1367px)  {
-  .index-page header .logo{
+  .index-page header .logo {
     margin: 0 auto;
     width: $unit * 12;
     height: $unit * 12;
@@ -102,15 +102,17 @@
 }
 
 @media (max-width: 1024px)  {
-  .index-page header{
+  .index-page header {
     padding-top: $unit * 4;
   }
-  .index-page header .logo{
+
+  .index-page header .logo {
     margin: 0 auto;
     width: $unit * 10;
     height: $unit * 10;
   }
-  .wrap-blocks{
+
+  .wrap-blocks {
     padding-bottom: $unit * 2;
   }
 }

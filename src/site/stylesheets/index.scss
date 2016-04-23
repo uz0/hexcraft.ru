@@ -116,37 +116,44 @@
 }
 
 @media (max-width: 600px) {
-
-  .wrap-blocks.top{
+  .wrap-blocks.top {
     display: block;
   }
-  .wrap-blocks{
+
+  .wrap-blocks {
     width: 90%;
     padding-bottom: $unit * 7;
   }
-  .index-page header{
+
+  .index-page header {
     padding-top: $unit * 3;
   }
-  .index-page header .logo{
+
+  .index-page header .logo {
     margin: 0 auto;
     width: $unit * 10;
     height: $unit * 10;
   }
-  .index-page header .description{
+
+  .index-page header .description {
     text-align: center;
     margin-top: $unit * 0.5;
   }
-  .index-page header .description h1{
+
+  .index-page header .description h1 {
     font-size: $unit * 3;
   }
-  .index-page header .description p{
+
+  .index-page header .description p {
     font-size: $unit * 2;
     margin-top: 0px;
   }
-  .index-page footer .button-play{
+
+  .index-page footer .button-play {
     font-size: $unit * 1.5;
   }
-  .index-page footer .links a{
+
+  .index-page footer .links a {
     font-size: $unit;
   }
 }

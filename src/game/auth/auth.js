@@ -61,7 +61,7 @@ export default class Auth extends PIXI.Stage {
         password: password
       })
     })
-    .then(response => response.json())
+    .then(utils.parseJson)
     .then(response => {
       window.localStorage.setItem('user', response.user.username);
       window.localStorage.setItem('token', response.token.token);

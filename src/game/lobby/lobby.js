@@ -1,6 +1,7 @@
 'use strict';
 
 import hexcraft from '../app.js';
+import utils from '../utils.js';
 import Board from '../board/board.js';
 import Panel from '../panel/panel.js';
 import lobbyGui from './lobby.gui.js';
@@ -23,7 +24,7 @@ export default class Lobby extends PIXI.Stage {
     // user list
     // TODO: online user list!
     window.fetch('/users')
-    .then(response => response.json())
+    .then(utils.parseJson)
     .then(users => {
       users.forEach(user => {
         EZGUI.components.usersList.addChild(EZGUI.create({
@@ -40,7 +41,7 @@ export default class Lobby extends PIXI.Stage {
     // all games
     // TODO: need label formater
     window.fetch('/games')
-    .then(response => response.json())
+    .then(utils.parseJson)
     .then(games => {
       games.forEach(game => {
         EZGUI.components.gamesList.addChild(EZGUI.create({

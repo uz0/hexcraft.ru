@@ -1,5 +1,7 @@
 {
   "development": {
+    "salt": "test",
+    "validTime": 86400,
     "dialect": "sqlite",
     "storage": "./db.development.sqlite"
   },

@@ -9,10 +9,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // init routes here
-app.use('/users', require('./src/api/users'));
-app.use('/news', require('./src/api/news'));
-app.use('/auth', require('./src/api/auth'));
-app.use('/games', require('./src/api/game'));
+app.use('/api/users', require('./src/api/users'));
+app.use('/api/news', require('./src/api/news'));
+app.use('/api/auth', require('./src/api/auth'));
+app.use('/api/games', require('./src/api/game'));
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

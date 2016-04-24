@@ -1,11 +1,13 @@
 'use strict';
+
 const models = require('./models');
+const isAdmin = require('./middlewares/isAdmin');
 const express = require('express');
 
 const router = module.exports = express.Router();
 
 /**
- * @api {get} / Get all news
+ * @api {get} /news Get all news
  * @apiName getAllNews
  * @apiGroup News
  *
@@ -14,13 +16,12 @@ const router = module.exports = express.Router();
 
 router.get('/', function(req, res) {
   models.News.findAll().then(news => {
-    res.status(200)
-       .json(news);
+    res.send(news);
   });
 });
 
 /**
- * @api {post} / Create new news story
+ * @api {post} /news Create new news story
  * @apiName createNews
  * @apiGroup News
  *
@@ -32,25 +33,17 @@ router.get('/', function(req, res) {
  *
  */
 
-router.post('/', function(req, res) {
-  // if (userAdmin) {
-  //   return res.status(400)
-  //             .send({
-  //     error: 'access denied'
-  //   });
-  // }
-
+router.post('/', isAdmin, function(req, res) {
   models.News.create({
     title: req.body.title,
     content: req.body.content || ''
   }).then(item => {
-    res.status(200)
-       .send(item);
+    res.send(item);
   });
 });
 
 /**
- * @api {delete} /:id Delete news story
+ * @api {delete} /news/:id Delete news story
  * @apiName deleteNews
  * @apiGroup News
  *
@@ -59,20 +52,12 @@ router.post('/', function(req, res) {
  *
  */
 
-router.delete('/:id', function(req, res) {
-  // if (userAdmin) {
-  //   return res.status(400)
-  //             .send({
-  //     error: 'access denied'
-  //   });
-  // }
-
+router.delete('/:id', isAdmin, function(req, res) {
   models.News.destroy({
     where: {
       id: req.params.id
       }
     }).then(() => {
-      res.status(200)
-         .send();
+      res.send();
   });
 });

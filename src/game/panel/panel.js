@@ -19,15 +19,15 @@ export default class Panel extends PIXI.Stage {
   }
 
   logout () {
-   window.localStorage.removeItem('user');
-   window.localStorage.removeItem('token');
-   window.fetch('/auth/logout', {
-     method: 'DELETE',
-     body: JSON.stringify({
+    window.localStorage.removeItem('user');
+    window.localStorage.removeItem('token');
+    window.fetch('/auth/logout', {
+      method: 'DELETE',
+      body: JSON.stringify({
         token: ''
-       })
-     })
-   document.location.href = '/';
+      })
+    });
+    document.location.href = '/';
   }
 
 

@@ -1,115 +1,85 @@
 'use strict';
-var models = require('./models');
-var express = require('express');
-var router = express.Router();
+
+const config = require('../../config/config.json');
+const env = process.env.NODE_ENV || 'development';
+const salt = config[env].salt || process.env.SALT;
+
+const bcrypt = require('bcrypt-nodejs');
+const isAdmin = require('./middlewares/isAdmin');
+const models = require('./models');
+const express = require('express');
+const router = module.exports = express.Router();
 
 
 /**
- * @api {get} / Request all online users
- * @apiName getOnlineUsers
+ * @api {get} /users Request all users
+ * @apiName getUsers
  * @apiGroup User
  *
- * @apiSuccess {json} allUsers All users' info
+ * @apiSuccess {Object[]} users All users
  */
 
 router.get('/', function(req, res) {
-  models.User.findAll().then(function(users) {
+  models.User.findAll().then(users => {
     res.send(users);
   });
 });
 
-/**
- * @api {get} /:userId Get this user's data
- * @apiName getUserData
- * @apiGroup User
- *
- * @apiParam {Number} userId User's id
- * @apiSuccess {json} data User's data
- */
-
-
-router.get('/:userId', function(req, res) {
-  models.User.findAll({
-    where: {
-      id: req.params.userId
-    }
-  }).then(function(users) {
-    res.send(users);
-  });
-});
 
 /**
- * @api {post} / Create new user
+ * @api {post} /users Create new user
  * @apiName createUser
  * @apiGroup User
  *
- * @apiSuccess {json} token User's Token
- * @apiSuccess {json} user User info
+ * @apiSuccess {Object} user User data
  */
 
-router.post('/', function(req, res) {
-
-  res.status(200).send({
-    user: {
-      id: req.params.userId,
-      username: req.body.username,
-      password: req.body.password,
-      createdAt: '2016-04-09T10:44:46.502Z',
-      updatedAt: '2016-04-09T10:44:46.502Z'
-    },
-    token: {
-      token: 1875178345,
-      validThrough: 17537163513,
-      createdAt: '2016-04-09T10:44:46.502Z',
-      updatedAt: '2016-04-09T10:44:46.502Z'
-    }
-  });
-  /*
+router.post('/', isAdmin, function(req, res) {
   models.User.create({
     username: req.body.username,
-    password: req.body.password,
-  }).then(function(user) {
-    user.addToken({
-        token: 1412512152,
-        validThrough: 101240192
-    }).then(function(token){
-        res.send(token);
-    });
+    password: bcrypt.hashSync(req.body.password, salt)
+  }).then(user => {
+    res.send(user);
   });
-  */
+
 });
 
 
+/**
+ * @api {get} /users/:id Get user data
+ * @apiName getUserData
+ * @apiGroup User
+ *
+ * @apiParam {Number} id User id
+ *
+ * @apiSuccess {Object} user User data
+ */
+
+router.get('/:id', function(req, res) {
+  models.User.findOne({
+    where: {
+      id: req.params.id
+    }
+  }).then(user => {
+    res.send(user);
+  });
+});
 
 
 /**
- * @api {delete} /:userId Delete this user
+ * @api {delete} /users/:userId Delete this user
  * @apiName deleteUser
  * @apiGroup User
  *
  * @apiParam {Number} id User id
- * @apiSuccess {json} status Operation status
  */
 
-
-router.delete('/:userId', function(req, res) {
+router.delete('/:id', isAdmin, function(req, res) {
   models.User.destroy({
     where: {
-      id: req.params.userId
+      id: req.params.id
     }
-  }).then(function() {
-    res.status(200).send();
+  }).then(() => {
+    res.send();
   });
 });
-
-router.delete('/logout', function(req, res) {
-  models.User.destroy({
-    where: {
-      id: req.params.token
-    }
-  }).then(function() {
-    res.status(200).send();
-  });
-});
-
-module.exports = router;

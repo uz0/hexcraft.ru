@@ -4,13 +4,13 @@ export default [{
   id: 'textAuth',
   text: 'Авторизация',
   font: {
-    size: '30px',
+    size: '24px',
     color: '#fff'
   },
   component: 'Label',
   position: {
-    x: 95 ,
-    y: 20
+    x: 310 ,
+    y: 150
   },
   width: 200,
   height: 50
@@ -20,54 +20,60 @@ export default [{
   text: '',
   component: 'Input',
   position: {
-    x: 75,
-    y: 100
+    x: 310,
+    y: 230
   },
-  width: 250,
-  height: 50
+  width: 200,
+  height: 35
 },
 {
   id: 'authPassword',
   text: '',
   component: 'Input',
   position: {
-    x: 75,
-    y: 200
+    x: 310,
+    y: 300
   },
-  width: 250,
-  height: 50
+  width: 200,
+  height: 35
 },
 {
   id: 'authSubmit',
   text: 'Вход',
+  font: {
+    size: '16px'
+  },
   component: 'Button',
   position: {
-    x: 90,
-    y: 300
+    x: 310,
+    y: 380
   },
-  width: 100,
-  height: 50
+  width: 95,
+  height: 40
 },
 {
   id: 'demoBtn',
   text: 'Демо',
+  font: {
+    size: '16px'
+  },
   component: 'Button',
   position: {
-    x: 210,
-    y: 300
+    x: 415,
+    y: 380
   },
-  width: 100,
-  height: 50
+  width: 95,
+  height: 40
 },
 {
   id: 'ErrorMessage',
   font: {
-    size: '15px',
-    color: '#900'
+    size: '16px',
+    color: '#000'
   },
   component: 'Label',
   position: {
-    x: 100,
+    x: 310,
     y: -50
   },
   width: 200,

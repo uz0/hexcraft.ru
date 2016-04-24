@@ -15,6 +15,10 @@ export default class Auth extends PIXI.Stage {
     this.verify(token);
 
     let hex = PIXI.Sprite.fromImage("/game/auth/hex.svg");
+    hex.position = {
+      x: 225,
+      y: 100
+    }
     this.addChild(hex)
 
     authGui.forEach(element => {
@@ -31,11 +35,11 @@ export default class Auth extends PIXI.Stage {
     this.GUI.ErrorMessage.position.dy = -50;
     this.GUI.authPassword.filters = [pixilate];
     this.GUI.authSubmit.on('click', this.login.bind(this));
-    this.GUI.demoBtn.on('click', hexcraft.setStage(Demo));
+    this.GUI.demoBtn.on('click', () => hexcraft.setStage(Demo));
   }
 
   showError(message) {
-    this.GUI.ErrorMessage.position.dy = 350;
+    this.GUI.ErrorMessage.position.dy = 50;
     this.GUI.ErrorMessage.text = message;
     window.setTimeout(()=>{
       this.GUI.ErrorMessage.position.dy = -50;

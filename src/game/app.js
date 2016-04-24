@@ -4,7 +4,7 @@ import Load from './load/load.js';
 
 class Hexcraft {
   constructor() {
-    this.renderer = new PIXI.WebGLRenderer(window.innerWidth, window.innerHeight);
+    this.renderer = new PIXI.WebGLRenderer(800, 600);
     this.renderer.backgroundColor = 0xFFFFFF;
     document.body.appendChild(this.renderer.view);
 

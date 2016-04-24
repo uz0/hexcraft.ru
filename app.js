@@ -1,8 +1,9 @@
-var express = require('express');
-var path = require('path');
-var bodyParser = require('body-parser');
-var models = require("./src/api/models");
-var app = express();
+const express = require('express');
+const path = require('path');
+const bodyParser = require('body-parser');
+const models = require("./src/api/models");
+const app = module.exports =  express();
+const env = process.env.NODE_ENV || 'development';
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -22,11 +23,9 @@ app.use((req, res, next) => {
 });
 
 // error handler
-// no stacktraces leaked to user unless in development environment
 app.use((err, req, res, next) => {
   res.status(err.status || 500).json({
-    message: err.message,
-    error: (app.get('env') === 'development') ? err : {}
+    error: err.message
   });
 });
 
@@ -36,5 +35,3 @@ models.sequelize.sync().then(() => {
     console.log(`Express server http://localhost:${port}/`);
   });
 });
-
-module.exports = app;

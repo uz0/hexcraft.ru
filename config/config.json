@@ -1,6 +1,6 @@
 {
   "development": {
-    "salt": "test",
+    "salt": "$2a$10$3.YGiknAFfM0FvzdPz2OYO",
     "validTime": 86400,
     "dialect": "sqlite",
     "storage": "./db.development.sqlite"

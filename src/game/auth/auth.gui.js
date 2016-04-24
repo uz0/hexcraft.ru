@@ -68,7 +68,6 @@ export default [{
   component: 'Label',
   position: {
     x: 100,
-    dy: -50,
     y: -50
   },
   width: 200,

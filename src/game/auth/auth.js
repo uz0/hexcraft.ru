@@ -28,6 +28,7 @@ export default class Auth extends PIXI.Stage {
       y: 5
     };
 
+    this.GUI.ErrorMessage.position.dy = -50;
     this.GUI.authPassword.filters = [pixilate];
     this.GUI.authSubmit.on('click', this.login.bind(this));
     this.GUI.demoBtn.on('click', hexcraft.setStage(Demo));

@@ -1,5 +1,4 @@
 'use strict';
-// const sequelize = require('sequelize');
 const config = require('../../config/config.json');
 const env = process.env.NODE_ENV || 'development';
 const salt = config[env].salt || process.env.SALT;
@@ -21,7 +20,7 @@ const router = module.exports = express.Router();
  * @apiError (500) {String} error Error description
  */
 
-router.get('/verify', (req, res) => {
+router.get('/verify', function(req, res) {
   models.Token.findOne({
     where: {
       token: req.body.token,
@@ -61,7 +60,7 @@ router.post('/login', function(req, res) {
       username: req.body.username,
       password: bcrypt.hashSync(req.body.password, salt)
     }
-  }).then(function(user) {
+  }).then(user => {
     if (!user) {
       res.status(500)
          .send({

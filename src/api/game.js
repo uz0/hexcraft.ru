@@ -8,7 +8,7 @@ var router = express.Router();
  * @apiName getMaps
  * @apiGroup Game
  *
- * @apiSuccess {json} maps Array of all maps
+ * @apiSuccess {Object} maps Array of all maps
  */
 
 router.get('/map', function(req, res) {
@@ -44,7 +44,7 @@ router.get('/map', function(req, res) {
  * @apiParam {Number} id Map ID.
  *
  * @apiSuccess {Number} mapId Id of map
- * @apiSuccess {json} map All poins with hex positions.
+ * @apiSuccess {Object} map All poins with hex positions.
  */
 
 router.get('/map/:id', function(req, res) {
@@ -81,9 +81,9 @@ router.get('/', function(req, res) {
  * @apiGroup Game
  *
  * @apiSuccess {Number} mapId Id of map
- * @apiSuccess {json} user Your info
- * @apiSuccess {json} enemy Opponent's info
- * @paiSuccess {json} map Game's map
+ * @apiSuccess {Object} user Your info
+ * @apiSuccess {Object} enemy Opponent's info
+ * @paiSuccess {Object} map Game's map
  */
 
 
@@ -118,7 +118,7 @@ router.post('/', function(req, res) {
  * @apiGroup Game
  *
  * @apiParam {Number} gameId Game's Id
- * @apiSuccess {json} updatedFields hexes that have changed
+ * @apiSuccess {Object} updatedFields hexes that have changed
  */
 
 router.get('/:gameId', function(req, res) {
@@ -133,8 +133,7 @@ router.get('/:gameId', function(req, res) {
  * @apiGroup Game
  *
  * @apiParam {Number} gameId Game's Id
- * @apiParam {json} updatedFields Fields that have changed
- * @apiSuccess (200) {Nothing}
+ * @apiParam {Object} updatedFields Fields that have changed
  */
 
 router.post('/:gameId', function(req, res) {

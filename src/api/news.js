@@ -9,7 +9,7 @@ var router = express.Router();
  * @apiName getAllNews
  * @apiGroup News
  *
- * @apiSuccess (200) {json} news Array of all news
+ * @apiSuccess (200) {Object} news Array of all news
  */
 
 router.get('/', function(req, res) {
@@ -26,8 +26,6 @@ router.get('/', function(req, res) {
  * @apiParam {String} token User's token
  * @apiParam {Boolean} admin If user is admin
  *
- * @apiError (400) {Nothing}
- * @apiSuccess (200) {Nothing}
  */
 
 router.post('/', function(req, res) {
@@ -53,8 +51,6 @@ router.post('/', function(req, res) {
  * @apiParam {String} token User's token
  * @apiParam {Boolean} admin If user is admin
  *
- * @apiError (400) {Nothing}
- * @apiSuccess (200) {Nothing}
  */
 
 router.delete('/:newsId', function(req, res) {

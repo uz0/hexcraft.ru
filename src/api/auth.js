@@ -1,152 +1,108 @@
 'use strict';
-var models = require('./models');
-var express = require('express');
-//var sequelize = require('sequelize');
-var router = express.Router();
+// const sequelize = require('sequelize');
+const config = require('../../config/config.json');
+const env = process.env.NODE_ENV || 'development';
+const salt = config[env].salt || process.env.SALT;
+
+const models = require('./models');
+const bcrypt = require('bcrypt-nodejs');
+const uuid = require('node-uuid');
+const express = require('express');
+const router = module.exports = express.Router();
 
 /**
- * @api {get} /verify Verify token
+ * @api {get} /auth/verify Verify token
  * @apiName verifyToken
- * @apiGroup auth
+ * @apiGroup Auth
  *
- * @apiParam {Number} id User ID
  * @apiParam {String} token token
  *
- * @apiSuccess (200) {Nothing} If valid
- * @apiSuccess (500) {Nothing} If invalid
+ * @apiSuccess (200) {Object} token Token information
+ * @apiError (500) {String} error Error description
  */
 
-router.get('/verify', function(req, res) {
-  //{user: req.body.user,token: {token: 1875178345, validThrough: 17537163513} }
-  res.status(200).send();
-
-
-  /*
-    models.Token.find({
-      where: {
-        userId: req.body.userId,
-        token: req.body.token,
-        validThrough: { gt: sequelize.fn('NOW') } // if token still valid
+router.get('/verify', (req, res) => {
+  models.Token.findOne({
+    where: {
+      token: req.body.token,
+      validThrough: {
+        $gt: new Date().getTime()
       }
-    }).then(function(token) {
-      if (token) {
-        res.status(200).send(token);
-      } else {
-        res.status(500).send({ error: 'invalid token/user pair or token old' });
-      }
+    }
+  }).then(token => {
+    if(token) {
+      res.status(200)
+         .send(token);
+      return;
+    }
+
+    res.status(500)
+       .send({
+      error: 'invalid token'
     });
-  */
+  });
 });
 
 /**
- * @api {post} /login Login action
+ * @api {post} /auth/login Login
  * @apiName Login
  * @apiGroup Auth
  *
  * @apiParam {String} username Username
  * @apiParam {String} password Password
  *
- * @apiSuccess {json} user User info
- * @apiSuccess {json} token User's token
+ * @apiSuccess {Object} user User info
+ * @apiSuccess {Object} token User's token
  */
 
 router.post('/login', function(req, res) {
-
-
-  res.status(200).send({
-    user: {
-      'id': 1,
-      'username': req.body.username,
-      'password': req.body.password,
-      'createdAt': '2016-04-09T10:44:46.502Z',
-      'updatedAt': '2016-04-09T10:44:46.502Z'
-    },
-    token: {
-      token: 1875178345,
-      validThrough: 17537163513,
-      'createdAt': '2016-04-09T10:44:46.502Z',
-      'updatedAt': '2016-04-09T10:44:46.502Z'
-    }
-  });
-
-  /*
   models.User.findOne({
     where: {
       username: req.body.username,
-      password: req.body.password
+      password: bcrypt.hashSync(req.body.password, salt)
     }
   }).then(function(user) {
-    if (user) { // valid
-
-      models.Token.findOne({ where: { UserId: user.id } }).then(function(token) {
-        if (token) {
-          token.upsert({ id: token.id, validThrough: sequelize.fn('NOW') + 100000 }).then(function(token) {
-            res.send(token);
-          });
-        } else {
-          var vt = sequelize.fn('NOW') + 100000;
-          models.Token.create({
-            token: sequelize.fn('NOW') % 21,
-            validThrough: vt
-          }).then(function(token) {
-            res.send(token);
-          });
-        }
+    if (!user) {
+      res.status(500)
+         .send({
+        error: 'invalid credentials'
       });
-    } else {
-      res.status(500).send({ error: 'invalid credentials' });
+
+      return;
     }
+
+    models.Token.create({
+      token: uuid.v4(),
+      validThrough: new Date().getTime() + config[env].validTime
+    }).then(token => {
+      res.send(token);
+    });
+
   });
 });
 
-*/
-});
-
 /**
- * @api {post} /logout Logout action
+ * @api {post} /auth/logout Logout
  * @apiName Logout
  * @apiGroup Auth
  *
  * @apiParam {String} token user's token
- * @apiSuccess (200) {Nothing}
- * @apiError (400) {Nothing}
  */
 
 router.post('/logout', function(req, res) {
-  if (req.body.token != 0) {
-    res.status(200).send();
+  const token = req.body.token;
+
+  if (!token) {
+    res.status(400).send();
     return;
   }
-  res.status(400).send();
-});
 
-/**
- * @api {post} /register Register action
- * @apiName Register
- * @apiGroup Auth
- *
- * @apiParam {String} username Username
- * @apiParam {String} password Password
- * @apiSuccess {json} user User info (if status ok)
- * @apiSuccess {json} token User's token (if status ok)
- */
-
-router.post('/register', function(req, res) {
-  res.status(200).send({
-    user: {
-      'id': req.body.id,
-      'username': req.body.username,
-      'password': req.body.password,
-      'createdAt': '2016-04-09T10:44:46.502Z',
-      'updatedAt': '2016-04-09T10:44:46.502Z'
-    },
-    token: {
-      token: 1875178345,
-      validThrough: 17537163513,
-      'createdAt': '2016-04-09T10:44:46.502Z',
-      'updatedAt': '2016-04-09T10:44:46.502Z'
+  models.Token.destroy({
+    where: {
+      token: token
     }
+  }).then(() => {
+    res.status(200).send();
   });
-});
 
-module.exports = router;
+});

@@ -13,8 +13,9 @@ const router = module.exports = express.Router();
  */
 
 router.get('/', function(req, res) {
-  models.News.findAll().then(function(news) {
-    res.status(200).json(news);
+  models.News.findAll().then(news => {
+    res.status(200)
+       .json(news);
   });
 });
 
@@ -42,7 +43,7 @@ router.post('/', function(req, res) {
   models.News.create({
     title: req.body.title,
     content: req.body.content || ''
-  }).then((item) => {
+  }).then(item => {
     res.status(200)
        .send(item);
   });

@@ -70,7 +70,7 @@ router.post('/login', function(req, res, next) {
       token: uuid.v4(),
       UserId: user.id,
       validThrough: new Date().getTime() + config[env].validTime
-    }).then(token => res.send(token))
+    }).then(token => res.send(token));
 
   });
 });
@@ -83,7 +83,7 @@ router.post('/login', function(req, res, next) {
  * @apiParam {String} token user's token
  */
 
-router.post('/logout', isAuthed, function(req, res, next) {
+router.post('/logout', isAuthed, function(req, res) {
   models.Token.destroy({
     where: {
       token: req.body.token

@@ -1,8 +1,10 @@
 'use strict';
+
 const config = require('../../config/config.json');
 const env = process.env.NODE_ENV || 'development';
 const salt = config[env].salt || process.env.SALT;
 
+const isAuthed = require('./middlewares/isAuthed');
 const models = require('./models');
 const bcrypt = require('bcrypt-nodejs');
 const uuid = require('node-uuid');
@@ -20,7 +22,7 @@ const router = module.exports = express.Router();
  * @apiError (500) {String} error Error description
  */
 
-router.get('/verify', function(req, res) {
+router.post('/verify', function(req, res, next) {
   models.Token.findOne({
     where: {
       token: req.body.token,
@@ -29,16 +31,13 @@ router.get('/verify', function(req, res) {
       }
     }
   }).then(token => {
-    if(token) {
-      res.status(200)
-         .send(token);
-      return;
+    if(!token) {
+      let error = new Error('invalid token');
+      error.status = 400;
+      return next(error);
     }
 
-    res.status(500)
-       .send({
-      error: 'invalid token'
-    });
+    res.send(token);
   });
 });
 
@@ -54,7 +53,7 @@ router.get('/verify', function(req, res) {
  * @apiSuccess {Object} token User's token
  */
 
-router.post('/login', function(req, res) {
+router.post('/login', function(req, res, next) {
   models.User.findOne({
     where: {
       username: req.body.username,
@@ -62,20 +61,16 @@ router.post('/login', function(req, res) {
     }
   }).then(user => {
     if (!user) {
-      res.status(500)
-         .send({
-        error: 'invalid credentials'
-      });
-
-      return;
+      let error = new Error('invalid credentials');
+      error.status = 400;
+      return next(error);
     }
 
     models.Token.create({
       token: uuid.v4(),
+      UserId: user.id,
       validThrough: new Date().getTime() + config[env].validTime
-    }).then(token => {
-      res.send(token);
-    });
+    }).then(token => res.send(token))
 
   });
 });
@@ -88,20 +83,13 @@ router.post('/login', function(req, res) {
  * @apiParam {String} token user's token
  */
 
-router.post('/logout', function(req, res) {
-  const token = req.body.token;
-
-  if (!token) {
-    res.status(400).send();
-    return;
-  }
-
+router.post('/logout', isAuthed, function(req, res, next) {
   models.Token.destroy({
     where: {
-      token: token
+      token: req.body.token
     }
   }).then(() => {
-    res.status(200).send();
+    res.send();
   });
 
 });

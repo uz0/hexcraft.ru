@@ -1,15 +1,15 @@
 'use strict';
-var models = require('./models');
-var express = require('express');
+const models = require('./models');
+const express = require('express');
 
-var router = express.Router();
+const router = module.exports = express.Router();
 
 /**
  * @api {get} / Get all news
  * @apiName getAllNews
  * @apiGroup News
  *
- * @apiSuccess (200) {Object} news Array of all news
+ * @apiSuccess (200) {Object[]} news All news
  */
 
 router.get('/', function(req, res) {
@@ -24,44 +24,54 @@ router.get('/', function(req, res) {
  * @apiGroup News
  *
  * @apiParam {String} token User's token
- * @apiParam {Boolean} admin If user is admin
+ * @apiParam {String} title News title
+ * @apiParam {String} [content] News content
+ *
+ * @apiSuccess (200) {Object} news Created item
  *
  */
 
 router.post('/', function(req, res) {
-  if (req.body.token !== 0 && req.body.admin === true) {
-    console.log(req.body.userId);
-    res.status(400).send({ error: 'wrong user token!' });
-    return;
-  }
+  // if (userAdmin) {
+  //   return res.status(400)
+  //             .send({
+  //     error: 'access denied'
+  //   });
+  // }
 
   models.News.create({
     title: req.body.title,
-    content: req.body.content
-  }).then(function() {
-    res.status(200).send();
+    content: req.body.content || ''
+  }).then((item) => {
+    res.status(200)
+       .send(item);
   });
 });
 
 /**
- * @api {delete} /:newsId Delete news story
+ * @api {delete} /:id Delete news story
  * @apiName deleteNews
  * @apiGroup News
  *
  * @apiParam {String} token User's token
- * @apiParam {Boolean} admin If user is admin
+ * @apiParam {number} id News id
  *
  */
 
-router.delete('/:newsId', function(req, res) {
-  if (req.body.userId !== '0' && req.body.admin === true) {
-    res.status(400).send({ error: 'wrong user Id!' });
-    return;
-  }
+router.delete('/:id', function(req, res) {
+  // if (userAdmin) {
+  //   return res.status(400)
+  //             .send({
+  //     error: 'access denied'
+  //   });
+  // }
 
-  models.News.destroy({ where: { id: req.params.newsId } }).then(function() {
-    res.status(200).send();
+  models.News.destroy({
+    where: {
+      id: req.params.id
+      }
+    }).then(() => {
+      res.status(200)
+         .send();
   });
 });
-
-module.exports = router;

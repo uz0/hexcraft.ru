@@ -71,6 +71,9 @@ export default class Auth extends PIXI.Stage {
       window.localStorage.setItem('user', response.user.username);
       window.localStorage.setItem('token', response.token.token);
       hexcraft.setStage(Lobby);
+    })
+    .catch(response => {
+      this.showError('Неправильная пара логин\пароль')
     });
   }
 
@@ -85,7 +88,7 @@ export default class Auth extends PIXI.Stage {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      params: JSON.stringify({
+      body: JSON.stringify({
         token: token
       })
     })

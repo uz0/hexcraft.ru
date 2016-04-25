@@ -70,7 +70,10 @@ router.post('/login', function(req, res, next) {
       token: uuid.v4(),
       UserId: user.id,
       validThrough: new Date().getTime() + config[env].validTime
-    }).then(token => res.send(token));
+    }).then(token => res.send({
+      user: user,
+      token: token
+    }));
 
   });
 });

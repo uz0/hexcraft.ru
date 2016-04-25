@@ -11,6 +11,8 @@ const glob         = require('glob');
 const browserify   = require('browserify');
 const babelify     = require('babelify');
 const source       = require('vinyl-source-stream');
+const apidoc       = require('gulp-apidoc');
+const mocha        = require('gulp-spawn-mocha');
 
 const site = {
   styles: {
@@ -80,7 +82,7 @@ gulp.task('scripts:site', () => {
       })
       .transform(babelify)
       .bundle()
-      .on('error', function(err){
+      .on('error', function (err) {
         console.log(err.message);
         this.emit('end');
       })
@@ -101,7 +103,7 @@ gulp.task('scripts:game', () => {
       })
       .transform(babelify)
       .bundle()
-      .on('error', function(err){
+      .on('error', function (err) {
         console.log(err.message);
         this.emit('end');
       })
@@ -109,18 +111,33 @@ gulp.task('scripts:game', () => {
       .pipe(gulp.dest(game.to));
 });
 
-gulp.task('lint:api', function () {
+gulp.task('lint:api',  () => {
   gulp.src(api.scripts)
     .pipe(jshint('.jshintrc'))
     .pipe(jshint.reporter('default'))
 })
 
+gulp.task('apidoc:api', (done) => {
+  apidoc({
+    src: "src/",
+    dest: "public/apidoc/"
+  }, done);
+})
+
+gulp.task('spec:api', function () {
+  return gulp.src(['specs/*.specs.js'], {read: false})
+    .pipe(mocha({
+      debugBrk: false,
+      R: 'spec',
+      istanbul: false
+    }));
+});
 
 // Templates
 gulp.task('templates:site', ['styles:site'], () => {
   var styles = [];
 
-  glob.sync(site.styles.end).forEach(function(file) {
+  glob.sync(site.styles.end).forEach((file) =>  {
     styles.push(file.replace("public", ""));
   })
 
@@ -134,12 +151,12 @@ gulp.task('templates:site', ['styles:site'], () => {
 
 
 // Assets
-gulp.task('assets:site', function() {
+gulp.task('assets:site', () => {
   gulp.src(site.assets.ex.concat([site.assets.from]))
     .pipe(gulp.dest(site.assets.to));
 });
 
-gulp.task('assets:game', function() {
+gulp.task('assets:game', () => {
   gulp.src([game.ex, game.assets])
     .pipe(gulp.dest(game.to));
 });
@@ -158,7 +175,7 @@ gulp.task('watch', () => {
     script: 'app.js',
     watch: [api.scripts],
     ext: 'js',
-    tasks: ['lint:api']
+    tasks: ['lint:api', 'apidoc:api', 'spec:api']
   })
 });
 
@@ -171,7 +188,7 @@ gulp.task('clr', () => {
 
 // Queue task
 gulp.task('site', ['styles:site', 'scripts:site', 'templates:site', 'assets:site']);
-gulp.task('api', ['lint:api']);
+gulp.task('api', ['lint:api', 'apidoc:api']);
 gulp.task('game', ['assets:game', 'scripts:game']);
 
 gulp.task('compile', ['site', 'api', 'game']);

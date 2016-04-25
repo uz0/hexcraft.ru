@@ -32,8 +32,6 @@
   min-height: 100%;
   box-sizing: border-box;
   padding-bottom: $unit * 5.625;
-  -webkit-filter: drop-shadow(0 20px 15px #333);
-  filter: drop-shadow(0 20px 15px #333);
 }
 
 .index-page header .logo {
@@ -47,7 +45,6 @@
 .index-page header .description {
   text-align: left;
   margin: auto;
-  text-shadow: 0 4px 10px #333;
 }
 
 .index-page header .description h1 {
@@ -67,8 +64,6 @@
   margin-top: -$unit * 10;
   height: $unit * 9;
   width: 100%;
-  -webkit-filter: drop-shadow(0 40px 40px #333);
-  filter: drop-shadow(0 40px 40px #333);
 }
 
 .index-page footer .button-play {

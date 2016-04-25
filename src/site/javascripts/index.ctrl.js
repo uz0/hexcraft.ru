@@ -10,24 +10,25 @@ export default class indexCtrl {
 
     this.displacementSprite = PIXI.Sprite.fromImage('/images/displacementMap.jpg');
     this.displacementFilter = new PIXI.filters.DisplacementFilter(this.displacementSprite);
+    this.displacementFilter.scale = {
+      x: 100,
+      y: 100
+    };
 
-    const bg = PIXI.Sprite.fromImage('/images/background.jpg');
-    this.stage.addChild(bg);
+    this.bg = PIXI.TilingSprite.fromImage('/images/water.png', window.innerWidth, window.innerHeight);
+    this.stage.addChild(this.bg);
     this.stage.filters = [this.displacementFilter];
-    this.stage.interactive = true;
-    this.stage.on('mousemove', this.onMove.bind(this));
-    this.tick = 30;
+    this.tick = 100;
     this.loop();
   }
 
-  onMove() {
-    this.tick -= 2;
-  }
-
   loop () {
-    this.tick += 0.5;
-    this.displacementFilter.scale.x = this.tick;
-    this.displacementFilter.scale.y = this.tick;
+    this.tick += 0.005;
+
+    this.bg.tileScale.x = 2 + Math.cos(this.tick);
+    this.bg.tileScale.y = 3 + Math.sin(this.tick);
+
+    this.bg.tilePosition.x += Math.cos(this.tick);
 
     window.requestAnimationFrame(this.loop.bind(this));
     this.renderer.render(this.stage);

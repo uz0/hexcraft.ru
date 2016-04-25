@@ -16,7 +16,8 @@ module.exports = function(sequelize, DataTypes) {
       validate: {
         notEmpty: true
       }
-    }
+    },
+    admin: DataTypes.BOOLEAN
   });
 
   return User;

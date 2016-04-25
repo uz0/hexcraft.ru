@@ -23,7 +23,7 @@ export default class Lobby extends PIXI.Stage {
 
     // user list
     // TODO: online user list!
-    window.fetch('/users')
+    window.fetch('/api/users')
     .then(utils.parseJson)
     .then(users => {
       users.forEach(user => {
@@ -40,7 +40,7 @@ export default class Lobby extends PIXI.Stage {
 
     // all games
     // TODO: need label formater
-    window.fetch('/games')
+    window.fetch('/api/games')
     .then(utils.parseJson)
     .then(games => {
       games.forEach(game => {

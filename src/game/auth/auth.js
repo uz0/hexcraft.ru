@@ -55,8 +55,8 @@ export default class Auth extends PIXI.Stage {
       return;
     }
 
-    window.fetch('/auth/login', {
-      method: 'post',
+    window.fetch('/api/auth/login', {
+      method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -79,8 +79,8 @@ export default class Auth extends PIXI.Stage {
       return;
     }
 
-    window.fetch('/auth/verify', {
-      method: 'get',
+    window.fetch('/api/auth/verify', {
+      method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'

@@ -21,8 +21,8 @@ export default class Panel extends PIXI.Stage {
   logout () {
     window.localStorage.removeItem('user');
     window.localStorage.removeItem('token');
-    window.fetch('/auth/logout', {
-      method: 'DELETE',
+    window.fetch('/api/auth/logout', {
+      method: 'POST',
       body: JSON.stringify({
         token: ''
       })

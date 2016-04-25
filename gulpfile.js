@@ -117,7 +117,7 @@ gulp.task('lint:api', function () {
 
 
 // Templates
-gulp.task('templates:site', () => {
+gulp.task('templates:site', ['styles:site'], () => {
   var styles = [];
 
   glob.sync(site.styles.end).forEach(function(file) {
@@ -169,8 +169,10 @@ gulp.task('clr', () => {
 });
 
 
-// Default task
+// Queue task
 gulp.task('site', ['styles:site', 'scripts:site', 'templates:site', 'assets:site']);
 gulp.task('api', ['lint:api']);
 gulp.task('game', ['assets:game', 'scripts:game']);
-gulp.task('default', ['clr', 'site', 'api', 'game', 'watch']);
+
+gulp.task('compile', ['site', 'api', 'game']);
+gulp.task('default', ['clr', 'compile', 'watch']);

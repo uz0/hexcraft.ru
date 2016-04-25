@@ -8,20 +8,20 @@ var panelGui = {
     x: 0,
     y: 0
   },
-  width: window.innerWidth,
+  width: 800,
   height: 75,
   children: [{
     id: 'userName',
     text: 'username',
     component: 'label',
     font: {
-      size: '24px',
+      size: '16px',
       color: '#000'
     },
-    width: 250,
+    width: 150,
     height: 50,
     position: {
-      x: window.innerWidth - 400,
+      x: 520,
       y: 10
     }
   },{
@@ -29,7 +29,7 @@ var panelGui = {
     text: 'Сдаться',
     component: 'Button',
     position: {
-      x: window.innerWidth - 250,
+      x: 150,
       y: 10
     },
     width: 125,
@@ -40,7 +40,7 @@ var panelGui = {
     text: 'Выйти',
     component: 'Button',
     position: {
-      x: window.innerWidth - 110,
+      x: 680,
       y: 10
     },
     width: 100,

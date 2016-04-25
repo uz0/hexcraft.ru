@@ -37,3 +37,17 @@ npm i -g bower sequelize-cli gulp
 ```
 npm test
 ```
+<<<<<<< Updated upstream
+=======
+```
+
+### Тестовые данные
+
+Для заполнения базы тестовыми данными используйте команду
+
+```
+sequelize db:seed:all
+```
+
+Будет создано несколько новостей и тестовый пользователь с логином\паролем test\test
+>>>>>>> Stashed changes

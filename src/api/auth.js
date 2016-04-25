@@ -12,7 +12,7 @@ const express = require('express');
 const router = module.exports = express.Router();
 
 /**
- * @api {get} /auth/verify Verify token
+ * @api {post} /auth/verify Verify token
  * @apiName verifyToken
  * @apiGroup Auth
  *

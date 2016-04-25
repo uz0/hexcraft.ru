@@ -21,7 +21,7 @@ router.get('/', function(req, res) {
 });
 
 /**
- * @api {post} /news Create new news story
+ * @api {post} /news Create new news
  * @apiName createNews
  * @apiGroup News
  *
@@ -43,7 +43,7 @@ router.post('/', isAdmin, function(req, res) {
 });
 
 /**
- * @api {delete} /news/:id Delete news story
+ * @api {delete} /news/:id Delete news
  * @apiName deleteNews
  * @apiGroup News
  *

@@ -14,12 +14,12 @@ export default class Auth extends PIXI.Stage {
     let token = window.localStorage.getItem('token');
     this.verify(token);
 
-    let hex = PIXI.Sprite.fromImage("/game/auth/hex.svg");
+    let hex = PIXI.Sprite.fromImage('/game/auth/hex.svg');
     hex.position = {
       x: 225,
       y: 100
-    }
-    this.addChild(hex)
+    };
+    this.addChild(hex);
 
     authGui.forEach(element => {
       this.GUI[element.id] = EZGUI.create(element, 'kenney');
@@ -43,7 +43,7 @@ export default class Auth extends PIXI.Stage {
     this.GUI.ErrorMessage.text = message;
     window.setTimeout(()=>{
       this.GUI.ErrorMessage.position.dy = -50;
-    }, 10000)
+    }, 10000);
   }
 
   login() {
@@ -100,7 +100,7 @@ export default class Auth extends PIXI.Stage {
     const speed = 1;
     let position = this.GUI.ErrorMessage.position;
 
-    if(position.y != position.dy) {
+    if(position.y !== position.dy) {
       let sign = Math.sign(position.dy - position.y);
       position.y += sign*speed;
     }

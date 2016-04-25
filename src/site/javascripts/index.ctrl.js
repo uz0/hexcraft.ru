@@ -8,14 +8,14 @@ export default class indexCtrl {
 
     this.stage = new PIXI.Stage();
 
-    this.displacementSprite = PIXI.Sprite.fromImage("/images/displacementMap.jpg");
+    this.displacementSprite = PIXI.Sprite.fromImage('/images/displacementMap.jpg');
     this.displacementFilter = new PIXI.filters.DisplacementFilter(this.displacementSprite);
 
-    var bg = PIXI.Sprite.fromImage("/images/background.jpg");
+    const bg = PIXI.Sprite.fromImage('/images/background.jpg');
     this.stage.addChild(bg);
     this.stage.filters = [this.displacementFilter];
     this.stage.interactive = true;
-    this.stage.on('mousemove', this.onMove.bind(this))
+    this.stage.on('mousemove', this.onMove.bind(this));
     this.tick = 30;
     this.loop();
   }
@@ -24,10 +24,8 @@ export default class indexCtrl {
     this.tick -= 2;
   }
 
-
   loop () {
     this.tick += 0.5;
-    // if(this.tick > 100) this.tick = 0;
     this.displacementFilter.scale.x = this.tick;
     this.displacementFilter.scale.y = this.tick;
 

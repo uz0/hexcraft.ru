@@ -8,7 +8,7 @@
   "scripts": {
     "start": "gulp",
     "test": "gulp spec:api",
-    "postinstall": "bower install && gulp compile"
+    "postinstall": "node node_modules/bower/bin/bower install && gulp compile"
   },
   "apidoc": {
     "title": "Hexcraft game api",

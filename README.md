@@ -37,9 +37,6 @@ npm i -g bower sequelize-cli gulp
 ```
 npm test
 ```
-<<<<<<< Updated upstream
-=======
-```
 
 ### Тестовые данные
 
@@ -50,4 +47,3 @@ sequelize db:seed:all
 ```
 
 Будет создано несколько новостей и тестовый пользователь с логином\паролем test\test
->>>>>>> Stashed changes

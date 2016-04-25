@@ -36,7 +36,7 @@ var lobbyGui = [{
   },
   component: 'Label',
   position: {
-    x: window.innerWidth - 200,
+    x: 560,
     y: 75
   },
   width: 200,
@@ -47,7 +47,7 @@ var lobbyGui = [{
   padding: 3,
   draggable: false,
   position: {
-    x:window.innerWidth - 190,
+    x:610,
     y:125
   },
   width: 190,
@@ -59,8 +59,8 @@ var lobbyGui = [{
   text: 'В БОЙ',
   component: 'Button',
   position: {
-    x: window.innerWidth / 2 - 100,
-    y: window.innerHeight / 2
+    x: 350,
+    y: 250
   },
   width: 100,
   height: 50

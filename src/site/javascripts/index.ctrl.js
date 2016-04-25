@@ -26,7 +26,7 @@ export default class indexCtrl {
     this.tick += 0.005;
 
     this.bg.tileScale.x = 2 + Math.cos(this.tick);
-    this.bg.tileScale.y = 3 + Math.sin(this.tick);
+    this.bg.tileScale.y = 4 + Math.sin(this.tick);
 
     this.bg.tilePosition.x += Math.cos(this.tick);
 

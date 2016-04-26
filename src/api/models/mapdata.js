@@ -6,7 +6,7 @@ module.exports = function(sequelize, DataTypes) {
     mapId: DataTypes.INTEGER,
     x: DataTypes.INTEGER,
     y: DataTypes.INTEGER,
-    cs: DataTypes.INTEGER
+    cellstate: DataTypes.INTEGER
   });
   return MapData;
 };

@@ -1,9 +1,10 @@
 'use strict';
 
-var models = require('./models');
-const isAuthed = require('./middlewares/isAuthed');
-var express = require('express');
-var router = express.Router();
+  
+const models = require('./models'); 
+const isAuthed = require('./middlewares/isAuthed'); 
+const express = require('express'); 
+const router = module.exports = express.Router();
 
 
 /**

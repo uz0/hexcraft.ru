@@ -73,7 +73,7 @@ export default class Auth extends PIXI.Stage {
       hexcraft.setStage(Lobby);
     })
     .catch(response => {
-      this.showError('Неправильная пара логин\пароль')
+      this.showError('Неправильная пара логин\пароль');
     });
   }
 

@@ -50,7 +50,6 @@ router.post('/', isAuthed, function(req, res) {
       }).then(game => {
         res.send(game);
       });
-
       return;
     }
 

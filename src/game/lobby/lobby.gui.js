@@ -1,6 +1,6 @@
 'use strict';
 
-var lobbyGui = [{
+export default [{
   id: 'gamesListTitle',
   text: 'Игровой процесс',
   font: {
@@ -65,5 +65,3 @@ var lobbyGui = [{
   width: 100,
   height: 50
 }];
-
-export default lobbyGui;

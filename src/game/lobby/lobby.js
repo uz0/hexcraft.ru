@@ -9,17 +9,19 @@ import lobbyGui from './lobby.gui.js';
 export default class Lobby extends PIXI.Stage {
   constructor() {
     super();
+    this.GUI = [];
 
-    var panel = new Panel();
+    lobbyGui.forEach(element => {
+      this.GUI[element.id] = EZGUI.create(element, 'kenney');
+      this.addChild(this.GUI[element.id]);
+    });
+
+    let panel = new Panel();
     panel.log('боль и страдание');
     panel.showExit();
     this.addChild(panel);
 
-    lobbyGui.forEach(element => {
-      this.addChild(EZGUI.create(element, 'kenney'));
-    });
-
-    EZGUI.components.gameSubmit.on('click', this.startGame);
+    this.GUI.gameSubmit.on('click', this.startGame);
 
     // user list
     // TODO: online user list!
@@ -27,7 +29,7 @@ export default class Lobby extends PIXI.Stage {
     .then(utils.parseJson)
     .then(users => {
       users.forEach(user => {
-        EZGUI.components.usersList.addChild(EZGUI.create({
+        this.GUI.usersList.addChild(EZGUI.create({
           id: user.id,
           text: user.username,
           component: 'Label',
@@ -44,7 +46,7 @@ export default class Lobby extends PIXI.Stage {
     .then(utils.parseJson)
     .then(games => {
       games.forEach(game => {
-        EZGUI.components.gamesList.addChild(EZGUI.create({
+        this.GUI.gamesList.addChild(EZGUI.create({
           id: game.id,
           text: game.player1,
           component: 'Label',

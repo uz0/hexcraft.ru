@@ -47,8 +47,8 @@ export default class Auth extends PIXI.Stage {
   }
 
   login() {
-    var username = this.GUI.authUsername.text;
-    var password = this.GUI.authPassword.text;
+    let username = this.GUI.authUsername.text;
+    let password = this.GUI.authPassword.text;
 
     if (!username || !password) {
       this.showError('Заполните все поля');
@@ -72,7 +72,7 @@ export default class Auth extends PIXI.Stage {
       window.localStorage.setItem('token', response.token.token);
       hexcraft.setStage(Lobby);
     })
-    .catch(response => {
+    .catch(() => {
       this.showError('Неправильная пара логин\пароль');
     });
   }

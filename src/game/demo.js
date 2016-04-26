@@ -7,8 +7,8 @@ export default class Demo extends PIXI.Stage {
     super();
     this.logo = new PIXI.Sprite(hexcraft.resources.logo.texture);
 
-    this.logo.position.x = window.innerWidth/2;
-    this.logo.position.y = window.innerHeight/2;
+    this.logo.position.x = window.innerWidth / 2;
+    this.logo.position.y = window.innerHeight / 2;
 
     this.logo.scale.set(0.1);
     this.logo.anchor.set(0.5);
@@ -28,21 +28,21 @@ export default class Demo extends PIXI.Stage {
     this.addChild(this.logo);
   }
 
-  onDragStart(event){
+  onDragStart(event) {
     this.alpha = 0.5;
     this.scale.set(0.11);
     this.dragging = true;
     this.data = event.data;
   }
 
-  onDragEnd(){
+  onDragEnd() {
     this.alpha = 1;
     this.scale.set(0.1);
     this.dragging = false;
     this.data = null;
   }
 
-  onDragMove(){
+  onDragMove() {
     if (this.dragging) {
       var newPosition = this.data.getLocalPosition(this.parent);
       this.position.x = newPosition.x;

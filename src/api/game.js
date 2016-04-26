@@ -34,7 +34,7 @@ router.get('/', function(req, res) {
 
 
 router.post('/', isAuthed, function(req, res) {
-  const user = req.User;
+  const user = req.user;
 
   models.Game.findAll({
     where: {

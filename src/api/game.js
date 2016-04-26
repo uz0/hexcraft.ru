@@ -44,7 +44,7 @@ router.post('/', isAuthed, function(req, res) {
 
     if (!games.length){
       models.Game.create({
-        levelId: 1,
+        mapId: 1,
         player1: user.id,
         stage: 'Not started'
       }).then(game => {

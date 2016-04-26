@@ -5,73 +5,16 @@ const isAuthed = require('./middlewares/isAuthed');
 var express = require('express');
 var router = express.Router();
 
-/**
- * @api {get} /map Get all available maps
- * @apiName getMaps
- * @apiGroup Game
- *
- * @apiSuccess {Object} maps Array of all maps
- */
-
-router.get('/map', function(req, res) {
-  res.status.send({
-    maps: [{
-      mapId: 1,
-      map: [
-        { x: 0, y: 0, v: 0 },
-        { x: 0, y: -1, v: 0 },
-        { x: 0, y: 1, v: 0 },
-        { x: 1, y: -1, v: 0 },
-        { x: 1, y: -1, v: 0 }
-      ]
-    }, {
-      mapId: 2,
-      map: [
-        { x: 0, y: 0, v: 0 },
-        { x: 0, y: -1, v: 0 },
-        { x: 0, y: 1, v: 0 },
-        { x: 1, y: -1, v: 0 },
-        { x: 1, y: -1, v: 0 }
-      ]
-    }]
-  });
-});
-
-
-/**
- * @api {get} /map/:id Request map info
- * @apiName getMap
- * @apiGroup Game
- *
- * @apiParam {Number} id Map ID.
- *
- * @apiSuccess {Number} mapId Id of map
- * @apiSuccess {Object} map All poins with hex positions.
- */
-
-router.get('/map/:id', function(req, res) {
-  res.status(200).send({
-    mapId: req.params.id,
-    map: [
-      { x: 0, y: 0, v: 0 },
-      { x: 0, y: -1, v: 0 },
-      { x: 0, y: 1, v: 0 },
-      { x: 1, y: -1, v: 0 },
-      { x: 1, y: -1, v: 0 }
-    ]
-  });
-});
-
 
 /**
  * @api {get} / get list games
- * @apiName getGame
+ * @apiName getGames
  * @apiGroup Game
  *
  */
 
-router.get('/', isAuthed, function(req, res) {
-  models.Game.findAll().then(function(games) {
+router.get('/', function(req, res) {
+  models.Game.findAll().then(games => {
     res.send(games);
   });
 });
@@ -90,68 +33,64 @@ router.get('/', isAuthed, function(req, res) {
 
 
 router.post('/', isAuthed, function(req, res) {
+  const user = req.User;
 
-  models.Token.findOne({
-    include: [models.User],
+  models.Game.findAll({
     where: {
-      token: token
+      player2: null
     }
-  }).then(result => {
-    var user = result.User;
-    models.Game.findAll({where: {player2: null}}).then(games => {
-    if (!games){
-      models.Game.create({
-        levelId:1,
-        player1: user.id,
-        stage:'Not started'
-      }).then(game => {
+  }).then(games => {
 
-        res.send({
-        'game':game
-        });
+    if (!games.length){
+      models.Game.create({
+        levelId: 1,
+        player1: user.id,
+        stage: 'Not started'
+      }).then(game => {
+        res.send(game);
       });
-      }
-    else{
-        var g = games[0];
-        g.player2 = user.id;
-        g.stage = 'Started';
-        g.save().then(function(){
-          res.send({
-            'game':g
-          });
-        });
-      }
+
+      return;
+    }
+
+    let game = games[0];
+    game.player2 = user.id;
+    game.stage = 'Started';
+    game.save().then(function(){
+      res.send({
+        'game': game
+      });
     });
+
   });
+
 });
 
 
 /**
- * @api {get} /:gameId
+ * @api {get} /:id
  * @apiName gameUpdate
  * @apiGroup Game
  *
- * @apiParam {Number} gameId Game's Id
+ * @apiParam {Number} id Game's Id
  * @apiSuccess {Object} updatedFields hexes that have changed
  */
 
-router.get('/:gameId', function(req, res) {
-  res.status(200).send({
+router.get('/:id', function(req, res) {
+  res.send({
     updatedFields: [{ x: 0, y: 0, v: 1 }]
   });
 });
 
 /**
- * @api {post} /:gameId
+ * @api {post} /:id
  * @apiName gameStep
  * @apiGroup Game
  *
- * @apiParam {Number} gameId Game's Id
+ * @apiParam {Number} id Game's Id
  * @apiParam {Object} updatedFields Fields that have changed
  */
 
-router.post('/:gameId', function(req, res) {
-  res.status(200).send();
+router.post('/:id', function(req, res) {
+  res.send();
 });
-
-module.exports = router;

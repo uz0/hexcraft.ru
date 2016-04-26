@@ -1,6 +1,7 @@
 'use strict';
 
 var models = require('./models');
+const isAuthed = require('./middlewares/isAuthed');
 var express = require('express');
 var router = express.Router();
 
@@ -69,7 +70,7 @@ router.get('/map/:id', function(req, res) {
  *
  */
 
-router.get('/', function(req, res) {
+router.get('/', isAuthed, function(req, res) {
   models.Game.findAll().then(function(games) {
     res.send(games);
   });
@@ -88,27 +89,39 @@ router.get('/', function(req, res) {
  */
 
 
-router.post('/', function(req, res) {
-  res.status(200).send({
-    gameId: 1,
-    user: {
-      id: req.body.id,
-      username: req.body.username
-    },
-    enemy: {
-      id: req.body.id + 1,
-      username: req.body.username
-    },
-    map: {
-      mapId: req.params.id,
-      map: [
-        { x: 0, y: 0, v: 0 },
-        { x: 0, y: -1, v: 0 },
-        { x: 0, y: 1, v: 0 },
-        { x: 1, y: -1, v: 0 },
-        { x: 1, y: -1, v: 0 }
-      ]
+router.post('/', isAuthed, function(req, res) {
+
+  models.Token.findOne({
+    include: [models.User],
+    where: {
+      token: token
     }
+  }).then(result => {
+    var user = result.User;
+    models.Game.findAll({where: {player2: null}}).then(games => {
+    if (!games){
+      models.Game.create({
+        levelId:1,
+        player1: user.id,
+        stage:'Not started'
+      }).then(game => {
+
+        res.send({
+        'game':game
+        });
+      });
+      }
+    else{
+        var g = games[0];
+        g.player2 = user.id;
+        g.stage = 'Started';
+        g.save().then(function(){
+          res.send({
+            'game':g
+          });
+        });
+      }
+    });
   });
 });
 

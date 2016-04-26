@@ -14,14 +14,18 @@ module.exports = function(req, res, next) {
   models.Token.findOne({
     where: {
       token: token
-    }
+    },
+    include:[models.User]
   }).then(result => {
-    if(!result) {
-      let error = new Error('invalid token');
-      error.status = 400;
-      return next(error);
-    }
+    if(!result){
+    let error = new Error('invalid token');
+    error.status = 400;
+    return next(error);
+  }
 
-    next();
+  req.user = result.User;
+
+
+  next();
   });
 };

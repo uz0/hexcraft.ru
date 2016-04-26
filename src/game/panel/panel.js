@@ -5,26 +5,29 @@ import panelGui from './panel.gui.js';
 export default class Panel extends PIXI.Stage {
   constructor() {
     super();
+    this.GUI = [];
 
-    var username = window.localStorage.getItem('user');
+    panelGui.forEach(element => {
+      this.GUI[element.id] = EZGUI.create(element, 'kenney');
+      this.addChild(this.GUI[element.id]);
+    });
 
-    this.guiElt = EZGUI.create(panelGui, 'kenney');
-    EZGUI.components.userName.text = username;
+    const username = window.localStorage.getItem('user');
+    this.GUI.userName.text = username;
 
     //workaround: cant setup visible from config file
-    EZGUI.components.surrenderButton.visible = false;
-    EZGUI.components.logoutButton.visible = false;
-
-    this.addChild(this.guiElt);
+    this.GUI.surrenderButton.visible = false;
+    this.GUI.logoutButton.visible = false;
   }
 
   logout () {
+    const token = window.localStorage.getItem('token');
     window.localStorage.removeItem('user');
     window.localStorage.removeItem('token');
     window.fetch('/api/auth/logout', {
       method: 'POST',
       body: JSON.stringify({
-        token: ''
+        token: token
       })
     });
     document.location.href = '/';
@@ -32,16 +35,16 @@ export default class Panel extends PIXI.Stage {
 
 
   showExit() {
-    EZGUI.components.logoutButton.visible = true;
-    EZGUI.components.logoutButton.on('click', this.logout);
+    this.GUI.logoutButton.visible = true;
+    this.GUI.logoutButton.on('click', this.logout);
   }
 
   showCapitulation() {
-    EZGUI.components.surrenderButton.visible = true;
+    this.GUI.surrenderButton.visible = true;
   }
 
   log(text){
-    EZGUI.components.userStatus.text = text;
+    this.GUI.userStatus.text = text;
   }
 
   update(){}

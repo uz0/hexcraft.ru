@@ -1,9 +1,9 @@
 'use strict';
 
-  
-const models = require('./models'); 
-const isAuthed = require('./middlewares/isAuthed'); 
-const express = require('express'); 
+
+const models = require('./models');
+const isAuthed = require('./middlewares/isAuthed');
+const express = require('express');
 const router = module.exports = express.Router();
 
 
@@ -77,9 +77,19 @@ router.post('/', isAuthed, function(req, res) {
  */
 
 router.get('/:id', function(req, res) {
-  res.send({
-    updatedFields: [{ x: 0, y: 0, v: 1 }]
-  });
+
+  models.Game.findOne({
+    include: [{
+      model: models.Map,
+      include: [ models.MapData ]
+    }],
+    where: {
+      id: req.params.id
+    }
+  }).then(game => {
+    res.send(game);
+  })
+
 });
 
 /**

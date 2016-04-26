@@ -6,7 +6,11 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function(models) {
-        Map.hasMany(models.MapData, {foreignKey: 'mapId'});
+        Map.hasMany(models.MapData, {
+          foreignKey: {
+            allowNull: false
+          }
+        });
       }
     }
   });

@@ -1,10 +1,1 @@
 language: node_js
-deploy:
-  provider: openshift
-  user: dcversus@gmail.com
-  password:
-    secure: KoWJijs720rotNPmLZxJtmnNOHS/CGxdjJTklEEwORXhBNd+1IUSzP4BLVn2DylXLHuFXfH7vfb9nh4PHFtl46MOur/4O+cTaeZguDlx++97x56HTQ6k8/hGWi1N3w6Yamu9sdlyshNcoGLjzacvys7qCNKKioEvDb6GlPRSgdUPrLwb8pReLvYagpJJMkJKyyLYD6j0DwRlQJDU4FoOE2eAadwJKNpRoNgepBshkUcWLJwHSAvXgI6c9nrl3cDViCBCOOGvoO+cYqqiJe4EhWDgvQTUGXFXqX2LoIvyEa0YuASjh0UQaIj+Ob+b+K9v1MQppk6wvBXkAkxY1jkatvL45YUUMtRZPWYl8u8/2GPVI8Yd3uOd4bvss1Lv/8UJe+EIh8fLmzZFyZAZlXgO1pP9SnYAT1F0/mCkX4FAp6VO4fcuDrYIZbAcrDzDM4bND+bJ6xx6tkSuoExWkb8CoWCW+eDWdVEWdXHbsMWPBo56ykFNKVnpK1S97TzFhEZaaMo5qBuEZLsclTPhm+AcLjuRqgeJEuR72nsTn1qLdJIHD+yLM89B8T99WidU3sCYuWIJXh4hkqtMhv+zdglVH3Np9l7cH3CKcsADtrkVgaWARV0447RL2OolAEgbvazQ9T35UE66+TB+LqeRvN2J9cTeb4QFmcBuyXkYKWa0HAs=
-  app: hexcraft
-  domain: 'uz0'
-  on:
-    repo: uz0/hexcraft

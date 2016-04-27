@@ -129,7 +129,8 @@ gulp.task('spec:api', function () {
     .pipe(mocha({
       debugBrk: false,
       R: 'spec',
-      istanbul: false
+      istanbul: false,
+      timeout: 15000
     }));
 });
 

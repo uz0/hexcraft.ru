@@ -25,7 +25,7 @@ export default class Load extends PIXI.Stage {
     loader.once('complete', this.loaded.bind(this));
     loader.on('progress', this.onProgress.bind(this));
 
-    EZGUI.Theme.load(['/vendor/ezgui/assets/kenney-theme/kenney-theme.json'], () => {
+    EZGUI.Theme.load(['./kenney-theme.json'], () => {
       loader.load();
     });
 

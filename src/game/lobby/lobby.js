@@ -48,7 +48,7 @@ export default class Lobby extends PIXI.Stage {
       games.forEach(game => {
         this.GUI.gamesList.addChild(EZGUI.create({
           id: game.id,
-          text: game.player1,
+          text: this.labelFormater(game),
           component: 'Label',
           position: 'right',
           width: 100,
@@ -57,6 +57,10 @@ export default class Lobby extends PIXI.Stage {
       });
     });
 
+  }
+
+  labelFormater(game) {
+    return game.player1;
   }
 
   startGame() {

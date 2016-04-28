@@ -66,16 +66,27 @@ export default [{
   height: 40
 },
 {
+  id: 'ErrorMessageBg',
+  text: '',
+  component: 'Window',
+  position: {
+    x: 260,
+    y: -50
+  },
+  width: 300,
+  height: 50
+},
+{
   id: 'ErrorMessage',
   font: {
     size: '16px',
-    color: '#000'
+    color: '#fff'
   },
   component: 'Label',
   position: {
-    x: 310,
+    x: 360,
     y: -50
   },
-  width: 200,
+  width: 100,
   height: 50
 }];

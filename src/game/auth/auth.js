@@ -33,6 +33,7 @@ export default class Auth extends PIXI.Stage {
     };
 
     this.GUI.ErrorMessage.position.dy = -50;
+    this.GUI.ErrorMessageBg.position.dy = -50;
     this.GUI.authPassword.filters = [pixilate];
     this.GUI.authSubmit.on('click', this.login.bind(this));
     this.GUI.demoBtn.on('click', () => hexcraft.setStage(Demo));
@@ -40,9 +41,11 @@ export default class Auth extends PIXI.Stage {
 
   showError(message) {
     this.GUI.ErrorMessage.position.dy = 50;
+    this.GUI.ErrorMessageBg.position.dy = 50;
     this.GUI.ErrorMessage.text = message;
     window.setTimeout(()=>{
       this.GUI.ErrorMessage.position.dy = -50;
+      this.GUI.ErrorMessageBg.position.dy = -50;
     }, 10000);
   }
 
@@ -106,6 +109,7 @@ export default class Auth extends PIXI.Stage {
     if(position.y !== position.dy) {
       let sign = Math.sign(position.dy - position.y);
       position.y += sign*speed;
+      this.GUI.ErrorMessageBg.position.y += sign*speed;
     }
   }
 }

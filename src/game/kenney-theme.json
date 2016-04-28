@@ -23,9 +23,9 @@
     },
     "Window": {
         "bgPadding": 5,
-        "bg": "wnd-grey-bg.png",
-        "corner": "wnd-grey-bg.png",
-        "line": "wnd-grey-bg.png"
+        "bg": "window-black-bg.png",
+        "corner": "window-black-bg.png",
+        "line": "window-black-bg.png"
     },
     "Label_": {
         "bgPadding": 0,

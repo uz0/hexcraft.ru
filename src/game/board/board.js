@@ -2,11 +2,13 @@
 
 import Panel from '../panel/panel.js';
 import utils from '../utils.js';
+import Chip from './chip.js';
 
 export default class Board extends PIXI.Stage {
   constructor() {
     super();
     this.Field = [];
+    this.Chips = [];
 
     let panel = new Panel();
     panel.log('prepare to die');
@@ -15,25 +17,19 @@ export default class Board extends PIXI.Stage {
 
     this.generateField();
 
-    this.generatePlayersChips();
-
     const id = 1;
 
     window.fetch(`/api/games/${id}`)
     .then(utils.parseJson)
     .then(game => {
-      game.Map.MapData.forEach(element => {
-        if(element.cellstate === 'empty') {
-          this.Field[element.x][element.y].alpha = 1;
-        }
-      })
-    })
-
+      this.initializationMap(game.Map.MapData);
+    });
   }
 
   generateField() {
     for(let i=0; i<20; i++){
       this.Field[i] = [];
+      this.Chips[i] = [];
 
       for(let j=0; j<13; j++){
         if (j % 2 !== 0 && i === 19) {
@@ -53,98 +49,37 @@ export default class Board extends PIXI.Stage {
     }
   }
 
-  generatePlayersChips() {
+  initializationMap(mapData){
+    mapData.forEach(element => {
+      if(element.cellstate === 'empty') {
+        this.Field[element.x][element.y].alpha = 1;
+      }
 
-      let chip1 = PIXI.Sprite.fromImage('/game/board/chip1.svg');
-      chip1.alpha = 1;
-      chip1.position = {
-        x: 40+20,
-        y: 40+80
-      };
-      let chip2 = PIXI.Sprite.fromImage('/game/board/chip2.svg');
-      chip2.alpha = 1;
-      chip2.position = {
-        x: 100,
-        y: 60+60
-      };
-      let chip3 = PIXI.Sprite.fromImage('/game/board/chip3.svg');
-      chip3.alpha = 1;
-      chip3.position = {
-        x: 140,
-        y: 40+80
-      };
+      if(element.cellstate === 'player1') {
+        const x = (element.y % 2 === 0)? element.x*40 : element.x*40+20;
+        const y = element.y*40+80;
+        let chip = new Chip(x, y);
 
-      chip1.interactive = true;
-      chip1.buttonMode = true;
+        chip.onMove = this.onMove;
+        chip.onStep = this.onStep;
+        chip.preventStep = this.preventStep;
 
-      chip2.interactive = true;
-      chip2.buttonMode = true;
-
-      chip3.interactive = true;
-      chip3.buttonMode = true;
-
-
-      chip1
-          .on('mousedown', this.onDragStart)
-          .on('touchstart', this.onDragStart)
-          .on('mouseup', this.onDragEnd)
-          .on('mouseupoutside', this.onDragEnd)
-          .on('touchend', this.onDragEnd)
-          .on('touchendoutside', this.onDragEnd)
-          .on('mousemove', this.onDragMove)
-          .on('touchmove', this.onDragMove);
-      chip2
-          .on('mousedown', this.onDragStart)
-          .on('touchstart', this.onDragStart)
-          .on('mouseup', this.onDragEnd)
-          .on('mouseupoutside', this.onDragEnd)
-          .on('touchend', this.onDragEnd)
-          .on('touchendoutside', this.onDragEnd)
-          .on('mousemove', this.onDragMove)
-          .on('touchmove', this.onDragMove);
-      chip3
-          .on('mousedown', this.onDragStart)
-          .on('touchstart', this.onDragStart)
-          .on('mouseup', this.onDragEnd)
-          .on('mouseupoutside', this.onDragEnd)
-          .on('touchend', this.onDragEnd)
-          .on('touchendoutside', this.onDragEnd)
-          .on('mousemove', this.onDragMove)
-          .on('touchmove', this.onDragMove);
-
-      this.addChild(chip1);
-      this.addChild(chip2);
-      this.addChild(chip3);
+        this.Chips[element.x][element.y] = chip;
+        this.addChild(chip);
+      }
+    });
   }
 
-  onDragStart(event) {
-    this.alpha = 1;
-    this.scale.set(1);
-    this.dragging = true;
-    this.data = event.data;
+  onMove(current, old) {
+    console.log('yep1', current, old);
   }
 
-  onDragEnd() {
-    this.alpha = 1;
-    this.scale.set(1);
-    this.dragging = false;
-    this.data = null;
-    this.position.x = Math.round(this.position.x / 40) * 40;
-    this.position.y = Math.round(this.position.y / 40) * 40;
-    if (this.position.y % 40 !== 0){
-     this.position.x = Math.round(this.position.x / 40) * 40 + 20;
-    }
-    console.log(this.position.x);
-    console.log(this.position.y);
-
+  onStep(current, old) {
+    console.log('yep2', current, old);
   }
 
-  onDragMove() {
-    if (this.dragging) {
-      var newPosition = this.data.getLocalPosition(this.parent);
-      this.position.x = newPosition.x;
-      this.position.y = newPosition.y;
-    }
+  preventStep(current, old) {
+    console.log('yep3', current, old);
   }
 
   update(){}

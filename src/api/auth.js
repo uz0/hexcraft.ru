@@ -42,6 +42,7 @@ router.post('/verify', function(req, res, next) {
   });
 });
 
+
 /**
  * @api {post} /auth/login Login
  * @apiName Login
@@ -78,6 +79,7 @@ router.post('/login', function(req, res, next) {
 
   });
 });
+
 
 /**
  * @api {post} /auth/logout Logout

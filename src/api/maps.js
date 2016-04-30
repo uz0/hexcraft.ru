@@ -6,6 +6,7 @@ const express = require('express');
 
 const router = module.exports = express.Router();
 
+
 /**
  * @api {get} /maps Get all maps
  * @apiName getAllMaps

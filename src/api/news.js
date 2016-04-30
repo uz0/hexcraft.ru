@@ -6,6 +6,7 @@ const express = require('express');
 
 const router = module.exports = express.Router();
 
+
 /**
  * @api {get} /news Get all news
  * @apiName getAllNews

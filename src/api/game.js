@@ -1,6 +1,5 @@
 'use strict';
 
-
 const models = require('./models');
 const isAuthed = require('./middlewares/isAuthed');
 const express = require('express');
@@ -31,7 +30,6 @@ router.get('/', function(req, res) {
  * @apiSuccess {Object} enemy Opponent's info
  * @paiSuccess {Object} map Game's map
  */
-
 
 router.post('/', isAuthed, function(req, res) {
   const user = req.user;
@@ -77,7 +75,6 @@ router.post('/', isAuthed, function(req, res) {
  */
 
 router.get('/:id', function(req, res) {
-
   models.Game.findOne({
     include: [{
       model: models.Map,
@@ -91,6 +88,7 @@ router.get('/:id', function(req, res) {
   });
 
 });
+
 
 /**
  * @api {post} /games/:id

@@ -23,6 +23,20 @@ module.exports = {
       cellstate: 'empty',
       createdAt: new Date(),
       updatedAt: new Date()
+    },{
+      MapId: 1,
+      x: 1,
+      y: 4,
+      cellstate: 'player1',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },{
+      MapId: 1,
+      x: 3,
+      y: 4,
+      cellstate: 'player1',
+      createdAt: new Date(),
+      updatedAt: new Date()
     }]);
   }
 };

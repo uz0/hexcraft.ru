@@ -42,6 +42,8 @@ export default class Chip extends PIXI.Sprite {
 
   onDragEnd() {
     if(this.preventStep && this.preventStep(this.position, this.oldPosition)) {
+      this.position.x = this.oldPosition.x;
+      this.position.y = this.oldPosition.y;
       return;
     }
 
@@ -70,6 +72,7 @@ export default class Chip extends PIXI.Sprite {
     if(this.data && this.onMove) {
       this.onMove(this.position, this.oldPosition)
     }
+
   }
 
 }

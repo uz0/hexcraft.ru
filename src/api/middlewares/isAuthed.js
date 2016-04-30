@@ -4,17 +4,23 @@ const models = require('../models');
 
 module.exports = function(req, res, next) {
   const token = req.body.token;
+
   if (!token) {
     let error = new Error('token not set');
     error.status = 400;
     return next(error);
   }
+
   models.Token.findOne({
     where: {
-      token: token
+      token: token,
+      validThrough: {
+        $gt: new Date().getTime() / 1000
+      }
     },
     include: [ models.User ]
   }).then(result => {
+
     if (!result) {
       let error = new Error('invalid token');
       error.status = 400;

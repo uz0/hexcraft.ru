@@ -28,7 +28,7 @@ router.post('/verify', function(req, res, next) {
     where: {
       token: req.body.token,
       validThrough: {
-        $gt: new Date().getTime()
+        $gt: (new Date().getTime() / 1000)
       }
     }
   }).then(token => {
@@ -70,7 +70,7 @@ router.post('/login', function(req, res, next) {
     models.Token.create({
       token: uuid.v4(),
       UserId: user.id,
-      validThrough: new Date().getTime() + config[env].validTime
+      validThrough: (new Date().getTime() / 1000) + config[env].validTime
     }).then(token => res.send({
       user: user,
       token: token

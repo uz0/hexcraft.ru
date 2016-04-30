@@ -81,12 +81,12 @@ export default class Board extends PIXI.Stage {
   preventStep(current, old) {
     console.log('yep3', current, old);
 
-    if(this.position.x < 0 || this.position.x > 800) {
-     this.position.x = this.oldPosition.x;
-    }
+    if(current.x < 0
+      || current.x > 760
+      || current.y < 80
+      || current.y > 560) {
 
-    if(this.position.y < 40 || this.position.y > 600) {
-     this.position.y = this.oldPosition.y;
+     return true;
     }
 
   }

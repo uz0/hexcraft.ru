@@ -88,7 +88,7 @@ router.get('/:id', function(req, res) {
     }
   }).then(game => {
     res.send(game);
-  })
+  });
 
 });
 

@@ -176,7 +176,7 @@ gulp.task('watch', () => {
     script: 'app.js',
     watch: [api.scripts],
     ext: 'js',
-    tasks: ['lint:api', 'apidoc:api', 'spec:api']
+    tasks: ['lint:api', 'apidoc:api']
   })
 });
 

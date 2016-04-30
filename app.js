@@ -14,6 +14,7 @@ app.use('/api/users', require('./src/api/users'));
 app.use('/api/news', require('./src/api/news'));
 app.use('/api/auth', require('./src/api/auth'));
 app.use('/api/games', require('./src/api/game'));
+app.use('/api/maps', require('./src/api/maps'));
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

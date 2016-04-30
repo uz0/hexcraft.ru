@@ -12,7 +12,7 @@ module.exports = function(req, res, next) {
   }
 
   models.Token.findOne({
-    include: [models.User],
+    include: [ models.User ],
     where: {
       token: token
     }

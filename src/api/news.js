@@ -20,6 +20,7 @@ router.get('/', function(req, res) {
   });
 });
 
+
 /**
  * @api {post} /news Create new news
  * @apiName createNews
@@ -42,6 +43,7 @@ router.post('/', isAdmin, function(req, res) {
   });
 });
 
+
 /**
  * @api {delete} /news/:id Delete news
  * @apiName deleteNews
@@ -56,8 +58,8 @@ router.delete('/:id', isAdmin, function(req, res) {
   models.News.destroy({
     where: {
       id: req.params.id
-      }
-    }).then(() => {
-      res.send();
+    }
+  }).then(() => {
+    res.send();
   });
 });

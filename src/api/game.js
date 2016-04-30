@@ -8,7 +8,7 @@ const router = module.exports = express.Router();
 
 
 /**
- * @api {get} / get list games
+ * @api {get} /games get list games
  * @apiName getGames
  * @apiGroup Game
  *
@@ -22,7 +22,7 @@ router.get('/', function(req, res) {
 
 
 /**
- * @api {post} / Start game
+ * @api {post} /games Start game
  * @apiName startGame
  * @apiGroup Game
  *
@@ -68,7 +68,7 @@ router.post('/', isAuthed, function(req, res) {
 
 
 /**
- * @api {get} /:id
+ * @api {get} /games/:id
  * @apiName gameUpdate
  * @apiGroup Game
  *
@@ -93,7 +93,7 @@ router.get('/:id', function(req, res) {
 });
 
 /**
- * @api {post} /:id
+ * @api {post} /games/:id
  * @apiName gameStep
  * @apiGroup Game
  *

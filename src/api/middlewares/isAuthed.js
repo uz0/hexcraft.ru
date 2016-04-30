@@ -13,7 +13,7 @@ module.exports = function(req, res, next) {
     where: {
       token: token
     },
-    include: [models.User]
+    include: [ models.User ]
   }).then(result => {
     if (!result) {
       let error = new Error('invalid token');

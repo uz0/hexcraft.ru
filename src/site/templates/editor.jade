@@ -1,0 +1,12 @@
+extends layout
+
+block vars
+  - var title = 'Редактор'
+  - var bodyClass = 'editor-page'
+
+block content
+    include ./_header.jade
+    .wrapper.wrap(ng-controller="editorCtrl as editor")
+      p редактор карт
+
+    include ./_footer.jade

@@ -1,3 +1,5 @@
+'use strict';
+
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
@@ -17,22 +19,22 @@ app.use('/api/games', require('./src/api/game'));
 app.use('/api/maps', require('./src/api/maps'));
 
 // catch 404 and forward to error handler
-app.use((req, res, next) => {
-  var err = new Error('Not Found');
+app.use(function(req, res, next) {
+  let err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
 
 // error handler
-app.use((err, req, res, next) => {
+app.use(function(err, req, res, next) {
   res.status(err.status || 500).json({
     error: err.message
   });
 });
 
-models.sequelize.sync().then(() => {
-  var port = process.env.PORT || 3000;
-  var server = app.listen(port, () => {
+models.sequelize.sync().then(function() {
+  let port = process.env.PORT || 3000;
+  let server = app.listen(port, () => {
     console.log(`Express server http://localhost:${port}/`);
   });
 });

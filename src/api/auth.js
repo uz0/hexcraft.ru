@@ -11,6 +11,7 @@ const uuid = require('node-uuid');
 const express = require('express');
 const router = module.exports = express.Router();
 
+
 /**
  * @api {post} /auth/verify Verify token
  * @apiName verifyToken

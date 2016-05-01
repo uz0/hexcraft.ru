@@ -90,7 +90,7 @@ router.post('/', isAuthed, function(req, res) {
  * @apiSuccess {Object} updatedFields hexes that have changed
  */
 
-router.get('/:id', isAuthed, function(req, res) {
+router.get('/:id', function(req, res) {
   models.Game.findOne({
     include: [{
       model: models.Map,

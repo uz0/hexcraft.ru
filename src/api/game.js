@@ -5,7 +5,7 @@ const isAuthed = require('./middlewares/isAuthed');
 const express = require('express');
 const router = module.exports = express.Router();
 const NodeCache = require("node-cache");
-var myCache = new NodeCache({ stdTTL: 86400 });
+var cache = new NodeCache({ stdTTL: 86400 });
 
 
 /**
@@ -48,6 +48,11 @@ router.post('/', isAuthed, function(req, res) {
         player1: user.id,
         stage: 'Not started'
       }).then(game => {
+        var data = {
+          'game': game,
+          'p1IP': req.headers['x-forwarded-for']
+        };
+        cache.set(game.id, data);
         res.send(game);
       });
       return;
@@ -57,6 +62,9 @@ router.post('/', isAuthed, function(req, res) {
     game.player2 = user.id;
     game.stage = 'Started';
     game.save().then(function() {
+      var data = cache.get(game.id);
+      data.p2IP = req.headers['x-forwarded-for'];
+      cache.set(game.id, data);
       res.send({
         'game': game
       });
@@ -88,6 +96,9 @@ router.get('/:id', function(req, res) {
   }).then(game => {
     res.send(game);
   });
+  _
+}
+
 
 });
 
@@ -102,5 +113,5 @@ router.get('/:id', function(req, res) {
  */
 
 router.post('/:id', function(req, res) {
-  res.send();
+
 });

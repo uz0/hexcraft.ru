@@ -74,19 +74,19 @@ export default [{
     y: -50
   },
   width: 300,
-  height: 50
-},
-{
-  id: 'ErrorMessage',
-  font: {
-    size: '16px',
-    color: '#fff'
-  },
-  component: 'Label',
-  position: {
-    x: 360,
-    y: -50
-  },
-  width: 100,
-  height: 50
+  height: 50,
+  children: [{
+    id: 'ErrorMessage',
+    font: {
+      size: '16px',
+      color: '#fff'
+    },
+    component: 'Label',
+    position: {
+      x: 100,
+      y: 0
+    },
+    width: 100,
+    height: 50
+  }]
 }];

@@ -4,8 +4,8 @@ const models = require('./models');
 const isAuthed = require('./middlewares/isAuthed');
 const express = require('express');
 const router = module.exports = express.Router();
-const NodeCache = require("node-cache");
-var cache = new NodeCache({ stdTTL: 86400 });
+const cache = require('memory-store');
+
 
 
 /**
@@ -16,7 +16,13 @@ var cache = new NodeCache({ stdTTL: 86400 });
  */
 
 router.get('/', function(req, res) {
-  models.Game.findAll({ where: { stage: { $ne: 'Over' } } }).then(games => {
+  models.Game.findAll({
+    where: {
+      stage: {
+        $ne: 'Over' // not equals
+      }
+    }
+  }).then(games => {
     res.send(games);
   });
 });
@@ -109,8 +115,8 @@ router.get('/:id', isAuthed, function(req, res) {
  */
 
 router.post('/:id', isAuthed, function(req, res) {
-  let data = cache.get(req.params.id, true);
-  if (data == undefined){
+  let data = cache.get(req.params.id);
+  if (data === undefined) {
     res.send('No game with that id found');
     return;
   }

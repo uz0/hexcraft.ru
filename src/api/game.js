@@ -84,7 +84,7 @@ router.post('/', isAuthed, function(req, res) {
  * @apiSuccess {Object} updatedFields hexes that have changed
  */
 
-router.get('/:id', function(req, res) {
+router.get('/:id', isAuthed, function(req, res) {
   models.Game.findOne({
     include: [{
       model: models.Map,
@@ -96,10 +96,6 @@ router.get('/:id', function(req, res) {
   }).then(game => {
     res.send(game);
   });
-  _
-}
-
-
 });
 
 
@@ -112,6 +108,11 @@ router.get('/:id', function(req, res) {
  * @apiParam {Object} updatedFields Fields that have changed
  */
 
-router.post('/:id', function(req, res) {
+router.post('/:id', isAuthed, function(req, res) {
+  let data = cache.get(req.params.id, true);
+  if (data == undefined){
+    res.send('No game with that id found');
+    return;
+  }
 
 });

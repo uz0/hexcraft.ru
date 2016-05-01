@@ -11,6 +11,7 @@ export default class Auth extends PIXI.Stage {
     super();
     this.GUI = [];
 
+
     let token = window.localStorage.getItem('token');
     this.verify(token);
 
@@ -32,7 +33,6 @@ export default class Auth extends PIXI.Stage {
       y: 5
     };
 
-    this.GUI.ErrorMessage.position.dy = -50;
     this.GUI.ErrorMessageBg.position.dy = -50;
     this.GUI.authPassword.filters = [pixilate];
     this.GUI.authSubmit.on('click', this.login.bind(this));
@@ -40,11 +40,11 @@ export default class Auth extends PIXI.Stage {
   }
 
   showError(message) {
-    this.GUI.ErrorMessage.position.dy = 50;
     this.GUI.ErrorMessageBg.position.dy = 50;
-    this.GUI.ErrorMessage.text = message;
+
+    this.GUI.ErrorMessageBg.children[2].children[0].text = message;
+
     window.setTimeout(()=>{
-      this.GUI.ErrorMessage.position.dy = -50;
       this.GUI.ErrorMessageBg.position.dy = -50;
     }, 10000);
   }
@@ -76,7 +76,7 @@ export default class Auth extends PIXI.Stage {
       hexcraft.setStage(Lobby);
     })
     .catch(() => {
-      this.showError('Неправильная пара логин\пароль');
+      this.showError('Неправильная пара логин/пароль');
     });
   }
 
@@ -104,7 +104,7 @@ export default class Auth extends PIXI.Stage {
 
     // Flash animation!!!111oneone
     const speed = 1;
-    let position = this.GUI.ErrorMessage.position;
+    let position = this.GUI.ErrorMessageBg.position;
 
     if(position.y !== position.dy) {
       let sign = Math.sign(position.dy - position.y);

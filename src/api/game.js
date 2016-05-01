@@ -14,7 +14,7 @@ const router = module.exports = express.Router();
  */
 
 router.get('/', function(req, res) {
-  models.Game.findAll().then(games => {
+  models.Game.findAll({where: {stage: {$ne: 'Over'}}}).then(games => {
     res.send(games);
   });
 });

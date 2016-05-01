@@ -30,7 +30,8 @@ router.post('/verify', function(req, res, next) {
       validThrough: {
         $gt: (new Date().getTime() / 1000)
       }
-    }
+    },
+    include: [ models.User ]
   }).then(token => {
     if(!token) {
       let error = new Error('invalid token');

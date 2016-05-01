@@ -5,17 +5,39 @@ export default class editorCtrl {
 
   constructor($http) {
     this.$http = $http;
-    // $http.get('/api/news').then((res)=>{
-    //   this.list = res.data;
-    // });
+
+    this.token = window.localStorage.getItem('token');
+    this.verify();
   }
 
-  auth() {
-    this.$http.post('/api/auth', {
-      login: this.login,
-      password: this.password
+  verify(token) {
+    if(!this.token) {
+      return;
+    }
+
+    this.$http.post('/api/auth/verify', {
+      token: this.token
     }).then(res => {
-      console.log(res)
+      this.user = res.data.User;
+    });
+  }
+
+  login() {
+    this.$http.post('/api/auth/login', {
+      username: this.username,
+      password: this.password
+    }).then(response => {
+      this.user = response.data.user;
+      window.localStorage.setItem('token', response.data.token.token);
+    });
+  }
+
+  logout() {
+    this.$http.post('/api/auth/logout', {
+      token: this.token
+    }).then(response => {
+      window.localStorage.removeItem('token');
+      delete this.user;
     });
   }
 }

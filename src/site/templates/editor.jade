@@ -7,9 +7,15 @@ block vars
 block content
     include ./_header.jade
     .wrapper.wrap(ng-controller="editorCtrl as editor")
-      form.auth(ng-submit="editor.auth()")
-        input(type="text" ng-model="editor.login" placeholder="логин")
+
+      form.login-form(ng-submit="editor.login()" ng-if="!editor.user")
+        input(type="text" ng-model="editor.username" placeholder="логин")
         input(type="password" ng-model="editor.password" placeholder="пароль")
-        input(type="submit" value="авторизоваться")
+        button войти
+
+      div.logout(ng-if="editor.user")
+        span(ng-bind="editor.user.username")
+        button(ng-click="editor.logout()") выйти
+
 
     include ./_footer.jade

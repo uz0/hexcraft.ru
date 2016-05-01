@@ -4,6 +4,8 @@ const models = require('./models');
 const isAuthed = require('./middlewares/isAuthed');
 const express = require('express');
 const router = module.exports = express.Router();
+const NodeCache = require("node-cache");
+var myCache = new NodeCache({ stdTTL: 86400 });
 
 
 /**
@@ -14,7 +16,7 @@ const router = module.exports = express.Router();
  */
 
 router.get('/', function(req, res) {
-  models.Game.findAll({where: {stage: {$ne: 'Over'}}}).then(games => {
+  models.Game.findAll({ where: { stage: { $ne: 'Over' } } }).then(games => {
     res.send(games);
   });
 });
@@ -40,7 +42,7 @@ router.post('/', isAuthed, function(req, res) {
     }
   }).then(games => {
 
-    if (!games.length){
+    if (!games.length) {
       models.Game.create({
         mapId: 1,
         player1: user.id,
@@ -54,7 +56,7 @@ router.post('/', isAuthed, function(req, res) {
     let game = games[0];
     game.player2 = user.id;
     game.stage = 'Started';
-    game.save().then(function(){
+    game.save().then(function() {
       res.send({
         'game': game
       });
@@ -78,7 +80,7 @@ router.get('/:id', function(req, res) {
   models.Game.findOne({
     include: [{
       model: models.Map,
-      include: [ models.MapData ]
+      include: [models.MapData]
     }],
     where: {
       id: req.params.id

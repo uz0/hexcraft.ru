@@ -121,14 +121,4 @@ router.post('/:id', isAuthed, function(req, res) {
     return;
   }
 
-  res.writeHead(200, {'Content-Type': 'text/event-stream'});
-  req.socket.setTimeout(Infinity);
-  req.on('close', function () {
-    //при падении соединения ничего не делаем?
-  });
-
-  if (req.method==="broadcast") {
-
-  }
-
 });

@@ -147,6 +147,7 @@ router.get('/loop/:id', isAuthed, function(req, res) {
 
     res.write('id: ' + Date.now() + '\n');
     res.write('data: ' + JSON.stringify(data) + '\n\n');
+    res.flushHeaders();
   });
 });
 

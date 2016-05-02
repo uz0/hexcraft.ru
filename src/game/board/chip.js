@@ -1,19 +1,22 @@
 'use strict';
 
 export default class Chip extends PIXI.Sprite {
-  constructor(x, y){
+  constructor(x, y, field){
     super();
+
+    this.Field = field;
 
     const textures = [
       '/game/board/chip1.svg',
       '/game/board/chip2.svg',
       '/game/board/chip3.svg'
-    ]
+    ];
 
     const random = Math.floor(Math.random() * 2) + 0;
 
     this.texture = PIXI.Texture.fromImage(textures[random]);
     this.alpha = 1;
+
     this.position = {
       x: x,
       y: y
@@ -51,12 +54,15 @@ export default class Chip extends PIXI.Sprite {
 
     this.oldPosition = null;
 
-    this.position.x = Math.round(this.position.x / 40) * 40;
-    this.position.y = Math.round(this.position.y / 40) * 40;
-
-    if ((this.position.y/40) % 2 !== 0){
-      this.position.x = Math.round(this.position.x / 40 - 1) * 40 + 20;
+    let current = this.position;
+    let x = Math.round(current.x / 40);
+    let y = Math.round((current.y - 80) / 40);
+    if (y % 2 !== 0){
+      x = Math.round((current.x - 20) / 40);
     }
+
+    this.position.x = this.Field[x][y].x;
+    this.position.y = this.Field[x][y].y;
 
     if(this.onStep) {
       this.onStep(this.position, this.oldPosition);
@@ -71,7 +77,7 @@ export default class Chip extends PIXI.Sprite {
     }
 
     if(this.data && this.onMove) {
-      this.onMove(this.position, this.oldPosition)
+      this.onMove(this.position, this.oldPosition);
     }
 
   }

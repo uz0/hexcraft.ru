@@ -6,7 +6,9 @@ const express = require('express');
 const router = module.exports = express.Router();
 const cache = require('memory-store');
 
+const sse = require('./middlewares/sse');//подключаем нашу минилибу
 
+var buf_games = {id:0, arr: [x:1, y:1, x1:3, y1:3]}; //объект, 1-айди игры, 2-фишки
 
 /**
  * @api {get} /games get list games
@@ -40,6 +42,7 @@ router.get('/', function(req, res) {
  */
 
 router.post('/', isAuthed, function(req, res) {
+  res.sseSetup();//создание sse соединения при cтарте игры
   const user = req.user;
 
   models.Game.findAll({
@@ -119,6 +122,27 @@ router.post('/:id', isAuthed, function(req, res) {
   if (data === undefined) {
     res.send('No game with that id found');
     return;
+  }
+
+});
+
+
+/**
+ * @api {get} /games/loop/:id
+ * @apiName gameLoop
+ * @apiGroup Game
+ *
+ * @apiParam {Number} id Game's Id
+ * @apiParam {Object} ??
+ */
+
+router.get('/loop/:id', isAuthed, function(req, res) {
+
+  for(let i=0; i<buf_games.length;i++) {
+    if(buf_games[i].id===req.params.id) {
+      sseSend(buf_games[i].arr);
+      delete(buf_games[i]);
+    }
   }
 
 });

@@ -10,7 +10,7 @@ export default [{
   component: 'Label',
   position: {
     x: 310 ,
-    y: 150
+    y: 175
   },
   width: 200,
   height: 50
@@ -21,7 +21,7 @@ export default [{
   component: 'Input',
   position: {
     x: 310,
-    y: 230
+    y: 238
   },
   width: 200,
   height: 35
@@ -32,7 +32,7 @@ export default [{
   component: 'Input',
   position: {
     x: 310,
-    y: 300
+    y: 307
   },
   width: 200,
   height: 35
@@ -46,10 +46,10 @@ export default [{
   component: 'Button',
   position: {
     x: 310,
-    y: 380
+    y: 372
   },
   width: 95,
-  height: 40
+  height: 35
 },
 {
   id: 'demoBtn',
@@ -60,10 +60,10 @@ export default [{
   component: 'Button',
   position: {
     x: 415,
-    y: 380
+    y: 372
   },
   width: 95,
-  height: 40
+  height: 35
 },
 {
   id: 'ErrorMessageBg',

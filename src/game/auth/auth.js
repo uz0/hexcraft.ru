@@ -40,7 +40,7 @@ export default class Auth extends PIXI.Stage {
   }
 
   showError(message) {
-    this.GUI.ErrorMessageBg.position.dy = 50;
+    this.GUI.ErrorMessageBg.position.dy = 20;
 
     this.GUI.ErrorMessageBg.children[2].children[0].text = message;
 

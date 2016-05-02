@@ -3,7 +3,7 @@
 const models = require('../models');
 
 module.exports = function(req, res, next) {
-  const token = req.body.token;
+  const token = req.body.token || req.query.token;
 
   if (!token) {
     let error = new Error('token not set');

@@ -6,9 +6,8 @@ const express = require('express');
 const router = module.exports = express.Router();
 const cache = require('memory-store');
 
-const sse = require('./middlewares/sse');//подключаем нашу минилибу
-
-var buf_games = {id:0, arr: [x:1, y:1, x1:3, y1:3]}; //объект, 1-айди игры, 2-фишки
+const events = require('events');
+const emitter = new events.EventEmitter();
 
 /**
  * @api {get} /games get list games
@@ -133,16 +132,38 @@ router.post('/:id', isAuthed, function(req, res) {
  * @apiGroup Game
  *
  * @apiParam {Number} id Game's Id
- * @apiParam {Object} ??
  */
 
 router.get('/loop/:id', isAuthed, function(req, res) {
+  res.writeHead(200, {
+    'Content-Type': 'text/event-stream',
+    'Cache-Control': 'no-cache',
+    'Connection': 'keep-alive'
+  });
+  res.write('\n');
 
-  for(let i=0; i<buf_games.length;i++) {
-    if(buf_games[i].id===req.params.id) {
-      sseSend(buf_games[i].arr);
-      delete(buf_games[i]);
-    }
-  }
+  emitter.on('message', data => {
+    data.user = req.user;
 
+    res.write('id: ' + Date.now() + '\n');
+    res.write('data: ' + JSON.stringify(data) + '\n\n');
+  });
+});
+
+
+
+/**
+ * @api {get} /games/test/:id
+ * @apiName testGameLoop
+ * @apiGroup Game
+ *
+ * @apiParam {Number} id Game's Id
+ */
+
+router.get('/test/:id', function(req, res) {
+  emitter.emit('message', {
+    id: req.params.id
+  });
+
+  res.send();
 });

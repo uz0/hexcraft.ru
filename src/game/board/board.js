@@ -25,6 +25,7 @@ export default class Board extends PIXI.Stage {
 
     this.generateField();
 
+    let token = window.localStorage.getItem('token');
     const id = 1;
 
     window.fetch(`/api/games/${id}`)
@@ -32,6 +33,15 @@ export default class Board extends PIXI.Stage {
     .then(game => {
       this.initializationMap(game.Map.MapData);
     });
+
+    // loop example
+    let loop = new EventSource(`/api/games/loop/${id}?token=${token}`);
+
+    loop.addEventListener('message', event => {
+      let data = JSON.parse(event.data);
+      console.log(data);
+    });
+
   }
 
   generateField() {

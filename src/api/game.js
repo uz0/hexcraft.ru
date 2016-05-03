@@ -2,16 +2,15 @@
 
 const models = require('./models');
 const isAuthed = require('./middlewares/isAuthed');
+const stepValidation = require('./middlewares/stepValidation');
+const rebuildMap = require('./middlewares/rebuildMap');
 const express = require('express');
 const router = module.exports = express.Router();
-const cache = require('memory-store');
+const storage = require('memory-store');
 
 const events = require('events');
-const emitter = new events.EventEmitter();
-
-const sse = require('server-sent-events');
-
-const validStep = require('./middlewares/validStep');
+let emitter = new events.EventEmitter();
+let onlineUsers = [];
 
 /**
  * @api {get} /games get list games
@@ -44,8 +43,7 @@ router.get('/', function(req, res) {
  * @paiSuccess {Object} map Game's map
  */
 
-router.post('/', isAuthed, sse, function(req, res) {
-
+router.post('/', isAuthed, function(req, res) {
   const user = req.user;
 
   models.Game.findAll({
@@ -63,32 +61,29 @@ router.post('/', isAuthed, sse, function(req, res) {
       models.Game.create({
         mapId: 1,
         player1: user.id,
-        stage: 'Not started'
+        stage: 'not started'
       }).then(game => {
-        var gameData = {
-          'game': game,
-          'p1': req.body.token
-        };
-        cache.set(game.id, gameData);
-        res.sse(game);
+        storage.set(game.id, game);
+        res.send(game);
       });
+
       return;
     }
 
     let game = games[0];
     game.player2 = user.id;
-    game.stage = 'Started';
-    game.save().then(function() {
-      var gameData = cache.get(game.id);
-      gameData.p2 = req.body.token;
-      cache.set(game.id, gameData);
-      res.sse({
-        'game': game
+    game.stage = 'started';
+    game.save().then(() => {
+      storage.set(game.id, game);
+
+      emitter.emit('message', {
+        event: 'started',
+        user: req.user
       });
+
+      res.send(game);
     });
-
   });
-
 });
 
 
@@ -102,17 +97,8 @@ router.post('/', isAuthed, sse, function(req, res) {
  */
 
 router.get('/:id', function(req, res) {
-  models.Game.findOne({
-    include: [{
-      model: models.Map,
-      include: [models.MapData]
-    }],
-    where: {
-      id: req.params.id
-    }
-  }).then(game => {
-    res.send(game);
-  });
+  let game = storage.get(req.params.id);
+  res.send(game);
 });
 
 /**
@@ -124,26 +110,40 @@ router.get('/:id', function(req, res) {
  * @apiParam {Object} updatedFields Fields that have changed
  */
 
-router.post('/:id', isAuthed, function(req, res) {
-  var gameData = cache.get(req.params.id);
-  
-  if (gameData === undefined) {
-    res.send('No game with that id found');
-    return;
-  }
-  
-  if (! (gameData.p1 === req.body.token || gameData.p2 === req.body.token)){
-    return;
+router.post('/:id', isAuthed, function(req, res, next) {
+  const gameId = req.params.id;
+  const step = req.body.step;
+  let game = storage.get(gameId);
+
+  if (!game) {
+    let error = new Error('game not found');
+    error.status = 400;
+    return next(error);
   }
 
-  if (validStep(gameData.game, req.body.updatedField)) {
-    gameData.game.step.unshift(req.body.updatedField);
-    cache.set(req.params.id, gameData);
-    emitter.emit('game' + req.params.id, req.body.updatedField);
+  if (game.player1 !== req.user.id && game.player2 !== req.user.id){
+    let error = new Error('wrong user');
+    error.status = 400;
+    return next(error);
   }
+
+  let stepError = stepValidation(game, step);
+  if (stepError) {
+    let error = new Error(stepError);
+    error.status = 400;
+    return next(error);
+  }
+
+  game.Map.MapData = rebuildMap(game, step);
+  storage.set(gameId, game);
+
+  emitter.emit('message', {
+    event: 'step',
+    step: step,
+    user: req.user
+  });
 
   res.send();
-
 });
 
 /**
@@ -162,35 +162,15 @@ router.get('/loop/:id', isAuthed, function(req, res) {
   });
   res.write('\n');
 
-  emitter.on('message', data => {
-    data.user = req.user;
+  onlineUsers.push(req.user);
 
+  emitter.on('message', data => {
     res.write('id: ' + Date.now() + '\n');
     res.write('data: ' + JSON.stringify(data) + '\n\n');
     res.flushHeaders();
   });
-});
 
-/**
- * @api {get} /games/:id/stream
- * @apiName gameStream
- * @apiGroup Game
- * 
- * 
- * @apiParam {Number} id Game's Id
- *
- */
-
-router.get('/:id/stream', isAuthed, sse, function(req, res) {
-
-  emitter.on('game' + req.params.id, emmitterData => {
-    var gameData = cache.get(req.params.id);
-    if (gameData === undefined) {
-      return;
-    }
-
-    res.sse(gameData.game.step[0]);
-
+  req.on('close', () => {
+    onlineUsers = onlineUsers.filter(user => user !== req.user);
   });
-
 });

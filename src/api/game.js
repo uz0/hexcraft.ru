@@ -6,9 +6,9 @@ const stepValidation = require('./logic/stepValidation');
 const rebuildMap = require('./logic/rebuildMap');
 const express = require('express');
 const router = module.exports = express.Router();
-// const storage = require('memory-store');
-
 const events = require('events');
+
+var storage = {};
 let emitter = new events.EventEmitter();
 
 /**
@@ -57,7 +57,7 @@ router.post('/', isAuthed, function(req, res) {
         stage: 'not started'
       }).then(game => {
         game.gameSteps = []; // store game steps
-        // storage.set(game.id, game);
+        storage[`${game.id}`] = game;
         res.send(game);
       });
 
@@ -68,7 +68,7 @@ router.post('/', isAuthed, function(req, res) {
     game.player2 = user.id;
     game.stage = 'started';
     game.save().then(() => {
-      // storage.set(game.id, game);
+      storage[`${game.id}`] = game;
 
       emitter.emit(`game${game.id}`, {
         event: 'started',
@@ -91,19 +91,21 @@ router.post('/', isAuthed, function(req, res) {
  */
 
 router.get('/:id', function(req, res) {
-  // let game = store.get(req.params.id);
-  // res.send(game);
+  let game = storage[`${req.params.id}`];
+  res.send(game);
+  /*
   models.Game.findOne({
     include: [{
       model: models.Map,
-      include: [ models.MapData ]
+      include: [models.MapData]
     }],
     where: {
       id: req.params.id
     }
   }).then(game => {
     res.send(game);
-  })
+  });
+  */
 });
 
 /**
@@ -118,7 +120,7 @@ router.get('/:id', function(req, res) {
 router.post('/:id', isAuthed, function(req, res, next) {
   const gameId = req.params.id;
   const step = req.body.step;
-  // let game = storage.get(gameId);
+  let game = storage[`${gameId}`];
 
   if (!game) {
     let error = new Error('game not found');
@@ -126,7 +128,7 @@ router.post('/:id', isAuthed, function(req, res, next) {
     return next(error);
   }
 
-  if (game.player1 !== req.user.id && game.player2 !== req.user.id){
+  if (game.player1 !== req.user.id && game.player2 !== req.user.id) {
     let error = new Error('wrong user');
     error.status = 400;
     return next(error);

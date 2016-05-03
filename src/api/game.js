@@ -2,8 +2,8 @@
 
 const models = require('./models');
 const isAuthed = require('./middlewares/isAuthed');
-const stepValidation = require('./middlewares/stepValidation');
-const rebuildMap = require('./middlewares/rebuildMap');
+const stepValidation = require('./logic/stepValidation');
+const rebuildMap = require('./logic/rebuildMap');
 const express = require('express');
 const router = module.exports = express.Router();
 const storage = require('memory-store');

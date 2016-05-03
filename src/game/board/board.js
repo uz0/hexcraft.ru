@@ -26,20 +26,27 @@ export default class Board extends PIXI.Stage {
     this.generateField();
 
     let token = window.localStorage.getItem('token');
-    const id = 1;
-
-    window.fetch(`/api/games/${id}`)
+    window.fetch('/api/games', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        token: token
+      })
+    })
     .then(utils.parseJson)
     .then(game => {
-      this.initializationMap(game.Map.MapData);
-    });
+      this.initializationMap(game);
 
-    // loop example
-    let loop = new EventSource(`/api/games/loop/${id}?token=${token}`);
+      // loop example
+      let loop = new EventSource(`/api/games/${game.id}/loop`);
 
-    loop.addEventListener('message', event => {
-      let data = JSON.parse(event.data);
-      console.log(data);
+      loop.addEventListener('message', event => {
+        let data = JSON.parse(event.data);
+        console.log(data);
+      });
     });
 
   }
@@ -67,25 +74,29 @@ export default class Board extends PIXI.Stage {
     }
   }
 
-  initializationMap(mapData){
-    mapData.forEach(element => {
-      if(element.cellstate === 'empty') {
-        this.Field[element.x][element.y].alpha = 1;
-      }
+  initializationMap(game){
+    window.fetch(`/api/games/${game.id}`)
+    .then(utils.parseJson)
+    .then(game => {
+      game.Map.MapData.forEach(element => {
+        if(element.cellstate === 'empty') {
+          this.Field[element.x][element.y].alpha = 1;
+        }
 
-      if(element.cellstate === 'player1') {
-        const x = (element.y % 2 === 0)? element.x*40 : element.x*40+20;
-        const y = element.y*40+80;
-        let chip = new Chip(x, y, this.Field);
+        if(element.cellstate === 'player1') {
+          const x = (element.y % 2 === 0)? element.x*40 : element.x*40+20;
+          const y = element.y*40+80;
+          let chip = new Chip(x, y, this.Field);
 
-        chip.onMove = this.onMove.bind(this);
-        chip.onStep = this.onStep.bind(this);
-        chip.preventStep = this.preventStep.bind(this);
+          chip.onMove = this.onMove.bind(this);
+          chip.onStep = this.onStep.bind(this);
+          chip.preventStep = this.preventStep.bind(this);
 
-        this.Chips[element.x][element.y] = chip;
-        this.addChild(chip);
-      }
-    });
+          this.Chips[element.x][element.y] = chip;
+          this.addChild(chip);
+        }
+      });
+    })
   }
 
   onMove(current, old) {

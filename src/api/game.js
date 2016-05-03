@@ -6,7 +6,7 @@ const stepValidation = require('./logic/stepValidation');
 const rebuildMap = require('./logic/rebuildMap');
 const express = require('express');
 const router = module.exports = express.Router();
-const storage = require('memory-store');
+// const storage = require('memory-store');
 
 const events = require('events');
 let emitter = new events.EventEmitter();
@@ -48,22 +48,16 @@ router.post('/', isAuthed, function(req, res) {
   models.Game.findAll({
     where: {
       player2: null
-    },
-    include: [{
-      model: models.Map,
-      include: [{
-        model: models.MapData
-      }]
-    }]
+    }
   }).then(games => {
     if (!games.length) {
       models.Game.create({
-        mapId: 1, // TODO random map from map list
+        MapId: 1, // TODO random map from map list
         player1: user.id,
         stage: 'not started'
       }).then(game => {
         game.gameSteps = []; // store game steps
-        storage.set(game.id, game);
+        // storage.set(game.id, game);
         res.send(game);
       });
 
@@ -74,7 +68,7 @@ router.post('/', isAuthed, function(req, res) {
     game.player2 = user.id;
     game.stage = 'started';
     game.save().then(() => {
-      storage.set(game.id, game);
+      // storage.set(game.id, game);
 
       emitter.emit(`game${game.id}`, {
         event: 'started',
@@ -97,8 +91,19 @@ router.post('/', isAuthed, function(req, res) {
  */
 
 router.get('/:id', function(req, res) {
-  let game = storage.get(req.params.id);
-  res.send(game);
+  // let game = store.get(req.params.id);
+  // res.send(game);
+  models.Game.findOne({
+    include: [{
+      model: models.Map,
+      include: [ models.MapData ]
+    }],
+    where: {
+      id: req.params.id
+    }
+  }).then(game => {
+    res.send(game);
+  })
 });
 
 /**
@@ -113,7 +118,7 @@ router.get('/:id', function(req, res) {
 router.post('/:id', isAuthed, function(req, res, next) {
   const gameId = req.params.id;
   const step = req.body.step;
-  let game = storage.get(gameId);
+  // let game = storage.get(gameId);
 
   if (!game) {
     let error = new Error('game not found');
@@ -135,7 +140,7 @@ router.post('/:id', isAuthed, function(req, res, next) {
   }
 
   game.Map.MapData = rebuildMap(game, step);
-  storage.set(gameId, game);
+  // storage.set(gameId, game);
 
   emitter.emit(`game${gameId}`, {
     event: 'step',

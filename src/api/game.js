@@ -10,7 +10,6 @@ const storage = require('memory-store');
 
 const events = require('events');
 let emitter = new events.EventEmitter();
-let onlineUsers = [];
 
 /**
  * @api {get} /games get list games
@@ -23,7 +22,7 @@ router.get('/', function(req, res) {
   models.Game.findAll({
     where: {
       stage: {
-        $ne: 'Over' // not equals
+        $ne: 'over' // not equals
       }
     }
   }).then(games => {
@@ -59,10 +58,11 @@ router.post('/', isAuthed, function(req, res) {
   }).then(games => {
     if (!games.length) {
       models.Game.create({
-        mapId: 1,
+        mapId: 1, // TODO random map from map list
         player1: user.id,
         stage: 'not started'
       }).then(game => {
+        game.gameSteps = []; // store game steps
         storage.set(game.id, game);
         res.send(game);
       });
@@ -76,9 +76,9 @@ router.post('/', isAuthed, function(req, res) {
     game.save().then(() => {
       storage.set(game.id, game);
 
-      emitter.emit('message', {
+      emitter.emit(`game${game.id}`, {
         event: 'started',
-        user: req.user
+        player2: req.user
       });
 
       res.send(game);
@@ -137,7 +137,7 @@ router.post('/:id', isAuthed, function(req, res, next) {
   game.Map.MapData = rebuildMap(game, step);
   storage.set(gameId, game);
 
-  emitter.emit('message', {
+  emitter.emit(`game${gameId}`, {
     event: 'step',
     step: step,
     user: req.user
@@ -147,14 +147,14 @@ router.post('/:id', isAuthed, function(req, res, next) {
 });
 
 /**
- * @api {get} /games/loop/:id
+ * @api {get} /games/:id/loop
  * @apiName gameLoop
  * @apiGroup Game
  *
  * @apiParam {Number} id Game's Id
  */
 
-router.get('/loop/:id', isAuthed, function(req, res) {
+router.get('/:id/loop', function(req, res) {
   res.writeHead(200, {
     'Content-Type': 'text/event-stream',
     'Cache-Control': 'no-cache',
@@ -162,15 +162,11 @@ router.get('/loop/:id', isAuthed, function(req, res) {
   });
   res.write('\n');
 
-  onlineUsers.push(req.user);
+  const gameId = req.params.id;
 
-  emitter.on('message', data => {
+  emitter.on(`game${gameId}`, data => {
     res.write('id: ' + Date.now() + '\n');
     res.write('data: ' + JSON.stringify(data) + '\n\n');
     res.flushHeaders();
-  });
-
-  req.on('close', () => {
-    onlineUsers = onlineUsers.filter(user => user !== req.user);
   });
 });

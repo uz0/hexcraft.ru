@@ -20,7 +20,8 @@
     "express": "~4.13.1",
     "memory-store": "0.0.1",
     "node-uuid": "^1.4.7",
-    "sequelize": "^3.3.2"
+    "sequelize": "^3.3.2",
+    "server-sent-events": "^1.0.0"
   },
   "devDependencies": {
     "babel-plugin-transform-class-properties": "^6.6.0",

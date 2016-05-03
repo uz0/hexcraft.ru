@@ -9,6 +9,10 @@ const cache = require('memory-store');
 const events = require('events');
 const emitter = new events.EventEmitter();
 
+const sse = require('server-sent-events');
+
+const validStep = require('./middlewares/validStep');
+
 /**
  * @api {get} /games get list games
  * @apiName getGames
@@ -40,28 +44,33 @@ router.get('/', function(req, res) {
  * @paiSuccess {Object} map Game's map
  */
 
-router.post('/', isAuthed, function(req, res) {
-  res.sseSetup();//создание sse соединения при cтарте игры
+router.post('/', isAuthed, sse, function(req, res) {
+
   const user = req.user;
 
   models.Game.findAll({
     where: {
       player2: null
-    }
+    },
+    include: [{
+      model: models.Map,
+      include: [{
+        model: models.MapData
+      }]
+    }]
   }).then(games => {
-
     if (!games.length) {
       models.Game.create({
         mapId: 1,
         player1: user.id,
         stage: 'Not started'
       }).then(game => {
-        var data = {
+        var gameData = {
           'game': game,
-          'p1IP': req.headers['x-forwarded-for']
+          'p1': req.body.token
         };
-        cache.set(game.id, data);
-        res.send(game);
+        cache.set(game.id, gameData);
+        res.sse(game);
       });
       return;
     }
@@ -70,10 +79,10 @@ router.post('/', isAuthed, function(req, res) {
     game.player2 = user.id;
     game.stage = 'Started';
     game.save().then(function() {
-      var data = cache.get(game.id);
-      data.p2IP = req.headers['x-forwarded-for'];
-      cache.set(game.id, data);
-      res.send({
+      var gameData = cache.get(game.id);
+      gameData.p2 = req.body.token;
+      cache.set(game.id, gameData);
+      res.sse({
         'game': game
       });
     });
@@ -106,7 +115,6 @@ router.get('/:id', function(req, res) {
   });
 });
 
-
 /**
  * @api {post} /games/:id
  * @apiName gameStep
@@ -117,14 +125,26 @@ router.get('/:id', function(req, res) {
  */
 
 router.post('/:id', isAuthed, function(req, res) {
-  let data = cache.get(req.params.id);
-  if (data === undefined) {
+  var gameData = cache.get(req.params.id);
+  
+  if (gameData === undefined) {
     res.send('No game with that id found');
     return;
   }
+  
+  if (! (gameData.p1 === req.body.token || gameData.p2 === req.body.token)){
+    return;
+  }
+
+  if (validStep(gameData.game, req.body.updatedField)) {
+    gameData.game.step.unshift(req.body.updatedField);
+    cache.set(req.params.id, gameData);
+    emitter.emit('game' + req.params.id, req.body.updatedField);
+  }
+
+  res.send();
 
 });
-
 
 /**
  * @api {get} /games/loop/:id
@@ -151,20 +171,26 @@ router.get('/loop/:id', isAuthed, function(req, res) {
   });
 });
 
-
-
 /**
- * @api {get} /games/test/:id
- * @apiName testGameLoop
+ * @api {get} /games/:id/stream
+ * @apiName gameStream
  * @apiGroup Game
- *
+ * 
+ * 
  * @apiParam {Number} id Game's Id
+ *
  */
 
-router.get('/test/:id', function(req, res) {
-  emitter.emit('message', {
-    id: req.params.id
+router.get('/:id/stream', isAuthed, sse, function(req, res) {
+
+  emitter.on('game' + req.params.id, emmitterData => {
+    var gameData = cache.get(req.params.id);
+    if (gameData === undefined) {
+      return;
+    }
+
+    res.sse(gameData.game.step[0]);
+
   });
 
-  res.send();
 });

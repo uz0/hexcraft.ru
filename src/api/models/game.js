@@ -13,8 +13,6 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false
           }
         });
-
-        Game.hasMany(models.GameData);
       }
     }
   });

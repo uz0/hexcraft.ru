@@ -52,8 +52,6 @@ export default class Chip extends PIXI.Sprite {
       return;
     }
 
-    this.oldPosition = null;
-
     let current = this.position;
     let x = Math.round(current.x / 40);
     let y = Math.round((current.y - 80) / 40);
@@ -67,6 +65,8 @@ export default class Chip extends PIXI.Sprite {
     if(this.onStep) {
       this.onStep(this.position, this.oldPosition);
     }
+
+    this.oldPosition = null;
   }
 
   onDragMove() {

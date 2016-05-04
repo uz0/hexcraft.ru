@@ -38,10 +38,11 @@ export default class Board extends PIXI.Stage {
     })
     .then(utils.parseJson)
     .then(game => {
+      this.game = game;
       this.initializationMap(game);
 
       // loop example
-      let loop = new EventSource(`/api/games/${game.id}/loop`);
+      let loop = new window.EventSource(`/api/games/${game.id}/loop`);
 
       loop.addEventListener('message', event => {
         let data = JSON.parse(event.data);
@@ -166,6 +167,23 @@ export default class Board extends PIXI.Stage {
   }
 
   onStep(current, old) {
+    let token = window.localStorage.getItem('token');
+
+    window.fetch(`/api/games/${this.game.id}`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        step: {
+          current: current,
+          old: old
+        },
+        token: token
+      })
+    })
+
     console.log('yep2', current, old);
   }
 

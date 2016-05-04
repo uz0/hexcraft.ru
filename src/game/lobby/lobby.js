@@ -60,7 +60,7 @@ export default class Lobby extends PIXI.Stage {
   }
 
   labelFormater(game) {
-    return game.player1;
+    return game.id;
   }
 
   startGame() {

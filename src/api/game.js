@@ -7,10 +7,11 @@ const rebuildMap = require('./logic/rebuildMap');
 const express = require('express');
 const router = module.exports = express.Router();
 const events = require('events');
-const sse = require('mysse');
+const sse = require('server-sent-events');
 
 var storage = {};
 let emitter = new events.EventEmitter();
+
 
 /**
  * @api {get} /games get list games
@@ -47,6 +48,10 @@ router.post('/', isAuthed, function(req, res) {
   const user = req.user;
 
   models.Game.findAll({
+    include: [{
+      model: models.Map,
+      include: [ models.MapData ]
+    }],
     where: {
       player2: null
     }
@@ -57,9 +62,21 @@ router.post('/', isAuthed, function(req, res) {
         player1: user.id,
         stage: 'not started'
       }).then(game => {
-        game.gameSteps = []; // store game steps
-        storage[`${game.id}`] = game;
-        res.send(game);
+
+        // WORKAROUND: include MapData not working in create options
+        models.Game.findOne({
+          include: [{
+            model: models.Map,
+            include: [ models.MapData ]
+          }],
+          where: {
+            id: game.id
+          }
+        }).then(game => {
+          game.gameSteps = []; // store game steps
+          storage[game.id] = game;
+          res.send(game);
+        });
       });
 
       return;
@@ -69,7 +86,7 @@ router.post('/', isAuthed, function(req, res) {
     game.player2 = user.id;
     game.stage = 'started';
     game.save().then(() => {
-      storage[`${game.id}`] = game;
+      storage[game.id] = game;
 
       emitter.emit(`game${game.id}`, {
         event: 'started',
@@ -92,22 +109,12 @@ router.post('/', isAuthed, function(req, res) {
  */
 
 router.get('/:id', function(req, res) {
-  let game = storage[`${req.params.id}`];
+  const gameId = req.params.id;
+  let game = storage[gameId];
   res.send(game);
-  /*
-  models.Game.findOne({
-    include: [{
-      model: models.Map,
-      include: [models.MapData]
-    }],
-    where: {
-      id: req.params.id
-    }
-  }).then(game => {
-    res.send(game);
-  });
-  */
+
 });
+
 
 /**
  * @api {post} /games/:id
@@ -121,7 +128,7 @@ router.get('/:id', function(req, res) {
 router.post('/:id', isAuthed, function(req, res, next) {
   const gameId = req.params.id;
   const step = req.body.step;
-  let game = storage[`${gameId}`];
+  let game = storage[gameId];
 
   if (!game) {
     let error = new Error('game not found');
@@ -143,7 +150,7 @@ router.post('/:id', isAuthed, function(req, res, next) {
   }
 
   game.Map.MapData = rebuildMap(game, step);
-  storage[`${gameId}`] = game;
+  storage[gameId] = game;
 
   emitter.emit(`game${gameId}`, {
     event: 'step',
@@ -154,6 +161,7 @@ router.post('/:id', isAuthed, function(req, res, next) {
   res.send();
 });
 
+
 /**
  * @api {get} /games/:id/loop
  * @apiName gameLoop
@@ -163,10 +171,10 @@ router.post('/:id', isAuthed, function(req, res, next) {
  */
 
 router.get('/:id/loop', sse, function(req, res) {
-
   const gameId = req.params.id;
 
   emitter.on(`game${gameId}`, data => {
-    res.sse(data);
+    data = JSON.stringify(data);
+    res.sse(`data: ${data}\n\n`);
   });
 });

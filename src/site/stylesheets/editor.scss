@@ -1,0 +1,24 @@
+@import "config.scss";
+
+.editor-field {
+  position: relative;
+
+}
+
+.editor-field .hex {
+  height: 40px;
+  width: 40px;
+  position: absolute;
+  background: url("/game/board/circuit_hex.svg") center / contain no-repeat;
+  line-height: 40px;
+  font-size: 10px;
+  text-align: center;
+  cursor: pointer;
+  z-index: 1;
+  user-select: none;
+}
+
+.editor-field .hex.field {
+  opacity: .2;
+  z-index: 0;
+}

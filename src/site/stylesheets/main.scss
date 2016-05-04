@@ -1,8 +1,9 @@
 @import "config.scss";
 
-::selection {color:white; background:$themeColor}
-::-webkit-selection {color:white; background:$themeColor}
-::-moz-selection {color:white; background:$themeColor}
+::selection {
+  color: white;
+  background: $themeColor
+}
 
 html {
   height: 100%;
@@ -44,7 +45,6 @@ body {
   vertical-align: top;
   margin-right: $unit * 2;
   background: url("/images/logo.svg") center / contain no-repeat;
-  -webkit-filter: invert(1);
   filter: invert(1);
 }
 

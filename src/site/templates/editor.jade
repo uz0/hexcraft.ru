@@ -13,9 +13,26 @@ block content
         input(type="password" ng-model="editor.password" placeholder="пароль")
         button войти
 
-      div.logout(ng-if="editor.user")
+      .logout(ng-if="editor.user")
         span(ng-bind="editor.user.username")
         button(ng-click="editor.logout()") выйти
 
+      .container
+        .map-list
+          button(ng-repeat="map in editor.mapList"
+                 ng-bind="'{{map.description}} ( {{map.id}} )'"
+                 ng-click="editor.select(map)"
+                 ng-class="{active: map.id == editor.map.id}")
+        .map-control
+          button(ng-click="editor.delete()") удалить
+          button(ng-click="editor.save()") сохранить
+        .editor-field
+          .field.hex(ng-repeat="field in editor.field"
+                     ng-style="editor.calcPosition(field)"
+                     ng-click="editor.create(field)")
+          .hex(ng-repeat="hex in editor.map.MapData"
+               ng-style="editor.calcPosition(hex)"
+               ng-bind="hex.cellstate"
+               ng-click="editor.change(hex)")
 
     include ./_footer.jade

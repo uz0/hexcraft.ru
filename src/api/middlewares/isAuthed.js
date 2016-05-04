@@ -3,7 +3,8 @@
 const models = require('../models');
 
 module.exports = function(req, res, next) {
-  var token = req.body.token || req.query.token;
+  const token = req.body.token || req.query.token;
+
   if (!token) {
     let error = new Error('token not set');
     error.status = 400;
@@ -25,6 +26,7 @@ module.exports = function(req, res, next) {
       error.status = 400;
       return next(error);
     }
+
     req.user = result.User;
     next();
   });

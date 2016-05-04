@@ -7,6 +7,7 @@ const rebuildMap = require('./logic/rebuildMap');
 const express = require('express');
 const router = module.exports = express.Router();
 const events = require('events');
+const sse = require('mysse');
 
 var storage = {};
 let emitter = new events.EventEmitter();
@@ -72,7 +73,7 @@ router.post('/', isAuthed, function(req, res) {
 
       emitter.emit(`game${game.id}`, {
         event: 'started',
-        player2: req.user
+        player2: user
       });
 
       res.send(game);
@@ -142,7 +143,7 @@ router.post('/:id', isAuthed, function(req, res, next) {
   }
 
   game.Map.MapData = rebuildMap(game, step);
-  // storage.set(gameId, game);
+  storage[`${gameId}`] = game;
 
   emitter.emit(`game${gameId}`, {
     event: 'step',
@@ -161,19 +162,11 @@ router.post('/:id', isAuthed, function(req, res, next) {
  * @apiParam {Number} id Game's Id
  */
 
-router.get('/:id/loop', function(req, res) {
-  res.writeHead(200, {
-    'Content-Type': 'text/event-stream',
-    'Cache-Control': 'no-cache',
-    'Connection': 'keep-alive'
-  });
-  res.write('\n');
+router.get('/:id/loop', sse, function(req, res) {
 
   const gameId = req.params.id;
 
   emitter.on(`game${gameId}`, data => {
-    res.write('id: ' + Date.now() + '\n');
-    res.write('data: ' + JSON.stringify(data) + '\n\n');
-    res.flushHeaders();
+    res.sse(data);
   });
 });

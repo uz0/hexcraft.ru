@@ -12,7 +12,7 @@ export default class Chip extends PIXI.Sprite {
       '/game/board/chip3.svg'
     ];
 
-    const random = Math.floor(Math.random() * 2) + 0;
+    const random = Math.floor(Math.random() * 3) + 0;
 
     this.texture = PIXI.Texture.fromImage(textures[random]);
     this.alpha = 1;

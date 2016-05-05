@@ -9,13 +9,15 @@ export default class editorCtrl {
     this.token = window.localStorage.getItem('token');
     this.verify();
     this.initMapList();
+    this.clear();
 
     this.field = [];
-    for(let i=0; i<20; i++){
-      for(let j=0; j<13; j++){
+    for(let i=0; i<20; i++) {
+      for(let j=0; j<13; j++) {
         if (j % 2 !== 0 && i === 19) {
           continue;
         }
+
         this.field.push({
           x: i,
           y: j
@@ -28,6 +30,12 @@ export default class editorCtrl {
       'player1',
       'player2'
     ]
+  }
+
+  clear(){
+    this.map = {
+      MapData: []
+    };
   }
 
   create(field){
@@ -69,12 +77,31 @@ export default class editorCtrl {
   }
 
   save() {
-    console.log(this.map)
+    function filter(object) {
+      delete object['createdAt'];
+      delete object['updatedAt'];
+      delete object['MapId'];
+      delete object['id'];
+      return object;
+    }
+
+    if(this.map.id) {
+      this.delete();
+    }
+
+    this.map = filter(this.map);
+    this.map.MapData = this.map.MapData.map(element => filter(element));
+
+    this.$http.post(`/api/maps?token=${this.token}`, this.map).then(res => {
+      this.initMapList();
+      this.clear();
+    });
+
   }
 
   delete() {
     this.$http.delete(`/api/maps/${this.map.id}?token=${this.token}`).then(res => {
-      this.initMapList()
+      this.initMapList();
     });
   }
 

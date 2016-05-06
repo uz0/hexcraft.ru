@@ -20,12 +20,12 @@ export default [{
   padding: 3,
   draggable: false,
   position: {
-    x:0,
-    y:125
+    x: 0,
+    y: 125
   },
   width: 190,
   height: 300,
-  layout: [null, 3],
+  // layout: [null, 3],
   children: []
 },{
   id: 'usersListTitle',
@@ -52,7 +52,7 @@ export default [{
   },
   width: 190,
   height: 300,
-  layout: [null, 3],
+  // layout: [null, 4],
   children: []
 },{
   id: 'gameSubmit',

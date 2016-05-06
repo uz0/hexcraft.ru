@@ -58,7 +58,8 @@
     },
     "List": {
         "bg": "sld-grey-bg.png",
-        "bgPadding": 5,
+        "bgPadding": 2,
+        "padding": 2,
         "corner": "sld-grey-corner.png",
         "line": "sld-grey-line.png"
     },

@@ -38,20 +38,15 @@ export default class Lobby extends PIXI.Stage {
     window.fetch('/api/users')
     .then(utils.parseJson)
     .then(users => {
-      let posY = 10;
       users.forEach(user => {
         this.GUI.usersList.addChild(EZGUI.create({
           id: user.id,
           text: user.username,
           component: 'Label',
-          position: {
-            x: 0,
-            y: posY
-          },
+          position: 'right',
           width: 100,
           height: 20
         }, 'kenney'));
-        posY += 30;
       });
     });
 
@@ -60,20 +55,15 @@ export default class Lobby extends PIXI.Stage {
     window.fetch('/api/games')
     .then(utils.parseJson)
     .then(games => {
-      let posY = 10;
       games.forEach(game => {
         this.GUI.gamesList.addChild(EZGUI.create({
           id: game.id,
           text: this.labelFormater(game),
           component: 'Label',
-          position: {
-            x: 110,
-            y: posY
-          },
+          position: 'left',
           width: 100,
           height: 20
         }, 'kenney'));
-        posY += 30;
       });
     });
 

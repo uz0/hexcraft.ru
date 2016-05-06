@@ -57,11 +57,11 @@
         "line-l": { "default": "btn-blue-line-l-down.png" }
     },
     "List": {
-        "bg": "sld-grey-bg.png",
+        "bg": "wnd-grey-bg.png",
         "bgPadding": 2,
         "padding": 2,
-        "corner": "sld-grey-corner.png",
-        "line": "sld-grey-line.png"
+        "corner": "wnd-grey-bg.png",
+        "line": "wnd-grey-bg.png"
     },
     "Button": {
         "bgPadding": 6,

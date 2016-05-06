@@ -18,6 +18,8 @@ export default class Panel extends PIXI.Stage {
     //workaround: cant setup visible from config file
     this.GUI.surrenderButton.visible = false;
     this.GUI.logoutButton.visible = false;
+    this.GUI.logoutButton.interactive = true;
+    this.GUI.logoutButton.buttonMode = true;
   }
 
   logout () {

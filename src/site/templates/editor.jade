@@ -24,14 +24,17 @@ block content
                  ng-click="editor.select(map)"
                  ng-class="{active: map.id == editor.map.id}")
           button(ng-click="editor.clear()") новая
+
         .map-control
           button(ng-click="editor.delete()") удалить
           button(ng-click="editor.save()") сохранить
           input(ng-model="editor.map.description" placeholder="имя карты")
+
         .editor-field
           .field.hex(ng-repeat="field in editor.field"
                      ng-style="editor.calcPosition(field)"
                      ng-click="editor.create(field)")
+
           .hex(ng-repeat="hex in editor.map.MapData"
                ng-style="editor.calcPosition(hex)"
                ng-bind="hex.cellstate"

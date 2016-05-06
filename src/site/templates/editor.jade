@@ -17,7 +17,7 @@ block content
         span(ng-bind="editor.user.username")
         button(ng-click="editor.logout()") выйти
 
-      .container
+      .container(ng-if="editor.user")
         .map-list
           button(ng-repeat="map in editor.mapList"
                  ng-bind="'{{map.description}} ( {{map.id}} )'"

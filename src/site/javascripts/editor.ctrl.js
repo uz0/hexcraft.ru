@@ -21,7 +21,7 @@ export default class editorCtrl {
         this.field.push({
           x: i,
           y: j
-        })
+        });
       }
     }
 
@@ -29,7 +29,7 @@ export default class editorCtrl {
       'empty',
       'player1',
       'player2'
-    ]
+    ];
   }
 
   clear(){
@@ -43,7 +43,7 @@ export default class editorCtrl {
       cellstate: 'empty',
       x: field.x,
       y: field.y
-    })
+    });
   }
 
   change(hex){
@@ -61,7 +61,7 @@ export default class editorCtrl {
     return {
       left: ((hex.y % 2 === 0)? hex.x*40 : hex.x*40+20)+'px',
       top: hex.y*40+'px'
-    }
+    };
   }
 
   select(map) {
@@ -78,10 +78,10 @@ export default class editorCtrl {
 
   save() {
     function filter(object) {
-      delete object['createdAt'];
-      delete object['updatedAt'];
-      delete object['MapId'];
-      delete object['id'];
+      delete object.createdAt;
+      delete object.updatedAt;
+      delete object.MapId;
+      delete object.id;
       return object;
     }
 
@@ -92,7 +92,7 @@ export default class editorCtrl {
     this.map = filter(this.map);
     this.map.MapData = this.map.MapData.map(element => filter(element));
 
-    this.$http.post(`/api/maps?token=${this.token}`, this.map).then(res => {
+    this.$http.post(`/api/maps?token=${this.token}`, this.map).then(() => {
       this.initMapList();
       this.clear();
     });
@@ -100,12 +100,12 @@ export default class editorCtrl {
   }
 
   delete() {
-    this.$http.delete(`/api/maps/${this.map.id}?token=${this.token}`).then(res => {
+    this.$http.delete(`/api/maps/${this.map.id}?token=${this.token}`).then(() => {
       this.initMapList();
     });
   }
 
-  verify(token) {
+  verify() {
     if(!this.token) {
       return;
     }
@@ -130,7 +130,7 @@ export default class editorCtrl {
   logout() {
     this.$http.post('/api/auth/logout', {
       token: this.token
-    }).then(response => {
+    }).then(() => {
       window.localStorage.removeItem('token');
       delete this.user;
     });

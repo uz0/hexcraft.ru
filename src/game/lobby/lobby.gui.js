@@ -57,10 +57,14 @@ export default [{
 },{
   id: 'gameSubmit',
   text: 'В БОЙ',
-  component: 'Button',
+  component: 'Label',
+  font: {
+    color: '#fff',
+    size: '18px'
+  },
   position: {
     x: 350,
-    y: 250
+    y: 275
   },
   width: 100,
   height: 50

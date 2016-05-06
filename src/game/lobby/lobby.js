@@ -11,6 +11,15 @@ export default class Lobby extends PIXI.Stage {
     super();
     this.GUI = [];
 
+    let hex = PIXI.Sprite.fromImage('/game/auth/hex.svg');
+    hex.position = {
+      x: 355,
+      y: 250
+    };
+    hex._width = 100;
+    hex._height = 100;
+    this.addChild(hex);
+
     lobbyGui.forEach(element => {
       this.GUI[element.id] = EZGUI.create(element, 'kenney');
       this.addChild(this.GUI[element.id]);

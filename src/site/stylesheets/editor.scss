@@ -1,11 +1,66 @@
 @import "config.scss";
 
-.editor-field {
-  position: relative;
-
+.editor-page button {
+  padding: $unit $unit*2;
+  border: 1px solid #eee;
+  margin-right: $unit;
+  background: #eee;
+  cursor: pointer;
 }
 
-.editor-field .hex {
+.editor-page .login-form {
+  padding: $unit*2 0;
+}
+
+.editor-page input {
+  padding: $unit;
+  border: 1px solid #eee;
+  margin-right: $unit*2;
+  width: $unit*15;
+  box-sizing: border-box;
+}
+
+.editor-page .logout {
+  padding: $unit*2 0;
+}
+
+.editor-page .logout button {
+  float: right;
+  margin-right: 0;
+}
+
+.editor-page .logout span {
+  padding: $unit 0;
+  display: inline-block;
+}
+
+.editor-page .map-control {
+  margin-bottom: $unit*2;
+}
+
+.editor-page .editor-field {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.editor-page .map-list {
+  display: inline-block;
+  width: $unit*15;
+  margin-right: $unit*2;
+}
+
+.editor-page .map-list button {
+  margin-bottom: $unit;
+  display: block;
+  width: 100%;
+}
+
+.editor-page .map-list button.active {
+  outline: 2px solid #0B91A9;
+}
+
+.editor-page .editor-field .hex {
   height: 40px;
   width: 40px;
   position: absolute;
@@ -18,7 +73,7 @@
   user-select: none;
 }
 
-.editor-field .hex.field {
+.editor-page .editor-field .hex.field {
   opacity: .2;
   z-index: 0;
 }

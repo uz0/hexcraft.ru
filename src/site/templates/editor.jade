@@ -17,18 +17,19 @@ block content
         span(ng-bind="editor.user.username")
         button(ng-click="editor.logout()") выйти
 
+      .map-control(ng-if="editor.user.admin")
+        input(ng-model="editor.map.description" placeholder="имя карты")
+        button(ng-click="editor.delete()") удалить
+        button(ng-click="editor.save()") сохранить
+
       .container(ng-if="editor.user")
         .map-list
+          button(ng-click="editor.clear()"
+                 ng-class="{active: !editor.map.id}") новая
           button(ng-repeat="map in editor.mapList"
                  ng-bind="'{{map.description}} ( {{map.id}} )'"
                  ng-click="editor.select(map)"
                  ng-class="{active: map.id == editor.map.id}")
-          button(ng-click="editor.clear()") новая
-
-        .map-control
-          button(ng-click="editor.delete()") удалить
-          button(ng-click="editor.save()") сохранить
-          input(ng-model="editor.map.description" placeholder="имя карты")
 
         .editor-field
           .field.hex(ng-repeat="field in editor.field"

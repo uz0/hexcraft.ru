@@ -9,7 +9,7 @@ export default [{
   },
   component: 'Label',
   position: {
-    x: 25,
+    x: 65,
     y: 75
   },
   width: 200,
@@ -20,12 +20,12 @@ export default [{
   padding: 3,
   draggable: false,
   position: {
-    x:0,
-    y:125
+    x: 0,
+    y: 125
   },
   width: 190,
   height: 300,
-  layout: [null, 3],
+  layout: [null, 7],
   children: []
 },{
   id: 'usersListTitle',
@@ -36,7 +36,7 @@ export default [{
   },
   component: 'Label',
   position: {
-    x: 560,
+    x: 630,
     y: 75
   },
   width: 200,
@@ -52,7 +52,7 @@ export default [{
   },
   width: 190,
   height: 300,
-  layout: [null, 3],
+  layout: [null, 10],
   children: []
 },{
   id: 'gameSubmit',

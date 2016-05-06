@@ -28,10 +28,13 @@ export default [{
 {
   id: 'logoutButton',
   text: 'Выйти',
-  component: 'Button',
+  component: 'Window',
   position: {
     x: 680,
     y: 10
+  },
+  font: {
+    color: '#fff'
   },
   width: 100,
   height: 50

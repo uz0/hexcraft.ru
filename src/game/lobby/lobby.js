@@ -31,7 +31,7 @@ export default class Lobby extends PIXI.Stage {
     panel.log('боль и страдание');
     panel.showExit();
     this.addChild(panel);
-    
+
     hex.on('click', this.startGame);
     // user list
     // TODO: online user list!
@@ -43,9 +43,9 @@ export default class Lobby extends PIXI.Stage {
           id: user.id,
           text: user.username,
           component: 'Label',
-          position: 'left',
+          position: 'right',
           width: 100,
-          height: 100
+          height: 20
         }, 'kenney'));
       });
     });
@@ -60,9 +60,9 @@ export default class Lobby extends PIXI.Stage {
           id: game.id,
           text: this.labelFormater(game),
           component: 'Label',
-          position: 'right',
+          position: 'left',
           width: 100,
-          height: 100
+          height: 20
         }, 'kenney'));
       });
     });

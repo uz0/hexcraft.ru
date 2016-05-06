@@ -16,6 +16,8 @@ export default class Lobby extends PIXI.Stage {
       x: 355,
       y: 250
     };
+    hex.interactive = true;
+    hex.buttonMode = true;
     hex._width = 100;
     hex._height = 100;
     this.addChild(hex);
@@ -29,9 +31,8 @@ export default class Lobby extends PIXI.Stage {
     panel.log('боль и страдание');
     panel.showExit();
     this.addChild(panel);
-
-    this.GUI.gameSubmit.on('click', this.startGame);
-
+    
+    hex.on('click', this.startGame);
     // user list
     // TODO: online user list!
     window.fetch('/api/users')

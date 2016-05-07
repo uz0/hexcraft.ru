@@ -101,6 +101,37 @@ export default class editorCtrl {
   export() {
     this.save();
 
+    let mapData = [];
+    this.map.MapData.forEach(element => {
+      mapData.push(`{
+        MapId: id,
+        x: ${element.x},
+        y: ${element.y},
+        cellstate: '${element.cellstate}',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      }`)
+    })
+
+    let template = `
+      'use strict';module.exports = {up: function (q, s, d) {q.bulkInsert('Maps', [{
+        description: '${this.map.description}',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      }]).then(id => {q.bulkInsert('MapData',[${mapData.join()}]).then(()=>{d();});});}};
+    `;
+
+    console.log(template);
+
+    let blob = new Blob([template], {type:'text/plain'});
+    let link = document.createElement("a");
+    link.download = `${this.map.description}.js`;
+    link.href = window.URL.createObjectURL(blob);
+    link.style.display = "none";
+    document.body.appendChild(link);
+
+    link.click();
+    link.remove();
   }
 
   delete() {

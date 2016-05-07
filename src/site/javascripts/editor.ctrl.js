@@ -96,6 +96,10 @@ export default class editorCtrl {
       this.initMapList();
       this.clear();
     });
+  }
+
+  export() {
+    this.save();
 
   }
 

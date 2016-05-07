@@ -11,7 +11,7 @@ module.exports = {
         MapId: id,
         x: 1,
         y: 1,
-        cellstate:"empty",
+        cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       }]).then(()=>{

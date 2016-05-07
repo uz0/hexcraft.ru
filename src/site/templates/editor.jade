@@ -21,6 +21,7 @@ block content
         input(ng-model="editor.map.description" placeholder="имя карты")
         button(ng-click="editor.delete()") удалить
         button(ng-click="editor.save()") сохранить
+        button(ng-click="editor.export()") экспорт
 
       .container(ng-if="editor.user")
         .map-list

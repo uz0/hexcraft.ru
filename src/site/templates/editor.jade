@@ -39,6 +39,7 @@ block content
           .hex(ng-repeat="hex in editor.map.MapData"
                ng-style="editor.calcPosition(hex)"
                ng-bind="hex.cellstate"
-               ng-click="editor.change(hex)")
+               ng-click="editor.change(hex)"
+               ng-class="hex.cellstate")
 
     include ./_footer.jade

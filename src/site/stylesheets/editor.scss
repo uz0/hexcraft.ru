@@ -60,7 +60,7 @@
   outline: 2px solid #0B91A9;
 }
 
-.editor-page .editor-field .hex {
+.editor-page .hex {
   height: 40px;
   width: 40px;
   position: absolute;
@@ -73,7 +73,19 @@
   user-select: none;
 }
 
-.editor-page .editor-field .hex.field {
+.editor-page .hex.empty {
+  color: #999;
+}
+
+.editor-page .hex.player1 {
+  color: red;
+}
+
+.editor-page .hex.player2 {
+  color: blue;
+}
+
+.editor-page .hex.field {
   opacity: .2;
   z-index: 0;
 }

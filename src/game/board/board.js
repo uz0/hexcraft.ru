@@ -181,19 +181,10 @@ export default class Board extends PIXI.Stage {
       }
     }
 
-    // проверки
-
-    // if(current.x < 0   ||
-    //    current.x > 760 ||
-    //    current.y < 80  ||
-    //    current.y > 560) {
-
-    //  return true;
-    // }
-
     let flag = true;
-    this.Field.forEach(i => {
 
+    // Prevent step out field
+    this.Field.forEach(i => {
       i.forEach(element => {
 
         if(element.alpha === 1 && element.position.x === current.x && element.position.y === current.y) {
@@ -201,6 +192,14 @@ export default class Board extends PIXI.Stage {
         }
 
       });
+    });
+
+    // Prevent step to other chip
+    this.Chips.forEach(element => {
+
+      if (current.x === element.position.x && current.y === element.position.y){
+        flag = true;
+      }
 
     });
 

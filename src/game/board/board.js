@@ -191,7 +191,20 @@ export default class Board extends PIXI.Stage {
     //  return true;
     // }
 
+    let flag = true;
+    this.Field.forEach(i => {
 
+      i.forEach(element => {
+
+        if(element.alpha === 1 && element.position.x === current.x && element.position.y === current.y) {
+          flag = false;
+        }
+
+      });
+
+    });
+
+    return flag;
 
   }
 

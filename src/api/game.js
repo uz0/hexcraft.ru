@@ -9,7 +9,7 @@ const router = module.exports = express.Router();
 const events = require('events');
 const sse = require('server-sent-events');
 
-var storage = {};
+let storage = {};
 let emitter = new events.EventEmitter();
 
 
@@ -47,7 +47,7 @@ router.get('/', function(req, res) {
 router.post('/', isAuthed, function(req, res) {
   const user = req.user;
 
-  models.Game.findAll({
+  models.Game.findOne({
     include: [{
       model: models.Map,
       include: [ models.MapData ]
@@ -55,34 +55,42 @@ router.post('/', isAuthed, function(req, res) {
     where: {
       player2: null
     }
-  }).then(games => {
-    if (!games.length) {
-      models.Game.create({
-        MapId: 1, // TODO random map from map list
-        player1: user.id,
-        stage: 'not started'
-      }).then(game => {
+  }).then(game => {
+    if (!game) {
 
-        // WORKAROUND: include MapData not working in create options
-        models.Game.findOne({
-          include: [{
-            model: models.Map,
-            include: [ models.MapData ]
-          }],
-          where: {
-            id: game.id
-          }
+
+      models.Map.findOne({
+        order: [
+          models.Sequelize.fn('RANDOM')
+        ]
+      }).then(result => {
+
+        models.Game.create({
+          MapId: result.id,
+          player1: user.id,
+          stage: 'not started'
         }).then(game => {
-          game.gameSteps = []; // store game steps
-          storage[game.id] = game;
-          res.send(game);
+
+          // WORKAROUND: include MapData not working in create options
+          models.Game.findOne({
+            include: [{
+              model: models.Map,
+              include: [ models.MapData ]
+            }],
+            where: {
+              id: game.id
+            }
+          }).then(game => {
+            game.gameSteps = []; // store game steps
+            storage[game.id] = game;
+            res.send(game);
+          });
         });
-      });
+      })
 
       return;
     }
 
-    let game = games[0];
     game.player2 = user.id;
     game.stage = 'started';
     game.save().then(() => {

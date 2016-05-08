@@ -25,7 +25,13 @@ export default class Board extends PIXI.Stage {
     };
 
     this.panel = new Panel();
-    this.panel.log('prepare to die');
+
+    if(this.username === this.game.player2.username) {
+      this.panel.log(`Ходит ${this.game.player1.username}`);
+    } else {
+      this.panel.log('Ваш ход');
+    }
+
     this.panel.showCapitulation();
     this.addChild(this.panel);
 
@@ -164,11 +170,17 @@ export default class Board extends PIXI.Stage {
       })
     });
 
-    console.log('yep2', current, old);
+    if(this.panel.GUI.userStatus.text === 'Ваш ход') {
+      let msg = 'Ходит ' + ((this.username === this.game.player1.username) ? this.game.player2.username : this.game.player1.username);
+      this.panel.log(msg);
+    }
+
+
+    // console.log('yep2', current, old);
   }
 
   preventStep(current, old) {
-    console.log('yep3', current, old);
+    // console.log('yep3', current, old);
 
     // очищаем поле
     for(let i=0; i<20; i++){
@@ -260,6 +272,7 @@ export default class Board extends PIXI.Stage {
       return;
     }
 
+    this.panel.log('Ваш ход');
     let chip = this.findChip(step.old.x, step.old.y);
     chip.x = step.current.x;
     chip.y = step.current.y;

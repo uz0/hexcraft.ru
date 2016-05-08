@@ -7,8 +7,10 @@ import Chip from './chip.js';
 export default class Board extends PIXI.Stage {
   constructor(game) {
     super();
+    this.game = game;
     this.Field = [];
     this.Chips = [];
+    this.Steps = [];
 
     this.username = window.localStorage.getItem('username');
 
@@ -29,7 +31,6 @@ export default class Board extends PIXI.Stage {
 
     this.generateField();
 
-    this.game = game;
     this.initializationMap(game);
 
     let loop = new window.EventSource(`/api/games/${game.id}/loop`);
@@ -181,13 +182,42 @@ export default class Board extends PIXI.Stage {
       }
     }
 
+    // observe correct step order
+    let last = this.Steps.length-1;
+    let lastUser = (last === -1) ? this.game.player2 : this.Steps[last].user;
+    if(lastUser.username === this.username) {
+      return true;
+    }
+
+    // check chip owner
+    let currentChip = this.findChip(current.x, current.y);
+    let playerIndex = (this.username === this.game.player1.username) ? 'player1' : 'player2';
+    if(currentChip.player !== playerIndex) {
+      return true;
+    }
+
+    // prevent step to old position
+    if(current.x === old.x && current.y === old.y) {
+      return true;
+    }
+
     let flag = true;
+    let cx = Math.round(current.x / 40);
+    let cy = Math.round((current.y - 80) / 40);
+    if (cy % 2 !== 0){
+      cx = Math.round((current.x - 20) / 40);
+    }
+
+    let chip;
+    if(this.Field[cx] && this.Field[cx][cy]) {
+      chip = this.Field[cx][cy];
+    }
 
     // Prevent step out field
     this.Field.forEach(i => {
       i.forEach(element => {
 
-        if(element.alpha === 1 && element.position.x === current.x && element.position.y === current.y) {
+        if(chip && element.alpha === 1 && element.position.x === chip.x && element.position.y === chip.y) {
           flag = false;
         }
 
@@ -197,7 +227,7 @@ export default class Board extends PIXI.Stage {
     // Prevent step to other chip
     this.Chips.forEach(element => {
 
-      if (current.x === element.position.x && current.y === element.position.y){
+      if (chip && chip.x === element.position.x && chip.y === element.position.y){
         flag = true;
       }
 
@@ -207,7 +237,7 @@ export default class Board extends PIXI.Stage {
 
   }
 
-  findChip(x,y) {
+  findChip(x, y) {
     let chip;
     this.Chips.forEach(element => {
       if(element.x === x && element.y === y) {
@@ -220,15 +250,16 @@ export default class Board extends PIXI.Stage {
 
   onEvent(event) {
     let data = JSON.parse(event.data);
+    this[`${data.event}Event`](data.data, data.user);
+  }
 
-    if(this.username === data.user.username) {
+  stepEvent(step, user) {
+    step.user = user;
+    this.Steps.push(step);
+    if(this.username === user.username) {
       return;
     }
 
-    this[`${data.event}Event`](data.data);
-  }
-
-  stepEvent(step) {
     let chip = this.findChip(step.old.x, step.old.y);
     chip.x = step.current.x;
     chip.y = step.current.y;

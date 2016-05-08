@@ -46,18 +46,18 @@ export default class Chip extends PIXI.Sprite {
   onDragEnd() {
     this.data = null;
 
+    if(this.preventStep && this.preventStep(this.position, this.oldPosition)) {
+      this.position.x = this.oldPosition.x;
+      this.position.y = this.oldPosition.y;
+      return;
+    }
+
     let current = this.position;
     let x = Math.round(current.x / 40);
     let y = Math.round((current.y - 80) / 40);
 
     if (y % 2 !== 0){
       x = Math.round((current.x - 20) / 40);
-    }
-
-    if(!this.Field[x] || !this.Field[x][y] || this.preventStep && this.preventStep(this.Field[x][y], this.oldPosition)) {
-      this.position.x = this.oldPosition.x;
-      this.position.y = this.oldPosition.y;
-      return;
     }
 
     this.position.x = this.Field[x][y].x;

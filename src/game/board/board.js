@@ -87,7 +87,7 @@ export default class Board extends PIXI.Stage {
           continue;
         }
 
-        // сбросить цвет
+        // reset color
         this.Field[i][j].tint = this.colors.clear;
 
         let x = Math.round(old.x / 40);
@@ -97,7 +97,7 @@ export default class Board extends PIXI.Stage {
         }
 
 
-        // найти соседние соседних точек и задать им цвет
+        // find neighbors neighbors chips and set color
         if((i > x-3 && i < x+3) && (j > y-3 && j < y+3) &&
           !(i===x+2 && j===y-2) &&
           !(i===x+2 && j===y+2) &&
@@ -112,7 +112,7 @@ export default class Board extends PIXI.Stage {
         }
 
 
-        // найти соседние ей точки и задать им цвет
+        // find neighbors chips and set color
         if((i > x-2 && i < x+2) && (j > y-2 && j < y+2) &&
           !(i===x+1 && j===y-1 && (y % 2 === 0)) &&
           !(i===x+1 && j===y+1 && (y % 2 === 0)) &&
@@ -123,13 +123,13 @@ export default class Board extends PIXI.Stage {
         }
 
 
-        // найти исходную точку и задать ей цвет
+        // find point of reference and set color
         if(i===x && j===y) {
           this.Field[i][j].tint = this.colors.old;
         }
 
 
-        // найти позицию курсора и задать цвет клетки под курсором
+        // find cursor position and set color Field under cursor
         let cx = Math.round(current.x / 40);
         let cy = Math.round((current.y - 80) / 40);
         if (cy % 2 !== 0){
@@ -176,7 +176,7 @@ export default class Board extends PIXI.Stage {
           continue;
         }
 
-        // сбросить цвет
+        // reset color
         this.Field[i][j].tint = this.colors.clear;
       }
     }

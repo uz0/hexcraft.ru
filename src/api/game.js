@@ -47,6 +47,7 @@ router.get('/', function(req, res) {
 router.post('/', isAuthed, function(req, res) {
   const user = req.user;
 
+  // TODO: refactoring
   models.Game.findOne({
     include: [{
       model: models.Map,
@@ -86,7 +87,7 @@ router.post('/', isAuthed, function(req, res) {
             res.send(game);
           });
         });
-      })
+      });
 
       return;
     }
@@ -98,7 +99,7 @@ router.post('/', isAuthed, function(req, res) {
 
       emitter.emit(`game${game.id}`, {
         event: 'started',
-        player2: user
+        user: user
       });
 
       res.send(game);
@@ -162,7 +163,7 @@ router.post('/:id', isAuthed, function(req, res, next) {
 
   emitter.emit(`game${gameId}`, {
     event: 'step',
-    step: step,
+    data: step,
     user: req.user
   });
 

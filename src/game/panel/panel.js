@@ -12,7 +12,7 @@ export default class Panel extends PIXI.Stage {
       this.addChild(this.GUI[element.id]);
     });
 
-    const username = window.localStorage.getItem('user');
+    const username = window.localStorage.getItem('username');
     this.GUI.userName.text = username;
 
     //workaround: cant setup visible from config file

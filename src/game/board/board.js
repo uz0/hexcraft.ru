@@ -5,12 +5,16 @@ import utils from '../utils.js';
 import Chip from './chip.js';
 
 export default class Board extends PIXI.Stage {
-  constructor() {
+  constructor(game) {
     super();
     this.Field = [];
     this.Chips = [];
 
+    this.username = window.localStorage.getItem('username');
+
     this.colors = {
+      player1: '0xb71c1c',
+      player2: '0x0D47A1',
       old: '0xFFCCBC',
       r1: '0xFFE0B2',
       r2: '0xFFECB3',
@@ -18,46 +22,25 @@ export default class Board extends PIXI.Stage {
       clear: '0xFFFFFF'
     };
 
-    let panel = new Panel();
-    panel.log('prepare to die');
-    panel.showCapitulation();
-    this.addChild(panel);
+    this.panel = new Panel();
+    this.panel.log('prepare to die');
+    this.panel.showCapitulation();
+    this.addChild(this.panel);
 
     this.generateField();
 
-    let token = window.localStorage.getItem('token');
-    window.fetch('/api/games', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        token: token
-      })
-    })
-    .then(utils.parseJson)
-    .then(game => {
-      this.game = game;
-      this.initializationMap(game);
+    this.game = game;
+    this.initializationMap(game);
 
-      // loop example
-      let loop = new window.EventSource(`/api/games/${game.id}/loop`);
-
-      loop.addEventListener('message', event => {
-        let data = JSON.parse(event.data);
-        console.log(data);
-      });
-    });
-
+    let loop = new window.EventSource(`/api/games/${game.id}/loop`);
+    loop.addEventListener('message', this.onEvent.bind(this));
   }
 
   generateField() {
-    for(let i=0; i<20; i++){
+    for(let i=0; i<20; i++) {
       this.Field[i] = [];
-      this.Chips[i] = [];
 
-      for(let j=0; j<13; j++){
+      for(let j=0; j<13; j++) {
         if (j % 2 !== 0 && i === 19) {
           continue;
         }
@@ -75,33 +58,29 @@ export default class Board extends PIXI.Stage {
     }
   }
 
-  initializationMap(game){
-    window.fetch(`/api/games/${game.id}`)
-    .then(utils.parseJson)
-    .then(game => {
-      game.Map.MapData.forEach(element => {
-        if(element.cellstate === 'empty') {
-          this.Field[element.x][element.y].alpha = 1;
-        }
+  initializationMap(game) {
+    game.Map.MapData.forEach(element => {
+      this.Field[element.x][element.y].alpha = 1;
 
-        if(element.cellstate === 'player1') {
-          const x = (element.y % 2 === 0)? element.x*40 : element.x*40+20;
-          const y = element.y*40+80;
-          let chip = new Chip(x, y, this.Field);
+      if(element.cellstate !== 'empty') {
+        const x = (element.y % 2 === 0)? element.x*40 : element.x*40+20;
+        const y = element.y*40+80;
+        let chip = new Chip(x, y, this.Field);
 
-          chip.onMove = this.onMove.bind(this);
-          chip.onStep = this.onStep.bind(this);
-          chip.preventStep = this.preventStep.bind(this);
+        chip.onMove = this.onMove.bind(this);
+        chip.onStep = this.onStep.bind(this);
+        chip.preventStep = this.preventStep.bind(this);
 
-          this.Chips[element.x][element.y] = chip;
-          this.addChild(chip);
-        }
-      });
-    })
+        chip.tint = this.colors[element.cellstate];
+        chip.player = element.cellstate;
+
+        this.Chips.push(chip);
+        this.addChild(chip);
+      }
+    });
   }
 
   onMove(current, old) {
-
     for(let i=0; i<20; i++){
       for(let j=0; j<13; j++){
         if (j % 2 !== 0 && i === 19) {
@@ -182,7 +161,7 @@ export default class Board extends PIXI.Stage {
         },
         token: token
       })
-    })
+    });
 
     console.log('yep2', current, old);
   }
@@ -204,14 +183,43 @@ export default class Board extends PIXI.Stage {
 
     // проверки
 
-    if(current.x < 0   ||
-       current.x > 760 ||
-       current.y < 80  ||
-       current.y > 560) {
+    // if(current.x < 0   ||
+    //    current.x > 760 ||
+    //    current.y < 80  ||
+    //    current.y > 560) {
 
-     return true;
+    //  return true;
+    // }
+
+
+
+  }
+
+  findChip(x,y) {
+    let chip;
+    this.Chips.forEach(element => {
+      if(element.x === x && element.y === y) {
+        chip = element;
+      }
+    });
+
+    return chip;
+  }
+
+  onEvent(event) {
+    let data = JSON.parse(event.data);
+
+    if(this.username === data.user.username) {
+      return;
     }
 
+    this[`${data.event}Event`](data.data);
+  }
+
+  stepEvent(step) {
+    let chip = this.findChip(step.old.x, step.old.y);
+    chip.x = step.current.x;
+    chip.y = step.current.y;
   }
 
   update(){}

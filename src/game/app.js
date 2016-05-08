@@ -12,8 +12,8 @@ class Hexcraft {
     this.loop();
   }
 
-  setStage (Stage) {
-    this.stage = new Stage();
+  setStage (Stage, argument) {
+    this.stage = new Stage(argument);
   }
 
   loop () {

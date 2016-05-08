@@ -41,7 +41,6 @@ export default class Auth extends PIXI.Stage {
 
   showError(message) {
     this.GUI.ErrorMessageBg.position.dy = 20;
-
     this.GUI.ErrorMessageBg.children[2].children[0].text = message;
 
     window.setTimeout(()=>{
@@ -71,11 +70,12 @@ export default class Auth extends PIXI.Stage {
     })
     .then(utils.parseJson)
     .then(response => {
-      window.localStorage.setItem('user', response.user.username);
+      window.localStorage.setItem('username', response.user.username);
       window.localStorage.setItem('token', response.token.token);
       hexcraft.setStage(Lobby);
     })
-    .catch(() => {
+    .catch(err => {
+      console.error(err);
       this.showError('Неправильная пара логин/пароль');
     });
   }

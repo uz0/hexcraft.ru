@@ -27,12 +27,13 @@ export default class Lobby extends PIXI.Stage {
       this.addChild(this.GUI[element.id]);
     });
 
-    let panel = new Panel();
-    panel.log('боль и страдание');
-    panel.showExit();
-    this.addChild(panel);
+    this.panel = new Panel();
+    this.panel.log('боль и страдание1');
+    this.panel.showExit();
+    this.addChild(this.panel);
 
-    hex.on('click', this.startGame);
+    hex.on('click', this.startGame.bind(this));
+
     // user list
     // TODO: online user list!
     window.fetch('/api/users')
@@ -74,7 +75,38 @@ export default class Lobby extends PIXI.Stage {
   }
 
   startGame() {
-    hexcraft.setStage(Board);
+    let token = window.localStorage.getItem('token');
+
+    window.fetch('/api/games', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        token: token
+      })
+    }).then(utils.parseJson).then(game => {
+      if(game.stage === 'not started') {
+        this.game = game;
+        this.loop = new window.EventSource(`/api/games/${game.id}/loop`);
+        this.loop.addEventListener('message', this.waitGame.bind(this));
+        this.panel.log('ждем второго игрока');
+
+        return;
+      }
+
+      hexcraft.setStage(Board, game);
+    });
+  }
+
+  waitGame(event) {
+    let data = JSON.parse(event.data);
+    if(data.event === 'started') {
+      this.game.player2 = data.user;
+      hexcraft.setStage(Board, this.game);
+      this.loop.close();
+    }
   }
 
   update(){}

@@ -2,8 +2,8 @@
 
 module.exports = function(sequelize, DataTypes) {
   let Game = sequelize.define('Game', {
-    player1: DataTypes.INTEGER,
-    player2: DataTypes.INTEGER,
+    // player1: DataTypes.INTEGER,
+    // player2: DataTypes.INTEGER,
     stage: DataTypes.ENUM('not started', 'started', 'over')
   }, {
     classMethods: {
@@ -12,6 +12,14 @@ module.exports = function(sequelize, DataTypes) {
           foreignKey: {
             allowNull: false
           }
+        });
+
+        Game.belongsTo(models.User, {
+          foreignKey: 'player1'
+        });
+
+        Game.belongsTo(models.User, {
+          foreignKey: 'player2'
         });
       }
     }

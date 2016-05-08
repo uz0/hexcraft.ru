@@ -82,6 +82,7 @@ router.post('/', isAuthed, function(req, res) {
               id: game.id
             }
           }).then(game => {
+            game.player1 = user;
             game.gameSteps = []; // store game steps
             storage[game.id] = game;
             res.send(game);
@@ -95,6 +96,8 @@ router.post('/', isAuthed, function(req, res) {
     game.player2 = user.id;
     game.stage = 'started';
     game.save().then(() => {
+      game.player1 = storage[game.id].player1;
+      game.player2 = user;
       storage[game.id] = game;
 
       emitter.emit(`game${game.id}`, {
@@ -145,7 +148,7 @@ router.post('/:id', isAuthed, function(req, res, next) {
     return next(error);
   }
 
-  if (game.player1 !== req.user.id && game.player2 !== req.user.id) {
+  if (game.player1.id !== req.user.id && game.player2.id !== req.user.id) {
     let error = new Error('wrong user');
     error.status = 400;
     return next(error);

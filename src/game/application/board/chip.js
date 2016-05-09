@@ -1,10 +1,15 @@
 'use strict';
 
+import Hex from './hex.js';
+
 export default class Chip extends PIXI.Sprite {
-  constructor(x, y, field){
+  constructor(i, j, player){
     super();
 
-    this.Field = field;
+    const colors = {
+      player1: '0xb71c1c',
+      player2: '0x0D47A1'
+    };
 
     const textures = [
       '/game/resources/chip1.svg',
@@ -13,14 +18,13 @@ export default class Chip extends PIXI.Sprite {
     ];
 
     const random = Math.floor(Math.random() * 3) + 0;
-
     this.texture = PIXI.Texture.fromImage(textures[random]);
-    this.alpha = 1;
+    this.tint = colors[player];
 
-    this.position = {
-      x: x,
-      y: y
-    };
+    this.player = player;
+    this.i = i;
+    this.j = j;
+    this.position = Hex.indexToCoordinates(i, j);
 
     this.interactive = true;
     this.buttonMode = true;
@@ -52,16 +56,10 @@ export default class Chip extends PIXI.Sprite {
       return;
     }
 
-    let current = this.position;
-    let x = Math.round(current.x / 40);
-    let y = Math.round((current.y - 80) / 40);
-
-    if (y % 2 !== 0){
-      x = Math.round((current.x - 20) / 40);
-    }
-
-    this.position.x = this.Field[x][y].x;
-    this.position.y = this.Field[x][y].y;
+    let index = Hex.coordinatesToIndex(this.position.x, this.position.y);
+    this.i = index.i;
+    this.j = index.j;
+    this.position = Hex.indexToCoordinates(index.i, index.j);
 
     if(this.onStep) {
       this.onStep(this.position, this.oldPosition);

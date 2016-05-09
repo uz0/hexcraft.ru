@@ -30,7 +30,7 @@ export default class Lobby extends PIXI.Stage {
     });
 
     this.panel = new Panel();
-    this.panel.log('боль и страдание1');
+    this.panel.log('боль и страдание');
     this.panel.showExit();
     this.addChild(this.panel);
 

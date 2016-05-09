@@ -1,25 +1,16 @@
 'use strict';
 
-import panelGui from './panel.json';
+import options from './panel.json';
+import GUI from '../gui.js';
 
-export default class Panel extends PIXI.Stage {
+export default class Panel extends PIXI.Container {
   constructor() {
     super();
-    this.GUI = [];
-
-    panelGui.forEach(element => {
-      this.GUI[element.id] = EZGUI.create(element, 'kenney');
-      this.addChild(this.GUI[element.id]);
-    });
+    this.GUI = new GUI(options);
+    this.addChild(this.GUI);
 
     const username = window.localStorage.getItem('username');
-    this.GUI.userName.text = username;
-
-    //workaround: cant setup visible from config file
-    this.GUI.surrenderButton.visible = false;
-    this.GUI.logoutButton.visible = false;
-    this.GUI.logoutButton.interactive = true;
-    this.GUI.logoutButton.buttonMode = true;
+    this.GUI.username.text = username;
   }
 
   logout () {
@@ -39,16 +30,16 @@ export default class Panel extends PIXI.Stage {
 
 
   showExit() {
-    this.GUI.logoutButton.visible = true;
-    this.GUI.logoutButton.on('click', this.logout);
+    this.GUI.logout.visible = true;
+    this.GUI.logout.on('click', this.logout);
   }
 
   showCapitulation() {
-    this.GUI.surrenderButton.visible = true;
+    this.GUI.surrender.visible = true;
   }
 
   log(text){
-    this.GUI.userStatus.text = text;
+    this.GUI.status.text = text;
   }
 
   update(){}

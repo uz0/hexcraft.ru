@@ -2,54 +2,43 @@
 
 import hexcraft from '../../application.js';
 import utils from '../utils.js';
+import GUI from '../gui.js';
 import Board from '../board/board.js';
 import Panel from '../panel/panel.js';
-import lobbyGui from './lobby.json';
+import options from './lobby.json';
 
-export default class Lobby extends PIXI.Stage {
+export default class Lobby extends PIXI.Container {
   constructor() {
     super();
-    this.GUI = [];
-
-    let hex = PIXI.Sprite.fromImage('/game/resources/hex.svg');
-    hex.position = {
-      x: 355,
-      y: 250
-    };
-    hex.scale = {
-      x: 0.25,
-      y: 0.25
-    };
-    hex.interactive = true;
-    hex.buttonMode = true;
-    this.addChild(hex);
-
-    lobbyGui.forEach(element => {
-      this.GUI[element.id] = EZGUI.create(element, 'kenney');
-      this.addChild(this.GUI[element.id]);
-    });
+    this.GUI = new GUI(options);
+    this.GUI.play.on('click', this.startGame.bind(this));
+    this.addChild(this.GUI);
 
     this.panel = new Panel();
-    this.panel.log('боль и страдание');
+    this.panel.log('Ждем игры');
     this.panel.showExit();
     this.addChild(this.panel);
-
-    hex.on('click', this.startGame.bind(this));
 
     // user list
     // TODO: online user list!
     window.fetch('/api/users')
     .then(utils.parseJson)
     .then(users => {
+      let counter = 0;
       users.forEach(user => {
-        this.GUI.usersList.addChild(EZGUI.create({
-          id: user.id,
-          text: user.username,
-          component: 'Label',
-          position: 'right',
-          width: 200,
-          height: 20
-        }, 'kenney'));
+        counter++;
+
+        let label = new PIXI.Text(user.username, {
+          font : '24px Arial',
+          fill : "#333",
+          align : 'right'
+        });
+
+        label.y = 30*counter;
+        label.x = 290;
+        label.anchor.set(1,0);
+
+        this.GUI.players.addChild(label);
       });
     });
 
@@ -58,15 +47,21 @@ export default class Lobby extends PIXI.Stage {
     window.fetch('/api/games')
     .then(utils.parseJson)
     .then(games => {
+      let counter = 0;
       games.forEach(game => {
-        this.GUI.gamesList.addChild(EZGUI.create({
-          id: game.id,
-          text: this.labelFormater(game),
-          component: 'Label',
-          position: 'left',
-          width: 200,
-          height: 20
-        }, 'kenney'));
+        counter++;
+
+        let label = new PIXI.Text(this.labelFormater(game), {
+          font : '24px Arial',
+          fill : "#333",
+          align : 'left'
+        });
+
+        label.y = 30*counter;
+        label.x = 0;
+        label.anchor.set(0);
+
+        this.GUI.games.addChild(label);
       });
     });
 

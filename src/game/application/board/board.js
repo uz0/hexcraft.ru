@@ -6,7 +6,7 @@ import Chip from './chip.js';
 import Hex from './hex.js';
 import Field from './field.js';
 
-export default class Board extends PIXI.Stage {
+export default class Board extends PIXI.Container {
   constructor(game) {
     super();
     this.game = game;
@@ -121,7 +121,6 @@ export default class Board extends PIXI.Stage {
       this.panel.log('Ограничение по радиусу!');
       return true;
     }
-
   }
 
   onStep(current, old) {

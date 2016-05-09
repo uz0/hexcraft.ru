@@ -1,17 +1,15 @@
 'use strict';
 
-var utils = {};
+export default class utils {
+  static handleErrors(response) {
+    if (!response.ok) {
+      throw Error(response.statusText);
+    }
 
-utils.handleErrors = (response) => {
-  if (!response.ok) {
-    throw Error(response.statusText);
-  }
+    return response;
+  };
 
-  return response;
-};
-
-utils.parseJson = (response) => {
-  return response.json();
-};
-
-export default utils;
+  static parseJson(response) {
+    return response.json();
+  };
+}

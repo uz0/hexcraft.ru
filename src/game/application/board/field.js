@@ -2,10 +2,9 @@
 
 import Hex from './hex.js';
 
-export default class Field extends PIXI.Stage {
+export default class Field extends PIXI.Container {
   constructor() {
     super();
-    // this.field = [];
 
     this.forEach((i, j) => {
       let hex = PIXI.Sprite.fromImage('/game/resources/circuit_hex.svg');
@@ -14,7 +13,6 @@ export default class Field extends PIXI.Stage {
       hex.alpha = 0.2;
       hex.position = Hex.indexToCoordinates(i, j);
 
-      // this.field.push(hex);
       this.addChild(hex);
     });
   }
@@ -26,10 +24,7 @@ export default class Field extends PIXI.Stage {
           continue;
         }
 
-        let result = callback(i, j, this.findByIndex(i, j));
-        if(result) {
-          return result;
-        }
+        callback(i, j, this.findByIndex(i, j));
       }
     }
   }
@@ -50,6 +45,4 @@ export default class Field extends PIXI.Stage {
   findNeighborsNeighbors(x, y) {
     return Hex.findNeighborsNeighbors(this.children, x, y);
   }
-
-
 }

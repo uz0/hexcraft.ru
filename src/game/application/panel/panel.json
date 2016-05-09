@@ -1,52 +1,92 @@
 [{
-  id: "userName",
-  text: "username",
-  component: "label",
-  font: {
-  size: "16px",
-  color: "#000"
+  id: "username",
+  text: "",
+  component: "Text",
+  style: {
+    fill: "#aaa"
   },
-  width: 150,
-  height: 50,
   position: {
-    x: 520,
+    x: 500,
+    y: 20
+  },
+  anchor: {
+    x: 0,
+    y: 0
+  },
+  configuration: ""
+}, {
+  id: "status",
+  text: "",
+  component: "Text",
+  style: {
+    fill: "#333"
+  },
+  position: {
+    x: 0,
+    y: 20
+  },
+  configuration: ""
+},{
+  id: "surrender",
+  component: "Button",
+  visible: false,
+  position: {
+    x: 610,
     y: 10
+  },
+  configuration: {
+    value: "Сдаться",
+    padding: 10,
+    borderWidth: 0,
+    borderRadius: 0,
+    boxShadow: null,
+    innerShadow: null,
+    backgroundColor: "#000",
+    text: {
+      font: "24px Arial",
+      fill: "#fff",
+    }
   }
 },{
-  id: "surrenderButton",
-  text: "Сдаться",
+  id: "logout",
   component: "Button",
+  visible: false,
   position: {
-    x: 680,
+    x: 610,
     y: 10
   },
-  width: 125,
-  height: 50
+  configuration: {
+    value: "Выйти",
+    padding: 10,
+    borderWidth: 0,
+    borderRadius: 0,
+    boxShadow: null,
+    innerShadow: null,
+    backgroundColor: "#000",
+    text: {
+      font: "24px Arial",
+      fill: "#fff",
+    }
+  }
 },{
-  id: "logoutButton",
-  text: "Выйти",
-  component: "Window",
+  id: "border",
+  component: "Button",
+  width: 800,
   position: {
-    x: 680,
-    y: 10
+    x: 0,
+    y: 70
   },
-  font: {
-    color: "#fff"
-  },
-  width: 100,
-  height: 50
-},{
-  id: "userStatus",
-  text: "",
-  component: "label",
-  font: {
-  size: "16px",
-  color: "#000"
-  },
-  width: 250,
-  height: 50,
-  position: {
-    x: 10,
-    y: 10
+  configuration: {
+    value: "",
+    padding: 0,
+    borderWidth: 0,
+    borderRadius: 0,
+    boxShadow: null,
+    innerShadow: null,
+    backgroundColor: "#000",
+    text: {
+      font: "1px Arial",
+      fill: "#fff",
+    }
   }
 }];

@@ -16,7 +16,7 @@ class Loader extends PIXI.loaders.Loader {
 }
 
 // load stage init
-export default class Load extends PIXI.Stage {
+export default class Load extends PIXI.Container {
   constructor() {
     super();
 
@@ -24,10 +24,7 @@ export default class Load extends PIXI.Stage {
     var loader = new Loader();
     loader.once('complete', this.loaded.bind(this));
     loader.on('progress', this.onProgress.bind(this));
-
-    EZGUI.Theme.load(['./resources/theme/kenney-theme.json'], () => {
-      loader.load();
-    });
+    loader.load();
 
     // Scene draw
     var logo = PIXI.Texture.fromImage('/game/resources/logo.svg');

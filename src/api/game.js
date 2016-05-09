@@ -26,7 +26,8 @@ router.get('/', function(req, res) {
       stage: {
         $ne: 'over' // not equals
       }
-    }
+    },
+    limit: 15
   }).then(games => {
     res.send(games);
   });

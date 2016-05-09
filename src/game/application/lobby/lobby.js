@@ -24,6 +24,8 @@ export default class Lobby extends PIXI.Container {
     window.fetch('/api/users')
     .then(utils.parseJson)
     .then(users => {
+      this.users = users;
+
       let counter = 0;
       users.forEach(user => {
         counter++;
@@ -68,6 +70,13 @@ export default class Lobby extends PIXI.Container {
   }
 
   labelFormater(game) {
+    console.log(game);
+    // get username by userId (this.users)
+    // game.stage
+    // игрок1 ожидает игры, (not started)
+    // игрок1 играет с игрок2, (started)
+    // игрок1 победил игрока2 (over player1)
+    // игрок2 победил игрока1 (over player2)
     return game.id;
   }
 

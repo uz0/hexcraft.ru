@@ -66,10 +66,9 @@ export default class Hex {
     let neighborsNeighbors = [];
     Hex.findNeighbors(array, x, y).forEach(neighbor => {
       let neighbors = Hex.findNeighbors(array, neighbor.x, neighbor.y);
-      // console.log(neighbors);
       neighborsNeighbors = neighborsNeighbors.concat(neighbors);
     })
-    console.log(neighborsNeighbors);
+
     return neighborsNeighbors;
   }
 }

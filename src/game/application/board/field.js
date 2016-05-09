@@ -26,7 +26,10 @@ export default class Field extends PIXI.Stage {
           continue;
         }
 
-        callback(i, j, this.findByIndex(i, j));
+        let result = callback(i, j, this.findByIndex(i, j));
+        if(result) {
+          return result;
+        }
       }
     }
   }

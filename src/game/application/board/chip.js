@@ -25,9 +25,7 @@ export default class Chip extends PIXI.Sprite {
     this.i = i;
     this.j = j;
     this.position = Hex.indexToCoordinates(i, j);
-
-    this.interactive = true;
-    this.buttonMode = true;
+    this.updateOldPosition();
 
     this.on('mousedown', this.onDragStart)
         .on('touchstart', this.onDragStart)
@@ -39,33 +37,21 @@ export default class Chip extends PIXI.Sprite {
         .on('touchmove', this.onDragMove);
   }
 
-  onDragStart(event) {
-    this.data = event.data;
+  changeMode(mode) {
+    this.interactive = mode;
+    this.buttonMode = mode;
+  }
+
+  updateOldPosition() {
     this.oldPosition = {
       x: this.position.x,
       y: this.position.y
     };
   }
 
-  onDragEnd() {
-    this.data = null;
-
-    if(this.preventStep && this.preventStep(this.position, this.oldPosition)) {
-      this.position.x = this.oldPosition.x;
-      this.position.y = this.oldPosition.y;
-      return;
-    }
-
-    let index = Hex.coordinatesToIndex(this.position.x, this.position.y);
-    this.i = index.i;
-    this.j = index.j;
-    this.position = Hex.indexToCoordinates(index.i, index.j);
-
-    if(this.onStep) {
-      this.onStep(this.position, this.oldPosition);
-    }
-
-    this.oldPosition = null;
+  onDragStart(event) {
+    this.data = event.data;
+    this.updateOldPosition();
   }
 
   onDragMove() {
@@ -78,7 +64,27 @@ export default class Chip extends PIXI.Sprite {
     if(this.data && this.onMove) {
       this.onMove(this.position, this.oldPosition);
     }
-
   }
 
+  onDragEnd() {
+    this.data = null;
+
+    if(this.beforeStep && this.beforeStep(this.position, this.oldPosition)) {
+      this.position.x = this.oldPosition.x;
+      this.position.y = this.oldPosition.y;
+
+      return;
+    }
+
+    let index = Hex.coordinatesToIndex(this.position.x, this.position.y);
+    this.i = index.i;
+    this.j = index.j;
+    this.position = Hex.indexToCoordinates(index.i, index.j);
+
+    if(this.onStep) {
+      this.onStep(this.position, this.oldPosition);
+    }
+
+    this.updateOldPosition();
+  }
 }

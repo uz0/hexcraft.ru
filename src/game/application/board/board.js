@@ -46,7 +46,7 @@ export default class Board extends PIXI.Stage {
           continue;
         }
 
-        let hex = PIXI.Sprite.fromImage('/game/board/circuit_hex.svg');
+        let hex = PIXI.Sprite.fromImage('/game/resources/circuit_hex.svg');
         hex.alpha = 0.2;
         hex.position = {
           x: (j % 2 === 0)? i*40 : i*40 + 20,
@@ -82,8 +82,8 @@ export default class Board extends PIXI.Stage {
   }
 
   onMove(current, old) {
-    for(let i=0; i<20; i++){
-      for(let j=0; j<13; j++){
+    for(let i=0; i<20; i++) {
+      for(let j=0; j<13; j++) {
         if (j % 2 !== 0 && i === 19) {
           continue;
         }
@@ -171,8 +171,8 @@ export default class Board extends PIXI.Stage {
     console.log('yep3', current, old);
 
     // очищаем поле
-    for(let i=0; i<20; i++){
-      for(let j=0; j<13; j++){
+    for(let i=0; i<20; i++) {
+      for(let j=0; j<13; j++) {
         if (j % 2 !== 0 && i === 19) {
           continue;
         }

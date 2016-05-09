@@ -1,7 +1,7 @@
 'use strict';
 
-import resources from '../resources.json';
-import hexcraft from '../app.js';
+import resources from '../../resources.json';
+import hexcraft from '../../application.js';
 import Auth from '../auth/auth.js';
 
 // load all from resources.json
@@ -25,12 +25,12 @@ export default class Load extends PIXI.Stage {
     loader.once('complete', this.loaded.bind(this));
     loader.on('progress', this.onProgress.bind(this));
 
-    EZGUI.Theme.load(['./kenney-theme.json'], () => {
+    EZGUI.Theme.load(['./resources/theme/kenney-theme.json'], () => {
       loader.load();
     });
 
     // Scene draw
-    var logo = PIXI.Texture.fromImage('/images/logo.svg');
+    var logo = PIXI.Texture.fromImage('/game/resources/logo.svg');
     this.logo = new PIXI.Sprite(logo);
 
     this.logo.position.x = window.innerWidth/2;
@@ -48,7 +48,7 @@ export default class Load extends PIXI.Stage {
   }
 
   onProgress (loader) {
-    this.logo.alpha = loader.progress/100;
+    this.logo.alpha = loader.progress / 100;
   }
 
   update(){}

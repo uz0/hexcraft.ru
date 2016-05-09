@@ -1,6 +1,6 @@
 'use strict';
 
-import Load from './load/load.js';
+import Load from './application/load/load.js';
 
 class Hexcraft {
   constructor() {

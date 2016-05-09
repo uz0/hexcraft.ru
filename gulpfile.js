@@ -53,7 +53,7 @@ const api = {
 const game = {
   scripts: 'src/game/**/*.js',
   configs: 'src/game/**/*.json',
-  main:    'src/game/app.js',
+  main:    'src/game/application.js',
   assets:  'src/game/**/*.*',
   ex:      '!src/game/**/*.js',
   to:      'public/game'

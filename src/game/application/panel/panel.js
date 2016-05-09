@@ -1,6 +1,6 @@
 'use strict';
 
-import panelGui from './panel.gui.js';
+import panelGui from './panel.json';
 
 export default class Panel extends PIXI.Stage {
   constructor() {
@@ -24,6 +24,7 @@ export default class Panel extends PIXI.Stage {
 
   logout () {
     const token = window.localStorage.getItem('token');
+
     window.localStorage.removeItem('user');
     window.localStorage.removeItem('token');
     window.fetch('/api/auth/logout', {
@@ -32,6 +33,7 @@ export default class Panel extends PIXI.Stage {
         token: token
       })
     });
+
     document.location.href = '/';
   }
 

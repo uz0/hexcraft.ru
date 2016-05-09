@@ -1,25 +1,27 @@
 'use strict';
 
-import hexcraft from '../app.js';
+import hexcraft from '../../application.js';
 import utils from '../utils.js';
 import Board from '../board/board.js';
 import Panel from '../panel/panel.js';
-import lobbyGui from './lobby.gui.js';
+import lobbyGui from './lobby.json';
 
 export default class Lobby extends PIXI.Stage {
   constructor() {
     super();
     this.GUI = [];
 
-    let hex = PIXI.Sprite.fromImage('/game/auth/hex.svg');
+    let hex = PIXI.Sprite.fromImage('/game/resources/hex.svg');
     hex.position = {
       x: 355,
       y: 250
     };
+    hex.scale = {
+      x: 0.25,
+      y: 0.25
+    };
     hex.interactive = true;
     hex.buttonMode = true;
-    hex._width = 100;
-    hex._height = 100;
     this.addChild(hex);
 
     lobbyGui.forEach(element => {
@@ -45,7 +47,7 @@ export default class Lobby extends PIXI.Stage {
           text: user.username,
           component: 'Label',
           position: 'right',
-          width: 100,
+          width: 200,
           height: 20
         }, 'kenney'));
       });
@@ -62,7 +64,7 @@ export default class Lobby extends PIXI.Stage {
           text: this.labelFormater(game),
           component: 'Label',
           position: 'left',
-          width: 100,
+          width: 200,
           height: 20
         }, 'kenney'));
       });

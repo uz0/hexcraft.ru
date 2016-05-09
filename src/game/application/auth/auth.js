@@ -1,9 +1,8 @@
 'use strict';
 
-import authGui from './auth.gui.js';
-import hexcraft from '../app.js';
+import authGui from './auth.json';
+import hexcraft from '../../application.js';
 import utils from '../utils.js';
-import Demo from '../demo.js';
 import Lobby from '../lobby/lobby.js';
 
 export default class Auth extends PIXI.Stage {
@@ -15,7 +14,7 @@ export default class Auth extends PIXI.Stage {
     let token = window.localStorage.getItem('token');
     this.verify(token);
 
-    let hex = PIXI.Sprite.fromImage('/game/auth/hex.svg');
+    let hex = PIXI.Sprite.fromImage('/game/resources/hex.svg');
     hex.position = {
       x: 225,
       y: 100
@@ -36,7 +35,6 @@ export default class Auth extends PIXI.Stage {
     this.GUI.ErrorMessageBg.position.dy = -50;
     this.GUI.authPassword.filters = [pixilate];
     this.GUI.authSubmit.on('click', this.login.bind(this));
-    this.GUI.demoBtn.on('click', () => hexcraft.setStage(Demo));
   }
 
   showError(message) {
@@ -68,13 +66,13 @@ export default class Auth extends PIXI.Stage {
         password: password
       })
     })
+    .then(utils.handleErrors)
     .then(utils.parseJson)
     .then(response => {
       window.localStorage.setItem('username', response.user.username);
       window.localStorage.setItem('token', response.token.token);
       hexcraft.setStage(Lobby);
-    })
-    .catch(err => {
+    }).catch(err => {
       console.error(err);
       this.showError('Неправильная пара логин/пароль');
     });
@@ -101,8 +99,7 @@ export default class Auth extends PIXI.Stage {
   }
 
   update() {
-
-    // Flash animation!!!111oneone
+    // Flash animation
     const speed = 1;
     let position = this.GUI.ErrorMessageBg.position;
 

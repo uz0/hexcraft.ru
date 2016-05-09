@@ -7,9 +7,9 @@ export default class Chip extends PIXI.Sprite {
     this.Field = field;
 
     const textures = [
-      '/game/board/chip1.svg',
-      '/game/board/chip2.svg',
-      '/game/board/chip3.svg'
+      '/game/resources/chip1.svg',
+      '/game/resources/chip2.svg',
+      '/game/resources/chip3.svg'
     ];
 
     const random = Math.floor(Math.random() * 3) + 0;

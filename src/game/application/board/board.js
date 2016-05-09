@@ -12,8 +12,8 @@ export default class Board extends PIXI.Stage {
     this.game = game;
     this.chips = [];
 
-    let username = window.localStorage.getItem('username');
-    this.user = (game.player1.username === username)? 'player1' : 'player2';
+    this.username = window.localStorage.getItem('username');
+    this.user = (game.player1.username === this.username)? 'player1' : 'player2';
 
     this.colors = {
       old: '0xFFCCBC',

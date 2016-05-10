@@ -163,5 +163,17 @@ export default class Board extends PIXI.Container {
     chip.position = Hex.indexToCoordinates(step.current.i, step.current.j);
   }
 
+  chipEvent(coordinates, user) {
+    let owner = (game.player1.username === user.username)? 'player1' : 'player2';
+    let chip = new Chip(coordinates.x, coordinates.y, owner);
+
+    chip.onMove = this.onMove.bind(this);
+    chip.onStep = this.onStep.bind(this);
+    chip.beforeStep = this.beforeStep.bind(this);
+
+    this.chips.push(chip);
+    this.addChild(chip);
+  }
+
   update(){}
 }

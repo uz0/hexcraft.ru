@@ -13,6 +13,10 @@ let storage = {};
 let emitter = new events.EventEmitter();
 
 
+var util = require('util');
+
+
+
 /**
  * @api {get} /games get list games
  * @apiName getGames
@@ -52,7 +56,7 @@ router.post('/', isAuthed, function(req, res) {
   models.Game.findOne({
     include: [{
       model: models.Map,
-      include: [ models.MapData ]
+      include: [models.MapData]
     }],
     where: {
       player2: null
@@ -60,6 +64,7 @@ router.post('/', isAuthed, function(req, res) {
   }).then(game => {
     if (!game) {
 
+  
 
       models.Map.findOne({
         order: [
@@ -77,13 +82,14 @@ router.post('/', isAuthed, function(req, res) {
           models.Game.findOne({
             include: [{
               model: models.Map,
-              include: [ models.MapData ]
+              include: [models.MapData]
             }],
             where: {
               id: game.id
             }
           }).then(game => {
             game.player1 = user;
+            game.currentPlayer = user.id;
             game.gameSteps = []; // store game steps
             storage[game.id] = game;
             res.send(game);
@@ -124,6 +130,7 @@ router.post('/', isAuthed, function(req, res) {
 router.get('/:id', function(req, res) {
   const gameId = req.params.id;
   let game = storage[gameId];
+
   res.send(game);
 
 });
@@ -142,6 +149,7 @@ router.post('/:id', isAuthed, function(req, res, next) {
   const gameId = req.params.id;
   const step = req.body.step;
   let game = storage[gameId];
+  step.userId = req.user.id;
 
   if (!game) {
     let error = new Error('game not found');

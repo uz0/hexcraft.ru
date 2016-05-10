@@ -5,7 +5,6 @@ module.exports = function(game, step) {
   // order check
 
   if (game.currentPlayer === step.userId) {
-    console.log('\r\n\r\n\r\n\r\n\r\nWrong order\r\n\r\n\r\n\r\n');
     return 'Wrong order';
   }
 
@@ -15,7 +14,6 @@ module.exports = function(game, step) {
   game.Map.MapData.forEach(function(hex) {
     if (step.old.i === hex.x && step.old.j === hex.y) {
       if ((hex.cellstate === 'player1' && game.player1.id !== step.userId) || (hex.cellstate === 'player2' && game.player2.id !== step.userId)) {
-        console.log('\r\n\r\n\r\n\r\n\r\n\r\nWrong chip\r\n\r\n\r\n\r\n');
         return 'Wrong chip';
       }
     }
@@ -33,11 +31,9 @@ module.exports = function(game, step) {
     }
   });
   if (occurranceStatus.OUTOFBOUNDS) {
-    console.log('\r\n\r\n\r\n\r\n\r\nOut of bounds\r\n\r\n\r\n\r\n');
     return 'Out of bounds';
   }
   if (occurranceStatus.CELLSTATE !== 'empty') {
-    console.log('\r\n\r\n\r\n\r\n\r\nCannot step on used cell\r\n\r\n\r\n\r\n');
     return 'Cannot step on used cell';
   }
 
@@ -45,7 +41,6 @@ module.exports = function(game, step) {
 
   let dist = Math.abs(step.old.i - step.current.i) + Math.abs(step.old.j - step.current.j) - 1;
   if (dist > 2) {
-    console.log('\r\n\r\n\r\n\r\n\r\nDistance too great: %d\r\n\r\n\r\n\r\n',dist);
     return 'Distance too great';
   }
 

@@ -141,6 +141,18 @@ export default class Board extends PIXI.Container {
         },
         token: token
       })
+    })
+    .then(utils.handleErrors)
+    .catch(err => {
+      console.log(err);
+      this.panel.log(err);
+
+      let hex = Hex.findByIndex(this.chips, index.i, index.j)
+
+      hex.i = oldIndex.i;
+      hex.j = oldIndex.j;
+      hex.position = Hex.indexToCoordinates(oldIndex.i, oldIndex.j);
+      hex.updateOldPosition();
     });
   }
 
@@ -161,6 +173,26 @@ export default class Board extends PIXI.Container {
     chip.i = step.current.i;
     chip.j = step.current.j;
     chip.position = Hex.indexToCoordinates(step.current.i, step.current.j);
+  }
+
+  chipEvent(coordinates, user) {
+    let owner = (this.game.player1.username === user.username)? 'player1' : 'player2';
+    let chip = new Chip(coordinates.x, coordinates.y, owner);
+
+    chip.onMove = this.onMove.bind(this);
+    chip.onStep = this.onStep.bind(this);
+    chip.beforeStep = this.beforeStep.bind(this);
+
+    this.chips.push(chip);
+    this.addChild(chip);
+  }
+
+  ownerEvent(coordinatesArray, user) {
+    let owner = (this.game.player1.username === user.username)? 'player1' : 'player2';
+
+    coordinatesArray.forEach(coordinates => {
+      Hex.findByIndex(this.chips, coordinates.x, coordinates.y).changeOwner(owner);
+    })
   }
 
   update(){}

@@ -7,7 +7,7 @@ export default class Chip extends PIXI.Sprite {
   constructor(i, j, player){
     super();
 
-    const colors = {
+    this.colors = {
       player1: '0xb71c1c',
       player2: '0x0D47A1'
     };
@@ -20,13 +20,12 @@ export default class Chip extends PIXI.Sprite {
 
     const random = Math.floor(Math.random() * 3) + 0;
     this.texture = PIXI.Texture.fromImage(textures[random]);
-    this.tint = colors[player];
 
-    this.player = player;
     this.i = i;
     this.j = j;
     this.position = Hex.indexToCoordinates(i, j);
     this.updateOldPosition();
+    this.changeOwner(player);
 
     this.on('mousedown', this.onDragStart)
         .on('touchstart', this.onDragStart)
@@ -36,6 +35,11 @@ export default class Chip extends PIXI.Sprite {
         .on('touchendoutside', this.onDragEnd)
         .on('mousemove', this.onDragMove)
         .on('touchmove', this.onDragMove);
+  }
+
+  changeOwner(player) {
+    this.tint = this.colors[player];
+    this.player = player;
   }
 
   changeMode(mode) {

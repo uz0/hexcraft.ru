@@ -18,13 +18,16 @@ export default class Lobby extends PIXI.Container {
     this.panel.log('Нажмите "В БОЙ"');
     this.panel.showExit();
     this.addChild(this.panel);
+    this.getUsers();
 
-    // user list
-    // TODO: online user list!
+    }
+
+  getUsers() {
     window.fetch('/api/users')
     .then(utils.parseJson)
     .then(users => {
       this.users = users;
+      this.getGames();
 
       let counter = 0;
       users.forEach(user => {
@@ -32,7 +35,7 @@ export default class Lobby extends PIXI.Container {
 
         let label = new PIXI.Text(user.username, {
           font : '24px Arial',
-          fill : "#333",
+          fill : '#333',
           align : 'right'
         });
 
@@ -43,10 +46,10 @@ export default class Lobby extends PIXI.Container {
         this.GUI.players.addChild(label);
       });
     });
+  }
 
-    // all games
-    // TODO: need label formater
-    window.fetch('/api/games')
+  getGames(){
+    window.fetch('/api/games/')
     .then(utils.parseJson)
     .then(games => {
       let counter = 0;
@@ -55,7 +58,7 @@ export default class Lobby extends PIXI.Container {
 
         let label = new PIXI.Text(this.labelFormater(game), {
           font : '24px Arial',
-          fill : "#333",
+          fill : '#333',
           align : 'left'
         });
 
@@ -66,17 +69,41 @@ export default class Lobby extends PIXI.Container {
         this.GUI.games.addChild(label);
       });
     });
-
   }
 
   labelFormater(game) {
-    // get username by userId (this.users)
-    // game.stage
-    // игрок1 ожидает игры, (not started)
-    // игрок1 играет с игрок2, (started)
-    // игрок1 победил игрока2 (over player1)
-    // игрок2 победил игрока1 (over player2)
-    return game.id;
+
+    let firstPlayer;
+    let secondPlayer;
+
+    this.users.forEach(user => {
+
+      if(user.id === game.player1){
+        firstPlayer = user.username;
+      }
+
+      if(user.id === game.player2){
+        secondPlayer = user.username;
+      }
+
+    });
+
+    if(game.stage === 'started'){
+      return `${firstPlayer} играет с ${secondPlayer}`;
+    }
+
+    if(game.stage === 'not started'){
+      return `${firstPlayer} ожидает игру`;
+    }
+
+    if(game.stage === 'over player1'){
+      return `${firstPlayer} победил ${secondPlayer}`;
+    }
+
+    if(game.stage === 'over player2'){
+      return `${secondPlayer} победил ${firstPlayer}`;
+    }
+
   }
 
   startGame() {

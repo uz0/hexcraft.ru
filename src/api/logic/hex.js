@@ -1,30 +1,14 @@
 'use strict';
 
 module.exports = function Hex() {
-
-
-  this.findNeighbors = function(array, i, j) {
-
-  
-
-    const directions = [
-      [
-        [+1, 0],
-        [0, -1],
-        [-1, -1],
-        [-1, 0],
-        [-1, +1],
-        [0, +1]
-      ],
-      [
-        [+1, 0],
-        [+1, -1],
-        [0, -1],
-        [-1, 0],
-        [0, +1],
-        [+1, +1]
-      ]
-    ];
+  this.findNeighbors = (array, i, j) => {
+    const directions = [[
+      [+1,  0], [ 0, -1], [-1, -1],
+      [-1,  0], [-1, +1], [ 0, +1]
+    ], [
+      [+1,  0], [+1, -1], [ 0, -1],
+      [-1,  0], [ 0, +1], [+1, +1]
+    ]];
 
     let parity = j & 1; // jshint ignore:line
 
@@ -40,10 +24,10 @@ module.exports = function Hex() {
     return neighbors;
   };
 
-  this.findNeighborsNeighbors = function(array, x, y) {
+  this.findNeighborsNeighbors = (array, i, j) => {
     let neighborsNeighbors = [];
-    Hex.findNeighbors(array, x, y).forEach(neighbor => {
-      let neighbors = Hex.findNeighbors(array, neighbor.x, neighbor.y);
+    Hex.findNeighbors(array, i, j).forEach(neighbor => {
+      let neighbors = Hex.findNeighbors(array, neighbor.i, neighbor.j);
       neighborsNeighbors = neighborsNeighbors.concat(neighbors);
     });
 

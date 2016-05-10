@@ -82,6 +82,7 @@ router.post('/', isAuthed, function(req, res) {
             game.player1 = user;
             game.currentPlayer = user.id;
             game.gameSteps = []; // store game steps
+            game.gameSteps[0] = {"userId":user.id};
             storage[game.id] = game;
             res.send(game);
           });
@@ -142,19 +143,25 @@ router.post('/:id', isAuthed, function(req, res, next) {
   step.userId = req.user.id;
 
 
+
   if (!game) {
     let error = new Error('game not found');
     error.status = 400;
     return next(error);
   }
 
+
   if (game.player1.id !== req.user.id && game.player2.id !== req.user.id) {
     let error = new Error('wrong user');
     error.status = 400;
     return next(error);
-  }
+  } 
 
-  game.lastStepUserId = game.gameSteps[last].user.id || game.player2.id;
+  let last = game.gameSteps.length - 1;
+
+   console.log("\r\n1\r\n");
+
+  game.lastStepUserId = game.gameSteps[last].userId || game.player2.id;
 
   let stepError = stepValidation(game, step);
   if (stepError) {
@@ -164,7 +171,6 @@ router.post('/:id', isAuthed, function(req, res, next) {
   }
 
   game.Map.MapData = rebuildMap(game, step);
-  game.currentPlayer = step.otherUser;
   storage[gameId] = game;
 
   emitter.emit(`game${gameId}`, {

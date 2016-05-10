@@ -19,5 +19,7 @@ module.exports = function(game, step) {
     }
   });
 
+  game.gameSteps[game.gameSteps.length] = step;
+
   return game.Map.MapData;
 };

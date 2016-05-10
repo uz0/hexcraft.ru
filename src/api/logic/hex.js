@@ -2,10 +2,20 @@
 
 module.exports = function Hex() {
 
+  this.findByIndex = (array, i, j) => {
+    let element;
+    array.forEach(hex => {
+      if(hex.i === i && hex.j === j) {
+        element = hex;
+      }
+    });
+    return element;
+  }
 
-  this.findNeighbors = function(array, i, j) {
 
-  
+  this.findNeighbors = (array, i, j) => {
+
+
 
     const directions = [
       [
@@ -40,10 +50,10 @@ module.exports = function Hex() {
     return neighbors;
   };
 
-  this.findNeighborsNeighbors = function(array, x, y) {
+  this.findNeighborsNeighbors = (array, i, j) => {
     let neighborsNeighbors = [];
-    Hex.findNeighbors(array, x, y).forEach(neighbor => {
-      let neighbors = Hex.findNeighbors(array, neighbor.x, neighbor.y);
+    Hex.findNeighbors(array, i, j).forEach(neighbor => {
+      let neighbors = Hex.findNeighbors(array, neighbor.i, neighbor.j);
       neighborsNeighbors = neighborsNeighbors.concat(neighbors);
     });
 

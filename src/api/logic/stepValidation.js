@@ -4,6 +4,8 @@ const Hex = require('./hex.js');
 
 module.exports = function(game, step) {  
 
+
+
   if (  game.lastStepUserId === step.userId) {
     return 'Wrong order';
   }
@@ -44,7 +46,7 @@ module.exports = function(game, step) {
 
   // Check radius
 
-  let neighborsNeighbors = Hex.findNeighborsNeighbors(step.old.x, step.old.y);
+  let neighborsNeighbors = Hex.findNeighborsNeighbors(game.Map.MapData, step.old.x, step.old.y);
   let cell = Hex.findByCoords(neighborsNeighbors, step.current.x, step.current.y);
   if (!cell) {
     return 'Distance too long';

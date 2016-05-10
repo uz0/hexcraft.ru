@@ -153,6 +153,12 @@ router.post('/:id', isAuthed, function(req, res, next) {
     return next(error);
   }
 
+  if (game.player1.id !== step.userId) {
+    step.otherUser = game.player1.id;
+  } else {
+    step.otherUser = game.player2.id;
+  }
+
   let stepError = stepValidation(game, step);
   if (stepError) {
     let error = new Error(stepError);
@@ -161,6 +167,7 @@ router.post('/:id', isAuthed, function(req, res, next) {
   }
 
   game.Map.MapData = rebuildMap(game, step);
+  game.currentPlayer = step.otherUser;
   storage[gameId] = game;
 
   emitter.emit(`game${gameId}`, {

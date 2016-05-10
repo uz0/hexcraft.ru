@@ -2,11 +2,9 @@
 
 const Hex = require('./logic/hex.js');
 
-module.exports = function(game, step) {
+module.exports = function(game, step) {  
 
-  // order check
-
-  if (game.currentPlayer === step.userId) {
+  if (game.currentPlayer === step.otherUser) {
     return 'Wrong order';
   }
 

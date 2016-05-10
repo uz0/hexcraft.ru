@@ -141,6 +141,18 @@ export default class Board extends PIXI.Container {
         },
         token: token
       })
+    })
+    .then(utils.handleErrors)
+    .catch(err => {
+      console.log(err);
+      this.panel.log(err);
+
+      let hex = Hex.findByIndex(this.chips, index.i, index.j)
+
+      hex.i = oldIndex.i;
+      hex.j = oldIndex.j;
+      hex.position = Hex.indexToCoordinates(oldIndex.i, oldIndex.j);
+      hex.updateOldPosition();
     });
   }
 

@@ -187,5 +187,13 @@ export default class Board extends PIXI.Container {
     this.addChild(chip);
   }
 
+  ownerEvent(coordinatesArray, user) {
+    let owner = (this.game.player1.username === user.username)? 'player1' : 'player2';
+
+    coordinatesArray.forEach(coordinates => {
+      Hex.findByIndex(this.chips, coordinates.x, coordinates.y).changeOwner(owner);
+    })
+  }
+
   update(){}
 }

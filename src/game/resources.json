@@ -1,4 +1,9 @@
 [
-  {"id": "logo", "path": "/images/logo.png"},
-  // {"id": "test1", "path": "/100meg.test"}
+  {"id": "chip1", "path": "/game/resources/chip1.svg"},
+  {"id": "chip2", "path": "/game/resources/chip2.svg"},
+  {"id": "chip3", "path": "/game/resources/chip3.svg"},
+  {"id": "circuit_hex", "path": "/game/resources/circuit_hex.svg"},
+  {"id": "hex", "path": "/game/resources/hex.svg"},
+  {"id": "click", "path": "/game/resources/Wine_Glass_Shatter.wav"},
+  {"id": "hit", "path": "/game/resources/Rock_Hits_Metal_Debris.wav"}
 ]

@@ -1,5 +1,6 @@
 'use strict';
 
+import hexcraft from '../../application.js';
 import Hex from './hex.js';
 
 export default class Chip extends PIXI.Sprite {
@@ -12,9 +13,9 @@ export default class Chip extends PIXI.Sprite {
     };
 
     const textures = [
-      '/game/resources/chip1.svg',
-      '/game/resources/chip2.svg',
-      '/game/resources/chip3.svg'
+      hexcraft.resources.chip1.blobUrl,
+      hexcraft.resources.chip2.blobUrl,
+      hexcraft.resources.chip3.blobUrl
     ];
 
     const random = Math.floor(Math.random() * 3) + 0;
@@ -50,6 +51,8 @@ export default class Chip extends PIXI.Sprite {
   }
 
   onDragStart(event) {
+    new Audio(hexcraft.resources.hit.blobUrl).play();
+
     this.data = event.data;
     this.updateOldPosition();
   }
@@ -68,6 +71,8 @@ export default class Chip extends PIXI.Sprite {
 
   onDragEnd() {
     this.data = null;
+
+    new Audio(hexcraft.resources.click.blobUrl).play();
 
     if(this.beforeStep && this.beforeStep(this.position, this.oldPosition)) {
       this.position.x = this.oldPosition.x;

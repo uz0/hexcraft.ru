@@ -1,5 +1,6 @@
 'use strict';
 
+import hexcraft from '../../application.js';
 import Hex from './hex.js';
 
 export default class Field extends PIXI.Container {
@@ -7,7 +8,7 @@ export default class Field extends PIXI.Container {
     super();
 
     this.forEach((i, j) => {
-      let hex = PIXI.Sprite.fromImage('/game/resources/circuit_hex.svg');
+      let hex = PIXI.Sprite.fromImage(hexcraft.resources.circuit_hex.blobUrl);
       hex.i = i;
       hex.j = j;
       hex.alpha = 0.2;

@@ -176,7 +176,7 @@ export default class Board extends PIXI.Container {
   }
 
   chipEvent(coordinates, user) {
-    let owner = (game.player1.username === user.username)? 'player1' : 'player2';
+    let owner = (this.game.player1.username === user.username)? 'player1' : 'player2';
     let chip = new Chip(coordinates.x, coordinates.y, owner);
 
     chip.onMove = this.onMove.bind(this);

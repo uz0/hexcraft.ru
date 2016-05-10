@@ -6,7 +6,7 @@ import Hex from './hex.js';
 export default class Field extends PIXI.Container {
   constructor() {
     super();
-
+    
     this.forEach((i, j) => {
       let hex = PIXI.Sprite.fromImage(hexcraft.resources.circuit_hex.blobUrl);
       hex.i = i;

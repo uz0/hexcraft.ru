@@ -1,5 +1,7 @@
 'use strict';
 
+const Hex = require('./logic/hex.js');
+
 module.exports = function(game, step) {
 
   // order check
@@ -10,14 +12,19 @@ module.exports = function(game, step) {
 
   // chiip owner check
 
+  let wrongchip = false;
 
   game.Map.MapData.forEach(function(hex) {
     if (step.old.i === hex.x && step.old.j === hex.y) {
       if ((hex.cellstate === 'player1' && game.player1.id !== step.userId) || (hex.cellstate === 'player2' && game.player2.id !== step.userId)) {
-        return 'Wrong chip';
+        wrongchip = true;
       }
     }
   });
+
+  if (wrongchip) {
+    return 'Wrong chip';
+  }
 
   // map and position check
   let occurranceStatus = {
@@ -39,11 +46,11 @@ module.exports = function(game, step) {
 
   // Check radius
 
-  let dist = Math.abs(step.old.i - step.current.i) + Math.abs(step.old.j - step.current.j) - 1;
-  if (dist > 2) {
-    return 'Distance too great';
+  let neighborsNeighbors = Hex.findNeighborsNeighbors(step.old.x, step.old.y);
+  let cell = Hex.findByCoords(neighborsNeighbors, step.current.x, step.current.y);
+  if (!cell) {
+    return 'Distance too long';
   }
-
 
   // TODO
   // correct step order (player1, player2, player1 ...)

@@ -13,10 +13,6 @@ let storage = {};
 let emitter = new events.EventEmitter();
 
 
-var util = require('util');
-
-
-
 /**
  * @api {get} /games get list games
  * @apiName getGames
@@ -63,21 +59,16 @@ router.post('/', isAuthed, function(req, res) {
     }
   }).then(game => {
     if (!game) {
-
-  
-
       models.Map.findOne({
         order: [
           models.Sequelize.fn('RANDOM')
         ]
       }).then(result => {
-
         models.Game.create({
           MapId: result.id,
           player1: user.id,
           stage: 'not started'
         }).then(game => {
-
           // WORKAROUND: include MapData not working in create options
           models.Game.findOne({
             include: [{
@@ -96,7 +87,6 @@ router.post('/', isAuthed, function(req, res) {
           });
         });
       });
-
       return;
     }
 

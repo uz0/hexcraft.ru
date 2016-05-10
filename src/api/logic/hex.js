@@ -3,12 +3,9 @@
 module.exports = function Hex() {
 
 
-  this.findNeighbors = function(array, x, y) {
+  this.findNeighbors = function(array, i, j) {
 
-    let index = {
-      i: x,
-      j: y
-    };
+  
 
     const directions = [
       [
@@ -29,11 +26,11 @@ module.exports = function Hex() {
       ]
     ];
 
-    let parity = index.j & 1; // jshint ignore:line
+    let parity = j & 1; // jshint ignore:line
 
     let neighbors = [];
     directions[parity].forEach(coordinates => {
-      let field = Hex.findByIndex(array, index.i + coordinates[0], index.j + coordinates[1]);
+      let field = Hex.findByIndex(array, i + coordinates[0], j + coordinates[1]);
 
       if (field) {
         neighbors.push(field);

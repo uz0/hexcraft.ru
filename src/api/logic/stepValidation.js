@@ -4,7 +4,7 @@ const Hex = require('./hex.js');
 
 module.exports = function(game, step) {  
 
-  if (game.currentPlayer === step.otherUser) {
+  if (  game.lastStepUserId === step.userId) {
     return 'Wrong order';
   }
 

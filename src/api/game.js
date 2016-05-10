@@ -141,6 +141,7 @@ router.post('/:id', isAuthed, function(req, res, next) {
   let game = storage[gameId];
   step.userId = req.user.id;
 
+
   if (!game) {
     let error = new Error('game not found');
     error.status = 400;
@@ -153,11 +154,7 @@ router.post('/:id', isAuthed, function(req, res, next) {
     return next(error);
   }
 
-  if (game.player1.id !== step.userId) {
-    step.otherUser = game.player1.id;
-  } else {
-    step.otherUser = game.player2.id;
-  }
+  game.lastStepUserId = game.gameSteps[last].user.id || game.player2.id;
 
   let stepError = stepValidation(game, step);
   if (stepError) {

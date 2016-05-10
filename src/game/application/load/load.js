@@ -9,6 +9,10 @@ class Loader extends PIXI.loaders.Loader {
   constructor() {
     super();
 
+    let Resource = PIXI.loaders.Resource;
+    Resource.setExtensionLoadType("wav", Resource.LOAD_TYPE.XHR);
+    Resource.setExtensionXhrType("wav", Resource.XHR_RESPONSE_TYPE.BUFFER);
+
     resources.forEach((element) => {
       this.add(element.id, element.path);
     });
@@ -48,6 +52,10 @@ export default class Load extends PIXI.Container {
   onProgress (loader, resource) {
     if(resource.isXml) {
       resource.blobUrl = this.generateBlobUrl(resource.xhr.responseText, 'image/svg+xml;charset=utf-8');
+    }
+
+    if(resource.xhrType == 'arraybuffer') {
+      resource.blobUrl = this.generateBlobUrl(new DataView(resource.data), 'audio/wav');
     }
 
     this.logo.alpha = loader.progress / 100;

@@ -51,6 +51,8 @@ export default class Chip extends PIXI.Sprite {
   }
 
   onDragStart(event) {
+    new Audio(hexcraft.resources.hit.blobUrl).play();
+
     this.data = event.data;
     this.updateOldPosition();
   }
@@ -69,6 +71,8 @@ export default class Chip extends PIXI.Sprite {
 
   onDragEnd() {
     this.data = null;
+
+    new Audio(hexcraft.resources.click.blobUrl).play();
 
     if(this.beforeStep && this.beforeStep(this.position, this.oldPosition)) {
       this.position.x = this.oldPosition.x;

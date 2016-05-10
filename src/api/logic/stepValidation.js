@@ -1,6 +1,6 @@
 'use strict';
 
-const Hex = require('./logic/hex.js');
+const Hex = require('./hex.js');
 
 module.exports = function(game, step) {  
 

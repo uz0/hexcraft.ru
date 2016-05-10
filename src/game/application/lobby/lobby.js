@@ -89,19 +89,19 @@ export default class Lobby extends PIXI.Container {
     });
 
     if(game.stage === 'started'){
-      return '${firstPlayer}' играет с '${secondPlayer}';
+      return `${firstPlayer} играет с ${secondPlayer}`;
     }
 
     if(game.stage === 'not started'){
-      return '${firstPlayer} ожидает игру';
+      return `${firstPlayer} ожидает игру`;
     }
 
     if(game.stage === 'over player1'){
-      return '${firstPlayer}' победил '${secondPlayer}';
+      return `${firstPlayer} победил ${secondPlayer}`;
     }
 
     if(game.stage === 'over player2'){
-      return '${secondPlayer}' победил ' ${firstPlayer}';
+      return `${secondPlayer} победил ${firstPlayer}`;
     }
 
   }

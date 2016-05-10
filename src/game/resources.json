@@ -5,5 +5,6 @@
   {"id": "circuit_hex", "path": "/game/resources/circuit_hex.svg"},
   {"id": "hex", "path": "/game/resources/hex.svg"},
   {"id": "click", "path": "/game/resources/Wine_Glass_Shatter.wav"},
-  {"id": "hit", "path": "/game/resources/Rock_Hits_Metal_Debris.wav"}
+  {"id": "hit", "path": "/game/resources/Rock_Hits_Metal_Debris.wav"},
+  {"id": "murlock", "path": "/game/resources/murlock_sample.wav"}
 ]

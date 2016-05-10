@@ -47,6 +47,7 @@ export default class Load extends PIXI.Container {
     console.log(resources);
     hexcraft.resources = resources;
     hexcraft.setStage(Auth);
+    new Audio(hexcraft.resources.murlock.blobUrl).play();
   }
 
   onProgress (loader, resource) {

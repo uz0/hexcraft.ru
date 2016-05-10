@@ -1,5 +1,6 @@
 'use strict';
 
+import hexcraft from '../../application.js';
 import Hex from './hex.js';
 
 export default class Chip extends PIXI.Sprite {
@@ -12,9 +13,9 @@ export default class Chip extends PIXI.Sprite {
     };
 
     const textures = [
-      '/game/resources/chip1.svg',
-      '/game/resources/chip2.svg',
-      '/game/resources/chip3.svg'
+      hexcraft.resources.chip1.blobUrl,
+      hexcraft.resources.chip2.blobUrl,
+      hexcraft.resources.chip3.blobUrl
     ];
 
     const random = Math.floor(Math.random() * 3) + 0;

@@ -40,12 +40,26 @@ export default class Load extends PIXI.Container {
   }
 
   loaded (loader, resources) {
+    console.log(resources);
     hexcraft.resources = resources;
     hexcraft.setStage(Auth);
   }
 
-  onProgress (loader) {
+  onProgress (loader, resource) {
+    if(resource.isXml) {
+      resource.blobUrl = this.generateBlobUrl(resource.xhr.responseText, 'image/svg+xml;charset=utf-8');
+    }
+
     this.logo.alpha = loader.progress / 100;
+  }
+
+  generateBlobUrl(text, type) {
+      let DOMURL = self.URL || self.webkitURL || self;
+      let svg = new Blob([text], {
+        type: type
+      });
+
+      return DOMURL.createObjectURL(svg);
   }
 
   update(){}

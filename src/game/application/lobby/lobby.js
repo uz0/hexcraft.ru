@@ -15,7 +15,7 @@ export default class Lobby extends PIXI.Container {
     this.addChild(this.GUI);
 
     this.panel = new Panel();
-    this.panel.log('Ждем игры');
+    this.panel.log('Нажмите "В БОЙ"');
     this.panel.showExit();
     this.addChild(this.panel);
 
@@ -70,7 +70,6 @@ export default class Lobby extends PIXI.Container {
   }
 
   labelFormater(game) {
-    console.log(game);
     // get username by userId (this.users)
     // game.stage
     // игрок1 ожидает игры, (not started)

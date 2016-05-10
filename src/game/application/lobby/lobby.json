@@ -17,8 +17,7 @@
   },
   style: {
     fill: "#333"
-  },
-  configuration: ""
+  }
 }, {
   component: "Container",
   id: "players",
@@ -26,7 +25,6 @@
     x: 500,
     y: 100
   },
-  configuration: null,
   width: 300
 }, {
   component: "Text",
@@ -38,11 +36,11 @@
   },
   style: {
     fill: "#333"
-  },
-  configuration: ""
+  }
 }, {
   component: "Sprite",
   id: "sprite",
+  textureName: "hex",
   position: {
     x: 400,
     y: 300
@@ -54,8 +52,7 @@
   anchor: {
     x: 0.5,
     y: 0.5
-  },
-  configuration: "/game/resources/hex.svg"
+  }
 }, {
   id: "play",
   value: "В БОЙ",

@@ -12,8 +12,7 @@
   anchor: {
     x: 0,
     y: 0
-  },
-  configuration: ""
+  }
 }, {
   id: "status",
   text: "",
@@ -24,8 +23,7 @@
   position: {
     x: 0,
     y: 20
-  },
-  configuration: ""
+  }
 },{
   id: "surrender",
   component: "Button",

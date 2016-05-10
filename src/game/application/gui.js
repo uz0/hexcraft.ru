@@ -1,5 +1,7 @@
 'use strict';
 
+import hexcraft from '../application.js';
+
 export default class GUI extends PIXI.Container {
   constructor(options) {
     super();
@@ -13,7 +15,11 @@ export default class GUI extends PIXI.Container {
     }
 
     options.forEach(options => {
-      let element = new constructors[options.component](options.configuration);
+      if(options.component === 'Sprite') {
+        options.configuration = hexcraft.resources[options.textureName].blobUrl;
+      }
+
+      let element = new constructors[options.component](options.configuration || "");
       this.extend(element, options);
 
       this[options.id] = element;

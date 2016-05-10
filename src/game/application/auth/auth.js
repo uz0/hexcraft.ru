@@ -2,7 +2,7 @@
 
 import options from './auth.json';
 import hexcraft from '../../application.js';
-import utils from '../utils.js';
+import http from '../http.js';
 import GUI from '../gui.js';
 import Lobby from '../lobby/lobby.js';
 
@@ -31,26 +31,15 @@ export default class Auth extends PIXI.Container {
       return;
     }
 
-    window.fetch('/api/auth/login', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        username: username,
-        password: password
-      })
-    })
-    .then(utils.handleErrors)
-    .then(utils.parseJson)
-    .then(response => {
+    http.post('/api/auth/login', {
+      username: username,
+      password: password
+    }).then(response => {
       window.localStorage.setItem('username', response.user.username);
       window.localStorage.setItem('token', response.token.token);
       hexcraft.setStage(Lobby);
     }).catch(err => {
-      console.error(err);
-      this.showError('Неправильная пара логин/пароль');
+      this.showError('Неправильная пара логин/пароль')
     });
   }
 
@@ -59,19 +48,13 @@ export default class Auth extends PIXI.Container {
       return;
     }
 
-    window.fetch('/api/auth/verify', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
+    http.post('/api/auth/verify', {
         token: token
-      })
-    })
-    .then(utils.handleErrors)
-    .then(() => hexcraft.setStage(Lobby))
-    .catch(() => this.showError('Ваша авторизация устарела. Войдите снова'));
+    }).then(() => {
+      hexcraft.setStage(Lobby)
+    }).catch(() => {
+      this.showError('Ваша авторизация устарела. Войдите снова')
+    });
   }
 
   update() {}

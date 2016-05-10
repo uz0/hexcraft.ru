@@ -12,19 +12,19 @@ export default class GUI extends PIXI.Container {
       Text: PIXI.Text,
       Button: PIXI.Button,
       Container: PIXI.Container
-    }
+    };
 
     options.forEach(options => {
       if(options.component === 'Sprite') {
         options.configuration = hexcraft.resources[options.textureName].blobUrl;
       }
 
-      let element = new constructors[options.component](options.configuration || "");
+      let element = new constructors[options.component](options.configuration || '');
       this.extend(element, options);
 
       this[options.id] = element;
       this.addChild(element);
-    })
+    });
   }
 
   extend(original, options){

@@ -1,6 +1,7 @@
 'use strict';
 
 import options from './panel.json';
+import http from '../http.js';
 import GUI from '../gui.js';
 
 export default class Panel extends PIXI.Container {
@@ -18,16 +19,12 @@ export default class Panel extends PIXI.Container {
 
     window.localStorage.removeItem('user');
     window.localStorage.removeItem('token');
-    window.fetch('/api/auth/logout', {
-      method: 'POST',
-      body: JSON.stringify({
-        token: token
-      })
+    http.post('/api/auth/logout', {
+      token: token
     });
 
     document.location.href = '/';
   }
-
 
   showExit() {
     this.GUI.logout.visible = true;

@@ -1,7 +1,7 @@
 'use strict';
 
 import Panel from '../panel/panel.js';
-import utils from '../utils.js';
+import http from '../http.js';
 import Chip from './chip.js';
 import Hex from './hex.js';
 import Field from './field.js';
@@ -73,7 +73,7 @@ export default class Board extends PIXI.Container {
     // clear field
     this.field.forEach((i, j, hex)=> {
       hex.tint = this.colors.clear;
-    })
+    });
 
     // find neighbors neighbors and set color
     this.field.findNeighborsNeighbors(old.x, old.y).forEach(hex => {
@@ -97,7 +97,7 @@ export default class Board extends PIXI.Container {
     // clear field
     this.field.forEach((i, j, hex) => {
       hex.tint = this.colors.clear;
-    })
+    });
 
     // Prevent step out field
     let field = this.field.findByCoords(current.x, current.y);
@@ -128,26 +128,15 @@ export default class Board extends PIXI.Container {
     let index = Hex.coordinatesToIndex(current.x, current.y);
     let oldIndex = Hex.coordinatesToIndex(old.x, old.y);
 
-    window.fetch(`/api/games/${this.game.id}`, {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+    http.post(`/api/games/${this.game.id}`, {
+      step: {
+        current: index,
+        old: oldIndex
       },
-      body: JSON.stringify({
-        step: {
-          current: index,
-          old: oldIndex
-        },
-        token: token
-      })
-    })
-    .then(utils.handleErrors)
-    .catch(err => {
-      console.log(err);
-      this.panel.log(err);
-
-      let hex = Hex.findByIndex(this.chips, index.i, index.j)
+      token: token
+    }).catch(err => {
+      // rollback chip, after failure request
+      let hex = Hex.findByIndex(this.chips, index.i, index.j);
 
       hex.i = oldIndex.i;
       hex.j = oldIndex.j;
@@ -192,7 +181,7 @@ export default class Board extends PIXI.Container {
 
     coordinatesArray.forEach(coordinates => {
       Hex.findByIndex(this.chips, coordinates.x, coordinates.y).changeOwner(owner);
-    })
+    });
   }
 
   update(){}

@@ -5,7 +5,7 @@ export default class Hex {
     return {
       x: (j % 2 === 0) ? i*40 : i*40 + 20,
       y: j*40 + 80
-    }
+    };
   }
 
   static coordinatesToIndex(x, y) {
@@ -19,7 +19,7 @@ export default class Hex {
     return {
       i: i,
       j: j
-    }
+    };
   }
 
   static findByIndex(array, i, j) {
@@ -57,7 +57,7 @@ export default class Hex {
       if(field) {
         neighbors.push(field);
       }
-    })
+    });
 
     return neighbors;
   }
@@ -67,7 +67,7 @@ export default class Hex {
     Hex.findNeighbors(array, x, y).forEach(neighbor => {
       let neighbors = Hex.findNeighbors(array, neighbor.x, neighbor.y);
       neighborsNeighbors = neighborsNeighbors.concat(neighbors);
-    })
+    });
 
     return neighborsNeighbors;
   }

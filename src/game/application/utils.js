@@ -7,9 +7,9 @@ export default class utils {
     }
 
     return response;
-  };
+  }
 
   static parseJson(response) {
     return response.json();
-  };
+  }
 }

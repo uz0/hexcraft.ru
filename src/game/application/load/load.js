@@ -10,8 +10,8 @@ class Loader extends PIXI.loaders.Loader {
     super();
 
     let Resource = PIXI.loaders.Resource;
-    Resource.setExtensionLoadType("wav", Resource.LOAD_TYPE.XHR);
-    Resource.setExtensionXhrType("wav", Resource.XHR_RESPONSE_TYPE.BUFFER);
+    Resource.setExtensionLoadType('wav', Resource.LOAD_TYPE.XHR);
+    Resource.setExtensionXhrType('wav', Resource.XHR_RESPONSE_TYPE.BUFFER);
 
     resources.forEach((element) => {
       this.add(element.id, element.path);
@@ -44,10 +44,8 @@ export default class Load extends PIXI.Container {
   }
 
   loaded (loader, resources) {
-    console.log(resources);
     hexcraft.resources = resources;
     hexcraft.setStage(Auth);
-    new Audio(hexcraft.resources.murlock.blobUrl).play();
   }
 
   onProgress (loader, resource) {
@@ -55,16 +53,16 @@ export default class Load extends PIXI.Container {
       resource.blobUrl = this.generateBlobUrl(resource.xhr.responseText, 'image/svg+xml;charset=utf-8');
     }
 
-    if(resource.xhrType == 'arraybuffer') {
-      resource.blobUrl = this.generateBlobUrl(new DataView(resource.data), 'audio/wav');
+    if(resource.xhrType === 'arraybuffer') {
+      resource.blobUrl = this.generateBlobUrl(new window.DataView(resource.data), 'audio/wav');
     }
 
     this.logo.alpha = loader.progress / 100;
   }
 
   generateBlobUrl(text, type) {
-      let DOMURL = self.URL || self.webkitURL || self;
-      let svg = new Blob([text], {
+      let DOMURL = window.self.URL || window.self.webkitURL || window.self;
+      let svg = new window.Blob([text], {
         type: type
       });
 

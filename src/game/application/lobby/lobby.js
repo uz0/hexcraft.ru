@@ -1,7 +1,7 @@
 'use strict';
 
 import hexcraft from '../../application.js';
-import utils from '../utils.js';
+import http from '../http.js';
 import GUI from '../gui.js';
 import Board from '../board/board.js';
 import Panel from '../panel/panel.js';
@@ -19,13 +19,10 @@ export default class Lobby extends PIXI.Container {
     this.panel.showExit();
     this.addChild(this.panel);
     this.getUsers();
-
-    }
+  }
 
   getUsers() {
-    window.fetch('/api/users')
-    .then(utils.parseJson)
-    .then(users => {
+    http.get('/api/users').then(users => {
       this.users = users;
       this.getGames();
 
@@ -49,9 +46,7 @@ export default class Lobby extends PIXI.Container {
   }
 
   getGames(){
-    window.fetch('/api/games/')
-    .then(utils.parseJson)
-    .then(games => {
+    http.get('/api/games/').then(games => {
       let counter = 0;
       games.forEach(game => {
         counter++;
@@ -72,12 +67,10 @@ export default class Lobby extends PIXI.Container {
   }
 
   labelFormater(game) {
-
     let firstPlayer;
     let secondPlayer;
 
     this.users.forEach(user => {
-
       if(user.id === game.player1){
         firstPlayer = user.username;
       }
@@ -85,7 +78,6 @@ export default class Lobby extends PIXI.Container {
       if(user.id === game.player2){
         secondPlayer = user.username;
       }
-
     });
 
     if(game.stage === 'started'){
@@ -107,18 +99,12 @@ export default class Lobby extends PIXI.Container {
   }
 
   startGame() {
+    new window.Audio(hexcraft.resources.murlock.blobUrl).play();
     let token = window.localStorage.getItem('token');
 
-    window.fetch('/api/games', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
+    http.post('/api/games', {
         token: token
-      })
-    }).then(utils.parseJson).then(game => {
+    }).then(game => {
       if(game.stage === 'not started') {
         this.game = game;
         this.loop = new window.EventSource(`/api/games/${game.id}/loop`);

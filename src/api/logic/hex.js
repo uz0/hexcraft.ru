@@ -1,7 +1,6 @@
 'use strict';
 
 module.exports = function Hex() {
-
   this.findByIndex = (array, i, j) => {
     let element;
     array.forEach(hex => {
@@ -12,10 +11,7 @@ module.exports = function Hex() {
     return element;
   };
 
-
   this.findNeighbors = (array, i, j) => {
-
-
     const directions = [[
       [+1,  0], [ 0, -1], [-1, -1],
       [-1,  0], [-1, +1], [ 0, +1]

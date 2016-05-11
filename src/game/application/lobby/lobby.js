@@ -19,13 +19,11 @@ export default class Lobby extends PIXI.Container {
     this.panel.showExit();
     this.addChild(this.panel);
     this.getUsers();
+    this.getGames();
   }
 
   getUsers() {
     http.get('/api/users').then(users => {
-      this.users = users;
-      this.getGames();
-
       let counter = 0;
       users.forEach(user => {
         counter++;
@@ -67,18 +65,8 @@ export default class Lobby extends PIXI.Container {
   }
 
   labelFormater(game) {
-    let firstPlayer;
-    let secondPlayer;
-
-    this.users.forEach(user => {
-      if(user.id === game.player1){
-        firstPlayer = user.username;
-      }
-
-      if(user.id === game.player2){
-        secondPlayer = user.username;
-      }
-    });
+    let firstPlayer = game.player1.username;
+    let secondPlayer = game.player2.username;
 
     if(game.stage === 'started'){
       return `${firstPlayer} играет с ${secondPlayer}`;

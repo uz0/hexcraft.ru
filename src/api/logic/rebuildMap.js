@@ -1,25 +1,39 @@
 'use strict';
 
-module.exports = function(game, step) {
+module.exports = function(game, step, emit) {
 
-  // TODO
+  let owner = (game.player1.id === step.userId)? 'player1': 'player2';
+
   // rebuild mapData using step (without checks)
-
-  game.Map.MapData.forEach(function(hex, index, data) {
+  game.Map.MapData.forEach(hex => {
     if (step.current.i === hex.x && step.current.j === hex.y) {
-      if (game.player1.id === step.userId) {
-        data[index].cellstate = 'player1';
-      }
-      if (game.player2.id === step.userId) {
-        data[index].cellstate = 'player2';
-      }
+      hex.cellstate = owner;
     }
+
     if (step.old.i === hex.x && step.old.j === hex.y) {
-      data[index].cellstate = 'empty';
+      hex.cellstate = 'empty';
     }
   });
 
-  game.gameSteps[game.gameSteps.length] = step;
+  // change owners (find current neighbors)
+  // emit({
+  //   name: 'owner',
+  //   data: [{
+  //     x: 1,
+  //     y: 1
+  //   }, {
+  //
+  // }]
+  // });
+
+  // check if in radius (from old) and create new chip
+  // emit({
+  //   name: 'chip',
+  //   data: {
+  //     x: step.old.i,
+  //     y: step.old.j
+  //   }
+  // });
 
   return game.Map.MapData;
 };

@@ -2,8 +2,8 @@
 
 module.exports = function(sequelize, DataTypes) {
   let MapData = sequelize.define('MapData', {
-    x: DataTypes.INTEGER,
-    y: DataTypes.INTEGER,
+    i: DataTypes.INTEGER,
+    j: DataTypes.INTEGER,
     cellstate: DataTypes.ENUM('empty', 'player1', 'player2')
   });
 

@@ -5,1268 +5,1268 @@
         updatedAt: new Date()
       }]).then(id => {q.bulkInsert('MapData',[{
         MapId: id,
-        x: 1,
-        y: 0,
+        i: 1,
+        j: 0,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 1,
-        y: 1,
+        i: 1,
+        j: 1,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 2,
-        y: 2,
+        i: 2,
+        j: 2,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 3,
-        y: 2,
+        i: 3,
+        j: 2,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 2,
-        y: 1,
+        i: 2,
+        j: 1,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 2,
-        y: 0,
+        i: 2,
+        j: 0,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 18,
-        y: 0,
+        i: 18,
+        j: 0,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 17,
-        y: 0,
+        i: 17,
+        j: 0,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 17,
-        y: 1,
+        i: 17,
+        j: 1,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 16,
-        y: 1,
+        i: 16,
+        j: 1,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 16,
-        y: 2,
+        i: 16,
+        j: 2,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 17,
-        y: 2,
+        i: 17,
+        j: 2,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 2,
-        y: 3,
+        i: 2,
+        j: 3,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 3,
-        y: 3,
+        i: 3,
+        j: 3,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 3,
-        y: 4,
+        i: 3,
+        j: 4,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 4,
-        y: 4,
+        i: 4,
+        j: 4,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 4,
-        y: 5,
+        i: 4,
+        j: 5,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 3,
-        y: 5,
+        i: 3,
+        j: 5,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 4,
-        y: 6,
+        i: 4,
+        j: 6,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 5,
-        y: 6,
+        i: 5,
+        j: 6,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 4,
-        y: 7,
+        i: 4,
+        j: 7,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 5,
-        y: 7,
+        i: 5,
+        j: 7,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 5,
-        y: 8,
+        i: 5,
+        j: 8,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 6,
-        y: 8,
+        i: 6,
+        j: 8,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 7,
-        y: 8,
+        i: 7,
+        j: 8,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 5,
-        y: 9,
+        i: 5,
+        j: 9,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 6,
-        y: 9,
+        i: 6,
+        j: 9,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 7,
-        y: 9,
+        i: 7,
+        j: 9,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 6,
-        y: 7,
+        i: 6,
+        j: 7,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 6,
-        y: 6,
+        i: 6,
+        j: 6,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 5,
-        y: 5,
+        i: 5,
+        j: 5,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 5,
-        y: 4,
+        i: 5,
+        j: 4,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 4,
-        y: 3,
+        i: 4,
+        j: 3,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 4,
-        y: 2,
+        i: 4,
+        j: 2,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 3,
-        y: 1,
+        i: 3,
+        j: 1,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 3,
-        y: 0,
+        i: 3,
+        j: 0,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 16,
-        y: 0,
+        i: 16,
+        j: 0,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 15,
-        y: 1,
+        i: 15,
+        j: 1,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 15,
-        y: 2,
+        i: 15,
+        j: 2,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 14,
-        y: 3,
+        i: 14,
+        j: 3,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 14,
-        y: 4,
+        i: 14,
+        j: 4,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 13,
-        y: 5,
+        i: 13,
+        j: 5,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 13,
-        y: 6,
+        i: 13,
+        j: 6,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 12,
-        y: 7,
+        i: 12,
+        j: 7,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 12,
-        y: 8,
+        i: 12,
+        j: 8,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 11,
-        y: 9,
+        i: 11,
+        j: 9,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 11,
-        y: 10,
+        i: 11,
+        j: 10,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 8,
-        y: 10,
+        i: 8,
+        j: 10,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 8,
-        y: 11,
+        i: 8,
+        j: 11,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 9,
-        y: 11,
+        i: 9,
+        j: 11,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 10,
-        y: 11,
+        i: 10,
+        j: 11,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 16,
-        y: 3,
+        i: 16,
+        j: 3,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 16,
-        y: 4,
+        i: 16,
+        j: 4,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 15,
-        y: 5,
+        i: 15,
+        j: 5,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 15,
-        y: 6,
+        i: 15,
+        j: 6,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 14,
-        y: 7,
+        i: 14,
+        j: 7,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 14,
-        y: 8,
+        i: 14,
+        j: 8,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 13,
-        y: 9,
+        i: 13,
+        j: 9,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 13,
-        y: 10,
+        i: 13,
+        j: 10,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 12,
-        y: 11,
+        i: 12,
+        j: 11,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 12,
-        y: 12,
+        i: 12,
+        j: 12,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 11,
-        y: 12,
+        i: 11,
+        j: 12,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 11,
-        y: 11,
+        i: 11,
+        j: 11,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 12,
-        y: 10,
+        i: 12,
+        j: 10,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 12,
-        y: 9,
+        i: 12,
+        j: 9,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 13,
-        y: 8,
+        i: 13,
+        j: 8,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 13,
-        y: 7,
+        i: 13,
+        j: 7,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 14,
-        y: 6,
+        i: 14,
+        j: 6,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 14,
-        y: 5,
+        i: 14,
+        j: 5,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 15,
-        y: 4,
+        i: 15,
+        j: 4,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 15,
-        y: 3,
+        i: 15,
+        j: 3,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 6,
-        y: 10,
+        i: 6,
+        j: 10,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 6,
-        y: 11,
+        i: 6,
+        j: 11,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 7,
-        y: 12,
+        i: 7,
+        j: 12,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 8,
-        y: 12,
+        i: 8,
+        j: 12,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 9,
-        y: 12,
+        i: 9,
+        j: 12,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 10,
-        y: 12,
+        i: 10,
+        j: 12,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 7,
-        y: 11,
+        i: 7,
+        j: 11,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 7,
-        y: 10,
+        i: 7,
+        j: 10,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 9,
-        y: 7,
+        i: 9,
+        j: 7,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 10,
-        y: 6,
+        i: 10,
+        j: 6,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 10,
-        y: 5,
+        i: 10,
+        j: 5,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 9,
-        y: 5,
+        i: 9,
+        j: 5,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 8,
-        y: 5,
+        i: 8,
+        j: 5,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 8,
-        y: 4,
+        i: 8,
+        j: 4,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 7,
-        y: 3,
+        i: 7,
+        j: 3,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 7,
-        y: 2,
+        i: 7,
+        j: 2,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 6,
-        y: 1,
+        i: 6,
+        j: 1,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 6,
-        y: 0,
+        i: 6,
+        j: 0,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 7,
-        y: 0,
+        i: 7,
+        j: 0,
         cellstate: 'player1',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 7,
-        y: 1,
+        i: 7,
+        j: 1,
         cellstate: 'player1',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 8,
-        y: 2,
+        i: 8,
+        j: 2,
         cellstate: 'player1',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 8,
-        y: 3,
+        i: 8,
+        j: 3,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 9,
-        y: 4,
+        i: 9,
+        j: 4,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 10,
-        y: 4,
+        i: 10,
+        j: 4,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 11,
-        y: 4,
+        i: 11,
+        j: 4,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 11,
-        y: 3,
+        i: 11,
+        j: 3,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 12,
-        y: 2,
+        i: 12,
+        j: 2,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 12,
-        y: 1,
+        i: 12,
+        j: 1,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 13,
-        y: 0,
+        i: 13,
+        j: 0,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 12,
-        y: 0,
+        i: 12,
+        j: 0,
         cellstate: 'player2',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 11,
-        y: 1,
+        i: 11,
+        j: 1,
         cellstate: 'player2',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 11,
-        y: 2,
+        i: 11,
+        j: 2,
         cellstate: 'player2',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 10,
-        y: 3,
+        i: 10,
+        j: 3,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 9,
-        y: 3,
+        i: 9,
+        j: 3,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 10,
-        y: 2,
+        i: 10,
+        j: 2,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 9,
-        y: 2,
+        i: 9,
+        j: 2,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 8,
-        y: 1,
+        i: 8,
+        j: 1,
         cellstate: 'player1',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 10,
-        y: 1,
+        i: 10,
+        j: 1,
         cellstate: 'player2',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 9,
-        y: 1,
+        i: 9,
+        j: 1,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 8,
-        y: 0,
+        i: 8,
+        j: 0,
         cellstate: 'player1',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 9,
-        y: 0,
+        i: 9,
+        j: 0,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 10,
-        y: 0,
+        i: 10,
+        j: 0,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 11,
-        y: 0,
+        i: 11,
+        j: 0,
         cellstate: 'player2',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 19,
-        y: 4,
+        i: 19,
+        j: 4,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 18,
-        y: 5,
+        i: 18,
+        j: 5,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 18,
-        y: 6,
+        i: 18,
+        j: 6,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 17,
-        y: 7,
+        i: 17,
+        j: 7,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 17,
-        y: 8,
+        i: 17,
+        j: 8,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 16,
-        y: 9,
+        i: 16,
+        j: 9,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 16,
-        y: 10,
+        i: 16,
+        j: 10,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 15,
-        y: 11,
+        i: 15,
+        j: 11,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 15,
-        y: 12,
+        i: 15,
+        j: 12,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 16,
-        y: 12,
+        i: 16,
+        j: 12,
         cellstate: 'player2',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 17,
-        y: 12,
+        i: 17,
+        j: 12,
         cellstate: 'player2',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 19,
-        y: 12,
+        i: 19,
+        j: 12,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 18,
-        y: 12,
+        i: 18,
+        j: 12,
         cellstate: 'player2',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 18,
-        y: 11,
+        i: 18,
+        j: 11,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 17,
-        y: 11,
+        i: 17,
+        j: 11,
         cellstate: 'player2',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 16,
-        y: 11,
+        i: 16,
+        j: 11,
         cellstate: 'player2',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 17,
-        y: 10,
+        i: 17,
+        j: 10,
         cellstate: 'player2',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 18,
-        y: 10,
+        i: 18,
+        j: 10,
         cellstate: 'player2',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 19,
-        y: 10,
+        i: 19,
+        j: 10,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 18,
-        y: 9,
+        i: 18,
+        j: 9,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 17,
-        y: 9,
+        i: 17,
+        j: 9,
         cellstate: 'player2',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 19,
-        y: 8,
+        i: 19,
+        j: 8,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 18,
-        y: 8,
+        i: 18,
+        j: 8,
         cellstate: 'player2',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 18,
-        y: 7,
+        i: 18,
+        j: 7,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 19,
-        y: 6,
+        i: 19,
+        j: 6,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 4,
-        y: 12,
+        i: 4,
+        j: 12,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 3,
-        y: 11,
+        i: 3,
+        j: 11,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 3,
-        y: 10,
+        i: 3,
+        j: 10,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 2,
-        y: 9,
+        i: 2,
+        j: 9,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 1,
-        y: 7,
+        i: 1,
+        j: 7,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 2,
-        y: 8,
+        i: 2,
+        j: 8,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 1,
-        y: 6,
+        i: 1,
+        j: 6,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 0,
-        y: 5,
+        i: 0,
+        j: 5,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 0,
-        y: 4,
+        i: 0,
+        j: 4,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 0,
-        y: 6,
+        i: 0,
+        j: 6,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 0,
-        y: 7,
+        i: 0,
+        j: 7,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 1,
-        y: 8,
+        i: 1,
+        j: 8,
         cellstate: 'player1',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 0,
-        y: 9,
+        i: 0,
+        j: 9,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 1,
-        y: 9,
+        i: 1,
+        j: 9,
         cellstate: 'player1',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 1,
-        y: 10,
+        i: 1,
+        j: 10,
         cellstate: 'player1',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 2,
-        y: 10,
+        i: 2,
+        j: 10,
         cellstate: 'player1',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 2,
-        y: 11,
+        i: 2,
+        j: 11,
         cellstate: 'player1',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 1,
-        y: 11,
+        i: 1,
+        j: 11,
         cellstate: 'player1',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 0,
-        y: 11,
+        i: 0,
+        j: 11,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 0,
-        y: 10,
+        i: 0,
+        j: 10,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 0,
-        y: 12,
+        i: 0,
+        j: 12,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 1,
-        y: 12,
+        i: 1,
+        j: 12,
         cellstate: 'player1',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 2,
-        y: 12,
+        i: 2,
+        j: 12,
         cellstate: 'player1',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 3,
-        y: 12,
+        i: 3,
+        j: 12,
         cellstate: 'player1',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 2,
-        y: 7,
+        i: 2,
+        j: 7,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 3,
-        y: 7,
+        i: 3,
+        j: 7,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 7,
-        y: 7,
+        i: 7,
+        j: 7,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 8,
-        y: 7,
+        i: 8,
+        j: 7,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 10,
-        y: 7,
+        i: 10,
+        j: 7,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 11,
-        y: 7,
+        i: 11,
+        j: 7,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 15,
-        y: 7,
+        i: 15,
+        j: 7,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 16,
-        y: 7,
+        i: 16,
+        j: 7,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 2,
-        y: 6,
+        i: 2,
+        j: 6,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 3,
-        y: 6,
+        i: 3,
+        j: 6,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 7,
-        y: 6,
+        i: 7,
+        j: 6,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 9,
-        y: 6,
+        i: 9,
+        j: 6,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 8,
-        y: 6,
+        i: 8,
+        j: 6,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 11,
-        y: 6,
+        i: 11,
+        j: 6,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 12,
-        y: 6,
+        i: 12,
+        j: 6,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 16,
-        y: 6,
+        i: 16,
+        j: 6,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 17,
-        y: 6,
+        i: 17,
+        j: 6,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         MapId: id,
-        x: 0,
-        y: 8,
+        i: 0,
+        j: 8,
         cellstate: 'empty',
         createdAt: new Date(),
         updatedAt: new Date()

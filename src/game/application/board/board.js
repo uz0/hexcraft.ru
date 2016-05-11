@@ -39,10 +39,10 @@ export default class Board extends PIXI.Container {
 
   initialization(game) {
     game.Map.MapData.forEach(element => {
-      this.field.findByIndex(element.x, element.y).alpha = 1;
+      this.field.findByIndex(element.i, element.j).alpha = 1;
 
       if(element.cellstate !== 'empty') {
-        let chip = new Chip(element.x, element.y, element.cellstate);
+        let chip = new Chip(element.i, element.j, element.cellstate);
 
         chip.onMove = this.onMove.bind(this);
         chip.onStep = this.onStep.bind(this);
@@ -166,7 +166,7 @@ export default class Board extends PIXI.Container {
 
   chipEvent(coordinates, user) {
     let owner = (this.game.player1.username === user.username)? 'player1' : 'player2';
-    let chip = new Chip(coordinates.x, coordinates.y, owner);
+    let chip = new Chip(coordinates.i, coordinates.j, owner);
 
     chip.onMove = this.onMove.bind(this);
     chip.onStep = this.onStep.bind(this);
@@ -180,7 +180,7 @@ export default class Board extends PIXI.Container {
     let owner = (this.game.player1.username === user.username)? 'player1' : 'player2';
 
     coordinatesArray.forEach(coordinates => {
-      Hex.findByIndex(this.chips, coordinates.x, coordinates.y).changeOwner(owner);
+      Hex.findByIndex(this.chips, coordinates.i, coordinates.j).changeOwner(owner);
     });
   }
 

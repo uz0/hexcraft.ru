@@ -66,7 +66,7 @@ export default class Lobby extends PIXI.Container {
 
   labelFormater(game) {
     let firstPlayer = game.player1.username;
-    let secondPlayer = game.player2.username;
+    let secondPlayer = game.player2 && game.player2.username;
 
     if(game.stage === 'started'){
       return `${firstPlayer} играет с ${secondPlayer}`;

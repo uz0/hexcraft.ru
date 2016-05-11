@@ -19,8 +19,8 @@ export default class editorCtrl {
         }
 
         this.field.push({
-          x: i,
-          y: j
+          i: i,
+          j: j
         });
       }
     }
@@ -41,8 +41,8 @@ export default class editorCtrl {
   create(field){
     this.map.MapData.push({
       cellstate: 'empty',
-      x: field.x,
-      y: field.y
+      i: field.i,
+      j: field.j
     });
   }
 
@@ -59,8 +59,8 @@ export default class editorCtrl {
 
   calcPosition(hex) {
     return {
-      left: ((hex.y % 2 === 0)? hex.x*40 : hex.x*40+20)+'px',
-      top: hex.y*40+'px'
+      left: ((hex.j % 2 === 0)? hex.i*40 : hex.i*40+20)+'px',
+      top: hex.j*40+'px'
     };
   }
 
@@ -105,8 +105,8 @@ export default class editorCtrl {
     this.map.MapData.forEach(element => {
       mapData.push(`{
         MapId: id,
-        x: ${element.x},
-        y: ${element.y},
+        i: ${element.i},
+        j: ${element.j},
         cellstate: '${element.cellstate}',
         createdAt: new Date(),
         updatedAt: new Date()

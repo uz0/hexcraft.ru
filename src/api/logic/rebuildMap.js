@@ -1,26 +1,21 @@
 'use strict';
 
-module.exports = function(game, step, emit) {
+const Hex = require('./hex');
 
+module.exports = function(game, step, emit) {
   let owner = (game.player1.id === step.userId)? 'player1': 'player2';
 
   // rebuild mapData using step (without checks)
-  game.Map.MapData.forEach(hex => {
-    if (step.current.i === hex.x && step.current.j === hex.y) {
-      hex.cellstate = owner;
-    }
 
-    if (step.old.i === hex.x && step.old.j === hex.y) {
-      hex.cellstate = 'empty';
-    }
-  });
+  Hex.findByIndex(game.Map.MapData, step.current.i, step.current.j).cellstate = owner;
+  Hex.findByIndex(game.Map.MapData, step.old.i, step.old.j).cellstate = 'empty';
 
   // change owners (find current neighbors)
   // emit({
   //   name: 'owner',
   //   data: [{
-  //     x: 1,
-  //     y: 1
+  //     i: 1,
+  //     j: 1
   //   }, {
   //
   // }]
@@ -30,8 +25,8 @@ module.exports = function(game, step, emit) {
   // emit({
   //   name: 'chip',
   //   data: {
-  //     x: step.old.i,
-  //     y: step.old.j
+  //     i: step.old.i,
+  //     j: step.old.j
   //   }
   // });
 

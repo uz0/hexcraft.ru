@@ -34,7 +34,6 @@ router.get('/', function(req, res) {
 router.post('/', isAuthed, function(req, res) {
   console.log('>1');
   Game.create(req.user, game => {
-    console.log(game);
     res.send(game);
   });
 });
@@ -88,7 +87,7 @@ router.post('/:id', isAuthed, function(req, res, next) {
     next(error);
   });
 
-  res.send();
+  res.send({});
 });
 
 

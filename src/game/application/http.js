@@ -2,7 +2,6 @@
 
 export default class http {
   static post(url, data) {
-
     return window.fetch(url, {
       method: 'POST',
       headers: {

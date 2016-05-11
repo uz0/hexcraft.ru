@@ -9,7 +9,7 @@ const router = module.exports = express.Router();
 const events = require('events');
 const sse = require('server-sent-events');
 
-let storage = {};
+var storage = require('memory-cache');
 let emitter = new events.EventEmitter();
 
 
@@ -46,6 +46,7 @@ router.get('/', function(req, res) {
  */
 
 router.post('/', isAuthed, function(req, res) {
+
   const user = req.user;
 
   // TODO: refactoring
@@ -79,12 +80,16 @@ router.post('/', isAuthed, function(req, res) {
               id: game.id
             }
           }).then(game => {
-            game.player1 = user;
-            game.currentPlayer = user.id;
-            game.gameSteps = []; // store game steps
-            game.gameSteps[0] = {"userId":user.id};
-            storage[game.id] = game;
-            res.send(game);
+            let pureGame = game.toJSON();
+
+            pureGame.player1 = user;
+            pureGame.currentPlayer = user.id;
+            pureGame.gameSteps = []; // store game steps
+            //pureGame.gameSteps[0] = {"userId":user.id};
+            console.log('%j',pureGame);
+            storage.put(pureGame.id, pureGame);
+            res.send(pureGame);
+
           });
         });
       });
@@ -94,16 +99,16 @@ router.post('/', isAuthed, function(req, res) {
     game.player2 = user.id;
     game.stage = 'started';
     game.save().then(() => {
-      game.player1 = storage[game.id].player1;
-      game.player2 = user;
-      storage[game.id] = game;
+      let storedGame = storage.get(game.id);
+      storedGame.player2 = user;
+      storedGame.stage = 'started';
+      storage.put(storedGame.id, storedGame);
 
-      emitter.emit(`game${game.id}`, {
+      emitter.emit(`game${storedGame.id}`, {
         event: 'started',
         user: user
       });
-
-      res.send(game);
+      res.send(storedGame);
     });
   });
 });
@@ -120,7 +125,7 @@ router.post('/', isAuthed, function(req, res) {
 
 router.get('/:id', function(req, res) {
   const gameId = req.params.id;
-  let game = storage[gameId];
+  let game = storage.get(gameId);
 
   res.send(game);
 
@@ -137,11 +142,12 @@ router.get('/:id', function(req, res) {
  */
 
 router.post('/:id', isAuthed, function(req, res, next) {
+
   const gameId = req.params.id;
   const step = req.body.step;
-  let game = storage[gameId];
+  let game = storage.get(gameId);
   step.userId = req.user.id;
-
+  console.log('\n\r\n\r%j\n\r\n\r', game);
 
 
   if (!game) {
@@ -150,18 +156,17 @@ router.post('/:id', isAuthed, function(req, res, next) {
     return next(error);
   }
 
-
   if (game.player1.id !== req.user.id && game.player2.id !== req.user.id) {
     let error = new Error('wrong user');
     error.status = 400;
     return next(error);
-  } 
-
+  }
+  console.log('\n\r\n\r1\n\r\n\r');
   let last = game.gameSteps.length - 1;
-
-   console.log("\r\n1\r\n");
-
+  console.log('%d',last);
+  console.log('\n\r\n\r2\n\r\n\r');
   game.lastStepUserId = game.gameSteps[last].userId || game.player2.id;
+  console.log('\n\r\n\r3\n\r\n\r');
 
   let stepError = stepValidation(game, step);
   if (stepError) {
@@ -171,7 +176,7 @@ router.post('/:id', isAuthed, function(req, res, next) {
   }
 
   game.Map.MapData = rebuildMap(game, step);
-  storage[gameId] = game;
+  storage.put(gameId, game);
 
   emitter.emit(`game${gameId}`, {
     event: 'step',

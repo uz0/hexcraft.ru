@@ -10,7 +10,7 @@ module.exports = function Hex() {
       }
     });
     return element;
-  }
+  };
 
 
   this.findNeighbors = (array, i, j) => {

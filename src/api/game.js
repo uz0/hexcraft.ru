@@ -32,7 +32,6 @@ router.get('/', function(req, res) {
  */
 
 router.post('/', isAuthed, function(req, res) {
-  console.log('>1');
   Game.create(req.user, game => {
     res.send(game);
   });

@@ -9,7 +9,6 @@ var emitter = new events.EventEmitter();
 var storage = [];
 
 function Game(user, callback) {
-  console.log('>3');
   models.Map.findOne({
     order: [
       models.Sequelize.fn('RANDOM')
@@ -34,7 +33,6 @@ module.exports = Game;
 
 // static methods
 Game.create = function(user, callback) {
-  console.log('>2');
   let game = Game.findOne(element => {
     return !element.data.player2;
   });

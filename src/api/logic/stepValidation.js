@@ -11,7 +11,7 @@ module.exports = function(game, step, error) {
   // TODO
   // [x] game user
   // [x] correct step order (player1, player2, player1 ...)
-  // [ ] chip owner
+  // [x] chip owner
   // [ ] check step with map data
   // [ ] step to second radius
   // [ ] prevent step to another chip position
@@ -20,6 +20,10 @@ module.exports = function(game, step, error) {
   	return error('incorrect step order');
   }
 
+  let user = (game.player1.id === step.userId)? 'player1' : 'player2';
+  if(Hex.findByIndex(game.Map.MapData, step.old.i, step.old.j).cellstate !== user) {
+  	return error('wrong owner');
+  }
 
 
   // let last = this.data.gameSteps.length - 1;

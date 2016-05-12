@@ -10,14 +10,25 @@ module.exports = function(game, step, error) {
 
   // TODO
   // [x] game user
-  // [ ] correct step order (player1, player2, player1 ...)
-  // [ ] chip owner
-  // [ ] check step with map data
+  // [x] correct step order (player1, player2, player1 ...)
+  // [x] chip owner
+  // [x] check step with map data
   // [ ] step to second radius
   // [ ] prevent step to another chip position
 
+  if(game.gameSteps.length % 2 !== 0 && step.userId === game.player1.id) {
+  	return error('incorrect step order');
+  }
 
+  let user = (game.player1.id === step.userId)? 'player1' : 'player2';
+  if(Hex.findByIndex(game.Map.MapData, step.old.i, step.old.j).cellstate !== user) {
+  	return error('wrong owner');
+  }
 
+  let destination = Hex.findByIndex(game.Map.MapData, step.current.i, step.current.j);
+  if(destination && destination.cellstate !== 'empty') {
+  	return error('collision detected!!')
+  }
 
   // let last = this.data.gameSteps.length - 1;
   // this.lastStepUserId = (last<0) ? this.data.gameSteps[last].userId : this.data.player2.id;

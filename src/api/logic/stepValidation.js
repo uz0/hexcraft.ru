@@ -10,12 +10,15 @@ module.exports = function(game, step, error) {
 
   // TODO
   // [x] game user
-  // [ ] correct step order (player1, player2, player1 ...)
+  // [x] correct step order (player1, player2, player1 ...)
   // [ ] chip owner
   // [ ] check step with map data
   // [ ] step to second radius
   // [ ] prevent step to another chip position
 
+  if(game.gameSteps.length % 2 !== 0 && step.userId === game.player1.id) {
+  	return error('incorrect step order');
+  }
 
 
 

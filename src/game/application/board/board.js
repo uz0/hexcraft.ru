@@ -108,16 +108,14 @@ export default class Board extends PIXI.Container {
 
     // Prevent step to other chip
     // prevent step to old position
-    let chip = Hex.findByCoords(this.chips, current.x, current.y);
-    if(chip) {
+    if(Hex.findByCoords(this.chips, current.x, current.y)) {
       this.panel.log('Коллизии детектед!');
       return true;
     }
 
     // prevent step out neighbors neighbors
     let neighborsNeighbors = this.field.findNeighborsNeighbors(old.x, old.y);
-    let cell = Hex.findByCoords(neighborsNeighbors, current.x, current.y);
-    if(!cell) {
+    if(!Hex.findByCoords(neighborsNeighbors, current.x, current.y)) {
       this.panel.log('Ограничение по радиусу!');
       return true;
     }

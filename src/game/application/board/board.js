@@ -59,7 +59,7 @@ export default class Board extends PIXI.Container {
 
   changeMode(player) {
     const yourStep = `Ваш ход`;
-    const enemyName = (this.user === 'player1')? this.game.player1.username : this.game.player2.username;
+    const enemyName = (this.user === 'player1')? this.game.player2.username : this.game.player1.username;
     const enemyStep = `Ходит ${enemyName}`;
 
     let status = (this.user === player)? yourStep : enemyStep;

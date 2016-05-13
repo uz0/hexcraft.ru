@@ -55,6 +55,11 @@ export default class Hex {
       let field = Hex.findByIndex(array, index.i+coordinates[0], index.j+coordinates[1]);
 
       if(field) {
+
+        // WORKAROUND: ignore unavailable for step field ceils
+        if(field.alpha && field.alpha !== 1)
+          return;
+
         neighbors.push(field);
       }
     });

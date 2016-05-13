@@ -2,6 +2,7 @@
 
 const stepValidation = require('./stepValidation');
 const rebuildMap = require('./rebuildMap');
+const winValidation = require('./winValidation');
 const models = require('../models');
 const uuid = require('node-uuid');
 const events = require('events');
@@ -84,6 +85,8 @@ Game.prototype.step = function(step, user, errorCallback) {
       user: user
     });
   });
+
+  winValidation(this);
 
 
   this.data.gameSteps.push(step);

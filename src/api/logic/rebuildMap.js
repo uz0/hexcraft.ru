@@ -7,34 +7,26 @@ module.exports = function(game, step, emit) {
 
   // rebuild mapData using step (without checks)
 
-  let neighbors = Hex.findNeighbors(game.Map.MapData, step.current.i, step.current.j);
-
   Hex.findByIndex(game.Map.MapData, step.current.i, step.current.j).cellstate = owner;
   Hex.findByIndex(game.Map.MapData, step.old.i, step.old.j).cellstate = 'empty';
 
-  // Check to see if moved by one
+  let neighbors = Hex.findNeighbors(game.Map.MapData, step.current.i, step.current.j);
   let inRadius = Hex.findByIndex(neighbors, step.old.i, step.old.j);
+  if (inRadius) {
+    Hex.findByIndex(game.Map.MapData, step.old.i, step.old.j).cellstate = owner;
+    emit({
+      name: 'chip',
+      data: step.old
+    });
+  }
 
-  // If moved by one, capture the sorrounding enemy cells and copy to origin cell
   let changed = [];
-
   neighbors.forEach(cell => {
     if (cell.cellstate !== 'empty' && cell.cellstate !== owner) {
       cell.cellstate = owner;
       changed.push(cell);
     }
   });
-
-  if (inRadius) {
-    Hex.findByIndex(game.Map.MapData, step.old.i, step.old.j).cellstate = owner;
-    emit({
-      name: 'chip',
-      data: {
-        i: step.old.i,
-        j: step.old.j
-      }
-    });
-  }
 
   if (changed) {
     emit({

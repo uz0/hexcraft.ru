@@ -4,7 +4,9 @@ import Panel from '../panel/panel.js';
 import http from '../http.js';
 import Chip from './chip.js';
 import Hex from './hex.js';
+import hexcraft from '../../application.js';
 import Field from './field.js';
+import Lobby from '../lobby/lobby.js';
 
 export default class Board extends PIXI.Container {
   constructor(game) {
@@ -24,6 +26,7 @@ export default class Board extends PIXI.Container {
     };
 
     this.panel = new Panel();
+    this.panel.game = game;
     this.panel.showCapitulation();
     this.addChild(this.panel);
 
@@ -33,8 +36,8 @@ export default class Board extends PIXI.Container {
     this.initialization(game);
     this.changeMode('player1');
 
-    let loop = new window.EventSource(`/api/games/${game.id}/loop`);
-    loop.addEventListener('message', this.onEvent.bind(this));
+    this.loop = new window.EventSource(`/api/games/${game.id}/loop`);
+    this.loop.addEventListener('message', this.onEvent.bind(this));
   }
 
   initialization(game) {
@@ -180,6 +183,11 @@ export default class Board extends PIXI.Container {
     coordinatesArray.forEach(coordinates => {
       Hex.findByIndex(this.chips, coordinates.i, coordinates.j).changeOwner(owner);
     });
+  }
+
+  overEvent() {
+    hexcraft.setStage(Lobby, 'Игра окончена');
+    this.loop.close();
   }
 
   update(){}

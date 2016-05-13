@@ -33,6 +33,14 @@ export default class Panel extends PIXI.Container {
 
   showCapitulation() {
     this.GUI.surrender.visible = true;
+    this.GUI.surrender.on('click', this.surrender.bind(this));
+  }
+
+  surrender() {
+    const token = window.localStorage.getItem('token');
+    http.post(`/api/games/${this.game.id}/surrender`, {
+      token: token
+    });
   }
 
   log(text){

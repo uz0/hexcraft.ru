@@ -8,14 +8,14 @@ import Panel from '../panel/panel.js';
 import options from './lobby.json';
 
 export default class Lobby extends PIXI.Container {
-  constructor() {
+  constructor(message) {
     super();
     this.GUI = new GUI(options);
     this.GUI.play.on('click', this.startGame.bind(this));
     this.addChild(this.GUI);
 
     this.panel = new Panel();
-    this.panel.log('Нажмите "В БОЙ"');
+    this.panel.log(message || 'Нажмите "В БОЙ"');
     this.panel.showExit();
     this.addChild(this.panel);
     this.getUsers();

@@ -106,3 +106,30 @@ router.get('/:id/loop', sse, function(req, res) {
     res.sse(`data: ${data}\n\n`);
   });
 });
+
+
+/**
+ * @api {post} /games/:id/surrender
+ * @apiName surrender
+ * @apiGroup Game
+ *
+ * @apiParam {Number} id Game's Id
+ */
+
+router.post('/:id/surrender', isAuthed, function(req, res, next) {
+  const gameId = req.params.id;
+
+  let game = Game.findOne(element => {
+    return element.data.id === gameId;
+  });
+
+  if (!game) {
+    let error = new Error('game not found');
+    error.status = 400;
+    return next(error);
+  }
+
+  game.over(req.user);
+  
+  res.send({});
+});

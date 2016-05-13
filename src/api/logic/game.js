@@ -96,3 +96,14 @@ Game.prototype.step = function(step, user, errorCallback) {
 
   return;
 };
+
+
+Game.prototype.over = function(loserUser) {
+  let winner = (this.data.player1.id !== loserUser.id) ? 'player1' : 'player2';
+  this.data.stage = `over ${winner}`;
+  emitter.emit(this.data.id, {
+    event: 'over'
+  });
+
+
+}

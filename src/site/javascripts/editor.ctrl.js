@@ -12,9 +12,9 @@ export default class editorCtrl {
     this.clear();
 
     this.field = [];
-    for(let i=0; i<20; i++) {
-      for(let j=0; j<13; j++) {
-        if (j % 2 !== 0 && i === 19) {
+    for(let i=0; i<10; i++) {
+      for(let j=0; j<7; j++) {
+        if (j % 2 !== 0 && i === 9) {
           continue;
         }
 
@@ -59,8 +59,8 @@ export default class editorCtrl {
 
   calcPosition(hex) {
     return {
-      left: ((hex.j % 2 === 0)? hex.i*40 : hex.i*40+20)+'px',
-      top: hex.j*40+'px'
+      left: ((hex.j % 2 === 0)? hex.i*80 : hex.i*80+40)+'px',
+      top: hex.j*80+'px'
     };
   }
 

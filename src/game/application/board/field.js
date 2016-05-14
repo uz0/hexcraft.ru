@@ -19,9 +19,9 @@ export default class Field extends PIXI.Container {
   }
 
   forEach(callback) {
-    for(let i=0; i<20; i++) {
-      for(let j=0; j<13; j++) {
-        if (j % 2 !== 0 && i === 20-1) {
+    for(let i=0; i<10; i++) {
+      for(let j=0; j<7; j++) {
+        if (j % 2 !== 0 && i === 10-1) {
           continue;
         }
 

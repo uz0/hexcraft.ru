@@ -3,17 +3,17 @@
 export default class Hex {
   static indexToCoordinates(i, j) {
     return {
-      x: (j % 2 === 0) ? i*40 : i*40 + 20,
-      y: j*40 + 80
+      x: (j % 2 === 0) ? i*80 : i*80 + 40,
+      y: j*80 + 80
     };
   }
 
   static coordinatesToIndex(x, y) {
-    let i = Math.round(x / 40);
-    let j = Math.round((y - 80) / 40);
+    let i = Math.round(x / 80);
+    let j = Math.round((y - 80) / 80);
 
     if (j % 2 !== 0){
-      i = Math.round((x - 20) / 40);
+      i = Math.round((x - 40) / 80);
     }
 
     return {

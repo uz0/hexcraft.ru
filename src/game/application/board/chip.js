@@ -64,8 +64,8 @@ export default class Chip extends PIXI.Sprite {
   onDragMove() {
     if (this.data) {
       let newPosition = this.data.getLocalPosition(this.parent);
-      this.position.x = newPosition.x - 20;
-      this.position.y = newPosition.y - 20;
+      this.position.x = newPosition.x - 40;
+      this.position.y = newPosition.y - 40;
     }
 
     if(this.data && this.onMove) {

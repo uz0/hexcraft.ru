@@ -1,12 +1,13 @@
 'use strict';
 
-export default class indexCtrl {
+export default class waterDirective {
   constructor() {
     this.renderer = new PIXI.WebGLRenderer(window.innerWidth, window.innerHeight);
     this.renderer.backgroundColor = 0xFFFFFF;
+    this.renderer.view.classList.add('water-canvas');
     document.body.appendChild(this.renderer.view);
 
-    this.stage = new PIXI.Stage();
+    this.stage = new PIXI.Container();
 
     this.displacementSprite = PIXI.Sprite.fromImage('/images/displacementMap.jpg');
     this.displacementFilter = new PIXI.filters.DisplacementFilter(this.displacementSprite);
@@ -15,11 +16,19 @@ export default class indexCtrl {
       y: 100
     };
 
-    this.bg = PIXI.TilingSprite.fromImage('/images/water.png', window.innerWidth, window.innerHeight);
+    this.bg = PIXI.extras.TilingSprite.fromImage('/images/water.png', window.innerWidth, window.innerHeight);
     this.stage.addChild(this.bg);
     this.stage.filters = [this.displacementFilter];
     this.tick = 100;
     this.loop();
+
+    window.addEventListener('resize', this.resize.bind(this));
+  }
+
+  resize(){
+    this.bg.width = window.innerWidth;
+    this.bg.height = window.innerHeight;
+    this.renderer.resize(window.innerWidth, window.innerHeight);
   }
 
   loop () {

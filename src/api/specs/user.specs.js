@@ -13,7 +13,7 @@ describe('User', () => {
     models.sequelize.sync().then(() => {
       done();
     });
-  })
+  });
 
   it('create', () => {
     return User.create({

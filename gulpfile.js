@@ -21,7 +21,7 @@ const site = {
     end:  'public/stylesheets/*.css'
   },
   scripts: {
-    main: 'src/site/javascripts/app.js',
+    main: 'src/site/javascripts/application.js',
     from: 'src/site/javascripts/**/*.js',
     to:   'public/javascripts'
   },
@@ -119,13 +119,13 @@ gulp.task('lint:api',  () => {
 
 gulp.task('apidoc:api', (done) => {
   apidoc({
-    src: "src/",
+    src: "src/api/",
     dest: "public/apidoc/"
   }, done);
 })
 
 gulp.task('spec:api', function () {
-  return gulp.src(['specs/*.specs.js'], {read: false})
+  return gulp.src(['src/api/specs/*.specs.js'], {read: false})
     .pipe(mocha({
       debugBrk: false,
       R: 'spec',
@@ -173,7 +173,7 @@ gulp.task('watch', () => {
   gulp.watch([game.scripts, game.configs], ['scripts:game']);
 
   nodemon({
-    script: 'app.js',
+    script: 'index.js',
     watch: [api.scripts],
     ext: 'js',
     tasks: ['lint:api', 'apidoc:api']

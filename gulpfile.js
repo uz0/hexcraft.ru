@@ -65,7 +65,7 @@ gulp.task('styles:site', () => {
     .pipe(sourcemaps.init())
     .pipe(sass())
     .pipe(autoprefixer('last 2 version'))
-    .pipe(sourcemaps.write('./maps'))
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest(site.styles.to))
 });
 

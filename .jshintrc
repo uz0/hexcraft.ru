@@ -25,6 +25,9 @@
     "app": true,
     "PIXI": false,
     "window": false,
-    "document": false
+    "document": false,
+    "describe": false,
+    "before": false,
+    "it": false
   }
 }

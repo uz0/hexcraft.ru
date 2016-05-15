@@ -1,6 +1,6 @@
 'use strict';
 
-function Hex() {};
+function Hex() {}
 
 Hex.findByIndex = function(array, i, j) {
   let element;

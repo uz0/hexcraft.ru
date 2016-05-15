@@ -51,26 +51,26 @@ Game.create = function(user, callback) {
 
     callback(game.data);
   }
-}
+};
 
 Game.findOne = function(condition) {
   return storage.find(element => {
     return condition(element);
   });
-}
+};
 
 Game.findAll = function() {
   let games = [];
   storage.forEach(game => {
     games.push(game.data);
-  })
+  });
 
   return games;
-}
+};
 
 Game.on = function(id, callback) {
   emitter.on(id, callback);
-}
+};
 
 
 Game.prototype.step = function(step, user, errorCallback) {
@@ -104,9 +104,8 @@ Game.prototype.step = function(step, user, errorCallback) {
 Game.prototype.over = function(loserUser) {
   let winner = (this.data.player1.id !== loserUser.id) ? 'player1' : 'player2';
   this.data.stage = `over ${winner}`;
+
   emitter.emit(this.data.id, {
     event: 'over'
   });
-
-
-}
+};

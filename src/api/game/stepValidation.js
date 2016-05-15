@@ -19,7 +19,7 @@ module.exports = function(game, step, error) {
 
   let destination = Hex.findByIndex(game.Map.MapData, step.current.i, step.current.j);
   if(destination && destination.cellstate !== 'empty') {
-    return error('collision detected!!')
+    return error('collision detected!');
   }
 
   let neighborsNeighbors = Hex.findNeighborsNeighbors(game.Map.MapData, step.old.i, step.old.j);

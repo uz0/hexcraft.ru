@@ -42,6 +42,7 @@
   position: relative;
   display: inline-block;
   vertical-align: top;
+  zoom: 0.8;
 }
 
 .editor-page .map-list {
@@ -54,17 +55,20 @@
   margin-bottom: $unit;
   display: block;
   width: 100%;
+  border: 0;
 }
 
 .editor-page .map-list button.active {
-  outline: 2px solid #0B91A9;
+  background: $themeColor;
+  color: $contrastColor;
+  outline: 1px solid $contrastColor;
 }
 
 .editor-page .hex {
   height: 80px;
   width: 80px;
   position: absolute;
-  background: url("/game/resources/circuit_hex.svg") center / contain no-repeat;
+  background: url("/images/hex.svg") center / contain no-repeat;
   line-height: 80px;
   font-size: 14px;
   text-align: center;

@@ -5,42 +5,42 @@ block vars
   - var bodyClass = 'editor-page'
 
 block content
-    include ./_header.jade
-    .wrapper.wrap(ng-controller="editorCtrl as editor")
+  include ./_header.jade
+  .wrap(ng-controller="editorCtrl as editor")
 
-      form.login-form(ng-submit="editor.login()" ng-if="!editor.user")
-        input(type="text" ng-model="editor.username" placeholder="логин")
-        input(type="password" ng-model="editor.password" placeholder="пароль")
-        button войти
+    form.login-form(ng-submit="editor.login()" ng-if="!editor.user")
+      input(type="text" ng-model="editor.username" placeholder="логин")
+      input(type="password" ng-model="editor.password" placeholder="пароль")
+      button войти
 
-      .logout(ng-if="editor.user")
-        span(ng-bind="editor.user.username")
-        button(ng-click="editor.logout()") выйти
+    .logout(ng-if="editor.user")
+      span(ng-bind="editor.user.username")
+      button(ng-click="editor.logout()") выйти
 
-      .map-control(ng-if="editor.user.admin")
-        input(ng-model="editor.map.description" placeholder="имя карты")
-        button(ng-click="editor.delete()") удалить
-        button(ng-click="editor.save()") сохранить
-        button(ng-click="editor.export()") экспорт
+    .map-control(ng-if="editor.user.admin")
+      input(ng-model="editor.map.description" placeholder="имя карты")
+      button(ng-click="editor.delete()") удалить
+      button(ng-click="editor.save()") сохранить
+      button(ng-click="editor.export()") экспорт
 
-      .container(ng-if="editor.user")
-        .map-list
-          button(ng-click="editor.clear()"
-                 ng-class="{active: !editor.map.id}") новая
-          button(ng-repeat="map in editor.mapList"
-                 ng-bind="'{{map.description}} ( {{map.id}} )'"
-                 ng-click="editor.select(map)"
-                 ng-class="{active: map.id == editor.map.id}")
+    .container(ng-if="editor.user")
+      .map-list
+        button(ng-click="editor.clear()"
+               ng-class="{active: !editor.map.id}") новая
+        button(ng-repeat="map in editor.mapList"
+               ng-bind="'{{map.description}} ( {{map.id}} )'"
+               ng-click="editor.select(map)"
+               ng-class="{active: map.id == editor.map.id}")
 
-        .editor-field
-          .field.hex(ng-repeat="field in editor.field"
-                     ng-style="editor.calcPosition(field)"
-                     ng-click="editor.create(field)")
+      .editor-field
+        .field.hex(ng-repeat="field in editor.field"
+                   ng-style="editor.calcPosition(field)"
+                   ng-click="editor.create(field)")
 
-          .hex(ng-repeat="hex in editor.map.MapData"
-               ng-style="editor.calcPosition(hex)"
-               ng-bind="hex.cellstate"
-               ng-click="editor.change(hex)"
-               ng-class="hex.cellstate")
+        .hex(ng-repeat="hex in editor.map.MapData"
+             ng-style="editor.calcPosition(hex)"
+             ng-bind="hex.cellstate"
+             ng-click="editor.change(hex)"
+             ng-class="hex.cellstate")
 
-    include ./_footer.jade
+  include ./_footer.jade

@@ -1,15 +1,9 @@
 @import "config.scss";
 
-.title-wrapper h2 {
-  display: inline-block;
+.news-page h2 {
+  font-weight: 600;
 }
 
-.title-wrapper label {
-  margin-left: $unit;
-}
-
-@media (max-width: 1024px)  {
-  .wrap {
-    width: 90%;
-  }
+.news-page .date  {
+  color: #eee;
 }

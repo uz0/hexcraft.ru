@@ -1,110 +1,15 @@
 @import "config.scss";
 
-.news-content {
-  overflow: hidden;
-}
-
-.news-content .item {
-  margin: $unit * 2 0 $unit * 2 $unit * 8;
-  box-sizing: border-box;
-  position: relative;
-}
-
-.news-content .item:first-child {
-  margin: $unit * 3 0 $unit * 2 $unit * 8;
-}
-
-.news-content .item:last-child {
-  margin: $unit * 2 0 $unit * 3 $unit * 8;
-}
-
-.news-content .item:before {
-  content: '';
-  position: absolute;
-  width: $unit * 6;
-  height: 999px;
-  border-left: 1px solid $themeColor;
-  border-bottom: 1px solid $themeColor;
-  bottom: 50%;
-  left: -$unit * 6;
-}
-
-.news-content .item:after {
-  content: '';
-  position: absolute;
-  width: $unit;
-  height: $unit;
-  background-color: $themeColor;
-  bottom: calc(50% - 7px);
-  left: -$unit * 6.5;
-  border-radius: 100%;
-}
-
-.news-content .item .date {
+.title-wrapper h2 {
   display: inline-block;
-  padding-left: $unit * 0.5;
-  font-weight: 400;
 }
 
-.news-content .item .title-wrapper {
-  border: 1px solid $themeColor;
-  border-bottom: 0;
-  background-color: $coverColor;
-}
-
-.news-content .item .title {
-  font-size: $unit * 1.5;
-  font-weight: bold;
-  margin: 0;
-  padding: $unit;
-  background-color: $coverColor;
-  display: inline-block;
-  color: #333;
-}
-
-.news-content .title-wrapper.only-title {
-  border: 0;
-  border-left: 1px solid $themeColor;
-  padding: $unit 0;
-}
-
-.news-content .title-wrapper.only-title h2 {
-  display: inline-block;
-  background: transparent;
-  padding: 0 $unit 0 $unit;
-  font-size: $unit * 1.5;
-  font-weight: bold;
-}
-
-.news-content .item p {
-  margin: 0 0 0 0;
-  font-size: $unit;
-  padding: $unit;
-  border: 1px solid $themeColor;
-  border-top: 0;
+.title-wrapper label {
+  margin-left: $unit;
 }
 
 @media (max-width: 1024px)  {
   .wrap {
     width: 90%;
-  }
-}
-
-@media (max-width: 768px) {
-  .news-content .item:before,
-  .news-content .item:after {
-    display: none;
-  }
-
-  .news-content .item:first-child {
-    margin: $unit * 2 0 $unit 0px;
-  }
-
-  .news-content .item:last-child {
-    margin: $unit * 2 0 $unit * 2 0px;
-  }
-
-  .news-content .item {
-    margin: $unit 0 $unit  0px;
   }
 }

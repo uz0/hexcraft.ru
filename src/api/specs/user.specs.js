@@ -1,7 +1,7 @@
 'use strict';
 
 const expect = require('expect.js');
-const models = require('../src/api/models');
+const models = require('../models');
 const User = models.User;
 
 const testName = 'johndoe';

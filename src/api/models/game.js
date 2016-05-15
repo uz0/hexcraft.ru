@@ -4,7 +4,7 @@ module.exports = function(sequelize, DataTypes) {
   let Game = sequelize.define('Game', {
     // player1: DataTypes.INTEGER,
     // player2: DataTypes.INTEGER,
-    stage: DataTypes.ENUM('not started', 'started', 'over')
+    stage: DataTypes.ENUM('not started', 'started', 'over player1', 'over player2')
   }, {
     classMethods: {
       associate: function(models) {

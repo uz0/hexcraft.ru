@@ -1,7 +1,7 @@
 'use strict';
 
-const models = require('./models');
-const isAdmin = require('./middlewares/isAdmin');
+const models = require('../models');
+const isAdmin = require('../middlewares/isAdmin');
 const express = require('express');
 
 const router = module.exports = express.Router();

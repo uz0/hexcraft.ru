@@ -1,11 +1,11 @@
 'use strict';
 
-const config = require('../../config/config.json');
+const config = require('../configuration.json');
 const env = process.env.NODE_ENV || 'development';
 const salt = config[env].salt || process.env.SALT;
 
-const isAuthed = require('./middlewares/isAuthed');
-const models = require('./models');
+const isAuthed = require('../middlewares/isAuthed');
+const models = require('../models');
 const bcrypt = require('bcrypt-nodejs');
 const uuid = require('node-uuid');
 const express = require('express');

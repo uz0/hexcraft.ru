@@ -1,12 +1,12 @@
 'use strict';
 
-const config = require('../../config/config.json');
+const config = require('../configuration.json');
 const env = process.env.NODE_ENV || 'development';
 const salt = config[env].salt || process.env.SALT;
 
 const bcrypt = require('bcrypt-nodejs');
-const isAdmin = require('./middlewares/isAdmin');
-const models = require('./models');
+const isAdmin = require('../middlewares/isAdmin');
+const models = require('../models');
 const express = require('express');
 const router = module.exports = express.Router();
 
@@ -34,7 +34,7 @@ router.get('/', function(req, res) {
  * @apiSuccess {Object} user User data
  */
 
-router.post('/', isAdmin, function(req, res) {
+router.post('/', function(req, res) {
   models.User.create({
     username: req.body.username,
     password: bcrypt.hashSync(req.body.password, salt)

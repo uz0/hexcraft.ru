@@ -1,7 +1,7 @@
 'use strict';
 
-const Game = require('./logic/game');
-const isAuthed = require('./middlewares/isAuthed');
+const Game = require('../game/game.class');
+const isAuthed = require('../middlewares/isAuthed');
 const express = require('express');
 const router = module.exports = express.Router();
 const sse = require('server-sent-events');
@@ -130,6 +130,6 @@ router.post('/:id/surrender', isAuthed, function(req, res, next) {
   }
 
   game.over(req.user);
-  
+
   res.send({});
 });

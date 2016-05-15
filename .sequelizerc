@@ -1,0 +1,4 @@
+module.exports = {
+  'config': './src/api/configuration.json',
+  'seeders-path': './src/api/seeders'
+}

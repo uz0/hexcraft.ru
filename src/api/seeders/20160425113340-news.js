@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-  up: function (queryInterface, Sequelize) {
+  up: function (queryInterface) {
     return queryInterface.bulkInsert('News', [{
       title: 'С другой стороны рамки.',
       content: `С другой стороны рамки и место обучения кадров способствует подготовки и реализации новых предложений.

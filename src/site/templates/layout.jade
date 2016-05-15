@@ -29,13 +29,15 @@ html(ng-app="hexcraft")
     link(rel="stylesheet", href='/vendor/normalize-css/normalize.css')
     link(href='https://fonts.googleapis.com/css?family=Roboto:400,300,700' rel='stylesheet' type='text/css')
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
+
     each val in styles
       link(rel="stylesheet", href= val)
 
-  body(class= bodyClass)
+  body.water(class= bodyClass)
 
     block content
 
     script(src='/vendor/angular/angular.min.js')
+    script(src='/vendor/angular-i18n/angular-locale_ru-ru.js')
     script(src='/vendor/pixi.js/bin/pixi.js')
     script(src='/javascripts/bundle.js')

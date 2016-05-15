@@ -1,15 +1,31 @@
 @import "config.scss";
 
-h2, h3, h4 {font-weight: 300; color: $themeColor;}
-h1 {font-weight: 700; color: $themeColor;}
-label {font-weight: 300;}
-a {cursor: pointer; white-space: nowrap; text-decoration: none; color: $themeColor;}
+h2, h3, h4 {
+  font-weight: 300;
+  color: $contrastColor;
+}
+
+h1 {
+  font-weight: 700;
+  color: $contrastColor;
+}
 
 h2 {
-	margin-top: $unit * 2;
-	margin-bottom: $unit;
+  margin-top: $unit * 2;
+  margin-bottom: $unit;
+}
+
+label {
+  font-weight: 300;
+}
+
+a {
+  cursor: pointer;
+  white-space: nowrap;
+  text-decoration: none;
+  color: $themeColor;
 }
 
 p {
-	margin-bottom: $unit;
+  margin: $unit 0;
 }

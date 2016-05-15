@@ -5,191 +5,129 @@
   background: $themeColor
 }
 
-html {
-  height: 100%;
+body {
+  color: $contrastColor;
+  font-family: Roboto;
+  font-weight: 300;
+  color: #fff;
+  background: $themeColor;
+  box-sizing: border-box;
 }
 
-body {
-  display: block;
-  min-height: 100%;
-  font-family: Roboto;
-  font-weight: 400;
-  color: #333;
-  position: relative;
-  box-sizing: border-box;
+body>.wrap {
+  min-height: calc(100vh - #{14 * $unit});
+}
+
+.water-canvas {
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
 
 .wrap {
-  width: 1050px;
-  margin: 0 auto;
-  position: relative;
+  background-color: rgba(255, 255, 255, 0.05);
+  margin: $unit;
+  padding: $unit 2 * $unit;
 }
 
-.wrapper {
-  min-height: calc(100vh - 95px - 66px);
-  padding-bottom: 50px;
-  box-sizing: border-box;
+header.inner .wrap,
+footer.inner .wrap {
+  background-color: rgba(255, 255, 255, 0.15);
 }
 
-.header{
-  padding: $unit 0;
-  line-height: $unit * 3;
-  border-bottom: 1px solid $themeColor;
-  background: $coverColor;
-}
-
-.header .logo {
-  width: $unit * 3;
-  height: $unit * 3;
+// inner
+header.inner .menu {
   display: inline-block;
-  vertical-align: top;
-  margin-right: $unit * 2;
-  background: url("/images/logo.svg") center / contain no-repeat;
-  filter: invert(1);
+  width: 2 * $unit;
+  height: 2 * $unit;
+  background: url('/images/menu.svg') center / contain no-repeat;
+  float: right;
+  margin: $unit 0;
 }
 
-.header .navigation {
+header.inner .logo {
   display: inline-block;
-  vertical-align: top;
+  width: 4 * $unit;
+  height: 4 * $unit;
+  background: url('/images/logo.svg') center / contain no-repeat;
 }
 
-.header .navigation a {
+header.inner nav {
+  margin-top: $unit / 2;
+}
+
+header.inner nav:not(.open) {
+  display: none;
+}
+
+header.inner nav a {
+  display: block;
+  margin-top: $unit / 2;
+  padding: $unit / 2;
+  color: $contrastColor;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+header.inner nav .play {
+  background: $contrastColor;
   color: $themeColor;
-  text-decoration: none;
-  margin-right: $unit * 2;
-  font-size: $unit;
 }
 
-.header .navigation a.active {
-  text-decoration: underline;
+footer.inner a {
+  color: $contrastColor;
+  margin-right: $unit;
+  display: inline-block;
 }
 
-.header .wrap a.button-play {
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding: 7px $unit * 3;
-  border: 1px solid $themeColor;
-  font-weight: bold;
-  color: $themeColor;
-  text-decoration: none;
-  cursor: pointer;
-  font-size: $unit;
-  margin: 0;
-  line-height: 2;
-  background: #fff;
-}
-
-.footer {
-  width: 100%;
-  padding: $unit / 2 0;
-  border-top: 1px solid $themeColor;
-  line-height: $unit * 3;
-  color: #fff;
-  background: $coverColor;
-}
-
-.footer .links a {
-  color: $themeColor;
-  text-decoration: none;
-  margin-right: $unit * 2;
-  font-size: $unit;
-}
-
-.footer .link-uz0 {
-  position: absolute;
-  bottom: $unit * 0.5;
-  right: 0;
-  height: $unit * 2;
-  width: $unit * 2;
-  background-color: rgb(255, 163, 102);
-  text-align: center;
-}
-.footer .link-uz0 a img {
-  height: $unit;
+footer.inner .uz0 {
   width: $unit;
-  position: absolute;
-  top: 25%;
-  left: 25%;
+  float: right;
+  height: $unit;
+  margin: 0;
+  background: url('/images/uz0.svg') center / contain no-repeat;
 }
 
-@media (max-width: 768px)  {
-  .navigation {
-    display: none !important;
-  }
-
-  .mobile.menu {
-    position: absolute;
-    right: 0;
-    top: $unit;
-    width: $unit * 2;
-    height: $unit * 2;
-    background-image: url("/images/menu.svg");
-    background-repeat: no-repeat;
-  }
-
-  .navigation.open {
-    display: block !important;
-    background-color: #fff;
+// desktop
+@media (min-width: 960px) {
+  .wrap {
+    width: 960px;
+    margin: $unit auto;
     position: relative;
-    top: $unit;
-    padding-bottom: $unit;
-    text-align: left;
   }
 
-  .header .navigation a {
-    display: block;
-    color: $themeColor;
-    text-decoration: none;
-    text-align: left;
-    padding: 0;
-    margin: $unit * 0.5 0 $unit * 0.5 $unit * 2 - 8px;
-    font-size: $unit * 1.125;
-    line-height: 2;
-    padding-left: $unit * 2;
-    border-left: 1px solid $themeColor;
+  header.inner .logo {
+    width: 5 * $unit;
+    height: 5 * $unit;
+
+    position: absolute;
+    left: 6px;
+    top: -6px;
   }
 
-  .header .wrap a.button-play {
-    position: static;
-    border: none;    text-align: left;
-    padding: 0;
-    margin: $unit * 0.5 0 $unit * 0.5 $unit * 2 - 8px;
-    font-size: $unit * 1.125;
-    line-height: 2;
-    font-weight: 400;
-    padding-left: $unit * 2;
-    border-left: 1px solid $themeColor;
+  header.inner nav {
+    display: block !important;
+    padding-left: 5 * $unit;
+    margin: 0;
   }
 
-  .footer .links a {
-    color: $themeColor;
-    text-decoration: none;
-    margin-right: $unit * 2;
-    font-size: 16px;
+  header.inner nav a {
+    display: inline-block;
+    padding: $unit/2 $unit;
+    margin: 0 $unit 0 0;
   }
 
-}
-
-@media (max-width: 425px) {
-  .footer .links a {
-    margin-right: $unit;
+  header.inner nav .play {
+    background: url('/images/play.svg') center / contain no-repeat;
+    width: 11 * $unit;
+    color: transparent;
+    float: right;
+    margin: 0;
   }
 
-  .footer .link-uz0 {
-    position: static;
-    margin: 0 auto;
-    line-height: 2.5;
-  }
-
-  .footer .link-uz0 a img {
-    position: static;
-  }
-
-}
-
-@media (max-width: 390px) {
-  .news-content .inner .item .date label {
-    margin-left: $unit * 0.5;
+  header.inner .menu {
+    display: none;
   }
 }

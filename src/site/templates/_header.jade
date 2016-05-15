@@ -1,11 +1,11 @@
-header.header
+header.inner
   .wrap
     a(href="/" class="logo")
-    nav.navigation(ng-class="{open: mobileMenu}")
+    a.menu(ng-click="mobileMenu=!mobileMenu")
+    nav(ng-class="{open: mobileMenu}")
       a(href='/news.html') Новости
       a(href='/about.html') Об игре
       a(href='/register.html') Регистрация
       a(href='/editor.html') Редактор
 
-      a.button-play(href='/game') Играть
-    a.mobile.menu(ng-click="mobileMenu=!mobileMenu")
+      a.play(href='/game') Играть

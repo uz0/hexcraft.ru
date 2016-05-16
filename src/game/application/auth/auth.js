@@ -16,6 +16,7 @@ export default class Auth extends PIXI.Container {
     this.verify(token);
 
     this.GUI.submit.on('click', this.login.bind(this));
+    this.GUI.submit.on('touchstart', this.login.bind(this));
   }
 
   showError(message) {

@@ -29,11 +29,13 @@ export default class Panel extends PIXI.Container {
   showExit() {
     this.GUI.logout.visible = true;
     this.GUI.logout.on('click', this.logout);
+    this.GUI.logout.on('touchstart', this.logout);
   }
 
   showCapitulation() {
     this.GUI.surrender.visible = true;
     this.GUI.surrender.on('click', this.surrender.bind(this));
+    this.GUI.surrender.on('touchstart', this.surrender.bind(this));
   }
 
   surrender() {

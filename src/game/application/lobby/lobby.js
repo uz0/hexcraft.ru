@@ -12,6 +12,7 @@ export default class Lobby extends PIXI.Container {
     super();
     this.GUI = new GUI(options);
     this.GUI.play.on('click', this.startGame.bind(this));
+    this.GUI.play.on('touchstart', this.startGame.bind(this));
     this.addChild(this.GUI);
 
     this.panel = new Panel();

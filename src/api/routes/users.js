@@ -13,11 +13,11 @@ const router = module.exports = express.Router();
 
 /**
  * @apiDefine UserInfo
- * @apiSuccess {String} username Username
- * @apiSuccess {String} password Password
- * @apiSuccess {Boolean} admin Admin
- * @apiSuccess {Data} createdAt User was created
- * @apiSuccess {Data} updatedAt User info was updated
+ * @apiSuccess {String} username Unique and not empty string
+ * @apiSuccess {String} password 
+ * @apiSuccess {Boolean} admin True - admin
+ * @apiSuccess {Data} createdAt 
+ * @apiSuccess {Data} updatedAt 
  */
 
 /**
@@ -26,7 +26,7 @@ const router = module.exports = express.Router();
  *     {
  *       "id": 2,
  *       "username": "User",
- *       "password": "$2a$10$3.YGiknAFfM0FvzdPz2OYOBLX7H/6ISY19OfXjIVqgaviZizC9IIW",
+ *       "password": "",
  *       "admin": null,
  *       "createdAt": "2016-05-16T16:24:35.974Z",
  *       "updatedAt": "2016-05-16T16:24:35.974Z"
@@ -37,14 +37,14 @@ const router = module.exports = express.Router();
  * @api {get} /users Request all users
  * @apiName getUsers
  * @apiGroup User
- * @apiExample {curl} Example usage:
+ * @apiExample Example usage:
  *     /api/users
  * @apiSuccessExample {json} Success-Response:
  *   [
  *     {
  *       "id": 2,
  *       "username": "User",
- *       "password": "$2a$10$3.YGiknAFfM0FvzdPz2OYOBLX7H/6ISY19OfXjIVqgaviZizC9IIW",
+ *       "password": "",
  *       "admin": null,
  *       "createdAt": "2016-05-16T16:24:35.974Z",
  *       "updatedAt": "2016-05-16T16:24:35.974Z"
@@ -52,13 +52,13 @@ const router = module.exports = express.Router();
  *     {
  *       "id": 3,
  *       "username": "User1",
- *       "password": "$2a$10$3.YGiknAFfM0FvzdPz2OYOwtKZbIMKorv3YxOWAbdAmdHm3/e8kXa",
+ *       "password": "",
  *       "admin": null,
  *       "createdAt": "2016-05-16T17:13:48.548Z",
  *       "updatedAt": "2016-05-16T17:13:48.548Z"
  *     }
  *   ]
- * @apiSuccess {Object[]} users All users
+ * @apiSuccess {Object[]} users Contain info about all users
  */
 
 router.get('/', function(req, res) {
@@ -73,7 +73,7 @@ router.get('/', function(req, res) {
  * @apiName createUser
  * @apiGroup User
  *
- * @apiParam {String} username Username
+ * @apiParam {String} username Unique and not empty string
  * @apiParam {String} password Password
  *
  * @apiUse UserInfo
@@ -101,8 +101,6 @@ router.post('/', function(req, res, next) {
  * @apiGroup User
  *
  * @apiParam {Number} id User id
- * @apiExample {curl} Example usage:
- *     /api/user/2
  * @apiUse UserResponse
  * @apiUse UserInfo
  */

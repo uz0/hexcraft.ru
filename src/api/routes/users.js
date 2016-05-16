@@ -36,6 +36,13 @@ router.get('/', function(req, res) {
  *
  * @apiSuccess {Object} user User info
 
+ * @apiSuccessExample {json} Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *       "username": "John",
+ *       "password": "qwerty12345"
+ *     }
+
  * @apiError (400) {String} error Error info
  */
 
@@ -45,10 +52,10 @@ router.post('/', function(req, res, next) {
     password: bcrypt.hashSync(req.body.password, salt)
   }).then(user => {
     res.send(user);
-  }).catch( err => {
-      let error = new Error('Wrong username or password');
-      error.status = 400;
-      next(error);
+  }).catch(error => {
+    error.message = "Неверный логин или пароль.";
+    error.status = 400;
+    next(error);
   });
 });
 

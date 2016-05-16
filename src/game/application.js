@@ -38,11 +38,14 @@ class Hexcraft {
 
     let newAspectRatio = newWidth / newHeight;
 
-    // console.log(ratio, newAspectRatio);
     this.stage.y = 0;
     this.stage.x = 0;
-    console.log(newWidth, this.stage.width);
-    console.log(newHeight, this.stage.height);
+
+    console.group('stage - ', this.stage);
+    console.log('ratio:', ratio, ' : ', newAspectRatio);
+    console.log('width:', newWidth, ' : ', this.stage.width);
+    console.log('height:', newHeight, ' : ', this.stage.height);
+    console.groupEnd();
 
     if (newAspectRatio > aspectRatio) {
       this.stage.x = (newWidth - this.stage.width) / 2;

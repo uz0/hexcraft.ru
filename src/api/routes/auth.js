@@ -13,14 +13,66 @@ const router = module.exports = express.Router();
 
 
 /**
+ * @apiDefine UserInfo
+ * @apiSuccess {String} username Unique and not empty string
+ * @apiSuccess {String} password 
+ * @apiSuccess {Boolean} admin True - admin
+ * @apiSuccess {Data} createdAt 
+ * @apiSuccess {Data} updatedAt 
+ */
+
+ /**
+ * @apiDefine TokenInfo
+ * @apiSuccess {String} id Token id 
+ * @apiSuccess {String} token 
+ * @apiSuccess {String} UserId Owner of token id 
+ * @apiSuccess {String} validThrough Time before expiring
+ * @apiSuccess {Data} updatedAt 
+ * @apiSuccess {Data} createdAt 
+ */
+
+/**
+ * @apiDefine UserResponse
+ * @apiSuccessExample {json} Success-Response:
+ *   [  
+ *     {
+ *       "id": 2,
+ *       "username": "Test",
+ *       "password": "",
+ *       "admin": null,
+ *       "createdAt": "2016-05-16T16:24:35.974Z",
+ *       "updatedAt": "2016-05-16T16:24:35.974Z"
+ *     }
+ *     {
+ *       "id": 3,
+ *       "token": "Test",
+ *       "UserId": "2",
+ *       "validThrough": 1463522254.954,
+ *       "updatedAt": "2016-05-16T16:24:35.974Z",
+ *       "createdAt": "2016-05-16T16:24:35.974Z"
+ *     }
+ *   ]
+ */
+
+
+/**
  * @api {post} /auth/verify Verify token
  * @apiName verifyToken
  * @apiGroup Auth
  *
- * @apiParam {String} token token
+ * @apiParam {String} token Token
  *
- * @apiSuccess (200) {Object} token Token information
- * @apiError (500) {String} error Error description
+ * @apiUse TokenInfo
+ * @apiSuccessExample Success-Response:
+ *     {
+ *       "id": 3,
+ *       "token": "Test",
+ *       "UserId": "2",
+ *       "validThrough": 1463522254.954,
+ *       "updatedAt": "2016-05-16T16:24:35.974Z",
+ *       "createdAt": "2016-05-16T16:24:35.974Z"
+ *     }
+ * @apiError (400) {String} error Error description
  */
 
 router.post('/verify', function(req, res, next) {
@@ -49,11 +101,31 @@ router.post('/verify', function(req, res, next) {
  * @apiName Login
  * @apiGroup Auth
  *
- * @apiParam {String} username Username
- * @apiParam {String} password Password
+ * @apiParam {String} username Unique and not empty string
+ * @apiParam {String} password 
  *
- * @apiSuccess {Object} user User info
- * @apiSuccess {Object} token User's token
+ * @apiUse UserInfo
+ * @apiUse TokenInfo
+ * @apiSuccessExample {json} Success-Response:
+ *   [  
+ *     {
+ *       "id": 2,
+ *       "username": "Test",
+ *       "password": "",
+ *       "admin": null,
+ *       "createdAt": "2016-05-16T16:24:35.974Z",
+ *       "updatedAt": "2016-05-16T16:24:35.974Z"
+ *     }
+ *     {
+ *       "id": 3,
+ *       "token": "Test",
+ *       "UserId": "2",
+ *       "validThrough": 1463522254.954,
+ *       "updatedAt": "2016-05-16T16:24:35.974Z",
+ *       "createdAt": "2016-05-16T16:24:35.974Z"
+ *     }
+ *   ]
+ * @apiError (400) {String} error Error description
  */
 
 router.post('/login', function(req, res, next) {
@@ -83,7 +155,7 @@ router.post('/login', function(req, res, next) {
 
 
 /**
- * @api {post} /auth/logout Logout
+ * @api {destroy} /auth/logout Logout
  * @apiName Logout
  * @apiGroup Auth
  *

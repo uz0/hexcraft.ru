@@ -14,6 +14,7 @@ api.init(app, function() {
 
 // catch 404
 app.use(function(req, res) {
-  res.status(404)
-     .sendFile('public/error.html');
+  res.status(404).sendFile('public/error.html', {
+    root: __dirname
+  });
 });

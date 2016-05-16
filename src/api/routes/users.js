@@ -31,17 +31,25 @@ router.get('/', function(req, res) {
  * @apiName createUser
  * @apiGroup User
  *
- * @apiSuccess {Object} user User data
+ * @apiParam {String} username Username
+ * @apiParam {String} password Password
+ *
+ * @apiSuccess {Object} user User info
+
+ * @apiError (400) {String} error Error info
  */
 
-router.post('/', function(req, res) {
+router.post('/', function(req, res, next) {
   models.User.create({
     username: req.body.username,
     password: bcrypt.hashSync(req.body.password, salt)
   }).then(user => {
     res.send(user);
+  }).catch( err => {
+      let error = new Error('Wrong username or password');
+      error.status = 400;
+      next(error);
   });
-
 });
 
 

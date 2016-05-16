@@ -1,0 +1,27 @@
+@import "config.scss";
+
+.register input, label, {
+	display: block;
+}
+
+.register > button {
+	display: block;
+}
+
+.register input {
+	padding: $unit;
+	margin-top: $unit;
+	border: none;
+}
+
+.register h2 {
+	margin-bottom: $unit * 2;
+}
+
+.register button {
+	margin-top: $unit * 2;
+	padding: $unit;
+	border: none;
+	cursor: pointer;
+	background-color: #eee;
+}

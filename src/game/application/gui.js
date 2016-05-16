@@ -14,6 +14,19 @@ export default class GUI extends PIXI.Container {
       Container: PIXI.Container
     };
 
+    // let t = new PIXI.Text(123);
+    // t.width = 1;
+    // t.height = 1;
+    // t.position = {
+    //   x: 1000 -1,
+    //   y: 622 -1
+    // }
+    // this.width = 800;
+    // this.height = 600;
+    // console.log(t);
+    // console.log(this);
+    // this.addChild(t);
+
     options.forEach(options => {
       if(options.component === 'Sprite') {
         options.configuration = hexcraft.resources[options.textureName].blobUrl;
@@ -25,6 +38,9 @@ export default class GUI extends PIXI.Container {
       this[options.id] = element;
       this.addChild(element);
     });
+
+    // this.width = 800;
+    // this.height = 600;
   }
 
   extend(original, options){

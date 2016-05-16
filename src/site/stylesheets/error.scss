@@ -1,0 +1,12 @@
+@import "config.scss";
+
+.wrap .error {
+	text-align: center;
+	padding-top: $unit * 7;
+}
+
+@media (min-width: 960px){
+	.wrap .error {
+		padding-top: $unit * 10;
+	}
+}

@@ -98,33 +98,50 @@ footer.inner .uz0 {
     position: relative;
   }
 
+  header.inner .wrap {
+    padding: 0 0 0 4 * $unit;
+    border-bottom: 4px solid rgba(255, 255, 255, 0.15);
+  }
+
   header.inner .logo {
     width: 5 * $unit;
     height: 5 * $unit;
 
     position: absolute;
-    left: 6px;
+    left: -12px;
     top: -6px;
   }
 
   header.inner nav {
     display: block !important;
-    padding-left: 5 * $unit;
+    padding-left: 1 * $unit;
     margin: 0;
   }
 
   header.inner nav a {
     display: inline-block;
-    padding: $unit/2 $unit;
-    margin: 0 $unit 0 0;
+    padding: 1.5 * $unit $unit 1.5 * $unit - 4;
+    margin: 0;
+    background: none;
+    border-bottom: 4px solid rgba(255, 255, 255, 0.15);
+    margin-bottom: -4px;
+    text-shadow: 2px 2px 2px #0B91A9;
+    font-weight: 400;
+    letter-spacing: 1px;
+    text-transform: uppercase;
   }
 
   header.inner nav .play {
-    background: url('/images/play.svg') center / contain no-repeat;
     width: 11 * $unit;
-    color: transparent;
     float: right;
     margin: 0;
+    color: #fff;
+    background: transparent;
+    text-align: center;
+    font-size: 2 * $unit;
+    line-height: 0.6;
+    font-weight: 600;
+    letter-spacing: 4px;
   }
 
   header.inner .menu {

@@ -12,10 +12,52 @@ const router = module.exports = express.Router();
 
 
 /**
+ * @apiDefine UserInfo
+ * @apiSuccess {String} username Username
+ * @apiSuccess {String} password Password
+ * @apiSuccess {Boolean} admin Admin
+ * @apiSuccess {Data} createdAt User was created
+ * @apiSuccess {Data} updatedAt User info was updated
+ */
+
+/**
+ * @apiDefine UserResponse
+ * @apiSuccessExample {json} Success-Response:
+ *     {
+ *       "id": 2,
+ *       "username": "User",
+ *       "password": "$2a$10$3.YGiknAFfM0FvzdPz2OYOBLX7H/6ISY19OfXjIVqgaviZizC9IIW",
+ *       "admin": null,
+ *       "createdAt": "2016-05-16T16:24:35.974Z",
+ *       "updatedAt": "2016-05-16T16:24:35.974Z"
+ *     }
+ */
+
+/**
  * @api {get} /users Request all users
  * @apiName getUsers
  * @apiGroup User
- *
+ * @apiExample {curl} Example usage:
+ *     /api/users
+ * @apiSuccessExample {json} Success-Response:
+ *   [
+ *     {
+ *       "id": 2,
+ *       "username": "User",
+ *       "password": "$2a$10$3.YGiknAFfM0FvzdPz2OYOBLX7H/6ISY19OfXjIVqgaviZizC9IIW",
+ *       "admin": null,
+ *       "createdAt": "2016-05-16T16:24:35.974Z",
+ *       "updatedAt": "2016-05-16T16:24:35.974Z"
+ *     }
+ *     {
+ *       "id": 3,
+ *       "username": "User1",
+ *       "password": "$2a$10$3.YGiknAFfM0FvzdPz2OYOwtKZbIMKorv3YxOWAbdAmdHm3/e8kXa",
+ *       "admin": null,
+ *       "createdAt": "2016-05-16T17:13:48.548Z",
+ *       "updatedAt": "2016-05-16T17:13:48.548Z"
+ *     }
+ *   ]
  * @apiSuccess {Object[]} users All users
  */
 
@@ -34,15 +76,8 @@ router.get('/', function(req, res) {
  * @apiParam {String} username Username
  * @apiParam {String} password Password
  *
- * @apiSuccess {Object} user User info
-
- * @apiSuccessExample {json} Success-Response:
- *     HTTP/1.1 200 OK
- *     {
- *       "username": "John",
- *       "password": "qwerty12345"
- *     }
-
+ * @apiUse UserInfo
+ * @apiUse UserResponse
  * @apiError (400) {String} error Error info
  */
 
@@ -66,8 +101,10 @@ router.post('/', function(req, res, next) {
  * @apiGroup User
  *
  * @apiParam {Number} id User id
- *
- * @apiSuccess {Object} user User data
+ * @apiExample {curl} Example usage:
+ *     /api/user/2
+ * @apiUse UserResponse
+ * @apiUse UserInfo
  */
 
 router.get('/:id', function(req, res) {
@@ -82,7 +119,7 @@ router.get('/:id', function(req, res) {
 
 
 /**
- * @api {delete} /users/:userId Delete this user
+ * @api {delete} /users/:id Delete this user
  * @apiName deleteUser
  * @apiGroup User
  *

@@ -28,14 +28,14 @@ body>.wrap {
 }
 
 .wrap {
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: $lightBackgroundColor;
   margin: $unit;
   padding: $unit 2 * $unit;
 }
 
 header.inner .wrap,
 footer.inner .wrap {
-  background-color: rgba(255, 255, 255, 0.15);
+  background-color: $lighterBackgroundColor;
 }
 
 // inner
@@ -68,7 +68,7 @@ header.inner nav a {
   margin-top: $unit / 2;
   padding: $unit / 2;
   color: $contrastColor;
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: $lightBackgroundColor;
 }
 
 header.inner nav .play {
@@ -100,7 +100,7 @@ footer.inner .uz0 {
 
   header.inner .wrap {
     padding: 0 0 0 4 * $unit;
-    border-bottom: 4px solid rgba(255, 255, 255, 0.15);
+    border-bottom: $innerBorderHeight solid $lighterBackgroundColor;
   }
 
   header.inner .logo {
@@ -120,12 +120,11 @@ footer.inner .uz0 {
 
   header.inner nav a {
     display: inline-block;
-    padding: 1.5 * $unit $unit 1.5 * $unit - 4;
+    padding: 1.5 * $unit $unit 1.5 * $unit - $innerBorderHeight;
     margin: 0;
     background: none;
-    border-bottom: 4px solid rgba(255, 255, 255, 0.15);
-    margin-bottom: -4px;
-    text-shadow: 2px 2px 2px #0B91A9;
+    border-bottom: $innerBorderHeight solid $lighterBackgroundColor;
+    margin-bottom: -$innerBorderHeight;
     font-weight: 400;
     letter-spacing: 1px;
     text-transform: uppercase;

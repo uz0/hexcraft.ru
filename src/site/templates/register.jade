@@ -1,17 +1,25 @@
 extends layout
 
 block vars
-  - var title = 'РЕГИСТРАЦИЯ'
+  - var title = 'Регистрация'
+  - var bodyClass = 'register-page'
 
 block content
   include ./_header.jade
-  .wrap.register(ng-controller="registerCtrl as register")
+  .wrap(ng-controller="registerCtrl as register")
     h2 Регистрация
     form(ng-submit="register.register()")
+      span {{register.responseData}}
       label
-        input(type="text" ng-model="register.username" placeholder="Логин" required)
+        input(type="text"
+          ng-model="register.username" 
+          placeholder="Логин"
+          required)
       label
-        input(type="password" ng-model="register.password" placeholder="Пароль" required)
+        input(type="password"
+          ng-model="register.password"
+          placeholder="Пароль"
+          required)
       button Зарегистрироваться
 
   include ./_footer.jade

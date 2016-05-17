@@ -1,27 +1,41 @@
 @import "config.scss";
 
-.register input, label, {
-	display: block;
+.register-page input, label, {
+  display: block;
 }
 
-.register > button {
-	display: block;
+.register-page > button {
+  display: block;
 }
 
-.register input {
-	padding: $unit;
-	margin-top: $unit;
-	border: none;
+.register-page input {
+  padding: $unit / 2;
+  margin-top: $unit;
+  border: none;
 }
 
-.register h2 {
-	margin-bottom: $unit * 2;
+.register-page input[type="text"] {
+  margin-top: 0px;
 }
 
-.register button {
-	margin-top: $unit * 2;
-	padding: $unit;
-	border: none;
-	cursor: pointer;
-	background-color: #eee;
+.register-page h2 {
+  margin-bottom: $unit * 2;
+}
+
+.register-page span {
+  position: relative;
+  top: -$unit;
+}
+
+.register-page button {
+  margin-top: $unit * 2;
+  padding: $unit / 2;
+  letter-spacing: 1.3px;
+  border: none;
+  cursor: pointer;
+  background-color: #eee;
+}
+
+.register-page .ng-not-empty {
+  border: 1px solid green;
 }

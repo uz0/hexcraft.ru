@@ -12,53 +12,46 @@ const router = module.exports = express.Router();
 
 
 /**
- * @apiDefine UserInfo
- * @apiSuccess {String} username Unique and not empty string
- * @apiSuccess {String} password 
- * @apiSuccess {Boolean} admin True - admin
- * @apiSuccess {Data} createdAt 
- * @apiSuccess {Data} updatedAt 
- */
-
-/**
  * @apiDefine UserResponse
+ *
+ * @apiSuccess {Number}  id
+ * @apiSuccess {String}  username
+ * @apiSuccess {Boolean} admin true if user has admin rights
+ * @apiSuccess {Date}    createdAt
+ * @apiSuccess {Date}    updatedAt
+ *
  * @apiSuccessExample {json} Success-Response:
- *     {
- *       "id": 2,
- *       "username": "User",
- *       "password": "",
- *       "admin": null,
- *       "createdAt": "2016-05-16T16:24:35.974Z",
- *       "updatedAt": "2016-05-16T16:24:35.974Z"
- *     }
+    {
+      "id": 2,
+      "username": "User",
+      "admin": null,
+      "createdAt": "2016-05-16T16:24:35.974Z",
+      "updatedAt": "2016-05-16T16:24:35.974Z"
+    }
  */
 
 /**
  * @api {get} /users Request all users
  * @apiName getUsers
  * @apiGroup User
- * @apiExample Example usage:
- *     /api/users
+ *
+ * @apiSuccess {Object[]} users
+ * @apiSuccess {Number}   users.id
+ * @apiSuccess {String}   users.username
+ * @apiSuccess {Boolean}  users.admin true if user has admin rights
+ * @apiSuccess {Date}     users.createdAt
+ * @apiSuccess {Date}     users.updatedAt
+ *
  * @apiSuccessExample {json} Success-Response:
- *   [
- *     {
- *       "id": 2,
- *       "username": "User",
- *       "password": "",
- *       "admin": null,
- *       "createdAt": "2016-05-16T16:24:35.974Z",
- *       "updatedAt": "2016-05-16T16:24:35.974Z"
- *     }
- *     {
- *       "id": 3,
- *       "username": "User1",
- *       "password": "",
- *       "admin": null,
- *       "createdAt": "2016-05-16T17:13:48.548Z",
- *       "updatedAt": "2016-05-16T17:13:48.548Z"
- *     }
- *   ]
- * @apiSuccess {Object[]} users Contain info about all users
+    [
+       {
+          "id":2,
+          "username":"test",
+          "admin":null,
+          "createdAt":"2016-05-11T21:40:57.876Z",
+          "updatedAt":"2016-05-11T21:40:57.876Z"
+       }
+    ]
  */
 
 router.get('/', function(req, res) {
@@ -70,15 +63,16 @@ router.get('/', function(req, res) {
 
 /**
  * @api {post} /users Create new user
+ * @apiDescription Create new user with username and password and return user data
  * @apiName createUser
  * @apiGroup User
  *
  * @apiParam {String} username Unique and not empty string
  * @apiParam {String} password Password
  *
- * @apiUse UserInfo
  * @apiUse UserResponse
- * @apiError (400) {String} error Error info
+ *
+ * @apiError (400) {String} error
  */
 
 router.post('/', function(req, res, next) {
@@ -100,9 +94,9 @@ router.post('/', function(req, res, next) {
  * @apiName getUserData
  * @apiGroup User
  *
- * @apiParam {Number} id User id
  * @apiUse UserResponse
- * @apiUse UserInfo
+ *
+ * @apiParam {Number} id User id
  */
 
 router.get('/:id', function(req, res) {
@@ -117,9 +111,10 @@ router.get('/:id', function(req, res) {
 
 
 /**
- * @api {delete} /users/:id Delete this user
+ * @api {delete} /users/:id Delete user
  * @apiName deleteUser
  * @apiGroup User
+ * @apiPermission admin
  *
  * @apiParam {Number} id User id
  */

@@ -36,8 +36,8 @@ export default class Auth extends PIXI.Container {
       username: username,
       password: password
     }).then(response => {
-      window.localStorage.setItem('username', response.user.username);
-      window.localStorage.setItem('token', response.token.token);
+      window.localStorage.setItem('username', response.User.username);
+      window.localStorage.setItem('token', response.token);
       hexcraft.setStage(Lobby);
     }).catch(err => {
       this.showError('Неправильная пара логин/пароль')

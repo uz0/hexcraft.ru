@@ -4,10 +4,8 @@ block vars
   - var title = 'Ошибка'
 
 block content
-    include ./_header.jade
-    .wrap
-     .error
-        img(src="/images/error.svg")
-        p Упс... что-то пошло не так :(
+  include ./_header.jade
+  .wrap.error 
+    p Упс... что-то пошло не так :(
 
-    include ./_footer.jade
+  include ./_footer.jade

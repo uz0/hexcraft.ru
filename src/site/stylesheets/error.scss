@@ -1,12 +1,16 @@
 @import "config.scss";
 
-.wrap .error {
-	text-align: center;
-	padding-top: $unit * 7;
+.wrap.error {
+  position: relative;
 }
 
-@media (min-width: 960px){
-	.wrap .error {
-		padding-top: $unit * 10;
-	}
+.wrap.error p {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  margin-top: -$unit * 4;
+  padding-top: $unit * 6;
+  text-align: center;
+  background: url('/images/error.svg') center no-repeat;
 }

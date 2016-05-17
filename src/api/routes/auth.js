@@ -64,7 +64,7 @@ router.post('/verify', function(req, res, next) {
     include: [ models.User ]
   }).then(token => {
     if(!token) {
-      let error = new Error('invalid token');
+      let error = new Error('Неверный токен.');
       error.status = 400;
       return next(error);
     }
@@ -96,7 +96,7 @@ router.post('/login', function(req, res, next) {
     }
   }).then(user => {
     if (!user) {
-      let error = new Error('invalid credentials');
+      let error = new Error('Неверная пара логин\\пароль.');
       error.status = 400;
       return next(error);
     }

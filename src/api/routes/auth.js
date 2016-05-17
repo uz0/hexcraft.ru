@@ -11,68 +11,46 @@ const uuid = require('node-uuid');
 const express = require('express');
 const router = module.exports = express.Router();
 
-
 /**
- * @apiDefine UserInfo
- * @apiSuccess {String} username Unique and not empty string
- * @apiSuccess {String} password 
- * @apiSuccess {Boolean} admin True - admin
- * @apiSuccess {Data} createdAt 
- * @apiSuccess {Data} updatedAt 
- */
-
- /**
- * @apiDefine TokenInfo
- * @apiSuccess {String} id Token id 
- * @apiSuccess {String} token 
- * @apiSuccess {String} UserId Owner of token id 
- * @apiSuccess {String} validThrough Time before expiring
- * @apiSuccess {Data} updatedAt 
- * @apiSuccess {Data} createdAt 
- */
-
-/**
- * @apiDefine UserResponse
- * @apiSuccessExample {json} Success-Response:
- *   [  
- *     {
- *       "id": 2,
- *       "username": "Test",
- *       "password": "",
- *       "admin": null,
- *       "createdAt": "2016-05-16T16:24:35.974Z",
- *       "updatedAt": "2016-05-16T16:24:35.974Z"
- *     }
- *     {
- *       "id": 3,
- *       "token": "Test",
- *       "UserId": "2",
- *       "validThrough": 1463522254.954,
- *       "updatedAt": "2016-05-16T16:24:35.974Z",
- *       "createdAt": "2016-05-16T16:24:35.974Z"
- *     }
- *   ]
- */
-
+ * @apiDefine TokenWithUserDataResponse
+ *
+ * @apiSuccess {Number}  id
+ * @apiSuccess {String}  token
+ * @apiSuccess {Number}  validThrough Time before expiring
+ * @apiSuccess {Date}    updatedAt
+ * @apiSuccess {Date}    createdAt
+ * @apiSuccess {Number}  UserId Owner of token
+ * @apiSuccess {Object}  User User data
+ *
+ * @apiSuccessExample Success-Response:
+    {
+       "id":31,
+       "token":"521fe7b1-5af8-4f48-b4ca-584d4f060e88",
+       "validThrough":1463517876.142,
+       "createdAt":"2016-05-16T20:44:36.144Z",
+       "updatedAt":"2016-05-16T20:44:36.144Z",
+       "UserId":3,
+       "User":{
+          "id":3,
+          "username":"admin",
+          "admin":true,
+          "createdAt":"2016-05-11T21:40:57.876Z",
+          "updatedAt":"2016-05-11T21:40:57.876Z"
+       }
+    }
+*/
 
 /**
  * @api {post} /auth/verify Verify token
+ * @apiDescription Check token status, return token data with user if token valid or error
  * @apiName verifyToken
  * @apiGroup Auth
  *
  * @apiParam {String} token Token
  *
- * @apiUse TokenInfo
- * @apiSuccessExample Success-Response:
- *     {
- *       "id": 3,
- *       "token": "Test",
- *       "UserId": "2",
- *       "validThrough": 1463522254.954,
- *       "updatedAt": "2016-05-16T16:24:35.974Z",
- *       "createdAt": "2016-05-16T16:24:35.974Z"
- *     }
- * @apiError (400) {String} error Error description
+ * @apiUse TokenWithUserDataResponse
+ *
+ * @apiError (400) {String} error
  */
 
 router.post('/verify', function(req, res, next) {
@@ -86,7 +64,7 @@ router.post('/verify', function(req, res, next) {
     include: [ models.User ]
   }).then(token => {
     if(!token) {
-      let error = new Error('invalid token');
+      let error = new Error('Неверный токен.');
       error.status = 400;
       return next(error);
     }
@@ -98,34 +76,16 @@ router.post('/verify', function(req, res, next) {
 
 /**
  * @api {post} /auth/login Login
+ * @apiDescription Create and return new user token with user data if credentials valid or error
  * @apiName Login
  * @apiGroup Auth
  *
  * @apiParam {String} username Unique and not empty string
- * @apiParam {String} password 
+ * @apiParam {String} password
  *
- * @apiUse UserInfo
- * @apiUse TokenInfo
- * @apiSuccessExample {json} Success-Response:
- *   [  
- *     {
- *       "id": 2,
- *       "username": "Test",
- *       "password": "",
- *       "admin": null,
- *       "createdAt": "2016-05-16T16:24:35.974Z",
- *       "updatedAt": "2016-05-16T16:24:35.974Z"
- *     }
- *     {
- *       "id": 3,
- *       "token": "Test",
- *       "UserId": "2",
- *       "validThrough": 1463522254.954,
- *       "updatedAt": "2016-05-16T16:24:35.974Z",
- *       "createdAt": "2016-05-16T16:24:35.974Z"
- *     }
- *   ]
- * @apiError (400) {String} error Error description
+ * @apiUse TokenWithUserDataResponse
+ *
+ * @apiError (400) {String} error
  */
 
 router.post('/login', function(req, res, next) {
@@ -136,7 +96,7 @@ router.post('/login', function(req, res, next) {
     }
   }).then(user => {
     if (!user) {
-      let error = new Error('invalid credentials');
+      let error = new Error('Неверная пара логин\\пароль.');
       error.status = 400;
       return next(error);
     }
@@ -145,17 +105,17 @@ router.post('/login', function(req, res, next) {
       token: uuid.v4(),
       UserId: user.id,
       validThrough: (new Date().getTime() / 1000) + config[env].validTime
-    }).then(token => res.send({
-      user: user,
-      token: token
-    }));
-
+    }).then(token => {
+      token.dataValues.User = user;
+      res.send(token)
+    });
   });
 });
 
 
 /**
- * @api {destroy} /auth/logout Logout
+ * @api {post} /auth/logout Logout
+ * @apiDescription Destroy token
  * @apiName Logout
  * @apiGroup Auth
  *
@@ -168,7 +128,7 @@ router.post('/logout', isAuthed, function(req, res) {
       token: req.body.token
     }
   }).then(() => {
-    res.send();
+    res.send({});
   });
 
 });

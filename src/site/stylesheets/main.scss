@@ -31,6 +31,7 @@ body>.wrap {
   background-color: $lightBackgroundColor;
   margin: $unit;
   padding: $unit 2 * $unit;
+  position: relative;
 }
 
 header.inner .wrap,
@@ -95,7 +96,6 @@ footer.inner .uz0 {
   .wrap {
     width: 960px;
     margin: $unit auto;
-    position: relative;
   }
 
   header.inner .wrap {

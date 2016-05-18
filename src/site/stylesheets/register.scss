@@ -1,39 +1,22 @@
 @import "config.scss";
 
-.register-page input, label, {
-  display: block;
-}
-
-.register-page > button {
-  display: block;
-}
-
-.register-page input {
-  padding: $unit / 2;
+.register-page input,
+.register-page button {
   margin-top: $unit;
   border: none;
-}
-
-.register-page input[type="text"] {
-  margin-top: 0px;
+  display: block;
+  box-sizing: border-box;
+  width: $unit * 14;
+  padding: $unit 2 * $unit;
 }
 
 .register-page h2 {
   margin-bottom: $unit * 2;
 }
 
-.register-page span {
-  position: relative;
-  top: -$unit;
-}
-
 .register-page button {
-  margin-top: $unit * 2;
-  padding: $unit / 2;
-  letter-spacing: 1.3px;
-  border: none;
   cursor: pointer;
-  background-color: #eee;
+  text-align: center;
 }
 
 .register-page .ng-not-empty {

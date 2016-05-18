@@ -9,17 +9,18 @@ block content
   .wrap(ng-controller="registerCtrl as register")
     h2 Регистрация
     form(ng-submit="register.register()")
-      span {{register.responseData}}
-      label
-        input(type="text"
-          ng-model="register.username" 
-          placeholder="Логин"
-          required)
-      label
-        input(type="password"
-          ng-model="register.password"
-          placeholder="Пароль"
-          required)
+      span(ng-bind="register.responseData")
+
+      input(type="text"
+        ng-model="register.username"
+        placeholder="Логин"
+        required)
+
+      input(type="password"
+        ng-model="register.password"
+        placeholder="Пароль"
+        required)
+
       button Зарегистрироваться
 
   include ./_footer.jade

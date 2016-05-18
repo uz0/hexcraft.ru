@@ -18,7 +18,6 @@ export default class registerCtrl {
     })
     .catch(res => {
       this.responseData = res.data.error;
-      this.reset();
     });
   }
   reset() {

@@ -1,13 +1,14 @@
 [{
   id: "username",
-  text: "",
+  text:  "",
   component: "Text",
   style: {
-    fill: "#aaa"
+    fill: "#fff",
+    font: "24px Arial"
   },
   position: {
     x: 500,
-    y: 20
+    y: 25
   },
   anchor: {
     x: 0,
@@ -18,11 +19,12 @@
   text: "",
   component: "Text",
   style: {
-    fill: "#333"
+    fill: "#fff",
+    font: "24px Arial"
   },
   position: {
-    x: 0,
-    y: 20
+    x: 16,
+    y: 25
   }
 },{
   id: "surrender",
@@ -30,18 +32,18 @@
   visible: false,
   position: {
     x: 610,
-    y: 10
+    y: 12
   },
   configuration: {
-    value: "Сдаться",
+    value: "СДАТЬСЯ",
     padding: 10,
     borderWidth: 0,
     borderRadius: 0,
     boxShadow: null,
     innerShadow: null,
-    backgroundColor: "#000",
+    backgroundColor: "rgba(255, 255, 255, 0.15)",
     text: {
-      font: "24px Arial",
+      font: "bold 24px Arial",
       fill: "#fff",
     }
   }
@@ -51,39 +53,19 @@
   visible: false,
   position: {
     x: 610,
-    y: 10
+    y: 12
   },
   configuration: {
-    value: "Выйти",
+    value: "ВЫЙТИ",
     padding: 10,
     borderWidth: 0,
     borderRadius: 0,
     boxShadow: null,
     innerShadow: null,
-    backgroundColor: "#000",
+    backgroundColor: "rgba(255, 255, 255, 0.15)",
+    // innerShadow: "0px -4px 1px rgba(255, 255, 255, 0.5)",
     text: {
-      font: "24px Arial",
-      fill: "#fff",
-    }
-  }
-},{
-  id: "border",
-  component: "Button",
-  width: 800,
-  position: {
-    x: 0,
-    y: 70
-  },
-  configuration: {
-    value: "",
-    padding: 0,
-    borderWidth: 0,
-    borderRadius: 0,
-    boxShadow: null,
-    innerShadow: null,
-    backgroundColor: "#000",
-    text: {
-      font: "1px Arial",
+      font: "bold 24px Arial",
       fill: "#fff",
     }
   }

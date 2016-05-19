@@ -10,13 +10,14 @@
 }, {
   component: "Text",
   id: "auth",
-  text: "Игры",
+  text: "ИГРЫ",
   position: {
-    x: 0,
+    x: 16,
     y: 80
   },
   style: {
-    fill: "#333"
+    font: "bold 24px Arial",
+    fill: "#fff"
   }
 }, {
   component: "Container",
@@ -29,13 +30,14 @@
 }, {
   component: "Text",
   id: "auth",
-  text: "Игроки",
+  text: "ИГРОКИ",
   position: {
-    x: 700,
+    x: 684,
     y: 80
   },
   style: {
-    fill: "#333"
+    font: "bold 24px Arial",
+    fill: "#fff"
   }
 }, {
   component: "Sprite",
@@ -58,20 +60,20 @@
   value: "В БОЙ",
   component: "Button",
   configuration: {
-    padding: 10,
+    padding: 40,
     borderWidth: 0,
     value: "Вход",
     borderRadius: 0,
     boxShadow: null,
     innerShadow: null,
-    backgroundColor: "#000",
+    backgroundColor: "transparent",
     text: {
-      font: "24px Arial",
-      fill: "#fff",
+      font: "bold 24px Arial",
+      fill: "#0b93aa",
     }
   },
   position: {
-    x: 300,
-    y: 275
+    x: 265,
+    y: 245
   }
 }];

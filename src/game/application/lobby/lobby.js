@@ -31,12 +31,12 @@ export default class Lobby extends PIXI.Container {
 
         let label = new PIXI.Text(user.username, {
           font : '24px Arial',
-          fill : '#333',
+          fill : '#fff',
           align : 'right'
         });
 
         label.y = 30*counter;
-        label.x = 290;
+        label.x = 284;
         label.anchor.set(1,0);
 
         this.GUI.players.addChild(label);
@@ -52,12 +52,12 @@ export default class Lobby extends PIXI.Container {
 
         let label = new PIXI.Text(this.labelFormater(game), {
           font : '24px Arial',
-          fill : '#333',
+          fill : '#fff',
           align : 'left'
         });
 
         label.y = 30*counter;
-        label.x = 0;
+        label.x = 16;
         label.anchor.set(0);
 
         this.GUI.games.addChild(label);

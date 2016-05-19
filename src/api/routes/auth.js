@@ -115,9 +115,11 @@ router.post('/login', function(req, res, next) {
 
 /**
  * @api {post} /auth/logout Logout
- * @apiDescription Destroy token
  * @apiName Logout
  * @apiGroup Auth
+ * @apiPermission user
+ *
+ * @apiDescription Destroy token
  *
  * @apiParam {String} token user's token
  */

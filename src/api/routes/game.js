@@ -12,20 +12,20 @@ const sse = require('server-sent-events');
  * @apiSuccess {String}       id                  UUID of game.
  * @apiSuccess {String}       stage               Stage the game is in. Can be "not started", "started", "over player1" and "over player2".
  * @apiSuccess {Object}       player1             First player details
- * @apiSuccess {Object} player2             Depending on situation, can be second player details or Null (if game not started)
- * @paiSuccess {Object}       map                 Game's map data, including MapData (array of valid cells in the map).
- * @paiSuccess {Number}       map.id
- * @paiSuccess {String}       map.description
- * @paiSuccess {Date}         map.createdAt
- * @paiSuccess {Date}         map.updatedAt
- * @paiSuccess {Object[]}     map.MapData
- * @paiSuccess {Number}       map.MapData.id
- * @paiSuccess {String}       map.MapData.cellstate
- * @paiSuccess {Number}       map.MapData.i
- * @paiSuccess {Number}       map.MapData.j
- * @paiSuccess {Date}         map.MapData.createdAt
- * @paiSuccess {Date}         map.MapData.updatedAt
- * @paiSuccess {Number}       map.MapData.MapId
+ * @apiSuccess {Object}       player2             Depending on situation, can be second player details or Null (if game not started)
+ * @apiSuccess {Object}       Map                 Game's map data, including MapData (array of valid cells in the map).
+ * @apiSuccess {Number}       Map.id
+ * @apiSuccess {String}       Map.description
+ * @apiSuccess {Date}         Map.createdAt
+ * @apiSuccess {Date}         Map.updatedAt
+ * @apiSuccess {Object[]}     Map.MapData
+ * @apiSuccess {Number}       Map.MapData.id
+ * @apiSuccess {String}       Map.MapData.cellstate
+ * @apiSuccess {Number}       Map.MapData.i
+ * @apiSuccess {Number}       Map.MapData.j
+ * @apiSuccess {Date}         Map.MapData.createdAt
+ * @apiSuccess {Date}         Map.MapData.updatedAt
+ * @apiSuccess {Number}       Map.MapData.MapId
  * @apiSuccess {Object[]}     gameSteps           Contain all game steps with player id
  * @apiSuccess {Object}       gameSteps.current
  * @apiSuccess {Number}       gameSteps.current.i
@@ -36,7 +36,6 @@ const sse = require('server-sent-events');
  *
  * @apiSuccessExample Without second player
     {
-
       "id": "630444ed-037e-43b0-a558-32eb8c5a7278",
       "stage": "not started",
       "Map": {
@@ -113,9 +112,12 @@ router.get('/', function(req, res) {
  * @api {post} /games Start game
  * @apiName startGame
  * @apiGroup Game
+ * @apiPermission user
  *
  * @apiDescription Starts a game for the user. Finds games that don't have
  * a second player or if none were found, creates a new one and returns the instance.
+ *
+ * @apiParam {String} token Token
  *
  * @apiUse gameDetails
  */
@@ -151,8 +153,11 @@ router.get('/:id', function(req, res) {
  * @api {post} /games/:id Game step
  * @apiName gameStep
  * @apiGroup Game
+ * @apiPermission user
  *
  * @apiDescription Send updeted fields. Updates will be SSE'd at /games/:id/loop
+ *
+ * @apiParam {String} token Token
  * @apiParam {Number} id Game's Id
  */
 
@@ -228,9 +233,11 @@ router.get('/:id/loop', sse, function(req, res) {
  * @api {post} /games/:id/surrender Surrender
  * @apiName surrender
  * @apiGroup Game
+ * @apiPermission user
  *
  * @apiDescription To quit the game, post to here, and you will surrender and the game will end
  *
+ * @apiParam {String} token Token
  * @apiParam {Number} id Game's Id
  */
 

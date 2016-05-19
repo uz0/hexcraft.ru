@@ -26,11 +26,12 @@ router.get('/', function(req, res) {
  * @apiGroup Game
  * 
  * @apiDescription Starts a game for the user. Finds games that don't have a second player, or, if none were found, creates a new one and returns the instance. 
- * @apiSuccess {Number} id UUID of game
- * @apiSuccess {String} stage Staage the game is in. Can be "not started", "started", "over"
- * @apiSuccess {Object} player1 Depending on situation, can be either your info or your oponent's
- * @apiSuccess {Object} player2 Depending on situation, can be either your info or your oponent's
+ * @apiSuccess {Number} id UUID of game.
+ * @apiSuccess {String} stage Staage the game is in. Can be "not started", "started", "over".
+ * @apiSuccess {Object} player1 Depending on situation, can be either your info or your oponent's.
+ * @apiSuccess {Object} player2 Depending on situation, can be either your info or your oponent's.
  * @paiSuccess {Object} map Game's map data, including MapData (array of valid cells in the map).
+ * @apiSuccess {Array} gameSteps steps that were already taken in the game. Used to recreate the map.
  * @apiSuccessExample Create game:
     {
 
@@ -116,6 +117,7 @@ router.get('/:id', function(req, res) {
  * @api {post} /games/:id
  * @apiName gameStep
  * @apiGroup Game
+ *
  * @apiDescription Send updeted fields. Only a 400 status will always return. Updates will be SSE'd at /games/:id/loop
  * @apiParam {Number} id Game's Id
  * @apiParam {Object} updatedFields Fields that have changed
@@ -149,6 +151,7 @@ router.post('/:id', isAuthed, function(req, res, next) {
  * @api {get} /games/:id/loop
  * @apiName gameLoop
  * @apiGroup Game
+ *
  * @apiDescription This loop uses Server Sent Events to push updates to both clients when a move happens. Only valid moves are pushed. Several events can happen during one move, i.e. move, clone, capture action. All will be sent seperately: one action, one event.
  * @apiSuccessExample Step:
  {
@@ -187,6 +190,7 @@ router.get('/:id/loop', sse, function(req, res) {
  * @api {post} /games/:id/surrender
  * @apiName surrender
  * @apiGroup Game
+ *
  * @apiDescription To quit the game, post to here, and you will surrender and the game will end
  * @apiParam {Number} id Game's Id
  */

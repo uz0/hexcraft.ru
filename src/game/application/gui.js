@@ -1,6 +1,7 @@
 'use strict';
 
 import hexcraft from '../application.js';
+import Rectangle from './rectangle.js';
 
 export default class GUI extends PIXI.Container {
   constructor(options) {
@@ -11,7 +12,7 @@ export default class GUI extends PIXI.Container {
     // for rescale and contain game renderer
     let lt = new PIXI.Text(' ');
     lt.position.x = 800 - 9;
-    lt.position.y = 600 - 30;
+    lt.position.y = 640 - 30;
     this.addChild(lt);
 
     let rb = new PIXI.Text(' ');
@@ -31,7 +32,8 @@ export default class GUI extends PIXI.Container {
       Sprite: PIXI.Sprite.fromImage,
       Text: PIXI.Text,
       Button: PIXI.Button,
-      Container: PIXI.Container
+      Container: PIXI.Container,
+      Rectangle: Rectangle
     };
 
     if(options.component === 'Sprite') {

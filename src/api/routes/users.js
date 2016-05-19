@@ -82,7 +82,7 @@ router.post('/', function(req, res, next) {
   }).then(user => {
     res.send(user);
   }).catch(error => {
-    error.message = "Неверный логин или пароль.";
+    error.message = 'Неверный логин или пароль.';
     error.status = 400;
     next(error);
   });

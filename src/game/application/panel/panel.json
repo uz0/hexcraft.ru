@@ -1,4 +1,26 @@
 [{
+  id: "border",
+  component: "Rectangle",
+  configuration: {
+    color: 0xFFFFFF,
+    alpha: 0.25,
+    x: 0,
+    y: 60,
+    width: 800,
+    height: 5
+  }
+},{
+  id: "background",
+  component: "Rectangle",
+  configuration: {
+    color: 0xFFFFFF,
+    alpha: 0.15,
+    x: 0,
+    y: 10,
+    width: 800,
+    height: 55
+  }
+},{
   id: "username",
   text:  "",
   component: "Text",
@@ -31,12 +53,12 @@
   component: "Button",
   visible: false,
   position: {
-    x: 610,
-    y: 12
+    x: 606,
+    y: 11
   },
   configuration: {
     value: "СДАТЬСЯ",
-    padding: 10,
+    padding: 12,
     borderWidth: 0,
     borderRadius: 0,
     boxShadow: null,
@@ -52,12 +74,12 @@
   component: "Button",
   visible: false,
   position: {
-    x: 610,
-    y: 12
+    x: 604,
+    y: 11
   },
   configuration: {
     value: "ВЫЙТИ",
-    padding: 10,
+    padding: 12,
     borderWidth: 0,
     borderRadius: 0,
     boxShadow: null,

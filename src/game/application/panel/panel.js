@@ -10,20 +10,6 @@ export default class Panel extends PIXI.Container {
     this.GUI = new GUI(options);
     this.addChild(this.GUI);
 
-    let graphics = new PIXI.Graphics();
-
-    graphics.beginFill(0xFFFFFF, 0.15);
-    graphics.drawRect(0, 10, 800, 55);
-    graphics.endFill();
-    this.addChild(graphics);
-
-    let Decorator = new PIXI.Graphics();
-
-    graphics.beginFill(0xFFFFFF, 0.25);
-    graphics.drawRect(0, 60, 800, 5);
-    graphics.endFill();
-    this.addChild(Decorator);
-
     const username = window.localStorage.getItem('username');
     this.GUI.username.text = username;
   }

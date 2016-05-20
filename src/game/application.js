@@ -63,7 +63,7 @@ class Hexcraft {
 
   updateScale(){
     const GAME_WIDTH = 800;
-    const GAME_HEIGHT = 600;
+    const GAME_HEIGHT = 640;
     const aspectRatio = GAME_WIDTH / GAME_HEIGHT;
     const newWidth = window.innerWidth;
     const newHeight = window.innerHeight;

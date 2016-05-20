@@ -16,6 +16,24 @@ export default class Field extends PIXI.Container {
 
       this.addChild(hex);
     });
+
+    let displacementSprite = PIXI.Sprite.fromImage('/images/displacementMap.jpg');
+    // window.s = displacementSprite;
+    // window.f = displacementSprite;
+    this.displacementFilter = new PIXI.filters.DisplacementFilter(displacementSprite);
+    this.displacementFilter.scale = {
+      x: 10,
+      y: 10
+    };
+
+    this.filters = [this.displacementFilter];
+    // console.log(this.displacementFilter.uniforms);
+  }
+
+  update() {
+    // this.displacementFilter.uniforms.scale.value.y = hexcraft.tick/300;
+    // this.displacementFilter.uniforms.scale.value.x = hexcraft.tick/100;
+    // this.displacementFilter.syncUniform();
   }
 
   forEach(callback) {

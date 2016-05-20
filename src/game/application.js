@@ -23,10 +23,6 @@ class Hexcraft {
 
   setupWater(){
     let water = new PIXI.Container();
-    // water.scale  = {
-    //   x: 2,
-    //   y: 2
-    // };
 
     let displacementSprite = PIXI.Sprite.fromImage('/images/displacementMap.jpg');
     let displacementFilter = new PIXI.filters.DisplacementFilter(displacementSprite);

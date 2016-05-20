@@ -190,5 +190,7 @@ export default class Board extends PIXI.Container {
     this.loop.close();
   }
 
-  update(){}
+  update(){
+    this.field.update();
+  }
 }

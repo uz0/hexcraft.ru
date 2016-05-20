@@ -11,7 +11,20 @@ const router = module.exports = express.Router();
  * @api {get} /maps Get all maps
  * @apiName getAllMaps
  * @apiGroup Map
- *
+ * @apiDescription This returns all available maps with their data.
+ * @apiSuccessExample{JSON} Map example
+ {
+   "Map": {
+     "id": 3,
+     "description": "11111",
+     "MapData": [{
+       "i": 4,
+       "j": 0,
+       "cellstate": "empty",
+       "MapId": 3
+     }]
+   }
+ }
  * @apiSuccess (200) {Object[]} maps All maps
  */
 
@@ -26,7 +39,19 @@ router.get('/', function(req, res) {
  * @api {get} /maps/:id Get all maps
  * @apiName getMap
  * @apiGroup Map
- *
+ * @apiSuccessExample{JSON} Map example
+ {
+   "Map": {
+     "id": 3,
+     "description": "11111",
+     "MapData": [{
+       "i": 4,
+       "j": 0,
+       "cellstate": "empty",
+       "MapId": 3
+     }]
+   }
+ }
  * @apiSuccess (200) {Object} map Map data
  */
 

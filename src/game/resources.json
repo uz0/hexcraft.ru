@@ -6,5 +6,15 @@
   {"id": "hex", "path": "/game/resources/hex.svg"},
   {"id": "click", "path": "/game/resources/Wine_Glass_Shatter.wav"},
   {"id": "hit", "path": "/game/resources/Rock_Hits_Metal_Debris.wav"},
-  {"id": "murlock", "path": "/game/resources/murlock_sample.wav"}
+  {"id": "murlock", "path": "/game/resources/murlock_sample.wav"},
+  {"id": "buttonClick", "path": "/game/resources/button_click.wav"},
+  {"id": "laugh", "path": "/game/resources/laugh.wav"},
+  {"id": "fight", "path": "/game/resources/lets_fight.wav"},
+  {"id": "ready", "path": "/game/resources/ready.wav"},
+  {"id": "eat", "path": "/game/resources/eat_him.wav"},
+  {"id": "fight1", "path": "/game/resources/fight_1.wav"},
+  {"id": "victory", "path": "/game/resources/victory.wav"},
+  {"id": "good", "path": "/game/resources/good.wav"},
+  {"id": "goodTurn", "path": "/game/resources/good_turn.wav"},
+  {"id": "endStep", "path": "/game/resources/end_step.wav"}
 ]

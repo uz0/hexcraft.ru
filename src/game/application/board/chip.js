@@ -37,6 +37,20 @@ export default class Chip extends PIXI.Sprite {
         .on('touchmove', this.onDragMove);
   }
 
+  chipSound() {
+    const sounds = [
+      hexcraft.resources.laugh.blobUrl,
+      hexcraft.resources.fight.blobUrl,
+      hexcraft.resources.fight1.blobUrl,
+      hexcraft.resources.victory.blobUrl,
+      hexcraft.resources.good.blobUrl,
+    ];
+
+    const random = Math.floor(Math.random() * 6) + 0;
+
+    new window.Audio(sounds[random]).play();
+  }
+
   changeOwner(player) {
     this.tint = this.colors[player];
     this.player = player;
@@ -55,7 +69,7 @@ export default class Chip extends PIXI.Sprite {
   }
 
   onDragStart(event) {
-    new window.Audio(hexcraft.resources.hit.blobUrl).play();
+    this.chipSound();
 
     this.data = event.data;
     this.updateOldPosition();
@@ -74,9 +88,10 @@ export default class Chip extends PIXI.Sprite {
   }
 
   onDragEnd() {
-    this.data = null;
 
-    new window.Audio(hexcraft.resources.click.blobUrl).play();
+    new window.Audio(hexcraft.resources.endStep.blobUrl).play();
+
+    this.data = null;
 
     if(this.beforeStep && this.beforeStep(this.position, this.oldPosition)) {
       this.position.x = this.oldPosition.x;

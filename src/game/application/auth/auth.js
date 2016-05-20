@@ -32,6 +32,8 @@ export default class Auth extends PIXI.Container {
       return;
     }
 
+    new window.Audio(hexcraft.resources.buttonClick.blobUrl).play();
+
     http.post('/api/auth/login', {
       username: username,
       password: password

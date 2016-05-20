@@ -88,7 +88,7 @@ export default class Lobby extends PIXI.Container {
   }
 
   startGame() {
-    new window.Audio(hexcraft.resources.murlock.blobUrl).play();
+    new window.Audio(hexcraft.resources.buttonClick.blobUrl).play();
     let token = window.localStorage.getItem('token');
 
     http.post('/api/games', {

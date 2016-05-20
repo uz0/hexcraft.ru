@@ -1,6 +1,7 @@
 'use strict';
 
 import options from './panel.json';
+import hexcraft from '../../application.js';
 import http from '../http.js';
 import GUI from '../gui.js';
 
@@ -12,6 +13,7 @@ export default class Panel extends PIXI.Container {
 
     const username = window.localStorage.getItem('username');
     this.GUI.username.text = username;
+
   }
 
   logout () {
@@ -22,6 +24,9 @@ export default class Panel extends PIXI.Container {
     http.post('/api/auth/logout', {
       token: token
     });
+
+    // Баг: звук не проигрывается
+    // new window.Audio(hexcraft.resources.buttonClick.blobUrl).play();
 
     document.location.href = '/';
   }

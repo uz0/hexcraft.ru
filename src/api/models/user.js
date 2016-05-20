@@ -18,6 +18,14 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     admin: DataTypes.BOOLEAN
+  }, {
+    instanceMethods: {
+      toJSON: function(){
+        let res = this.dataValues;
+        delete res.password;
+        return res;
+      }
+    }
   });
 
   return User;

@@ -222,7 +222,6 @@ router.post('/:id', isAuthed, function(req, res, next) {
 router.get('/:id/loop', sse, function(req, res) {
   const gameId = req.params.id;
   Game.on(gameId, data => {
-    console.log("%j", data);
     data = JSON.stringify(data);
     res.sse(`data: ${data}\n\n`);
   });

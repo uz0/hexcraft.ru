@@ -40,7 +40,7 @@ export default class Auth extends PIXI.Container {
       window.localStorage.setItem('token', response.token);
       hexcraft.setStage(Lobby);
     }).catch(err => {
-      this.showError('Неправильная пара логин/пароль')
+      this.showError('Неправильная пара логин/пароль');
     });
   }
 
@@ -52,9 +52,9 @@ export default class Auth extends PIXI.Container {
     http.post('/api/auth/verify', {
         token: token
     }).then(() => {
-      hexcraft.setStage(Lobby)
+      hexcraft.setStage(Lobby);
     }).catch(() => {
-      this.showError('Ваша авторизация устарела. Войдите снова')
+      this.showError('Ваша авторизация устарела. Войдите снова');
     });
   }
 

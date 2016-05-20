@@ -110,8 +110,8 @@ export default class editorCtrl {
         cellstate: '${element.cellstate}',
         createdAt: new Date(),
         updatedAt: new Date()
-      }`)
-    })
+      }`);
+    });
 
     let template = `
       'use strict';module.exports = {up: function (q, s, d) {q.bulkInsert('Maps', [{
@@ -124,10 +124,10 @@ export default class editorCtrl {
     console.log(template);
 
     let blob = new Blob([template], {type:'text/plain'});
-    let link = document.createElement("a");
+    let link = document.createElement('a');
     link.download = `${this.map.description}.js`;
     link.href = window.URL.createObjectURL(blob);
-    link.style.display = "none";
+    link.style.display = 'none';
     document.body.appendChild(link);
 
     link.click();

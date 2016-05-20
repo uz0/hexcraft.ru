@@ -7,3 +7,5 @@ npm-debug.log
 public
 *.sublime-project
 *.sublime-workspace
+*.floo
+*.flooignore

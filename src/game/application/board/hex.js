@@ -57,8 +57,9 @@ export default class Hex {
       if(field) {
 
         // WORKAROUND: ignore unavailable for step field ceils
-        if(field.alpha && field.alpha !== 1)
+        if(field.alpha && field.alpha !== 1){
           return;
+        }
 
         neighbors.push(field);
       }

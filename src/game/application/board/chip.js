@@ -3,28 +3,37 @@
 import hexcraft from '../../application.js';
 import Hex from './hex.js';
 
-export default class Chip extends PIXI.Sprite {
+export default class Chip extends PIXI.Container {
   constructor(i, j, player){
     super();
 
-    this.colors = {
-      player1: '0xb71c1c',
-      player2: '0x0D47A1'
-    };
-
-    const textures = [
-      hexcraft.resources.chip1.blobUrl,
-      hexcraft.resources.chip2.blobUrl,
-      hexcraft.resources.chip3.blobUrl
+    // constants
+    const spines = [
+      hexcraft.resources.new_chip1.spineData,
+      hexcraft.resources.new_chip2.spineData,
+      hexcraft.resources.new_chip3.spineData
     ];
 
-    const random = Math.floor(Math.random() * 3) + 0;
-    this.texture = PIXI.Texture.fromImage(textures[random]);
+    const random = Math.floor(Math.random() * 3) + 0; // TODO: seed this
+
+    // spine
+    this.chipSpine = new PIXI.spine.Spine(spines[random]);
+    this.chipSpine.scale.set(.060);
+    this.chipSpine.position.set(35, 40);
+    this.chipSpine.state.setAnimationByName(0, 'stand', true);
+    this.addChild(this.chipSpine);
+
+    // position
+    let position = Hex.indexToCoordinates(i, j);
 
     this.i = i;
     this.j = j;
-    this.position = Hex.indexToCoordinates(i, j);
+    this.position.set(position.x, position.y);
     this.updateOldPosition();
+
+    // other
+    this.color = new PIXI.filters.ColorMatrixFilter();
+    this.filters = [this.color];
     this.changeOwner(player);
 
     this.on('mousedown', this.onDragStart)
@@ -52,7 +61,9 @@ export default class Chip extends PIXI.Sprite {
   }
 
   changeOwner(player) {
-    this.tint = this.colors[player];
+    let degrees = (player === 'player1')? 0 : -150;
+    this.color.hue(degrees);
+
     this.player = player;
   }
 
@@ -70,6 +81,7 @@ export default class Chip extends PIXI.Sprite {
 
   onDragStart(event) {
     this.chipSound();
+    this.chipSpine.state.setAnimationByName(0, 'drag', true);
 
     this.data = event.data;
     this.updateOldPosition();
@@ -89,6 +101,7 @@ export default class Chip extends PIXI.Sprite {
 
   onDragEnd() {
 
+    this.chipSpine.state.setAnimationByName(0, 'stand', true);
     new window.Audio(hexcraft.resources.endStep.blobUrl).play();
 
     this.data = null;

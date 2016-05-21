@@ -1,9 +1,11 @@
 [
-  {"id": "chip1", "path": "/game/resources/chip1.svg"},
-  {"id": "chip2", "path": "/game/resources/chip2.svg"},
-  {"id": "chip3", "path": "/game/resources/chip3.svg"},
+  // {"id": "chip1", "path": "/game/resources/chip1.svg"},
+  // {"id": "chip2", "path": "/game/resources/chip2.svg"},
+  // {"id": "chip3", "path": "/game/resources/chip3.svg"},
+
   {"id": "circuitHex", "path": "/game/resources/circuit_hex.svg"},
   {"id": "hex", "path": "/game/resources/hex.svg"},
+
   {"id": "click", "path": "/game/resources/Wine_Glass_Shatter.wav"},
   {"id": "hit", "path": "/game/resources/Rock_Hits_Metal_Debris.wav"},
   {"id": "murlock", "path": "/game/resources/murlock_sample.wav"},
@@ -16,5 +18,9 @@
   {"id": "victory", "path": "/game/resources/victory.wav"},
   {"id": "good", "path": "/game/resources/good.wav"},
   {"id": "goodTurn", "path": "/game/resources/good_turn.wav"},
-  {"id": "endStep", "path": "/game/resources/end_step.wav"}
+  {"id": "endStep", "path": "/game/resources/end_step.wav"},
+
+  {"id": "new_chip1", "path": "/game/resources/new_chip1/skeleton.json"},
+  {"id": "new_chip2", "path": "/game/resources/new_chip2/skeleton.json"},
+  {"id": "new_chip3", "path": "/game/resources/new_chip3/skeleton.json"}
 ]

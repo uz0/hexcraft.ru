@@ -24,6 +24,10 @@ module.exports = function(sequelize, DataTypes) {
         let res = this.dataValues;
         delete res.password;
         return res;
+      },
+      toJSON: function(){
+        let res = this.objectize();
+        return res;
       }
     }
   });

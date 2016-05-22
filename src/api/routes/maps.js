@@ -47,12 +47,6 @@ const router = module.exports = express.Router();
     "description": "test",
     "createdAt": "2016-05-17T16:04:57.914Z",
     "updatedAt": "2016-05-17T16:04:57.914Z"
-  },
-  {
-    "id": 1,
-    "description": "secondMap",
-    "createdAt": "2016-05-17T16:04:57.596Z",
-    "updatedAt": "2016-05-17T16:04:57.596Z"
   }
  ]
 
@@ -75,10 +69,7 @@ router.get('/', function(req, res) {
  *
  * @apiSuccess (200) {Object} map Map data
  *
- * @apiSuccess {Number}       id
- * @apiSuccess {String}       description
- * @apiSuccess {Date}         createdAt
- * @apiSuccess {Date}         updatedAt
+ * @apiUse mapFullInfo
  *
  * @apiSuccessExample{json} Map info
  {
@@ -94,15 +85,6 @@ router.get('/', function(req, res) {
       "cellstate": "empty",
       "createdAt": "2016-05-17T16:39:46.749Z",
       "updatedAt": "2016-05-17T16:39:46.749Z",
-      "MapId": 3
-    },
-    {
-      "id": 167,
-      "i": 7,
-      "j": 4,
-      "cellstate": "empty",
-      "createdAt": "2016-05-17T16:39:46.750Z",
-      "updatedAt": "2016-05-17T16:39:46.750Z",
       "MapId": 3
     }
   ]
@@ -141,8 +123,11 @@ router.get('/:id', function(req, res) {
  * @apiSuccess {String}       description
  * @apiSuccess {Number} id 
  * @apiSuccess {Object[]} MapData Map data
+ * @apiSuccess {Number} MapData.id 
  * @apiSuccess {Number} MapData.i X coord
  * @apiSuccess {Number} MapData.j Y coord
+ * @apiSuccess {Number} MapData.cellstate 
+ * @apiSuccess {Number} MapData.MapId 
  * @apiSuccess {Date}         createdAt
  * @apiSuccess {Date}         updatedAt
  *
@@ -156,15 +141,6 @@ router.get('/:id', function(req, res) {
       "i": 0,
       "j": 3,
       "cellstate": "empty",
-      "MapId": 8,
-      "updatedAt": "2016-05-22T14:09:07.731Z",
-      "createdAt": "2016-05-22T14:09:07.731Z"
-    },
-    {
-      "id": 170,
-      "i": 1,
-      "j": 2,
-      "cellstate": "player1",
       "MapId": 8,
       "updatedAt": "2016-05-22T14:09:07.731Z",
       "createdAt": "2016-05-22T14:09:07.731Z"

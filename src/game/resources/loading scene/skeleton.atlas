@@ -1,0 +1,113 @@
+
+skeleton.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+images/circle
+  rotate: false
+  xy: 2, 739
+  size: 3311, 3273
+  orig: 3311, 3273
+  offset: 0, 0
+  index: -1
+images/circle1
+  rotate: false
+  xy: 2221, 675
+  size: 759, 62
+  orig: 759, 62
+  offset: 0, 0
+  index: -1
+images/circle2
+  rotate: true
+  xy: 2, 2
+  size: 465, 585
+  orig: 465, 585
+  offset: 0, 0
+  index: -1
+images/circle3
+  rotate: true
+  xy: 1477, 534
+  size: 203, 742
+  orig: 203, 742
+  offset: 0, 0
+  index: -1
+images/circle4
+  rotate: true
+  xy: 3315, 2737
+  size: 661, 334
+  orig: 661, 334
+  offset: 0, 0
+  index: -1
+images/circle5
+  rotate: false
+  xy: 589, 141
+  size: 669, 326
+  orig: 669, 326
+  offset: 0, 0
+  index: -1
+images/circle6
+  rotate: false
+  xy: 3315, 1994
+  size: 190, 741
+  orig: 190, 741
+  offset: 0, 0
+  index: -1
+images/circle7
+  rotate: false
+  xy: 3315, 3400
+  size: 492, 612
+  orig: 1047, 890
+  offset: 0, 0
+  index: -1
+images/hand
+  rotate: false
+  xy: 3315, 1001
+  size: 422, 484
+  orig: 422, 484
+  offset: 0, 0
+  index: -1
+images/pupil
+  rotate: false
+  xy: 3809, 3831
+  size: 181, 181
+  orig: 181, 181
+  offset: 0, 0
+  index: -1
+images/spear
+  rotate: true
+  xy: 2, 469
+  size: 268, 1473
+  orig: 268, 1473
+  offset: 0, 0
+  index: -1
+images/teeth
+  rotate: true
+  xy: 3315, 1487
+  size: 505, 326
+  orig: 505, 326
+  offset: 0, 0
+  index: -1
+
+skeleton2.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+images/body
+  rotate: false
+  xy: 2, 2
+  size: 2489, 2870
+  orig: 2489, 2870
+  offset: 0, 0
+  index: -1
+
+skeleton3.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+images/ë
+  rotate: false
+  xy: 2, 2
+  size: 2476, 2856
+  orig: 2476, 2856
+  offset: 0, 0
+  index: -1

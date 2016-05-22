@@ -6,26 +6,52 @@ const express = require('express');
 
 const router = module.exports = express.Router();
 
+/**
+ * @apiDefine mapFullInfo
+ *
+ * @apiSuccess {Number}       id
+ * @apiSuccess {String}       description
+ * @apiSuccess {Date}         createdAt
+ * @apiSuccess {Date}         updatedAt
+ * @apiSuccess {Object[]}     MapData
+ * @apiSuccess {Number}       MapData.id
+ * @apiSuccess {String}       MapData.cellstate
+ * @apiSuccess {Number}       MapData.i
+ * @apiSuccess {Number}       MapData.j
+ * @apiSuccess {Date}         MapData.createdAt
+ * @apiSuccess {Date}         MapData.updatedAt
+ * @apiSuccess {Number}       MapData.MapId
+
+ */
+
+
+
+
 
 /**
  * @api {get} /maps Get all maps
  * @apiName getAllMaps
  * @apiGroup Map
- * @apiDescription This returns all available maps with their data.
- * @apiSuccessExample{JSON} Map example
- {
-   "Map": {
-     "id": 3,
-     "description": "11111",
-     "MapData": [{
-       "i": 4,
-       "j": 0,
-       "cellstate": "empty",
-       "MapId": 3
-     }]
-   }
- }
+ * @apiDescription Returns all available maps with brief information about them.
+ *
  * @apiSuccess (200) {Object[]} maps All maps
+ * @apiUse mapFullInfo
+ * @apiSuccessExample{Object[]} Brief info 
+ [
+  {
+    "id": 2,
+    "description": "test",
+    "createdAt": "2016-05-17T16:04:57.914Z",
+    "updatedAt": "2016-05-17T16:04:57.914Z"
+  },
+  {
+    "id": 1,
+    "description": "secondMap",
+    "createdAt": "2016-05-17T16:04:57.596Z",
+    "updatedAt": "2016-05-17T16:04:57.596Z"
+  }
+ ]
+
  */
 
 router.get('/', function(req, res) {
@@ -36,23 +62,40 @@ router.get('/', function(req, res) {
 
 
 /**
- * @api {get} /maps/:id Get all maps
+ * @api {get} /maps/:id Get one map
  * @apiName getMap
  * @apiGroup Map
- * @apiSuccessExample{JSON} Map example
- {
-   "Map": {
-     "id": 3,
-     "description": "11111",
-     "MapData": [{
-       "i": 4,
-       "j": 0,
-       "cellstate": "empty",
-       "MapId": 3
-     }]
-   }
- }
+ * @apiDescription Returns all information about map.
+ *
  * @apiSuccess (200) {Object} map Map data
+ *
+ * @apiSuccessExample{Object []} Map info
+ {
+  "id": 3,
+  "description": "secondMap",
+  "createdAt": "2016-05-17T16:39:46.653Z",
+  "updatedAt": "2016-05-17T16:39:46.653Z",
+  "MapData": [
+    {
+      "id": 114,
+      "i": 0,
+      "j": 3,
+      "cellstate": "empty",
+      "createdAt": "2016-05-17T16:39:46.749Z",
+      "updatedAt": "2016-05-17T16:39:46.749Z",
+      "MapId": 3
+    },
+    {
+      "id": 167,
+      "i": 7,
+      "j": 4,
+      "cellstate": "empty",
+      "createdAt": "2016-05-17T16:39:46.750Z",
+      "updatedAt": "2016-05-17T16:39:46.750Z",
+      "MapId": 3
+    }
+  ]
+ }
  */
 
 router.get('/:id', function(req, res) {

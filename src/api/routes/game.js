@@ -100,9 +100,9 @@ const sse = require('server-sent-events');
  * @apiName getGames
  * @apiGroup Game
  *
- * @apiDescription Gets an object with data about all finished and present games. 
+ * @apiDescription Gets an array with object, that contain data about all finished and unfinished games. 
  *
- * @apiSuccess {Object[]}     Games
+ * @apiSuccess {Object[]}     All games
  */
 
 router.get('/', function(req, res) {

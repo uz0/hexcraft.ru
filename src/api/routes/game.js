@@ -100,6 +100,9 @@ const sse = require('server-sent-events');
  * @apiName getGames
  * @apiGroup Game
  *
+ * @apiDescription Gets an object with data about all finished and present games. 
+ *
+ * @apiSuccess {Object[]}     Games
  */
 
 router.get('/', function(req, res) {
@@ -155,10 +158,12 @@ router.get('/:id', function(req, res) {
  * @apiGroup Game
  * @apiPermission user
  *
- * @apiDescription Send updeted fields. Updates will be SSE'd at /games/:id/loop
+ * @apiDescription Send updated fields. Updates will be SSE'd at /games/:id/loop
  *
  * @apiParam {String} token Token
  * @apiParam {Number} id Game's Id
+ *
+ * @apiError (400) {String} error Error description
  */
 
 router.post('/:id', isAuthed, function(req, res, next) {

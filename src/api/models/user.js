@@ -20,7 +20,7 @@ module.exports = function(sequelize, DataTypes) {
     admin: DataTypes.BOOLEAN
   }, {
     instanceMethods: {
-      toJSON: function(){
+      objectize: function(){
         let res = this.dataValues;
         delete res.password;
         return res;

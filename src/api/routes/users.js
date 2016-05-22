@@ -35,12 +35,13 @@ const router = module.exports = express.Router();
  * @apiName getUsers
  * @apiGroup User
  *
- * @apiSuccess {Object[]} users
- * @apiSuccess {Number}   users.id
- * @apiSuccess {String}   users.username
- * @apiSuccess {Boolean}  users.admin true if user has admin rights
- * @apiSuccess {Date}     users.createdAt
- * @apiSuccess {Date}     users.updatedAt
+ * @apiSuccess (200) {Object[]} users
+
+ * @apiSuccess {Number}         id
+ * @apiSuccess {String}         username
+ * @apiSuccess {Boolean}        admin true if user has admin rights
+ * @apiSuccess {Date}           createdAt
+ * @apiSuccess {Date}           updatedAt
  *
  * @apiSuccessExample {json} Success-Response:
     [
@@ -116,7 +117,10 @@ router.get('/:id', function(req, res) {
  * @apiGroup User
  * @apiPermission admin
  *
+ * @apiParam {String} token Admin's token
  * @apiParam {Number} id User id
+ *
+ * @apiError (400) {String} error
  */
 
 router.delete('/:id', isAdmin, function(req, res) {

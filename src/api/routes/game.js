@@ -102,7 +102,7 @@ const sse = require('server-sent-events');
  *
  * @apiDescription Gets an array with object, that contain data about all finished and unfinished games. 
  *
- * @apiSuccess {Object []}     Games
+ * @apiSuccess {Object[]}     All games
  */
 
 router.get('/', function(req, res) {

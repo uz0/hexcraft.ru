@@ -12,7 +12,13 @@ const router = module.exports = express.Router();
  * @apiName getAllNews
  * @apiGroup News
  *
- * @apiSuccessExample {json} Success-Response:
+ * @apiSuccess (200) {Object[]} news All news
+ *
+ * @apiSuccess {Number}       id
+ * @apiSuccess {String}       description
+ * @apiSuccess {Date}         createdAt
+ * @apiSuccess {Date}         updatedAt
+ * @apiSuccessExample{json} Success-Response: 
     [
       {
         "id": 1,
@@ -36,7 +42,7 @@ const router = module.exports = express.Router();
         "updatedAt": "2016-05-15T16:04:57.380Z"
       }
     ]
- * @apiSuccess (200) {Object[]} news All news
+
  */
 
 router.get('/', function(req, res) {

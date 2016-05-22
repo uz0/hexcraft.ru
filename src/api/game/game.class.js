@@ -20,7 +20,7 @@ function Game(user, callback) {
       id: uuid.v4(),
       stage: 'not started',
       Map: map.dataValues,
-      player1: user.dataValues,
+      player1: user,
       player2: null,
       gameSteps: []
     };
@@ -38,10 +38,10 @@ Game.create = function(user, callback) {
     return !element.data.player2;
   });
 
-  if(!game) {
+  if (!game) {
     game = new Game(user, callback);
   } else {
-    game.data.player2 = user.dataValues;
+    game.data.player2 = user;
     game.data.stage = 'started';
 
     emitter.emit(game.data.id, {

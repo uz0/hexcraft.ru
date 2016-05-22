@@ -8,10 +8,11 @@ export default class Field extends PIXI.Container {
     super();
 
     this.forEach((i, j) => {
-      let hex = PIXI.Sprite.fromImage(hexcraft.resources.circuitHex.blobUrl);
+      let hex = PIXI.Sprite.fromImage(hexcraft.resources.hex.blobUrl);
       hex.i = i;
       hex.j = j;
       hex.alpha = 0.2;
+      hex.scale.set(0.2);
       hex.position = Hex.indexToCoordinates(i, j);
 
       this.addChild(hex);

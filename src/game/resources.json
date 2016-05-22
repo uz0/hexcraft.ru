@@ -1,9 +1,4 @@
 [
-  // {"id": "chip1", "path": "/game/resources/chip1.svg"},
-  // {"id": "chip2", "path": "/game/resources/chip2.svg"},
-  // {"id": "chip3", "path": "/game/resources/chip3.svg"},
-
-  {"id": "circuitHex", "path": "/game/resources/circuit_hex.svg"},
   {"id": "hex", "path": "/game/resources/hex.svg"},
 
   {"id": "click", "path": "/game/resources/Wine_Glass_Shatter.wav"},

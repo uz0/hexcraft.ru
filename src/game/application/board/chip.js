@@ -18,7 +18,7 @@ export default class Chip extends PIXI.Container {
 
     // spine
     this.chipSpine = new PIXI.spine.Spine(spines[random]);
-    this.chipSpine.scale.set(.060);
+    this.chipSpine.scale.set(0.06);
     this.chipSpine.position.set(35, 40);
     this.chipSpine.state.setAnimationByName(0, 'stand', true);
     this.addChild(this.chipSpine);

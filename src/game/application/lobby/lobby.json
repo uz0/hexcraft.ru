@@ -43,6 +43,7 @@
   component: "Sprite",
   id: "sprite",
   textureName: "hex",
+  alpha: 0.85,
   position: {
     x: 400,
     y: 300

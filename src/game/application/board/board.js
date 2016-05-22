@@ -42,7 +42,7 @@ export default class Board extends PIXI.Container {
 
   initialization(game) {
     game.Map.MapData.forEach(element => {
-      this.field.findByIndex(element.i, element.j).alpha = 1;
+      this.field.findByIndex(element.i, element.j).alpha = 0.75;
 
       if(element.cellstate !== 'empty') {
         let chip = new Chip(element.i, element.j, element.cellstate);
@@ -104,7 +104,7 @@ export default class Board extends PIXI.Container {
 
     // Prevent step out field
     let field = this.field.findByCoords(current.x, current.y);
-    if(!field || field.alpha !== 1) {
+    if(!field || field.alpha !== 0.75) {
       this.panel.log('Выход за пределы поля!');
       return true;
     }

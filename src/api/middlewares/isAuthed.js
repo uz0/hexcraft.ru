@@ -26,7 +26,7 @@ module.exports = function(req, res, next) {
       error.status = 400;
       return next(error);
     }
-    req.user = result.User.toJSON();
+    req.user = result.User.objectize();
     next();
   });
 };

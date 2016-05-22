@@ -1,9 +1,6 @@
 [
   {"id": "hex", "path": "/game/resources/hex.svg"},
 
-  {"id": "click", "path": "/game/resources/Wine_Glass_Shatter.wav"},
-  {"id": "hit", "path": "/game/resources/Rock_Hits_Metal_Debris.wav"},
-  {"id": "murlock", "path": "/game/resources/murlock_sample.wav"},
   {"id": "buttonClick", "path": "/game/resources/button_click.wav"},
   {"id": "laugh", "path": "/game/resources/laugh.wav"},
   {"id": "fight", "path": "/game/resources/lets_fight.wav"},

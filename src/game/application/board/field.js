@@ -11,7 +11,7 @@ export default class Field extends PIXI.Container {
       let hex = PIXI.Sprite.fromImage(hexcraft.resources.hex.blobUrl);
       hex.i = i;
       hex.j = j;
-      hex.alpha = 0.2;
+      hex.alpha = 0.1;
       hex.scale.set(0.2);
       hex.position = Hex.indexToCoordinates(i, j);
 

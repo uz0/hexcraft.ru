@@ -1,4 +1,5 @@
 [
+  // {"id": "loading", "path": "/game/resources/loading_scene/skeleton.json"},
   {"id": "hex", "path": "/game/resources/hex.svg"},
 
   {"id": "buttonClick", "path": "/game/resources/button_click.wav"},

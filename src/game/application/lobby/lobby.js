@@ -21,6 +21,7 @@ export default class Lobby extends PIXI.Container {
     this.addChild(this.panel);
     this.getUsers();
     this.getGames();
+
   }
 
   getUsers() {

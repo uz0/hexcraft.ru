@@ -28,28 +28,33 @@ export default class Load extends PIXI.Container {
     this.GUI = new GUI([]);
     this.addChild(this.GUI);
 
-    // init load
-    var loader = new Loader();
-    loader.once('complete', this.loaded.bind(this));
-    loader.on('progress', this.onProgress.bind(this));
-    loader.load();
-
-    // Scene draw
-    var logo = PIXI.Texture.fromImage('/game/resources/logo.svg');
-    this.logo = new PIXI.Sprite(logo);
-
-    this.logo.position.x = 400;
-    this.logo.position.y = 320;
-    this.logo.anchor.set(0.5);
-    this.logo.scale.set(0.5);
-    // this.logo.alpha = 0;
-
-    this.addChild(this.logo);
+    // Load loader scene
+    var loader = new PIXI.loaders.Loader();
+    loader.add('loading', '/game/resources/loading_scene/skeleton.json')
+          .load(this.initLoading.bind(this));
   }
 
-  loaded (loader, resources) {
-    hexcraft.resources = resources;
-    hexcraft.setStage(Auth);
+  initLoading(loader, resources){
+    this.loading = new PIXI.spine.Spine(resources.loading.spineData);
+
+    this.loading.update(0);
+    this.loading.skeleton.setToSetupPose();
+    this.loading.autoUpdate = false;
+
+    this.loading.scale.set(0.06);
+    this.loading.alpha = 0.9;
+    this.loading.position.set(400, 320);
+
+    this.loading.current = 0;
+
+    this.loading.state.setAnimationByName(0, 'loading', false);
+    this.addChild(this.loading);
+
+    // init loading
+    let resourceLoader = new Loader();
+    resourceLoader.once('complete', this.loaded.bind(this));
+    resourceLoader.on('progress', this.onProgress.bind(this));
+    resourceLoader.load();
   }
 
   onProgress (loader, resource) {
@@ -61,7 +66,10 @@ export default class Load extends PIXI.Container {
       resource.blobUrl = this.generateBlobUrl(new window.DataView(resource.data), 'audio/wav');
     }
 
-    // this.logo.rotation = loader.progress / 100;
+    // update progress scene
+    let progress = loader.progress * this.loading.state.tracks[0].endTime / 100;
+    this.loading.update(progress - this.loading.current)
+    this.loading.current = progress;
   }
 
   generateBlobUrl(text, type) {
@@ -71,6 +79,11 @@ export default class Load extends PIXI.Container {
     });
 
     return DOMURL.createObjectURL(svg);
+  }
+
+  loaded(loader, resources) {
+    hexcraft.resources = resources;
+    hexcraft.setStage(Auth);
   }
 
   update(){}

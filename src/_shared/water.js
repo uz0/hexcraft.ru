@@ -40,7 +40,7 @@ export default class WaterField extends PIXI.Container {
     this.alpha = 0.3;
 
     for(let i = 0;i<100;i++) {
-      let hex = new waterHex(texture);
+      let hex = new WaterHex(texture);
       this.addChild(hex);
     }
   }

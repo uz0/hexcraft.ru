@@ -123,7 +123,7 @@ export default class editorCtrl {
 
     console.log(template);
 
-    let blob = new Blob([template], {type:'text/plain'});
+    let blob = new window.Blob([template], {type:'text/plain'});
     let link = document.createElement('a');
     link.download = `${this.map.description}.js`;
     link.href = window.URL.createObjectURL(blob);

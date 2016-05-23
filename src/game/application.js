@@ -1,7 +1,7 @@
 'use strict';
 
 import Load from './application/load/load.js';
-import waterField from '../_shared/water.js';
+import WaterField from '../_shared/water.js';
 
 class Hexcraft {
   constructor() {
@@ -11,7 +11,7 @@ class Hexcraft {
 
     this.container = new PIXI.Container();
 
-    let water = new waterField('/game/resources/hex.svg');
+    let water = new WaterField('/game/resources/hex.svg');
     this.container.addChild(water);
 
     this.setStage(Load);

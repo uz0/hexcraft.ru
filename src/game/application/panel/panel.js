@@ -25,9 +25,6 @@ export default class Panel extends PIXI.Container {
       token: token
     });
 
-    // Баг: звук не проигрывается
-    // new window.Audio(hexcraft.resources.buttonClick.blobUrl).play();
-
     document.location.href = '/';
   }
 
@@ -48,6 +45,8 @@ export default class Panel extends PIXI.Container {
     http.post(`/api/games/${this.game.id}/surrender`, {
       token: token
     });
+
+    new window.Audio(hexcraft.resources.buttonClick.blobUrl).play();
   }
 
   log(text){

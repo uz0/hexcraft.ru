@@ -11,7 +11,7 @@ export default class registerCtrl {
     this.$http.post('/api/users', {
       username: this.username,
       password: this.password
-    }).then(res => {
+    }).then(() => {
       this.responseData = 'Вы успешно зарегистрировались';
       this.reset();
     }).catch(res => {

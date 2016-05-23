@@ -68,7 +68,7 @@ export default class Load extends PIXI.Container {
 
     // update progress scene
     let progress = loader.progress * this.loading.state.tracks[0].endTime / 100;
-    this.loading.update(progress - this.loading.current)
+    this.loading.update(progress - this.loading.current);
     this.loading.current = progress;
   }
 

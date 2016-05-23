@@ -107,7 +107,7 @@ router.post('/login', function(req, res, next) {
       validThrough: (new Date().getTime() / 1000) + config[env].validTime
     }).then(token => {
       token.dataValues.User = user;
-      res.send(token)
+      res.send(token);
     });
   });
 });

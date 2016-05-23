@@ -135,7 +135,7 @@ export default class Board extends PIXI.Container {
         old: oldIndex
       },
       token: token
-    }).catch(err => {
+    }).catch(() => {
       // rollback chip, after failure request
       let hex = Hex.findByIndex(this.chips, index.i, index.j);
 

@@ -1,15 +1,15 @@
 'use strict';
 
-import waterField from '../../_shared/water.js';
+import WaterField from '../../_shared/water.js';
 
-export default class waterDirective {
+export default class WaterDirective {
   constructor() {
     this.renderer = new PIXI.WebGLRenderer(window.innerWidth, window.innerHeight);
     this.renderer.backgroundColor = 0x0B91A9;
     this.renderer.view.classList.add('water-canvas');
     document.body.appendChild(this.renderer.view);
 
-    this.waterField = new waterField('/images/hex.svg');
+    this.waterField = new WaterField('/images/hex.svg');
 
     this.loop();
     window.addEventListener('resize', this.resize.bind(this));

@@ -1,6 +1,6 @@
 'use strict';
 
-class waterHex extends PIXI.Sprite {
+class WaterHex extends PIXI.Sprite {
   constructor(texture) {
     super();
 
@@ -33,7 +33,7 @@ class waterHex extends PIXI.Sprite {
   }
 }
 
-export default class waterField extends PIXI.Container {
+export default class WaterField extends PIXI.Container {
   constructor(texture) {
     super();
 

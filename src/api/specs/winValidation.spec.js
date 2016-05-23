@@ -22,4 +22,4 @@ describe('winValidation', () => {
       }
     });
   });
-})
+});

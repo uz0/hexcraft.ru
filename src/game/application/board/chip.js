@@ -9,9 +9,9 @@ export default class Chip extends PIXI.Container {
 
     // constants
     const spines = [
-      hexcraft.resources.new_chip1.spineData,
-      hexcraft.resources.new_chip2.spineData,
-      hexcraft.resources.new_chip3.spineData
+      hexcraft.resources.newChip1.spineData,
+      hexcraft.resources.newChip2.spineData,
+      hexcraft.resources.newChip3.spineData
     ];
 
     const random = Math.floor(Math.random() * 3) + 0; // TODO: seed this

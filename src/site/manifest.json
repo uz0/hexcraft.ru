@@ -1,5 +1,11 @@
 {
- "name": "App",
+ "lang": "ru",
+ "name": "Hexcraft",
+ "display": "fullscreen",
+ "orientation": "landscape",
+ "start_url": "/game",
+ "theme_color": "#85BAB4",
+ "background_color": "#85BAB4",
  "icons": [
   {
    "src": "\/android-icon-36x36.png",

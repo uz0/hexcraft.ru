@@ -4,12 +4,7 @@ class WaterHex extends PIXI.Sprite {
   constructor(texture) {
     super();
 
-    this.filter = new PIXI.filters.BloomFilter();
-    this.filter.padding = 100;
-    // this.filters = [this.filter];
-
     this.seed = Math.random();
-    this.filter.blur = (1 - this.seed) * 100;
     this.alpha = this.seed;
     this.scale.set(1 - this.seed);
 

@@ -5,43 +5,43 @@ filter: Linear,Linear
 repeat: none
 body
   rotate: false
-  xy: 1367, 2
-  size: 791, 791
-  orig: 791, 791
-  offset: 0, 0
+  xy: 333, 2
+  size: 192, 191
+  orig: 192, 192
+  offset: 0, 1
   index: -1
 eye
   rotate: false
-  xy: 2, 208
-  size: 282, 282
-  orig: 282, 282
+  xy: 2, 50
+  size: 69, 70
+  orig: 69, 70
   offset: 0, 0
   index: -1
 pupil
   rotate: false
-  xy: 2765, 887
-  size: 117, 117
-  orig: 117, 117
+  xy: 671, 217
+  size: 29, 29
+  orig: 29, 29
   offset: 0, 0
   index: -1
 spear
   rotate: false
-  xy: 1367, 795
-  size: 1396, 209
-  orig: 1396, 209
+  xy: 333, 195
+  size: 336, 51
+  orig: 336, 51
   offset: 0, 0
   index: -1
 tail
   rotate: false
-  xy: 2, 492
-  size: 1363, 512
-  orig: 1363, 512
+  xy: 2, 122
+  size: 329, 124
+  orig: 329, 124
   offset: 0, 0
   index: -1
 teeth
   rotate: false
-  xy: 2160, 577
-  size: 253, 216
-  orig: 253, 216
-  offset: 0, 0
+  xy: 527, 137
+  size: 63, 56
+  orig: 63, 58
+  offset: 0, 1
   index: -1

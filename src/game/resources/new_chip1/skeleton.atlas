@@ -5,64 +5,64 @@ filter: Linear,Linear
 repeat: none
 body
   rotate: false
-  xy: 2, 193
-  size: 813, 751
-  orig: 813, 751
+  xy: 2, 51
+  size: 197, 182
+  orig: 197, 182
   offset: 0, 0
   index: -1
 brow
   rotate: false
-  xy: 1596, 801
-  size: 232, 143
-  orig: 232, 143
-  offset: 0, 0
+  xy: 395, 197
+  size: 57, 36
+  orig: 59, 36
+  offset: 1, 0
   index: -1
 eye
   rotate: false
-  xy: 817, 623
-  size: 326, 321
-  orig: 326, 321
+  xy: 201, 154
+  size: 80, 79
+  orig: 80, 79
   offset: 0, 0
   index: -1
 l_hand
   rotate: true
-  xy: 2, 10
-  size: 181, 449
-  orig: 181, 449
+  xy: 2, 2
+  size: 47, 109
+  orig: 47, 110
   offset: 0, 0
   index: -1
 l_leg
-  rotate: true
-  xy: 671, 9
-  size: 182, 145
-  orig: 182, 145
+  rotate: false
+  xy: 454, 197
+  size: 45, 36
+  orig: 45, 36
   offset: 0, 0
   index: -1
 pupil
   rotate: false
-  xy: 1145, 651
-  size: 110, 110
-  orig: 110, 110
+  xy: 283, 157
+  size: 28, 28
+  orig: 28, 28
   offset: 0, 0
   index: -1
 r_hand
   rotate: true
-  xy: 1145, 763
-  size: 181, 449
-  orig: 181, 449
+  xy: 283, 187
+  size: 46, 110
+  orig: 46, 110
   offset: 0, 0
   index: -1
 r_leg
   rotate: true
-  xy: 453, 2
-  size: 189, 216
-  orig: 189, 216
+  xy: 113, 2
+  size: 47, 54
+  orig: 47, 54
   offset: 0, 0
   index: -1
 teeth
   rotate: true
-  xy: 817, 284
-  size: 337, 196
-  orig: 337, 196
+  xy: 201, 70
+  size: 82, 48
+  orig: 83, 49
   offset: 0, 0
   index: -1

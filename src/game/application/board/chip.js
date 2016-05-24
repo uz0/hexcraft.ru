@@ -17,7 +17,6 @@ export default class Chip extends PIXI.Container {
     // spine
     let seed = i+j;
     let index = Math.floor(random(0, spines.length, seed));
-    console.log(index);
     let spine = spines[index];
 
     this.chipSpine = new PIXI.spine.Spine(spine);

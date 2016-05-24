@@ -18,7 +18,7 @@ module.exports = function(req, res, next) {
         $gt: new Date().getTime() / 1000
       }
     },
-    include: [ models.User ]
+    include: [models.User]
   }).then(result => {
 
     if (!result) {

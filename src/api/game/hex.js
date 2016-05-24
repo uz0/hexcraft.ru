@@ -41,7 +41,7 @@ Hex.findNeighborsNeighbors = function(array, i, j) {
     let neighbors = Hex.findNeighbors(array, neighbor.i, neighbor.j);
     neighborsNeighbors = neighborsNeighbors.concat(neighbors);
   });
-
+  
   return neighborsNeighbors;
 };
 

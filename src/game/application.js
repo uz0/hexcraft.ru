@@ -19,6 +19,18 @@ class Hexcraft {
 
     window.addEventListener('resize', this.updateScale.bind(this));
     window.addEventListener('orientationchange', this.updateScale.bind(this));
+
+    // #107 fullscreen mode for touch devices
+    document.addEventListener('touchend', () => {
+      let element = this.renderer.view;
+
+      element.requestFullscreen = element.requestFullscreen ||
+                                  element.mozRequestFullScreen ||
+                                  element.webkitRequestFullscreen;
+
+      element.requestFullscreen();
+      window.screen.orientation.lock('landscape');
+    });
   }
 
   setStage (Stage, argument) {

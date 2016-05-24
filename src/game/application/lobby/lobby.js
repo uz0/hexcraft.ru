@@ -23,7 +23,9 @@ export default class Lobby extends PIXI.Container {
     this.getGames();
 
     // WORKAROUND: remove input, to prevent show keyboard on mobile
-    document.getElementsByTagName('input')[0].remove();
+    let input = document.getElementsByTagName('input')[0];
+    if(input)
+      input.remove();
   }
 
   getUsers() {

@@ -49,7 +49,7 @@ export default class Panel extends PIXI.Container {
     new window.Audio(hexcraft.resources.buttonClick.blobUrl).play();
   }
 
-  log(text){
+  log(text) {
     this.GUI.status.text = text;
   }
 

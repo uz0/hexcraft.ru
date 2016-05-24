@@ -2,22 +2,25 @@
 
 import hexcraft from '../../application.js';
 import Hex from './hex.js';
+import random from '../../../_shared/random.js';
 
 export default class Chip extends PIXI.Container {
   constructor(i, j, player){
     super();
 
-    // constants
     const spines = [
       hexcraft.resources.newChip1.spineData,
       hexcraft.resources.newChip2.spineData,
       hexcraft.resources.newChip3.spineData
     ];
 
-    const random = Math.floor(Math.random() * 3) + 0; // TODO: seed this
-
     // spine
-    this.chipSpine = new PIXI.spine.Spine(spines[random]);
+    let seed = i+j;
+    let index = Math.floor(random(0, spines.length, seed));
+    console.log(index);
+    let spine = spines[index];
+
+    this.chipSpine = new PIXI.spine.Spine(spine);
     this.chipSpine.scale.set(0.06);
     this.chipSpine.position.set(35, 40);
     this.chipSpine.state.setAnimationByName(0, 'stand', true);

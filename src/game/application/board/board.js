@@ -25,19 +25,26 @@ export default class Board extends PIXI.Container {
       clear: '0xFFFFFF'
     };
 
-    this.panel = new Panel();
-    this.panel.game = game;
-    this.panel.showCapitulation();
-    this.addChild(this.panel);
 
     this.field = new Field();
     this.addChild(this.field);
+
+    this.panel = new Panel();
+    this.panel.game = game;
+    this.panel.showCapitulation();
+    this.startSplash();
+    this.addChild(this.panel);
 
     this.initialization(game);
     this.changeMode('player1');
 
     this.loop = new window.EventSource(`/api/games/${game.id}/loop`);
     this.loop.addEventListener('message', this.onEvent.bind(this));
+  }
+
+  startSplash() {
+    this.panel.splash();
+    this.panel.splash.startSplash(this.game.player1.username, this.game.player2.username);
   }
 
   initialization(game) {

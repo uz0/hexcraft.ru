@@ -1,0 +1,61 @@
+[{
+  id: "background",
+  component: "Rectangle",
+  configuration: {
+    color: 0xFFFFFF,
+    alpha: 0.85,
+    x: 0,
+    y: 250,
+    width: 800,
+    height: 200
+  }
+ },{
+  id: "player1",
+  text:  "",
+  component: "Text",
+  style: {
+    fill: "#0b93aa",
+    font: "48px Arial"
+  },
+  position: {
+    x: 100,
+    y: 325
+  },
+  anchor: {
+    x: 0,
+    y: 0
+  }
+ },{
+  id: "player2",
+  text:  "",
+  component: "Text",
+  style: {
+    fill: "#0b93aa",
+    font: "48px Arial"
+  },
+  position: {
+    x: 600,
+    y: 325
+  },
+  anchor: {
+    x: 0,
+    y: 0
+  }
+ },{
+  id: "versus",
+  text:  "VS",
+  component: "Text",
+  style: {
+    fill: "#0b93aa",
+    font: "48px Arial"
+  },
+  position: {
+    x: 365,
+    y: 325
+  },
+  anchor: {
+    x: 0,
+    y: 0
+  }
+ }
+];

@@ -98,11 +98,12 @@ const sse = require('server-sent-events');
 /**
  * @api {get} /games All games
  * @apiName getGames
+ * @apiDescription Gets an array with object, that contain
+ * data about all finished and unfinished games.
+ *
  * @apiGroup Game
  *
- * @apiDescription Gets an array with object, that contain data about all finished and unfinished games. 
- *
- * @apiSuccess {Object[]}     All games
+ * @apiSuccess {Object[]} All games
  */
 
 router.get('/', function(req, res) {
@@ -114,11 +115,11 @@ router.get('/', function(req, res) {
 /**
  * @api {post} /games Start game
  * @apiName startGame
- * @apiGroup Game
- * @apiPermission user
- *
  * @apiDescription Starts a game for the user. Finds games that don't have
  * a second player or if none were found, creates a new one and returns the instance.
+ *
+ * @apiGroup Game
+ * @apiPermission user
  *
  * @apiParam {String} token Token
  *
@@ -133,7 +134,7 @@ router.post('/', isAuthed, function(req, res) {
 
 
 /**
- * @api {get} /games/:id Get game
+ * @api {get} /games/:id Get game details
  * @apiName getGame
  * @apiGroup Game
  *
@@ -155,10 +156,10 @@ router.get('/:id', function(req, res) {
 /**
  * @api {post} /games/:id Game step
  * @apiName gameStep
+ * @apiDescription Send updated fields. Updates will be SSE'd at /games/:id/loop
+ *
  * @apiGroup Game
  * @apiPermission user
- *
- * @apiDescription Send updated fields. Updates will be SSE'd at /games/:id/loop
  *
  * @apiParam {String} token Token
  * @apiParam {Number} id Game's Id
@@ -193,35 +194,91 @@ router.post('/:id', isAuthed, function(req, res, next) {
 /**
  * @api {get} /games/:id/loop Game loop
  * @apiName gameLoop
- * @apiGroup Game
- *
- * @apiDescription This loop uses Server Sent Events to push updates to both clients
+ * @apiDescription This loop uses Server Sent Events to push updates to all clients
  * when a move happens. Only valid moves are pushed. Several events can happen during
- * one move, i.e. move, clone, capture action. All will be sent seperately:
- * one action, one event.
+ * one move, i.e. step, chip, owner or over action. All will be sent seperately: one action, one event.
+ *
+ * @apiGroup Game
  *
  * @apiParam {Number} id Game's Id
  *
- * @apiSuccessExample Step:
- {
-   "event": "step",
-   "data": {
-     "current": {
-       "i": 7,
-       "j": 1
-     },
-     "old": {
-       "i": 8,
-       "j": 1
-     },
-     "userId": 1
-   },
-   "user": {
-     "id": 1,
-     "username": "test",
-     "admin": null
-   }
- }
+ * @apiSuccessExample Step (chip move):
+  {
+    "event": "step",
+    "data": {
+      "current": {
+        "i": 7,
+        "j": 1
+      },
+      "old": {
+        "i": 8,
+        "j": 1
+      },
+      "userId": 1
+    },
+    "user": {
+      "id": 1,
+      "username": "test",
+      "admin": null
+    }
+  }
+ *
+ * @apiSuccessExample Chip (new chip on field):
+  {
+    "event": "chip",
+    "data":{
+      "i":4,
+      "j":2
+    },
+    "user":{
+      "id":6,
+      "username":"asd",
+      "admin":null,
+      "createdAt":"2016-05-16T18:28:29.456Z",
+      "updatedAt":"2016-05-16T18:28:29.456Z"
+    }
+  }
+ *
+ * @apiSuccessExample Owner (change owner):
+  {
+    "event":"owner",
+    "data":[
+      {
+        "id":346,
+        "i":3,
+        "j":2,
+        "cellstate": "player1",
+        "createdAt": "2016-05-14T20:41:02.031Z",
+        "updatedAt": "2016-05-14T20:41:02.031Z",
+        "MapId":5
+      }
+    ],
+    "user":{
+      "id":6,
+      "username":"asd",
+      "admin":null,
+      "createdAt":"2016-05-16T18:28:29.456Z",
+      "updatedAt":"2016-05-16T18:28:29.456Z"
+    }
+  }
+ *
+ * @apiSuccessExample Started (second player connection):
+  {
+    "event": "started",
+    "user":{
+      "id":2,
+      "username":
+      "test",
+      "admin":null,
+      "createdAt":"2016-05-11T21:40:57.876Z",
+      "updatedAt":"2016-05-11T21:40:57.876Z"
+    }
+  }
+ *
+ * @apiSuccessExample Over (game over):
+  {
+    "event":"over"
+  }
  */
 
 router.get('/:id/loop', sse, function(req, res) {
@@ -236,10 +293,10 @@ router.get('/:id/loop', sse, function(req, res) {
 /**
  * @api {post} /games/:id/surrender Surrender
  * @apiName surrender
+ * @apiDescription To quit the game, post to here, and you will surrender and the game will end
+ *
  * @apiGroup Game
  * @apiPermission user
- *
- * @apiDescription To quit the game, post to here, and you will surrender and the game will end
  *
  * @apiParam {String} token Token
  * @apiParam {Number} id Game's Id

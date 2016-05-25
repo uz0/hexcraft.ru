@@ -8,6 +8,8 @@ export default class Chip extends PIXI.Container {
   constructor(i, j, player){
     super();
 
+    this.chipScale = 0.06;
+
     const spines = [
       hexcraft.resources.newChip1.spineData,
       hexcraft.resources.newChip2.spineData,
@@ -20,7 +22,7 @@ export default class Chip extends PIXI.Container {
     let spine = spines[index];
 
     this.chipSpine = new PIXI.spine.Spine(spine);
-    this.chipSpine.scale.set(0.06);
+    this.chipSpine.scale.set(this.chipScale);
     this.chipSpine.position.set(35, 40);
     this.chipSpine.state.setAnimationByName(0, 'stand', true);
     this.addChild(this.chipSpine);
@@ -65,6 +67,9 @@ export default class Chip extends PIXI.Container {
   changeOwner(player) {
     let degrees = (player === 'player1')? 0 : -150;
     this.color.hue(degrees);
+
+    let side = (player === 'player1')? 1 : -1;
+    this.chipSpine.scale.set(side * this.chipScale, this.chipScale);
 
     this.player = player;
   }

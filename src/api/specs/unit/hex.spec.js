@@ -1,7 +1,7 @@
 'use strict';
 
 const expect = require('expect.js');
-const Hex = require('../game/hex.js');
+const Hex = require('../../game/hex.js');
 
 const array = [{
   i: 4,

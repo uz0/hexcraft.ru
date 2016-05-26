@@ -125,7 +125,7 @@ gulp.task('apidoc:api', (done) => {
 })
 
 gulp.task('spec:api', function () {
-  return gulp.src(['src/api/specs/*.spec.js'], {read: false})
+  return gulp.src(['src/api/specs/**/*.spec.js'], {read: false})
     .pipe(mocha({
       debugBrk: false,
       R: 'spec',

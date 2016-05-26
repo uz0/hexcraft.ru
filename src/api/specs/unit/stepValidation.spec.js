@@ -1,7 +1,7 @@
 'use strict';
 
 const expect = require('expect.js');
-const stepValidation = require('../game/stepValidation.js');
+const stepValidation = require('../../game/stepValidation.js');
 
 const data = {
   player1: {
@@ -46,7 +46,7 @@ const step = {
   current: {
    i: 5,
    j: 0
-  },  
+  },
   userId: 3
 }
 
@@ -58,7 +58,7 @@ const stepDistance = {
   current: {
    i: 10,
    j: 6
-  },  
+  },
   userId: 3
 }
 
@@ -74,7 +74,7 @@ describe('stepValidation', () => {
   it('step order', () => {
     stepValidation(data, {
         userId: 1
-      }, 
+      },
       error => {
         expect(error).to.be.ok();
       });
@@ -84,17 +84,17 @@ describe('stepValidation', () => {
     stepValidation(data, step, error => {
       expect(error).to.be.ok();
     });
-  })  
+  })
 
   it('check for collisions', () => {
     stepValidation(data, step, error => {
       expect(error).to.be.ok();
     });
-  }) 
+  })
 
   it('check for distance', () => {
     stepValidation(data, stepDistance, error => {
       expect(error).to.be.ok();
     });
-  })    
+  })
 });

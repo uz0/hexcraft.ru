@@ -119,8 +119,8 @@ gulp.task('lint:api',  () => {
 
 gulp.task('apidoc:api', (done) => {
   apidoc({
-    src: "src/api/",
-    dest: "public/apidoc/"
+    src: "./src/api/",
+    dest: "./public/apidoc/"
   }, done);
 })
 

@@ -1,7 +1,7 @@
 'use strict';
 
 const expect = require('expect.js');
-const winValidation = require('../game/winValidation.js');
+const winValidation = require('../../game/winValidation.js');
 
 const data = {
   player1: 'player1',

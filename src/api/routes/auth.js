@@ -42,8 +42,9 @@ const router = module.exports = express.Router();
 
 /**
  * @api {post} /auth/verify Verify token
- * @apiDescription Check token status, return token data with user if token valid or error
  * @apiName verifyToken
+ * @apiDescription Check token status, return token data with user if token valid or error
+ *
  * @apiGroup Auth
  *
  * @apiParam {String} token Token
@@ -76,8 +77,9 @@ router.post('/verify', function(req, res, next) {
 
 /**
  * @api {post} /auth/login Login
- * @apiDescription Create and return new user token with user data if credentials valid or error
  * @apiName Login
+ * @apiDescription Create and return new user token with user data if credentials valid or error
+ *
  * @apiGroup Auth
  *
  * @apiParam {String} username Unique and not empty string
@@ -116,10 +118,10 @@ router.post('/login', function(req, res, next) {
 /**
  * @api {post} /auth/logout Logout
  * @apiName Logout
+ * @apiDescription Destroy token
+ *
  * @apiGroup Auth
  * @apiPermission user
- *
- * @apiDescription Destroy token
  *
  * @apiParam {String} token user's token
  */

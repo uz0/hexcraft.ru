@@ -30,18 +30,18 @@ const router = module.exports = express.Router();
     }
  */
 
+
 /**
  * @api {get} /users Request all users
  * @apiName getUsers
  * @apiGroup User
  *
- * @apiSuccess (200) {Object[]} users
-
- * @apiSuccess {Number}         id
- * @apiSuccess {String}         username
- * @apiSuccess {Boolean}        admin true if user has admin rights
- * @apiSuccess {Date}           createdAt
- * @apiSuccess {Date}           updatedAt
+ * @apiSuccess {Object[]}  users
+ * @apiSuccess {Number}    users.id
+ * @apiSuccess {String}    users.username
+ * @apiSuccess {Boolean}   users.admin true if user has admin rights
+ * @apiSuccess {Date}      users.createdAt
+ * @apiSuccess {Date}      users.updatedAt
  *
  * @apiSuccessExample {json} Success-Response:
     [
@@ -65,6 +65,7 @@ router.get('/', function(req, res) {
 /**
  * @api {post} /users Create new user
  * @apiDescription Create new user with username and password and return user data
+ *
  * @apiName createUser
  * @apiGroup User
  *
@@ -74,6 +75,7 @@ router.get('/', function(req, res) {
  * @apiUse UserResponse
  *
  * @apiError (400) {String} error
+ *
  */
 
 router.post('/', function(req, res, next) {
@@ -98,6 +100,7 @@ router.post('/', function(req, res, next) {
  * @apiUse UserResponse
  *
  * @apiParam {Number} id User id
+ *
  */
 
 router.get('/:id', function(req, res) {
@@ -114,6 +117,7 @@ router.get('/:id', function(req, res) {
 /**
  * @api {delete} /users/:id Delete user
  * @apiName deleteUser
+ *
  * @apiGroup User
  * @apiPermission admin
  *
@@ -121,6 +125,7 @@ router.get('/:id', function(req, res) {
  * @apiParam {Number} id User id
  *
  * @apiError (400) {String} error
+ *
  */
 
 router.delete('/:id', isAdmin, function(req, res) {

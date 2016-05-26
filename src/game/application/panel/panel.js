@@ -4,6 +4,7 @@ import options from './panel.json';
 import hexcraft from '../../application.js';
 import http from '../http.js';
 import GUI from '../gui.js';
+import Splash from './splash.js';
 
 export default class Panel extends PIXI.Container {
   constructor() {
@@ -14,6 +15,12 @@ export default class Panel extends PIXI.Container {
     const username = window.localStorage.getItem('username');
     this.GUI.username.text = username;
 
+  }
+
+  splash() {
+    this.splash = new Splash();
+    this.addChild(this.splash);
+    setTimeout(() => {this.removeChild(this.splash)}, 3000);
   }
 
   logout () {

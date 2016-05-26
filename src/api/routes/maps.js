@@ -6,8 +6,48 @@ const express = require('express');
 
 const router = module.exports = express.Router();
 
+
 /**
- * @apiDefine mapFullInfo
+ * @api {get} /maps Get all maps
+ * @apiName getAllMaps
+ * @apiDescription Returns all available maps with brief information about them.
+ *
+ * @apiGroup Map
+ *
+ * @apiSuccess (200) {Object[]} maps All maps
+ *
+ * @apiSuccess {Number}       id
+ * @apiSuccess {String}       description
+ * @apiSuccess {Date}         createdAt
+ * @apiSuccess {Date}         updatedAt
+ *
+ * @apiSuccessExample{json} Success-Response:
+ [
+  {
+    "id": 2,
+    "description": "test",
+    "createdAt": "2016-05-17T16:04:57.914Z",
+    "updatedAt": "2016-05-17T16:04:57.914Z"
+  }
+ ]
+ *
+ */
+
+router.get('/', function(req, res) {
+  models.Map.findAll().then(maps => {
+    res.send(maps);
+  });
+});
+
+
+/**
+ * @api {get} /maps/:id Get one map
+ * @apiName getMap
+ * @apiDescription Returns all information about map.
+ *
+ * @apiGroup Map
+ *
+ * @apiParam {Number} id User id
  *
  * @apiSuccess {Number}       id
  * @apiSuccess {String}       description
@@ -21,55 +61,6 @@ const router = module.exports = express.Router();
  * @apiSuccess {Date}         MapData.createdAt
  * @apiSuccess {Date}         MapData.updatedAt
  * @apiSuccess {Number}       MapData.MapId
-
- */
-
-
-
-
-
-/**
- * @api {get} /maps Get all maps
- * @apiName getAllMaps
- * @apiGroup Map
- * @apiDescription Returns all available maps with brief information about them.
- *
- * @apiSuccess (200) {Object[]} maps All maps
- *
- * @apiSuccess {Number}       id
- * @apiSuccess {String}       description
- * @apiSuccess {Date}         createdAt
- * @apiSuccess {Date}         updatedAt
- * @apiSuccessExample{json} Success-Response: 
- [
-  {
-    "id": 2,
-    "description": "test",
-    "createdAt": "2016-05-17T16:04:57.914Z",
-    "updatedAt": "2016-05-17T16:04:57.914Z"
-  }
- ]
-
- */
-
-router.get('/', function(req, res) {
-  models.Map.findAll().then(maps => {
-    res.send(maps);
-  });
-});
-
-
-/**
- * @api {get} /maps/:id Get one map
- * @apiName getMap
- * @apiGroup Map
- * @apiDescription Returns all information about map.
- *
- * @apiParam {Number} id User id
- *
- * @apiSuccess (200) {Object} map Map data
- *
- * @apiUse mapFullInfo
  *
  * @apiSuccessExample{json} Map info
  {
@@ -89,6 +80,7 @@ router.get('/', function(req, res) {
     }
   ]
  }
+ *
  */
 
 router.get('/:id', function(req, res) {
@@ -121,13 +113,13 @@ router.get('/:id', function(req, res) {
  * @apiSuccess (200) {Object} map Created item
  * @apiSuccess {Number}       id
  * @apiSuccess {String}       description
- * @apiSuccess {Number} id 
+ * @apiSuccess {Number} id
  * @apiSuccess {Object[]} MapData Map data
- * @apiSuccess {Number} MapData.id 
+ * @apiSuccess {Number} MapData.id
  * @apiSuccess {Number} MapData.i X coord
  * @apiSuccess {Number} MapData.j Y coord
- * @apiSuccess {Number} MapData.cellstate 
- * @apiSuccess {Number} MapData.MapId 
+ * @apiSuccess {Number} MapData.cellstate
+ * @apiSuccess {Number} MapData.MapId
  * @apiSuccess {Date}         createdAt
  * @apiSuccess {Date}         updatedAt
  *

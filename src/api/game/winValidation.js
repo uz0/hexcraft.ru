@@ -20,38 +20,26 @@ module.exports = function(game) {
     return;
   }
 
-  // TODO: Cannot move
-
-
+  // Cannot move
+  let mapData = game.data.Map.MapData;
   let moveCount = {
     player1: 0,
     player2: 0
   }
 
-  game.data.Map.MapData.forEach(cell => {
-    if (cell.cellstate === 'player1') {
-      let cellsteps = Hex.findNeighborsNeighbors(game.data.Map.MapData, cell.i, cell.j);
-      cellsteps.forEach(steps => {
-        if (steps.cellstate === 'empty') {
-          moveCount.player1++;
-        }
-      });
-    }
-    if (cell.cellstate === 'player2') {
-      let cellsteps = Hex.findNeighborsNeighbors(game.data.Map.MapData, cell.i, cell.j);
-      cellsteps.forEach(steps => {
-        if (steps.cellstate === 'empty') {
-          moveCount.player2++;
-        }
-      });
-    }
+  mapData.forEach(cell => {
+    Hex.findNeighborsNeighbors(mapData, cell.i, cell.j).forEach(field => {
+      if (field.cellstate === 'empty' && cell.cellstate !== 'empty') {
+        moveCount[cell.cellstate]++;
+      }
+    })
   });
 
-  if (moveCount.player1 === 0) {
+  if (!moveCount.player1) {
     game.over(game.data.player1);
   }
 
-  if (moveCount.player2 === 0) {
+  if (!moveCount.player2) {
     game.over(game.data.player2);
   }
 

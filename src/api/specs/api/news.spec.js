@@ -31,7 +31,7 @@ describe('News', () => {
       .get(url)
       .expect(res => {
         let item = res.body.filter(item => {
-          return item.id === id
+          return item.id === id;
         })[0];
 
         expect(item).to.be.ok();

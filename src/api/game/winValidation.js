@@ -25,14 +25,14 @@ module.exports = function(game) {
   let moveCount = {
     player1: 0,
     player2: 0
-  }
+  };
 
   mapData.forEach(cell => {
     Hex.findNeighborsNeighbors(mapData, cell.i, cell.j).forEach(field => {
       if (field.cellstate === 'empty' && cell.cellstate !== 'empty') {
         moveCount[cell.cellstate]++;
       }
-    })
+    });
   });
 
   if (!moveCount.player1) {

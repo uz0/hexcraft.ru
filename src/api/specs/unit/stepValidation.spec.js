@@ -48,7 +48,7 @@ const step = {
    j: 0
   },
   userId: 3
-}
+};
 
 const stepDistance = {
   old: {
@@ -60,8 +60,7 @@ const stepDistance = {
    j: 6
   },
   userId: 3
-}
-
+};
 
 
 describe('stepValidation', () => {
@@ -78,23 +77,23 @@ describe('stepValidation', () => {
       error => {
         expect(error).to.be.ok();
       });
-  })
+  });
 
   it('check owner', () => {
     stepValidation(data, step, error => {
       expect(error).to.be.ok();
     });
-  })
+  });
 
   it('check for collisions', () => {
     stepValidation(data, step, error => {
       expect(error).to.be.ok();
     });
-  })
+  });
 
   it('check for distance', () => {
     stepValidation(data, stepDistance, error => {
       expect(error).to.be.ok();
     });
-  })
+  });
 });

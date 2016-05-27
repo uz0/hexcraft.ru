@@ -6,8 +6,8 @@ const request = require('supertest');
 
 var app = module.exports;
 app.server = server;
-app.adminToken;
-app.inited;
+app.adminToken = false;
+app.inited = false;
 
 app.init = done => {
   if(app.inited) {
@@ -31,14 +31,14 @@ app.init = done => {
         }]).then(() => {
           done();
           app.inited = true;
-        })
+        });
       }
 
       done();
       app.inited = true;
     });
   });
-}
+};
 
 app.auth = done => {
   if(app.adminToken) {
@@ -56,4 +56,4 @@ app.auth = done => {
       app.adminToken = res.body.token;
     })
     .expect(200, done);
-}
+};

@@ -20,7 +20,9 @@ export default class Panel extends PIXI.Container {
   splash() {
     this.splash = new Splash();
     this.addChild(this.splash);
-    setTimeout(() => {this.removeChild(this.splash)}, 3000);
+    setTimeout(() => {
+      this.removeChild(this.splash);
+    }, 3000);
   }
 
   logout () {

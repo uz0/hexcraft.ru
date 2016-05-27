@@ -1,21 +1,21 @@
-@import "config.scss";
+@import url('config.css');
 
 ::selection {
   color: white;
-  background: $themeColor
+  background: var(--theme-color)
 }
 
 body {
-  color: $contrastColor;
+  color: var(--contrast-color);
   font-family: Roboto;
   font-weight: 300;
   color: #fff;
-  background: $themeColor;
+  background: var(--theme-color);
   box-sizing: border-box;
 }
 
-body>.wrap {
-  min-height: calc(100vh - #{14 * $unit});
+body > .wrap {
+  min-height: calc(100vh - (var(--unit) * 14));
 }
 
 .water-canvas {
@@ -28,36 +28,35 @@ body>.wrap {
 }
 
 .wrap {
-  background-color: $lightBackgroundColor;
-  margin: $unit;
-  padding: $unit 2 * $unit;
+  background-color: var(--light-background-color);
+  margin: var(--unit);
+  padding: var(--unit) calc(var(--unit) * 2);
   position: relative;
 }
 
 header.inner .wrap,
 footer.inner .wrap {
-  background-color: $lighterBackgroundColor;
+  background-color: var(--lighter-background-color);
 }
 
-// inner
 header.inner .menu {
   display: inline-block;
-  width: 2 * $unit;
-  height: 2 * $unit;
+  width: calc(var(--unit) * 2);
+  height: calc(var(--unit) * 2);
   background: url('/images/menu.svg') center / contain no-repeat;
   float: right;
-  margin: $unit 0;
+  margin: var(--unit) 0;
 }
 
 header.inner .logo {
   display: inline-block;
-  width: 4 * $unit;
-  height: 4 * $unit;
+  width: calc(var(--unit) * 4);
+  height: calc(var(--unit) * 4);
   background: url('/images/logo.svg') center / contain no-repeat;
 }
 
 header.inner nav {
-  margin-top: $unit / 2;
+  margin-top: calc(var(--unit) / 2);
 }
 
 header.inner nav:not(.open) {
@@ -66,46 +65,45 @@ header.inner nav:not(.open) {
 
 header.inner nav a {
   display: block;
-  margin-top: $unit / 2;
-  padding: $unit / 2;
-  color: $contrastColor;
-  background-color: $lightBackgroundColor;
+  margin-top: calc(var(--unit) / 2);
+  padding: calc(var(--unit) / 2);
+  color: var(--contrast-color);
+  background-color: var(--light-background-color);
 }
 
 header.inner nav .play {
-  background: $contrastColor;
-  color: $themeColor;
+  background: var(--contrast-color);
+  color: var(--theme-color);
 }
 
 footer.inner a {
-  color: $contrastColor;
-  margin-right: $unit;
+  color: var(--contrast-color);
+  margin-right: var(--unit);
   display: inline-block;
 }
 
 footer.inner .uz0 {
-  width: $unit;
+  width: var(--unit);
   float: right;
-  height: $unit;
+  height: var(--unit);
   margin: 0;
   background: url('/images/uz0.svg') center / contain no-repeat;
 }
 
-// desktop
 @media (min-width: 960px) {
   .wrap {
     width: 960px;
-    margin: $unit auto;
+    margin: var(--unit) auto;
   }
 
   header.inner .wrap {
-    padding: 0 0 0 4 * $unit;
-    border-bottom: $innerBorderHeight solid $lighterBackgroundColor;
+    padding: 0 0 0 calc(var(--unit) * 4);
+    border-bottom: var(--inner-border-height) solid var(--lighter-background-color);
   }
 
   header.inner .logo {
-    width: 5 * $unit;
-    height: 5 * $unit;
+    width: calc(var(--unit) * 5);
+    height: calc(var(--unit) * 5);
 
     position: absolute;
     left: -12px;
@@ -114,30 +112,33 @@ footer.inner .uz0 {
 
   header.inner nav {
     display: block !important;
-    padding-left: 1 * $unit;
+    padding-left: var(--unit);
     margin: 0;
   }
 
   header.inner nav a {
     display: inline-block;
-    padding: 1.5 * $unit $unit 1.5 * $unit - $innerBorderHeight;
+    padding-top: calc(var(--unit) * 1.5);
+    padding-right: var(--unit);
+    padding-bottom: calc(var(--unit) * 1.5);
+    padding-left: var(--unit);
     margin: 0;
     background: none;
-    border-bottom: $innerBorderHeight solid $lighterBackgroundColor;
-    margin-bottom: -$innerBorderHeight;
+    border-bottom: var(--inner-border-height) solid var(--lighter-background-color);
+    margin-bottom: -var(--inner-border-height);
     font-weight: 400;
     letter-spacing: 1px;
     text-transform: uppercase;
   }
 
   header.inner nav .play {
-    width: 11 * $unit;
+    width: calc(var(--unit) * 11);
     float: right;
     margin: 0;
     color: #fff;
     background: transparent;
     text-align: center;
-    font-size: 2 * $unit;
+    font-size: calc(var(--unit) * 2);
     line-height: 0.6;
     font-weight: 600;
     letter-spacing: 4px;

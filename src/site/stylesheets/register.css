@@ -1,17 +1,17 @@
-@import "config.scss";
+@import url('config.css');
 
 .register-page input,
 .register-page button {
-  margin-top: $unit;
+  margin-top: var(--unit);
   border: none;
   display: block;
   box-sizing: border-box;
-  width: $unit * 14;
-  padding: $unit 2 * $unit;
+  width: calc(var(--unit) * 14);
+  padding: var(--unit) calc(var(--unit) * 2);
 }
 
 .register-page h2 {
-  margin-bottom: $unit * 2;
+  margin-bottom: calc(var(--unit) * 2);
 }
 
 .register-page button {

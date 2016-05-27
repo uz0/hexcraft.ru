@@ -1,0 +1,8 @@
+:root {
+  --theme-color: #0B91A9;
+  --contrast-color: #ffffff;
+  --light-background-color: rgba(255, 255, 255, 0.05);
+  --lighter-background-color: rgba(255, 255, 255, 0.05);
+  --unit: 16px;
+  --inner-border-height: 4px;
+}

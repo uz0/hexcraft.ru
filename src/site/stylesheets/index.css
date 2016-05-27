@@ -1,4 +1,4 @@
-@import "config.scss";
+@import url('config.css');
 
 .index-page {
   position: relative;
@@ -6,20 +6,20 @@
 
 .index-page header {
   text-align: center;
-  height: calc(100vh - #{10 * $unit});
-  min-height: 10 * $unit;
+  height: calc(100vh - (var(--unit) * 10));
+  min-height: calc(var(--unit) * 10);
   box-sizing: border-box;
 }
 
 .index-page header .logo {
   display: inline-block;
   background: url('/images/logo.svg') center / contain no-repeat;
-  width: 6 * $unit;
-  height: 6 * $unit;
+  width: calc(var(--unit) * 6);
+  height: calc(var(--unit) * 6);
 }
 
 .index-page header .description h1 {
-  margin: $unit 0 0;
+  margin: var(--unit) 0 0;
 }
 
 .index-page header .description p {
@@ -33,50 +33,50 @@
 .index-page footer .play {
   display: inline-block;
   background: url('/images/play.svg') center / contain no-repeat;
-  width: 18 * $unit;
-  height: 3 * $unit;
+  width: calc(var(--unit) * 18);
+  height: calc(var(--unit) * 3);
   color: transparent;
 }
 
 .index-page footer .links {
-  margin-top: $unit;
+  margin-top: var(--unit);
 }
 
 .index-page footer .links a {
-  color: $contrastColor;
-  margin: $unit / 2;
+  color: var(--contrast-color);
+  margin: calc(var(--unit) / 2);
 }
 
-// desktop
 @media (min-width: 960px) {
   .index-page header {
-    padding-top: 3 * $unit;
-    height: calc(100vh - #{12 * $unit});
+    padding-top: calc(var(--unit) * 3);
+    height: calc(100vh - (12 * var(--unit)));
   }
 
   .index-page header .logo {
-    width: 12 * $unit;
-    height: 12 * $unit;
+    width: calc(var(--unit) * 12);
+    height: calc(var(--unit) * 12);
   }
 
   .index-page header .description {
     display: inline-block;
     vertical-align: top;
     text-align: left;
-    padding-top: 1.5 * $unit;
-    padding-left: $unit;
+    padding-top: calc(var(--unit) * 2);
+    padding-left: var(--unit);
   }
 
   .index-page header .description h1 {
-    font-size: 4 * $unit;
+    font-size: calc(var(--unit) * 4);
+    margin: 0;
   }
 
   .index-page header .description p {
-    font-size: 1.5 * $unit;
+    font-size: calc(var(--unit) * 2);
   }
 
   .index-page footer .play {
-    width: 28 * $unit;
-    height: 6 * $unit;
+    width: calc(var(--unit) * 28);
+    height: calc(var(--unit) * 6);
   }
 }

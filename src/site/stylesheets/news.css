@@ -1,9 +1,9 @@
-@import "config.scss";
+@import url('config.css');
 
 .news-page h2 {
   font-weight: 600;
 }
 
 .news-page .date  {
-  color: $contrastColor;
+  color: var(--contrast-color);
 }

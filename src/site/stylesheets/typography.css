@@ -1,0 +1,31 @@
+@import url('config.css');
+
+h2, h3, h4 {
+  font-weight: 300;
+  color: var(--contrast-color);
+}
+
+h1 {
+  font-weight: 700;
+  color: var(--contrast-color);
+}
+
+h2 {
+  margin-top: calc(var(--unit) * 2);
+  margin-bottom: var(--unit);
+}
+
+label {
+  font-weight: 300;
+}
+
+a {
+  cursor: pointer;
+  white-space: nowrap;
+  text-decoration: none;
+  color: var(--theme-color);
+}
+
+p {
+  margin: var(--unit) 0;
+}

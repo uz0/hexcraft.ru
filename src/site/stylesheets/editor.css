@@ -1,27 +1,27 @@
-@import "config.scss";
+@import url('config.css');
 
 .editor-page button {
-  padding: $unit $unit*2;
+  padding: var(--unit) calc(var(--unit) * 2);
   border: 1px solid #eee;
-  margin-right: $unit;
+  margin-right: var(--unit);
   background: #eee;
   cursor: pointer;
 }
 
 .editor-page .login-form {
-  padding: $unit*2 0;
+  padding: calc(var(--unit) * 2) 0;
 }
 
 .editor-page input {
-  padding: $unit;
+  padding: var(--unit);
   border: 1px solid #eee;
-  margin-right: $unit*2;
-  width: $unit*15;
+  margin-right: calc(var(--unit) * 2);
+  width: calc(var(--unit) * 15);
   box-sizing: border-box;
 }
 
 .editor-page .logout {
-  padding: $unit*2 0;
+  padding: calc(var(--unit) * 2) 0;
 }
 
 .editor-page .logout button {
@@ -30,12 +30,12 @@
 }
 
 .editor-page .logout span {
-  padding: $unit 0;
+  padding: var(--unit) 0;
   display: inline-block;
 }
 
 .editor-page .map-control {
-  margin-bottom: $unit*2;
+  margin-bottom: calc(var(--unit) * 2);
 }
 
 .editor-page .editor-field {
@@ -47,21 +47,21 @@
 
 .editor-page .map-list {
   display: inline-block;
-  width: $unit*15;
-  margin-right: $unit*2;
+  width: calc(var(--unit) * 15);
+  margin-right: calc(var(--unit) * 2);
 }
 
 .editor-page .map-list button {
-  margin-bottom: $unit;
+  margin-bottom: var(--unit);
   display: block;
   width: 100%;
   border: 0;
 }
 
 .editor-page .map-list button.active {
-  background: $themeColor;
-  color: $contrastColor;
-  outline: 1px solid $contrastColor;
+  background: var(--theme-color);
+  color: var(--contrast-color);
+  outline: 1px solid var(--contrast-color);
 }
 
 .editor-page .hex {

@@ -1,12 +1,12 @@
-@import "config.scss";
+@import url('config.css');
 
 .wrap .error {
   position: absolute;
   left: 0;
   right: 0;
   top: 50%;
-  margin-top: -$unit * 4;
-  padding-top: $unit * 6;
+  margin-top: calc(var(--unit) * -4);
+  padding-top: calc(var(--unit) * 6);
   text-align: center;
   background: url('/images/error.svg') center no-repeat;
 }

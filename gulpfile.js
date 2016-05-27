@@ -1,22 +1,15 @@
 const gulp         = require('gulp');
-const sass         = require('gulp-sass');
-const autoprefixer = require('gulp-autoprefixer');
+const gulpSequence = require('gulp-sequence');
+
 const jshint       = require('gulp-jshint');
-const concat       = require('gulp-concat');
-const jade         = require('gulp-jade');
-const marked       = require('marked');
-const sourcemaps   = require('gulp-sourcemaps');
-const nodemon      = require('gulp-nodemon');
 const glob         = require('glob');
 const browserify   = require('browserify');
 const babelify     = require('babelify');
 const source       = require('vinyl-source-stream');
-const apidoc       = require('gulp-apidoc');
-const mocha        = require('gulp-spawn-mocha');
 
 const site = {
   styles: {
-    from: 'src/site/stylesheets/**/*.scss',
+    from: 'src/site/stylesheets/**/*.css',
     to:   'public/stylesheets',
     end:  'public/stylesheets/*.css'
   },
@@ -37,7 +30,7 @@ const site = {
   assets: {
     from: 'src/site/**/*.*',
     ex:   [
-      '!src/site/**/*.scss',
+      '!src/site/**/*.css',
       '!src/site/**/*.js',
       '!src/site/**/*.jade',
       '!src/site/**/*.md'
@@ -61,10 +54,16 @@ const game = {
 
 // Styles
 gulp.task('styles:site', () => {
+  const postcss      = require('gulp-postcss');
+  const pVars        = require('postcss-css-variables');
+  const pImport      = require("postcss-import");
+  const pCalc        = require("postcss-calc");
+  const autoprefixer = require('autoprefixer');
+  const sourcemaps   = require('gulp-sourcemaps');
+
   return gulp.src(site.styles.from)
     .pipe(sourcemaps.init())
-    .pipe(sass())
-    .pipe(autoprefixer('last 2 version'))
+    .pipe(postcss([ autoprefixer('last 2 version'), pImport, pVars, pCalc ]))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(site.styles.to))
 });
@@ -118,13 +117,17 @@ gulp.task('lint:api',  () => {
 })
 
 gulp.task('apidoc:api', (done) => {
+  const apidoc = require('gulp-apidoc');
+
   apidoc({
-    src: "./src/api/",
-    dest: "./public/apidoc/"
+    src: "src/api/",
+    dest: "public/apidoc/"
   }, done);
 })
 
 gulp.task('spec:api', function () {
+  const mocha = require('gulp-spawn-mocha');
+
   return gulp.src(['src/api/specs/**/*.spec.js'], {read: false})
     .pipe(mocha({
       debugBrk: false,
@@ -136,6 +139,7 @@ gulp.task('spec:api', function () {
 
 // Templates
 gulp.task('templates:site', ['styles:site'], () => {
+  const jade = require('gulp-jade');
   var styles = [];
 
   glob.sync(site.styles.end).forEach((file) =>  {
@@ -145,7 +149,9 @@ gulp.task('templates:site', ['styles:site'], () => {
   return gulp.src(site.templates.ex.concat([site.templates.from]))
     .pipe(jade({
       pretty: false,
-      locals: {styles: styles}
+      locals: {
+        styles: styles
+      }
     }))
     .pipe(gulp.dest(site.templates.to))
 });
@@ -165,6 +171,8 @@ gulp.task('assets:game', () => {
 
 // Watch
 gulp.task('watch', () => {
+  const nodemon = require('gulp-nodemon');
+
   gulp.watch(site.styles.from, ['styles:site']);
   gulp.watch(site.scripts.from, ['scripts:site']);
   gulp.watch(site.templates.from, ['templates:site']);
@@ -193,4 +201,4 @@ gulp.task('api', ['lint:api', 'apidoc:api']);
 gulp.task('game', ['assets:game', 'scripts:game']);
 
 gulp.task('compile', ['site', 'api', 'game']);
-gulp.task('default', ['clr', 'compile', 'watch']);
+gulp.task('default', gulpSequence('clr', 'compile', 'watch'));

@@ -1,6 +1,6 @@
 {
   "name": "hexcraft",
-  "main": "app.js",
+  "main": "index.js",
   "version": "0.0.0",
   "license": "MIT",
   "url": "https://github.com/uz0/hexcraft/issues",
@@ -9,6 +9,9 @@
     "start": "gulp",
     "test": "gulp spec:api",
     "postinstall": "bower install && gulp compile"
+  },
+  "engines": {
+    "node": "6.2.0"
   },
   "apidoc": {
     "title": "Hexcraft game api",

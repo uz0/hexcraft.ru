@@ -181,8 +181,8 @@ router.post('/:id', isAuthed, function(req, res, next) {
     return next(error);
   }
 
-  game.step(step, req.user, stepError => {
-    let error = new Error(stepError);
+  game.step(step, req.user, message => {
+    let error = new Error(message);
     error.status = 400;
     next(error);
   });

@@ -11,30 +11,30 @@ const data = {
     id: 2
   },
   gameSteps:[{
-      current:{
-         i: 2,
-         j: 0
-      },
-      old:{
-         i: 1,
-         j: 0
-      },
-      userId: 2
-   }],
+    current:{
+      i: 2,
+      j: 0
+    },
+    old:{
+      i: 1,
+      j: 0
+    },
+    userId: 2
+  }],
   Map: {
-  MapData: [{
-    i: 4,
-    j: 0,
-    cellstate: 'empty'
-  }, {
-    i: 5,
-    j: 0,
-    cellstate: 'player2'
-  }, {
-    i: 10,
-    j: 6,
-    cellstate: 'empty'
-  }]
+    MapData: [{
+      i: 4,
+      j: 0,
+      cellstate: 'empty'
+    }, {
+      i: 5,
+      j: 0,
+      cellstate: 'player2'
+    }, {
+      i: 10,
+      j: 6,
+      cellstate: 'empty'
+    }]
   }
 };
 
@@ -50,50 +50,50 @@ const step = {
   userId: 3
 };
 
-const stepDistance = {
-  old: {
-   i: 4,
-   j: 0
-  },
-  current: {
-   i: 10,
-   j: 6
-  },
-  userId: 3
-};
-
+// inline all data
+// currect code
+//
 
 describe('stepValidation', () => {
   it('check wrong user', () => {
-    stepValidation(data, step, error => {
-      expect(error).to.be.ok();
+    stepValidation(data, step, (error, code) => {
+      expect(code).to.be(1);
     });
   });
 
   it('step order', () => {
     stepValidation(data, {
-        userId: 1
-      },
-      error => {
-        expect(error).to.be.ok();
-      });
+      userId: 1
+    }, (error, code) => {
+      expect(code).to.be(2);
+    });
   });
 
   it('check owner', () => {
-    stepValidation(data, step, error => {
-      expect(error).to.be.ok();
+    stepValidation(data, step, (error, code) => {
+      expect(code).to.be(3);
     });
   });
 
   it('check for collisions', () => {
-    stepValidation(data, step, error => {
-      expect(error).to.be.ok();
+    stepValidation(data, step, (error, code) => {
+      expect(code).to.be(4);
     });
   });
 
   it('check for distance', () => {
-    stepValidation(data, stepDistance, error => {
-      expect(error).to.be.ok();
+    stepValidation(data, {
+      old: {
+        i: 4,
+        j: 0
+      },
+      current: {
+        i: 10,
+        j: 6
+      },
+      userId: 3
+    }, (error, code) => {
+      expect(code).to.be(5);
     });
   });
 });

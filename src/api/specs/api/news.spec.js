@@ -4,7 +4,7 @@ const expect = require('expect.js');
 const request = require('supertest');
 const app = require('../');
 
-let url = '/api/news';
+const url = '/api/news';
 var id;
 
 describe('News', () => {

@@ -42,12 +42,27 @@ export default class Chip extends PIXI.Container {
 
     this.on('mousedown', this.onDragStart)
         .on('touchstart', this.onDragStart)
+
         .on('mouseup', this.onDragEnd)
         .on('mouseupoutside', this.onDragEnd)
+
         .on('touchend', this.onDragEnd)
         .on('touchendoutside', this.onDragEnd)
+
         .on('mousemove', this.onDragMove)
-        .on('touchmove', this.onDragMove);
+        .on('touchmove', this.onDragMove)
+
+        .on('mouseover', this.onMouseOver)
+        .on('mouseout', this.onMouseOut);
+  }
+
+  onMouseOver() {
+    this.chipSpine.state.setAnimationByName(0, 'hover', true);
+  }
+
+
+  onMouseOut() {
+    this.chipSpine.state.setAnimationByName(0, 'stand', true);
   }
 
   chipSound() {

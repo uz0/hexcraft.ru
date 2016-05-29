@@ -6,7 +6,6 @@
   {"id": "fightBegin", "path": "/game/resources/fight_begin.wav"},
   {"id": "laugh", "path": "/game/resources/laugh.wav"},
   {"id": "fight", "path": "/game/resources/lets_fight.wav"},
-  {"id": "ready", "path": "/game/resources/ready.wav"},
   {"id": "eat", "path": "/game/resources/eat_him.wav"},
   {"id": "fight1", "path": "/game/resources/fight_1.wav"},
   {"id": "victory", "path": "/game/resources/victory.wav"},

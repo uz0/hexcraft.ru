@@ -5,7 +5,10 @@
     "dialect": "sqlite",
     "storage": "./db.development.sqlite"
   },
-  "production": {
+  "production":{
+    "dialect": "mysql"
+  },
+  "oldproduction": {
     "username": "root",
     "password": null,
     "database": "database_production",

@@ -11,9 +11,7 @@ let sequelize;
 if (process.env.CLEARDB_DATABASE_URL) {
   sequelize = new Sequelize(process.env.CLEARDB_DATABASE_URL, {
     dialect: 'mysql',
-    protocol: 'mysql',
-    port: match[4],
-    host: match[3]
+    protocol: 'mysql'
   });
 } else {
   sequelize = new Sequelize(config.database, config.username, config.password, config);

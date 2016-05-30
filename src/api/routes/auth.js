@@ -1,8 +1,6 @@
 'use strict';
 
-const config = require('../configuration.json');
-const env = process.env.NODE_ENV || 'development';
-const salt = config[env].salt || process.env.SALT;
+const config = require('../configuration');
 
 const isAuthed = require('../middlewares/isAuthed');
 const models = require('../models');
@@ -94,7 +92,7 @@ router.post('/login', function(req, res, next) {
   models.User.findOne({
     where: {
       username: req.body.username,
-      password: bcrypt.hashSync(req.body.password, salt)
+      password: bcrypt.hashSync(req.body.password, config.salt)
     }
   }).then(user => {
     if (!user) {
@@ -106,7 +104,7 @@ router.post('/login', function(req, res, next) {
     models.Token.create({
       token: uuid.v4(),
       UserId: user.id,
-      validThrough: (new Date().getTime() / 1000) + config[env].validTime
+      validThrough: (new Date().getTime() / 1000) + config.validTime
     }).then(token => {
       token.dataValues.User = user;
       res.send(token);

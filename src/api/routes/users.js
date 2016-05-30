@@ -1,8 +1,6 @@
 'use strict';
 
-const config = require('../configuration.json');
-const env = process.env.NODE_ENV || 'development';
-const salt = config[env].salt || process.env.SALT;
+const config = require('../configuration');
 
 const bcrypt = require('bcrypt-nodejs');
 const isAdmin = require('../middlewares/isAdmin');
@@ -81,7 +79,7 @@ router.get('/', function(req, res) {
 router.post('/', function(req, res, next) {
   models.User.create({
     username: req.body.username,
-    password: bcrypt.hashSync(req.body.password, salt)
+    password: bcrypt.hashSync(req.body.password, config.salt)
   }).then(user => {
     res.send(user);
   }).catch(error => {

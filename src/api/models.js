@@ -4,18 +4,15 @@ const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
 
-const env = process.env.NODE_ENV;
-const configFile = require('./configuration.json');
-const config = (configFile[env]) ? configFile[env] : configFile.development;
+const config = require('./configuration');
 let sequelize;
-if (process.env.CLEARDB_DATABASE_URL) {
-  sequelize = new Sequelize(process.env.CLEARDB_DATABASE_URL, {
-    dialect: 'mysql',
-    protocol: 'mysql'
-  });
+
+if(config.uri) {
+  sequelize = new Sequelize(config.uri, config);
 } else {
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
+
 var db = module.exports = {};
 
 fs.readdirSync(path.join(__dirname, 'models')).forEach(file => {

@@ -32,7 +32,11 @@ export default class Board extends PIXI.Container {
     this.panel = new Panel();
     this.panel.game = game;
     this.panel.showCapitulation();
-    this.startSplash();
+    this.panel.splash('start', {
+      player1: this.game.player1.username,
+      player2: this.game.player2.username,
+      timer: 3000
+    });
     this.addChild(this.panel);
 
     this.initialization(game);
@@ -40,11 +44,6 @@ export default class Board extends PIXI.Container {
 
     this.loop = new window.EventSource(`/api/games/${game.id}/loop`);
     this.loop.addEventListener('message', this.onEvent.bind(this));
-  }
-
-  startSplash() {
-    this.panel.splash();
-    this.panel.splash.startSplash(this.game.player1.username, this.game.player2.username);
   }
 
   initialization(game) {
@@ -71,6 +70,13 @@ export default class Board extends PIXI.Container {
 
     let status = (this.user === player)? yourStep : enemyStep;
     this.panel.log(status);
+
+    if(this.splash) {
+      this.splash.close();
+    }
+    if(this.user !== player) {
+      this.splash = this.panel.splash('step', enemyStep);
+    }
 
     this.chips.forEach(chip => {
       let mode = (this.user === player && chip.player ===  player);

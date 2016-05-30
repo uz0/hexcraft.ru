@@ -17,12 +17,11 @@ export default class Panel extends PIXI.Container {
 
   }
 
-  splash() {
-    this.splash = new Splash();
-    this.addChild(this.splash);
-    setTimeout(() => {
-      this.removeChild(this.splash);
-    }, 3000);
+  splash(type, data) {
+    let splash = new Splash(type, data);
+    this.addChild(splash);
+
+    return splash;
   }
 
   logout () {

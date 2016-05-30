@@ -1,20 +1,41 @@
 'use strict';
 
-import hexcraft from '../../application.js';
 import GUI from '../gui.js';
-import options from './splash.json';
+import start from './start.json';
+import step from './step.json';
 
 export default class Splash extends PIXI.Container{
-    constructor(){
+    constructor(type, data){
       super();
-      this.GUI = new GUI(options);
-      this.addChild(this.GUI);
+
+      if (type === 'start') {
+
+          this.GUI = new GUI(start);
+
+          this.GUI.player1.text = data.player1;
+          this.GUI.player2.text = data.player2;
+          
+          this.addChild(this.GUI);
+
+          setTimeout(() => {
+            this.parent.removeChild(this);
+          }, data.timer);
+      }
+
+      else if (type === 'step') {
+
+          this.GUI = new GUI(step);
+
+          this.GUI.enemyName.text = data;
+
+          this.addChild(this.GUI);
+          
+      }
+
     }
 
-    startSplash(player1, player2) {
-      this.GUI.player1.text = player1;
-      this.GUI.player2.text = player2;
-      new window.Audio(hexcraft.resources.fightBegin.blobUrl).play();
+    close() {
+      this.parent.removeChild(this);
     }
 
 }

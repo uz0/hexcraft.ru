@@ -1,0 +1,25 @@
+[{
+  component: "Sprite",
+  id: "sprite",
+  alpha: 0.90,
+  textureName: "hex",
+  scale: {
+    x:0.70,
+    y:0.70
+  },
+  position: {
+    x: 267,
+    y: 220
+  }
+},{
+  component: "Text",
+  id: "enemyName",
+  text: "",
+  position: {
+    x: 315,
+    y: 340
+  },
+  style: {
+    fill: "#0b93aa"
+  }
+}];

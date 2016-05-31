@@ -1,6 +1,6 @@
 'use strict';
 
-const Hex = require('./hex.js');
+const Hex = require('../../_shared/hex');
 
 module.exports = function(game, step, error) {
   if (game.player1.id !== step.userId && game.player2.id !== step.userId) {

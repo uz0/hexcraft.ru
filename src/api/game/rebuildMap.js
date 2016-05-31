@@ -1,6 +1,6 @@
 'use strict';
 
-const Hex = require('./hex');
+const Hex = require('../../_shared/hex');
 
 module.exports = function(game, step, emit) {
   let owner = (game.player1.id === step.userId) ? 'player1' : 'player2';

@@ -1,6 +1,6 @@
 'use strict';
 
-const Hex = require('./hex.js');
+const Hex = require('../../_shared/hex');
 
 module.exports = function(game) {
 

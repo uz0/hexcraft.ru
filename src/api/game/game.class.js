@@ -60,12 +60,21 @@ Game.findOne = function(condition) {
 };
 
 Game.findAll = function() {
-  let games = [];
-  storage.forEach(game => {
-    games.push(game.data);
-  });
 
-  return games;
+  let activeGames = [];
+  let finishedGames = [];
+
+  storage.forEach(game => {
+    if (game.data.stage === 'started'){
+      activeGames.push(game.data);   
+    }
+    else{
+      finishedGames.push(game.data);
+    }
+  });
+  activeGames.concat(finishedGames);
+
+  return activeGames;
 };
 
 Game.on = function(id, callback) {

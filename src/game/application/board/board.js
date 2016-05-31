@@ -25,7 +25,6 @@ export default class Board extends PIXI.Container {
       clear: '0xFFFFFF'
     };
 
-
     this.field = new Field();
     this.addChild(this.field);
 
@@ -37,9 +36,9 @@ export default class Board extends PIXI.Container {
       player2: this.game.player2.username,
       timer: 3000
     });
-    this.addChild(this.panel);
 
     this.initialization(game);
+    this.addChild(this.panel);
     this.changeMode('player1');
 
     this.loop = new window.EventSource(`/api/games/${game.id}/loop`);
@@ -74,6 +73,7 @@ export default class Board extends PIXI.Container {
     if(this.splash) {
       this.splash.close();
     }
+
     if(this.user !== player) {
       this.splash = this.panel.splash('step', enemyStep);
     }
@@ -199,9 +199,12 @@ export default class Board extends PIXI.Container {
   }
 
   overEvent() {
-    hexcraft.setStage(Lobby, 'Игра окончена');
+    this.splash = this.panel.splash('gameover');
     this.loop.close();
-  }
+    setTimeout(() => {
+      hexcraft.setStage(Lobby, 'Игра окончена')
+      }, 3000);
+    }
 
   update(){}
 }

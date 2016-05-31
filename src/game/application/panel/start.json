@@ -1,25 +1,53 @@
 [{
-  id: "background",
-  component: "Rectangle",
-  configuration: {
-    color: 0xFFFFFF,
-    alpha: 0.85,
-    x: 0,
-    y: 250,
-    width: 800,
-    height: 200
+  component: "Sprite",
+  id: "sprite1",
+  alpha: 0.90,
+  textureName: "hex",
+  scale: {
+    x:0.60,
+    y:0.60
+  },
+  position: {
+    x: 45,
+    y: 240
   }
- },{
+},{
+  component: "Sprite",
+  id: "sprite2",
+  alpha: 0.90,
+  textureName: "hex",
+  scale: {
+    x:0.60,
+    y:0.60
+  },
+  position: {
+    x: 525,
+    y: 240
+  }
+},{
+  component: "Sprite",
+  id: "sprite3",
+  alpha: 0.90,
+  textureName: "hex",
+  scale: {
+    x:0.30,
+    y:0.30
+  },
+  position: {
+    x: 340,
+    y: 300
+  }
+},{
   id: "player1",
   text:  "",
   component: "Text",
   style: {
     fill: "#0b93aa",
-    font: "48px Arial"
+    font: "32px Arial"
   },
   position: {
-    x: 100,
-    y: 325
+    x: 115,
+    y: 340
   },
   anchor: {
     x: 0,
@@ -31,11 +59,11 @@
   component: "Text",
   style: {
     fill: "#0b93aa",
-    font: "48px Arial"
+    font: "32px Arial"
   },
   position: {
-    x: 600,
-    y: 325
+    x: 605,
+    y: 340
   },
   anchor: {
     x: 0,
@@ -51,7 +79,7 @@
   },
   position: {
     x: 365,
-    y: 325
+    y: 335
   },
   anchor: {
     x: 0,

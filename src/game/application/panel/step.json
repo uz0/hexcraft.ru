@@ -1,7 +1,7 @@
 [{
   component: "Sprite",
   id: "sprite",
-  alpha: 0.90,
+  alpha: 1,
   textureName: "hex",
   scale: {
     x:0.70,

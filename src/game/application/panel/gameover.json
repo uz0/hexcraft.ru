@@ -1,0 +1,46 @@
+[{
+  component: "Sprite",
+  id: "sprite1",
+  alpha: 1,
+  textureName: "hex",
+  scale: {
+    x:0.95,
+    y:0.95
+  },
+  position: {
+    x: 205,
+    y: 140
+  }
+ },{
+  id: "gameover",
+  text:  "Игра окончена!",
+  component: "Text",
+  style: {
+    fill: "#0b93aa",
+    font: "32px Arial"
+  },
+  position: {
+    x: 265,
+    y: 310
+  },
+  anchor: {
+    x: 0,
+    y: 0
+  }
+ },{
+  id: "status",
+  text:  "",
+  component: "Text",
+  style: {
+    fill: "#0b93aa",
+    font: "48px Arial"
+  },
+  position: {
+    x: 600,
+    y: 325
+  },
+  anchor: {
+    x: 0,
+    y: 0
+  }
+ }];

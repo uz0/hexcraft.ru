@@ -106,6 +106,7 @@ Game.prototype.over = function(loserUser) {
   this.data.stage = `over ${winner}`;
 
   emitter.emit(this.data.id, {
-    event: 'over'
+    event: 'over',
+    winner: '${winner}'
   });
 };

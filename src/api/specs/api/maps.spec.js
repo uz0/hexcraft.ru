@@ -6,6 +6,7 @@ const app = require('../');
 
 const url = '/api/maps';
 var id;
+var iCord = 22;
 
 describe('Maps', () => {
   before(app.init);
@@ -17,13 +18,11 @@ describe('Maps', () => {
       .send({
         token: app.adminToken,
         description: 'test',
-        MapData: [
-            {
-                i: 0,
+        MapData: [{
+                i: `${iCord}`,
                 j: 3,
                 cellstate: "empty"
-            }
-        ]
+        }]
       })
       .expect(res => {
         id = res.body.id;
@@ -47,12 +46,12 @@ describe('Maps', () => {
   });
 
   it('get one', done => {
-  request(app.server)
-    .get(`${url}/${id}`)
-    .expect(res => {
-      expect(res).to.be.ok();
-    })
-    .expect(200, done);
+    request(app.server)
+      .get(`${url}/${id}`)
+      .expect(res => {
+        expect(res.body.MapData[0].i).to.be.equal(iCord);
+      })
+      .expect(200, done);
 
 });
 

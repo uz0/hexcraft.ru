@@ -2,18 +2,18 @@
   // {"id": "loading", "path": "/game/resources/loading_scene/skeleton.json"},
   {"id": "hex", "path": "/game/resources/hex.svg"},
 
-  {"id": "buttonClick", "path": "/game/resources/button_click.wav"},
-  {"id": "fightBegin", "path": "/game/resources/fight_begin.wav"},
-  {"id": "laugh", "path": "/game/resources/laugh.wav"},
-  {"id": "fight", "path": "/game/resources/lets_fight.wav"},
-  {"id": "eat", "path": "/game/resources/eat_him.wav"},
-  {"id": "fight1", "path": "/game/resources/fight_1.wav"},
-  {"id": "victory", "path": "/game/resources/victory.wav"},
-  {"id": "good", "path": "/game/resources/good.wav"},
-  {"id": "goodTurn", "path": "/game/resources/good_turn.wav"},
-  {"id": "endStep", "path": "/game/resources/end_step.wav"},
+  {"id": "buttonClick", "path": "/game/resources/sounds/button_click.wav"},
+  {"id": "fightBegin", "path": "/game/resources/sounds/fight_begin.wav"},
+  {"id": "laugh", "path": "/game/resources/sounds/laugh.wav"},
+  {"id": "fight", "path": "/game/resources/sounds/lets_fight.wav"},
+  {"id": "eat", "path": "/game/resources/sounds/eat_him.wav"},
+  {"id": "fight1", "path": "/game/resources/sounds/fight_1.wav"},
+  {"id": "victory", "path": "/game/resources/sounds/victory.wav"},
+  {"id": "good", "path": "/game/resources/sounds/good.wav"},
+  {"id": "goodTurn", "path": "/game/resources/sounds/good_turn.wav"},
+  {"id": "endStep", "path": "/game/resources/sounds/end_step.wav"},
 
-  {"id": "newChip1", "path": "/game/resources/new_chip1/skeleton.json"},
-  {"id": "newChip2", "path": "/game/resources/new_chip2/skeleton.json"},
-  {"id": "newChip3", "path": "/game/resources/new_chip3/skeleton.json"}
+  {"id": "newChip1", "path": "/game/resources/alice/skeleton.json"},
+  {"id": "newChip2", "path": "/game/resources/bob/skeleton.json"},
+  {"id": "newChip3", "path": "/game/resources/stiven/skeleton.json"}
 ]

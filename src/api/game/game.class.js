@@ -61,20 +61,24 @@ Game.findOne = function(condition) {
 
 Game.findAll = function() {
 
-  let activeGames = [];
-  let finishedGames = [];
-
+  let games = [];
   storage.forEach(game => {
-    if (game.data.stage === 'started'){
-      activeGames.push(game.data);   
-    }
-    else{
-      finishedGames.push(game.data);
-    }
-  });
-  activeGames.concat(finishedGames);
 
-  return activeGames;
+    games.push(game.data);
+
+  });
+
+  models.Game.findAll().then(games => {
+
+    let strippedGame = {};
+    strippedGame.player1 = games.player1;
+    strippedGame.player2 = games.player2;
+    strippedGame.stage = games.stage;
+    games.push(strippedGame);
+
+  });
+
+  return games;
 };
 
 Game.on = function(id, callback) {

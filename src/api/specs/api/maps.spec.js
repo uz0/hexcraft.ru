@@ -5,8 +5,8 @@ const request = require('supertest');
 const app = require('../');
 
 const url = '/api/maps';
-var id;
-var iCord = 22;
+let id;
+let mapDescription = 'test';
 
 describe('Maps', () => {
   before(app.init);
@@ -17,11 +17,11 @@ describe('Maps', () => {
       .post(url)
       .send({
         token: app.adminToken,
-        description: 'test',
+        description: mapDescription,
         MapData: [{
-                i: `${iCord}`,
-                j: 3,
-                cellstate: "empty"
+          i: 1,
+          j: 3,
+          cellstate: "empty"
         }]
       })
       .expect(res => {
@@ -42,18 +42,16 @@ describe('Maps', () => {
         expect(item).to.be.ok();
       })
       .expect(200, done);
-
   });
 
   it('get one', done => {
     request(app.server)
       .get(`${url}/${id}`)
       .expect(res => {
-        expect(res.body.MapData[0].i).to.be.equal(iCord);
+        expect(res.body.description).to.be.equal(mapDescription);
       })
       .expect(200, done);
-
-});
+  });
 
   it('delete', done => {
     request(app.server)
@@ -62,6 +60,5 @@ describe('Maps', () => {
         token: app.adminToken
       })
       .expect(200, done);
-
   });
 });

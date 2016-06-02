@@ -5,8 +5,13 @@ const request = require('supertest');
 const app = require('../');
 
 const url = '/api/maps';
+const map = {
+  description: 'test',
+  i: 1,
+  j: 3,
+  cellstate: 'empty'
+};
 let id;
-let mapDescription = 'test';
 
 describe('Maps', () => {
   before(app.init);
@@ -17,11 +22,11 @@ describe('Maps', () => {
       .post(url)
       .send({
         token: app.adminToken,
-        description: mapDescription,
+        description: map.description,
         MapData: [{
-          i: 1,
-          j: 3,
-          cellstate: "empty"
+          i: map.i,
+          j: map.j,
+          cellstate: map.cellstate
         }]
       })
       .expect(res => {
@@ -48,7 +53,10 @@ describe('Maps', () => {
     request(app.server)
       .get(`${url}/${id}`)
       .expect(res => {
-        expect(res.body.description).to.be.equal(mapDescription);
+        expect(res.body.description).to.be.equal(map.description);
+        expect(res.body.MapData[0].i).to.be.equal(map.i);
+        expect(res.body.MapData[0].j).to.be.equal(map.j);
+        expect(res.body.MapData[0].cellstate).to.be.equal(map.cellstate);
       })
       .expect(200, done);
   });

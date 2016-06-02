@@ -40,7 +40,7 @@ Game.create = function(user, callback) {
 
   if (!game) {
     game = new Game(user, callback);
-  } else {
+  } else if (game.data.player1.id != user.id) {
     game.data.player2 = user;
     game.data.stage = 'started';
 

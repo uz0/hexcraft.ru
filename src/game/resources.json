@@ -13,7 +13,7 @@
   {"id": "goodTurn", "path": "/game/resources/sounds/good_turn.wav"},
   {"id": "endStep", "path": "/game/resources/sounds/end_step.wav"},
 
-  {"id": "newChip1", "path": "/game/resources/alice/skeleton.json"},
-  {"id": "newChip2", "path": "/game/resources/bob/skeleton.json"},
-  {"id": "newChip3", "path": "/game/resources/stiven/skeleton.json"}
+  {"id": "alice", "path": "/game/resources/alice/skeleton.json"},
+  {"id": "bob", "path": "/game/resources/bob/skeleton.json"},
+  {"id": "stiven", "path": "/game/resources/stiven/skeleton.json"}
 ]

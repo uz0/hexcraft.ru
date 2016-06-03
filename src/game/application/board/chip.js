@@ -11,9 +11,9 @@ export default class Chip extends PIXI.Container {
     this.chipScale = 0.06;
 
     const spines = [
-      hexcraft.resources.newChip1.spineData,
-      hexcraft.resources.newChip2.spineData,
-      hexcraft.resources.newChip3.spineData
+      hexcraft.resources.alice.spineData,
+      hexcraft.resources.bob.spineData,
+      hexcraft.resources.stiven.spineData
     ];
 
     // spine

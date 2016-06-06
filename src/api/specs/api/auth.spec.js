@@ -29,22 +29,20 @@ describe('Users', () => {
       .expect(200, done);
   });
 
-  it('logout', done => {
-    request(app.server)
-      .post(`${url}/logout`)
-      .send({
-        token: token
-      })      
-      .expect(200, done);
-  });
-
   it('verify token', done => {
     request(app.server)
       .post(`${url}/verify`)
       .send({
         token: token
       })
-      .expect(400, done);
+      .expect(200, done);
+  });
+
+  it('logout', done => {
+    var agent = request(app.server);
+    agent.post(`${url}/logout`).send({token: token}).end(function(){
+      agent.post(`${url}/verify`).send({token: token}).expect(400, done);
+    })
   });
 
 });

@@ -24,26 +24,7 @@ describe('Users', () => {
       })
       .expect(res => {
         token = res.body.token;
-        expect(res.body.id).to.be.ok();
-        expect(token).to.be.ok();
-        expect(res.body.UserId).to.be.ok();  
-        expect(res.body.User).to.be.ok();               
-      })
-      .expect(200, done);
-  });
-
-  it('verify token', done => {
-    request(app.server)
-      .post(`${url}/verify`)
-      .send({
-        token: token
-      })
-      .expect(res => {
-        token = res.body.token;
-        expect(res.body.id).to.be.ok();
-        expect(token).to.be.ok();
-        expect(res.body.UserId).to.be.ok();        
-        expect(res.body.User).to.be.ok();               
+        expect(res.body.User.username).to.be(testUsername);               
       })
       .expect(200, done);
   });
@@ -56,4 +37,14 @@ describe('Users', () => {
       })      
       .expect(200, done);
   });
+
+  it('verify token', done => {
+    request(app.server)
+      .post(`${url}/verify`)
+      .send({
+        token: token
+      })
+      .expect(400, done);
+  });
+
 });

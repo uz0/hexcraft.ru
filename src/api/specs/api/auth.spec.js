@@ -20,11 +20,11 @@ describe('Users', () => {
       .post(`${url}/login`)
       .send({
         username: testUsername,
-        password: testPassword    
+        password: testPassword
       })
       .expect(res => {
         token = res.body.token;
-        expect(res.body.User.username).to.be(testUsername);               
+        expect(res.body.User.username).to.be(testUsername);
       })
       .expect(200, done);
   });
@@ -39,10 +39,19 @@ describe('Users', () => {
   });
 
   it('logout', done => {
-    var agent = request(app.server);
-    agent.post(`${url}/logout`).send({token: token}).end(function(){
-      agent.post(`${url}/verify`).send({token: token}).expect(400, done);
-    })
+    request(app.server)
+      .post(`${url}/logout`)
+      .send({
+        token: token
+      })
+      .end(() => {
+        request(app.server)
+          .post(`${url}/verify`)
+          .send({
+            token: token
+          })
+          .expect(400, done);
+      })
   });
 
 });

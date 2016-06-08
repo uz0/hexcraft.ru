@@ -23,6 +23,7 @@ describe('Users', () => {
       })
       .expect(res => {
         id = res.body.id;
+        expect(res.body.username).to.be.equal(testUsername);        
       })
       .expect(200, done);
   });
@@ -55,6 +56,10 @@ describe('Users', () => {
       .send({
         token: app.adminToken
       })
-      .expect(200, done);
+      .end(() => {
+        request(app.server)
+          .get(`${url}/${id}`)
+          .expect(404, done);
+      })  
   });
 });

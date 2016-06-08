@@ -31,6 +31,7 @@ describe('Maps', () => {
       })
       .expect(res => {
         id = res.body.id;
+        expect(res.body.description).to.be.equal(map.description);
       })
       .expect(200, done);
 
@@ -67,6 +68,10 @@ describe('Maps', () => {
       .send({
         token: app.adminToken
       })
-      .expect(200, done);
+      .end(() => {
+        request(app.server)
+          .get(`${url}/${id}`)
+          .expect(404, done);
+      })   
   });
 });

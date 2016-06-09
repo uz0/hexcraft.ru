@@ -1,9 +1,22 @@
 @import url('config.css');
 
-.news-page h2 {
+.news-content h2 {
   font-weight: 600;
+}
+
+.news-content h3 {
+	font-weight: 500;
+	font-size: calc(var(--unit) * 1.5);
+}
+
+.news-content {
+	min-height: 100vh;
 }
 
 .news-page .date  {
   color: var(--contrast-color);
+}
+
+.title-wrapper label {
+  color: #dadada;
 }

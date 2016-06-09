@@ -1,4 +1,4 @@
-# Hexcraft
+# О Hexcraft
 
 [тут фото]
 

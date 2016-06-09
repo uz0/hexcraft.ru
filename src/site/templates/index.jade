@@ -5,15 +5,27 @@ block vars
   - var bodyClass = 'index-page'
 
 block content
-  header
-    a(href="/" class="logo")
-    .description
-      h1 HEXCRAFT
-      p Логическая игра
+  .block
+    header
+      a(href="/" class="logo")
+      .description
+        h1 HEXCRAFT
+        p Логическая игра
+    footer
+      a(href='/game' class='play') Играть
+      a(href='#news' class='arrow')
 
-  footer
-    a(href='/game' class='play') Играть
-    .links
-      a(href='/about.html') Об игре
-      a(href='/news.html') Новости
-      a(href='/register.html') Регистрация
+  .block(ng-controller="newsCtrl as news" ng-show="news.list.length")
+    .wrap.news-content#news
+      h1 Новости
+      .item(ng-repeat="item in news.list")
+        .title-wrapper(ng-class="{'only-title': !item.content}")
+          h3.title(ng-bind="item.title")
+          label.date(ng-bind="item.createdAt | newsDateFilter")
+        p(ng-bind="item.content" ng-if="item.content")
+
+  .block
+    .wrap
+      include:markdown ./about.md
+
+    include ./_footer.jade

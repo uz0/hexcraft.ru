@@ -83,13 +83,19 @@ router.get('/', function(req, res) {
  *
  */
 
-router.get('/:id', function(req, res) {
+router.get('/:id', function(req, res, next) {
   models.Map.findOne({
     include: [ models.MapData ],
     where: {
       id: req.params.id
     }
   }).then(map => {
+    if(!map) {
+      let error = new Error('Not found.');
+      error.status = 404;
+      return next(error);
+    } 
+       
     res.send(map);
   });
 });

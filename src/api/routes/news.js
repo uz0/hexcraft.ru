@@ -34,6 +34,11 @@ const router = module.exports = express.Router();
 
 router.get('/', function(req, res) {
   models.News.findAll().then(news => {
+    if(!news) {
+      let error = new Error('Not found.');
+      error.status = 404;
+      return next(error);
+    }    
     res.send(news);
   });
 });

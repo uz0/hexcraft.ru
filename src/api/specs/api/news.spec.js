@@ -21,6 +21,7 @@ describe('News', () => {
       })
       .expect(res => {
         id = res.body.id;
+        expect(res.body.content).to.be.equal('test content');          
       })
       .expect(200, done);
 
@@ -46,7 +47,17 @@ describe('News', () => {
       .send({
         token: app.adminToken
       })
-      .expect(200, done);
+      .end(() => {
+        request(app.server)
+          .get(url)
+          .expect(res => {
+            let item = res.body.filter(item => {
+              return item.id === id;
+            })[0];
 
+            expect(item).not.to.be.ok();
+          }) 
+          .expect(200, done);         
+      })
   });
 });

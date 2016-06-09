@@ -101,12 +101,17 @@ router.post('/', function(req, res, next) {
  *
  */
 
-router.get('/:id', function(req, res) {
+router.get('/:id', function(req, res, next) {
   models.User.findOne({
     where: {
       id: req.params.id
     }
   }).then(user => {
+    if(!user) {
+      let error = new Error('Not found.');
+      error.status = 404;
+      return next(error);
+    }
     res.send(user);
   });
 });

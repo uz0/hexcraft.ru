@@ -7,25 +7,23 @@ block vars
 block content
   .block
     header
-      a(href="/" class="logo")
+      a.logo(href="/")
       .description
         h1 HEXCRAFT
         p Логическая игра
     footer
-      a(href='/game' class='play') Играть
-      a(href='#news' class='arrow')
+      a.play(href='/game') Играть
+      .arrow
 
-  .block(ng-controller="newsCtrl as news" ng-show="news.list.length")
-    .wrap.news-content#news
-      h1 Новости
-      .item(ng-repeat="item in news.list")
-        .title-wrapper(ng-class="{'only-title': !item.content}")
-          h3.title(ng-bind="item.title")
-          label.date(ng-bind="item.createdAt | newsDateFilter")
-        p(ng-bind="item.content" ng-if="item.content")
+  .block.wrap.news-content(ng-controller="newsCtrl as news" ng-show="news.list.length")
+    h1 Новости
+    .item(ng-repeat="item in news.list")
+      .title-wrapper(ng-class="{'only-title': !item.content}")
+        h3.title(ng-bind="item.title")
+        label.date(ng-bind="item.createdAt | newsDateFilter")
+      p(ng-bind="item.content" ng-if="item.content")
 
-  .block
-    .wrap
-      include:markdown ./about.md
+  .block.wrap
+    include:markdown ./about.md
 
-    include ./_footer.jade
+  include ./_footer.jade

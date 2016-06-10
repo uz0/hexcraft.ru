@@ -6,8 +6,8 @@
 
 .index-page header {
   text-align: center;
-  height: calc(100vh - (var(--unit) * 10));
-  min-height: calc(var(--unit) * 10);
+  min-height: calc(100vh - (var(--unit) * 10));
+  padding-top: calc(var(--unit) * 3);
   box-sizing: border-box;
 }
 
@@ -47,17 +47,18 @@
 }
 
 .index-page footer .arrow {
-  width: calc(var(--unit) * 2);
-  height: calc(var(--unit) * 2);
+  width: var(--unit);
+  height: var(--unit);
   display: block;
   margin: 0 auto;
-  margin-top: calc(var(--unit));
-  background: url('/images/bottom.svg') center / contain no-repeat;
+  border: 3px solid #fff;
+  border-top: 0;
+  border-right: 0;
+  transform: rotate(-45deg);
 }
 
 @media (min-width: 960px) {
   .index-page header {
-    padding-top: calc(var(--unit) * 3);
     height: calc(100vh - (12 * var(--unit)));
   }
 

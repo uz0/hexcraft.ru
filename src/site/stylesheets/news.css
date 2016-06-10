@@ -5,12 +5,12 @@
 }
 
 .news-content h3 {
-	font-weight: 500;
-	font-size: calc(var(--unit) * 1.5);
+  font-weight: 500;
+  font-size: calc(var(--unit) * 1.5);
 }
 
 .news-content {
-	min-height: 100vh;
+  min-height: 100vh;
 }
 
 .news-page .date  {
@@ -19,4 +19,8 @@
 
 .title-wrapper label {
   color: #dadada;
+}
+
+.news-content .item {
+  margin-bottom: calc(var(--unit) * 4);
 }

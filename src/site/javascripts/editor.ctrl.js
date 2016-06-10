@@ -157,8 +157,8 @@ export default class editorCtrl {
       username: this.username,
       password: this.password
     }).then(response => {
-      this.user = response.data.user;
-      window.localStorage.setItem('token', response.data.token.token);
+      this.user = response.data.User;
+      window.localStorage.setItem('token', response.data.token);
     });
   }
 

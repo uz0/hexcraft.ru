@@ -9,7 +9,6 @@ const testUsername = 'test';
 const testPassword = 'test';
 
 let token;
-let id;
 
 describe('Users', () => {
   before(app.init);
@@ -51,7 +50,7 @@ describe('Users', () => {
             token: token
           })
           .expect(400, done);
-      })
+      });
   });
 
 });

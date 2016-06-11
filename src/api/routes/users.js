@@ -6,6 +6,8 @@ const bcrypt = require('bcrypt-nodejs');
 const isAdmin = require('../middlewares/isAdmin');
 const models = require('../models');
 const express = require('express');
+const uuid = require('node-uuid');
+
 const router = module.exports = express.Router();
 
 
@@ -89,6 +91,39 @@ router.post('/', function(req, res, next) {
   });
 });
 
+
+/**
+ * @api {post} /users/quick Create new user
+ * @apiDescription Create new user with username and return token
+ *
+ * @apiName quickUser
+ * @apiGroup User
+ *
+ * @apiParam {String} username String, may be empty
+ *
+ * @apiUse UserResponse
+ *
+ */
+
+router.post('/quick', function(req, res, next) {
+  models.User.create({
+    username: req.body.username,
+    password: 0
+  }).then(user => {
+    models.Token.create({
+      token: uuid.v4(),
+      UserId: user.id,
+      validThrough: (new Date().getTime() / 1000) + config.validTime
+    }).then(token => {
+      token.dataValues.User = user;
+      res.send(token);
+    });
+  }).catch(error => {
+    error.message = 'С таким именем уже играют';
+    error.status = 400;
+    next(error);
+  });
+});
 
 /**
  * @api {get} /users/:id Get user data

@@ -33,8 +33,7 @@ export default class Board extends PIXI.Container {
     this.panel.showCapitulation();
     this.panel.splash('start', {
       player1: this.game.player1.username,
-      player2: this.game.player2.username,
-      timer: 3000
+      player2: this.game.player2.username
     });
 
     this.initialization(game);
@@ -72,6 +71,7 @@ export default class Board extends PIXI.Container {
 
     if(this.splash) {
       this.splash.close();
+      delete this.splash;
     }
 
     if(this.user !== player) {
@@ -199,12 +199,11 @@ export default class Board extends PIXI.Container {
   }
 
   overEvent() {
-    this.splash = this.panel.splash('gameover');
     this.loop.close();
-    setTimeout(() => {
-      hexcraft.setStage(Lobby, 'Игра окончена')
-      }, 3000);
-    }
+    this.panel.splash('over', () => {
+      hexcraft.setStage(Lobby, 'Игра окончена');
+    });
+  }
 
   update(){}
 }

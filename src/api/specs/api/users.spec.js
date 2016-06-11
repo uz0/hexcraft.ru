@@ -19,11 +19,11 @@ describe('Users', () => {
       .post(url)
       .send({
         username: testUsername,
-        password: testPassword    
+        password: testPassword
       })
       .expect(res => {
         id = res.body.id;
-        expect(res.body.username).to.be.equal(testUsername);        
+        expect(res.body.username).to.be.equal(testUsername);
       })
       .expect(200, done);
   });
@@ -60,6 +60,6 @@ describe('Users', () => {
         request(app.server)
           .get(`${url}/${id}`)
           .expect(404, done);
-      })  
+      });
   });
 });

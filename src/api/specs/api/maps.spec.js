@@ -72,6 +72,6 @@ describe('Maps', () => {
         request(app.server)
           .get(`${url}/${id}`)
           .expect(404, done);
-      })   
+      });
   });
 });

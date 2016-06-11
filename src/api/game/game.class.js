@@ -11,9 +11,9 @@ var storage = [];
 
 function Game(user, callback) {
   models.Map.findOne({
-    order: [
-      models.Sequelize.fn('RANDOM')
-    ],
+    // order: [
+    //   models.Sequelize.fn('RANDOM')
+    // ],
     include: models.MapData
   }).then(map => {
     this.data = {

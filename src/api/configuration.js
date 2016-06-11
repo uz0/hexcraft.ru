@@ -18,4 +18,5 @@ const configuration = {
   }
 };
 
+configuration.env = env;
 module.exports = configuration[env];

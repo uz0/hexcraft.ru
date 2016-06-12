@@ -3,99 +3,66 @@ skeleton.png
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-circle
+body_
   rotate: false
   xy: 2, 2
+  size: 594, 685
+  orig: 594, 685
+  offset: 0, 0
+  index: -1
+circle
+  rotate: false
+  xy: 2, 689
   size: 3311, 3273
   orig: 3311, 3273
   offset: 0, 0
   index: -1
-
-skeleton2.png
-format: RGBA8888
-filter: Linear,Linear
-repeat: none
-body
-  rotate: true
-  xy: 2, 2
-  size: 2489, 2870
-  orig: 2489, 2870
-  offset: 0, 0
-  index: -1
 circle1
   rotate: true
-  xy: 2874, 257
+  xy: 3315, 1182
   size: 759, 62
   orig: 759, 62
   offset: 0, 0
   index: -1
 circle2
   rotate: false
-  xy: 3144, 1906
+  xy: 598, 102
   size: 465, 585
   orig: 465, 585
   offset: 0, 0
   index: -1
 circle3
-  rotate: true
-  xy: 2874, 52
+  rotate: false
+  xy: 3315, 1943
   size: 203, 742
   orig: 203, 742
   offset: 0, 0
   index: -1
 circle4
   rotate: true
-  xy: 3144, 1087
+  xy: 3315, 2687
   size: 661, 334
   orig: 661, 334
   offset: 0, 0
   index: -1
 circle5
-  rotate: true
-  xy: 2938, 347
+  rotate: false
+  xy: 1065, 361
   size: 669, 326
   orig: 669, 326
   offset: 0, 0
   index: -1
 circle6
-  rotate: false
-  xy: 3618, 1750
+  rotate: true
+  xy: 1736, 497
   size: 190, 741
   orig: 190, 741
   offset: 0, 0
   index: -1
 circle7
-  rotate: true
-  xy: 3266, 593
+  rotate: false
+  xy: 3315, 3350
   size: 492, 612
   orig: 1047, 890
-  offset: 0, 0
-  index: -1
-hand
-  rotate: false
-  xy: 3480, 1264
-  size: 422, 484
-  orig: 422, 484
-  offset: 0, 0
-  index: -1
-pupil
-  rotate: false
-  xy: 3618, 82
-  size: 181, 181
-  orig: 181, 181
-  offset: 0, 0
-  index: -1
-spear
-  rotate: false
-  xy: 2874, 1018
-  size: 268, 1473
-  orig: 268, 1473
-  offset: 0, 0
-  index: -1
-teeth
-  rotate: false
-  xy: 3266, 265
-  size: 505, 326
-  orig: 505, 326
   offset: 0, 0
   index: -1

@@ -14,6 +14,18 @@ describe('Users', () => {
   before(app.init);
   before(app.auth);
 
+  it('guest', done => {
+    request(app.server)
+      .post(`${url}/guest`)
+      .send({
+        username: testUsername
+      })
+      .expect(res => {
+        expect(res.body.User.username).to.be(testUsername);
+      })
+      .expect(200, done);
+  });
+
   it('login', done => {
     request(app.server)
       .post(`${url}/login`)

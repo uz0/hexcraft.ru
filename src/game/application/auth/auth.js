@@ -12,52 +12,42 @@ export default class Auth extends PIXI.Container {
     this.GUI = new GUI(options);
     this.addChild(this.GUI);
 
-    let token = window.localStorage.getItem('token');
-    this.verify(token);
+    this.GUI.submit.on('click', this.online.bind(this));
+    this.GUI.submit.on('touchstart', this.online.bind(this));
 
-    this.GUI.submit.on('click', this.login.bind(this));
-    this.GUI.submit.on('touchstart', this.login.bind(this));
+    this.GUI.vsPlayer.on('click', this.offlineVsPlayer.bind(this));
+    this.GUI.vsPlayer.on('touchstart', this.offlineVsPlayer.bind(this));
+
+    this.GUI.vsAI.on('click', this.offlineVsAi.bind(this));
+    this.GUI.vsAI.on('touchstart', this.offlineVsAi.bind(this));
   }
 
-  showError(message) {
-    this.GUI.error.text = message;
-  }
-
-  login() {
+  online() {
     let username = this.GUI.username.value;
-    let password = this.GUI.password.value;
 
-    if (!username || !password) {
-      this.showError('Пожалуйста заполните все поля.');
+    if (!username) {
       return;
     }
 
     new window.Audio(hexcraft.resources.buttonClick.blobUrl).play();
 
-    http.post('/api/auth/login', {
-      username: username,
-      password: password
+    http.post('/api/auth/guest', {
+      username: username
     }).then(response => {
       window.localStorage.setItem('username', response.User.username);
       window.localStorage.setItem('token', response.token);
       hexcraft.setStage(Lobby);
-    }).catch(() => {
-      this.showError('Неправильная пара логин/пароль');
     });
   }
 
-  verify(token) {
-    if(!token) {
-      return;
-    }
+  offlineVsPlayer() {
+    new window.Audio(hexcraft.resources.buttonClick.blobUrl).play();
+    console.log('vsPlayer');
+  }
 
-    http.post('/api/auth/verify', {
-        token: token
-    }).then(() => {
-      hexcraft.setStage(Lobby);
-    }).catch(() => {
-      this.showError('Ваша авторизация устарела. Войдите снова');
-    });
+  offlineVsAi() {
+    new window.Audio(hexcraft.resources.buttonClick.blobUrl).play();
+    console.log('offlineVsAi');
   }
 
   update() {}

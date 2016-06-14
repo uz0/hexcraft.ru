@@ -1,9 +1,9 @@
 'use strict';
 
-const stepValidation = require('../../_shared/game/stepValidation');
-const rebuildMap = require('../../_shared/game/rebuildMap');
-const winValidation = require('../../_shared/game/winValidation');
-const models = require('../models');
+const stepValidation = require('../_shared/game/stepValidation');
+const rebuildMap = require('../_shared/game/rebuildMap');
+const winValidation = require('../_shared/game/winValidation');
+const models = require('./models');
 const uuid = require('node-uuid');
 const events = require('events');
 var emitter = new events.EventEmitter();

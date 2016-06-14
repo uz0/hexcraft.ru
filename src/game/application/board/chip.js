@@ -26,14 +26,10 @@ export default class Chip extends PIXI.Container {
     this.chipSpine.position.set(35, 40);
     this.chipSpine.state.setAnimationByName(0, 'stand', true);
     this.addChild(this.chipSpine);
-
-    // position
-    let position = Hex.indexToCoordinates(i, j);
-
-    this.i = i;
-    this.j = j;
-    this.position.set(position.x, position.y);
-    this.updateOldPosition();
+    this.setPosition({
+      i: i,
+      j: j
+    });
 
     // other
     this.color = new PIXI.filters.ColorMatrixFilter();
@@ -56,10 +52,16 @@ export default class Chip extends PIXI.Container {
         .on('mouseout', this.onMouseOut);
   }
 
+  setPosition(position) {
+    this.i = position.i;
+    this.j = position.j;
+    this.position = Hex.indexToCoordinates(position.i, position.j);
+    this.updateOldPosition();
+  }
+
   onMouseOver() {
     this.chipSpine.state.setAnimationByName(0, 'hover', true);
   }
-
 
   onMouseOut() {
     this.chipSpine.state.setAnimationByName(0, 'stand', true);
@@ -122,7 +124,6 @@ export default class Chip extends PIXI.Container {
   }
 
   onDragEnd() {
-
     this.chipSpine.state.setAnimationByName(0, 'stand', true);
     new window.Audio(hexcraft.resources.endStep.blobUrl).play();
 

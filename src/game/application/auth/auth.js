@@ -20,6 +20,11 @@ export default class Auth extends PIXI.Container {
 
     this.GUI.vsAI.on('click', this.offlineVsAi.bind(this));
     this.GUI.vsAI.on('touchstart', this.offlineVsAi.bind(this));
+
+    let username = window.localStorage.getItem('username');
+    if(username) {
+      this.GUI.username.value = username;
+    }
   }
 
   online() {
@@ -34,6 +39,7 @@ export default class Auth extends PIXI.Container {
     http.post('/api/auth/guest', {
       username: username
     }).then(response => {
+      window.localStorage.setItem('userId', response.User.id);
       window.localStorage.setItem('username', response.User.username);
       window.localStorage.setItem('token', response.token);
       hexcraft.setStage(Lobby);

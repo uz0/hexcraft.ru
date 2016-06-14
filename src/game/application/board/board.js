@@ -1,21 +1,35 @@
 'use strict';
 
-import Panel from '../panel/panel.js';
-import http from '../http.js';
-import Chip from './chip.js';
-import Hex from './hex.js';
-import hexcraft from '../../application.js';
-import Field from './field.js';
-import Lobby from '../lobby/lobby.js';
+import Panel from '../panel/panel';
+import Field from './field';
+import Chip from './chip';
+import Online from './online';
+import stepValidation from '../../../_shared/game/stepValidation';
+import rebuildMap from '../../../_shared/game/rebuildMap';
+import Hex from '../../../_shared/game/hex';
 
 export default class Board extends PIXI.Container {
-  constructor(game) {
+  constructor(gameData) {
     super();
-    this.game = game;
-    this.chips = [];
+    this.game = new Online(gameData, this);
 
-    this.username = window.localStorage.getItem('username');
-    this.user = (game.player1.username === this.username)? 'player1' : 'player2';
+    this.field = new Field();
+    this.addChild(this.field);
+
+    this.chips = new PIXI.Container();
+    this.addChild(this.chips);
+
+    this.panel = new Panel(this.game.id);
+    this.panel.showCapitulation();
+    this.panel.splash('start', {
+      player1: this.game.player1.username,
+      player2: this.game.player2.username
+    });
+    this.addChild(this.panel);
+
+    this.userId = window.localStorage.getItem('userId');
+    this.userId = parseInt(this.userId);
+    this.player = (this.game.player1.id === this.userId)? 'player1' : 'player2';
 
     this.colors = {
       old: '0xFFCCBC',
@@ -25,67 +39,28 @@ export default class Board extends PIXI.Container {
       clear: '0xFFFFFF'
     };
 
-    this.field = new Field();
-    this.addChild(this.field);
-
-    this.panel = new Panel();
-    this.panel.game = game;
-    this.panel.showCapitulation();
-    this.panel.splash('start', {
-      player1: this.game.player1.username,
-      player2: this.game.player2.username
-    });
-
-    this.initialization(game);
-    this.addChild(this.panel);
-    this.changeMode('player1');
-
-    this.loop = new window.EventSource(`/api/games/${game.id}/loop`);
-    this.loop.addEventListener('message', this.onEvent.bind(this));
-  }
-
-  initialization(game) {
-    game.Map.MapData.forEach(element => {
+    this.game.Map.MapData.forEach(element => {
       this.field.findByIndex(element.i, element.j).alpha = 0.75;
 
       if(element.cellstate !== 'empty') {
-        let chip = new Chip(element.i, element.j, element.cellstate);
-
-        chip.onMove = this.onMove.bind(this);
-        chip.onStep = this.onStep.bind(this);
-        chip.beforeStep = this.beforeStep.bind(this);
-
-        this.chips.push(chip);
-        this.addChild(chip);
+        this.addChip(element.i, element.j, element.cellstate);
       }
     });
+
+    this.changeMode('player1');
   }
 
-  changeMode(player) {
-    const yourStep = `Ваш ход`;
-    const enemyName = (this.user === 'player1')? this.game.player2.username : this.game.player1.username;
-    const enemyStep = `Ходит ${enemyName}`;
+  addChip(i, j, owner) {
+    let chip = new Chip(i, j, owner);
 
-    let status = (this.user === player)? yourStep : enemyStep;
-    this.panel.log(status);
+    chip.onMove = this.onMove.bind(this);
+    chip.beforeStep = this.beforeStep.bind(this);
+    chip.onStep = this.onStep.bind(this);
 
-    if(this.splash) {
-      this.splash.close();
-      delete this.splash;
-    }
-
-    if(this.user !== player) {
-      this.splash = this.panel.splash('step', enemyStep);
-    }
-
-    this.chips.forEach(chip => {
-      let mode = (this.user === player && chip.player ===  player);
-      chip.changeMode(mode);
-    });
+    this.chips.addChild(chip);
   }
 
   onMove(current, old) {
-
     // clear field
     this.field.forEach((i, j, hex)=> {
       hex.tint = this.colors.clear;
@@ -105,103 +80,54 @@ export default class Board extends PIXI.Container {
     this.field.findByCoords(old.x, old.y).tint = this.colors.old;
 
     // find cursor position and set color Field under cursor
-    this.field.findByCoords(current.x, current.y).tint = this.colors.current;
+    try {
+      this.field.findByCoords(current.x, current.y).tint = this.colors.current;
+    } catch (error) {}
   }
 
   beforeStep(current, old) {
-
     // clear field
     this.field.forEach((i, j, hex) => {
       hex.tint = this.colors.clear;
     });
 
-    // Prevent step out field
-    let field = this.field.findByCoords(current.x, current.y);
-    if(!field || field.alpha !== 0.75) {
-      this.panel.log('Выход за пределы поля!');
+    return stepValidation(this.game, {
+      current: Hex.coordinatesToIndex(current.x, current.y),
+      old: Hex.coordinatesToIndex(old.x, old.y),
+      userId: this.userId
+    }, error => {
+      this.panel.log(error);
       return true;
-    }
-
-    // Prevent step to other chip
-    // prevent step to old position
-    if(Hex.findByCoords(this.chips, current.x, current.y)) {
-      this.panel.log('Коллизии детектед!');
-      return true;
-    }
-
-    // prevent step out neighbors neighbors
-    let neighborsNeighbors = this.field.findNeighborsNeighbors(old.x, old.y);
-    if(!Hex.findByCoords(neighborsNeighbors, current.x, current.y)) {
-      this.panel.log('Ограничение по радиусу!');
-      return true;
-    }
+    });
   }
 
   onStep(current, old) {
-    let token = window.localStorage.getItem('token');
-    let index = Hex.coordinatesToIndex(current.x, current.y);
-    let oldIndex = Hex.coordinatesToIndex(old.x, old.y);
+    rebuildMap(this.game, {
+      current: Hex.coordinatesToIndex(current.x, current.y),
+      old: Hex.coordinatesToIndex(old.x, old.y),
+      userId: this.userId
+    }, this.game.mapUpdated);
 
-    http.post(`/api/games/${this.game.id}`, {
-      step: {
-        current: index,
-        old: oldIndex
-      },
-      token: token
-    }).catch(() => {
-      // rollback chip, after failure request
-      let hex = Hex.findByIndex(this.chips, index.i, index.j);
-
-      hex.i = oldIndex.i;
-      hex.j = oldIndex.j;
-      hex.position = Hex.indexToCoordinates(oldIndex.i, oldIndex.j);
-      hex.updateOldPosition();
-    });
+    this.game.onStep(current, old);
   }
 
-  onEvent(event) {
-    let data = JSON.parse(event.data);
-    this[`${data.event}Event`](data.data, data.user);
-  }
+  changeMode(player) {
+    const log = `Ходит ${this.game[player].username}`;
 
-  stepEvent(step, user) {
-    let nextUserStep = (this.game.player1.username === user.username)? 'player2' : 'player1';
-    this.changeMode(nextUserStep);
-
-    if(this.username === user.username) {
-      return;
+    if(this.splash) {
+      this.splash.close();
+      delete this.splash;
     }
 
-    let chip = Hex.findByIndex(this.chips, step.old.i, step.old.j);
-    chip.i = step.current.i;
-    chip.j = step.current.j;
-    chip.position = Hex.indexToCoordinates(step.current.i, step.current.j);
-  }
+    if(this.player !== player) {
+      this.splash = this.panel.splash('step', log);
+    }
 
-  chipEvent(coordinates, user) {
-    let owner = (this.game.player1.username === user.username)? 'player1' : 'player2';
-    let chip = new Chip(coordinates.i, coordinates.j, owner);
+    this.panel.log(log);
 
-    chip.onMove = this.onMove.bind(this);
-    chip.onStep = this.onStep.bind(this);
-    chip.beforeStep = this.beforeStep.bind(this);
-
-    this.chips.push(chip);
-    this.addChild(chip);
-  }
-
-  ownerEvent(coordinatesArray, user) {
-    let owner = (this.game.player1.username === user.username)? 'player1' : 'player2';
-
-    coordinatesArray.forEach(coordinates => {
-      Hex.findByIndex(this.chips, coordinates.i, coordinates.j).changeOwner(owner);
-    });
-  }
-
-  overEvent() {
-    this.loop.close();
-    this.panel.splash('over', () => {
-      hexcraft.setStage(Lobby, 'Игра окончена');
+    this.chips.children.forEach(chip => {
+      let mode = (this.player === player && player === chip.player);
+      chip.changeMode(mode);
     });
   }
 

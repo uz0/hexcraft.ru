@@ -74,6 +74,34 @@ router.post('/verify', function(req, res, next) {
 
 
 /**
+ * @api {post} /auth/guest Guest authorization
+ * @apiName Guest
+ * @apiDescription Getting the token without registration using only login
+ *
+ * @apiGroup Auth
+ *
+ * @apiParam {String} username Display name
+ *
+ * @apiUse TokenWithUserDataResponse
+ */
+
+router.post('/guest', function(req, res) {
+  models.Token.create({
+    token: uuid.v4(),
+    guestName: req.body.username,
+    validThrough: (new Date().getTime() / 1000) + config.validTime
+  }).then(token => {
+    token.dataValues.User = {
+      id: token.id,
+      username: req.body.username
+    };
+
+    res.send(token);
+  });
+});
+
+
+/**
  * @api {post} /auth/login Login
  * @apiName Login
  * @apiDescription Create and return new user token with user data if credentials valid or error

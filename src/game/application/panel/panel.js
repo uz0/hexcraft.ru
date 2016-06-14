@@ -1,16 +1,18 @@
 'use strict';
 
 import options from './panel.json';
-import hexcraft from '../../application.js';
-import http from '../http.js';
-import GUI from '../gui.js';
-import Splash from './splash/splash.js';
+import hexcraft from '../../application';
+import http from '../http';
+import GUI from '../gui';
+import Splash from './splash/splash';
 
 export default class Panel extends PIXI.Container {
-  constructor() {
+  constructor(gameId) {
     super();
     this.GUI = new GUI(options);
     this.addChild(this.GUI);
+
+    this.gameId = gameId;
 
     const username = window.localStorage.getItem('username');
     this.GUI.username.text = username;
@@ -49,7 +51,7 @@ export default class Panel extends PIXI.Container {
 
   surrender() {
     const token = window.localStorage.getItem('token');
-    http.post(`/api/games/${this.game.id}/surrender`, {
+    http.post(`/api/games/${this.gameId}/surrender`, {
       token: token
     });
 

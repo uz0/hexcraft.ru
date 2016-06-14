@@ -20,13 +20,23 @@ module.exports = function(req, res, next) {
     },
     include: [models.User]
   }).then(result => {
-
     if (!result) {
       let error = new Error('invalid token');
       error.status = 400;
       return next(error);
     }
-    req.user = result.User.objectize();
+
+    if(result.User) {
+      req.user = result.User.objectize();
+    }
+
+    if(result.dataValues.guestName) {
+      req.user = {
+        id: result.dataValues.id,
+        username: result.dataValues.guestName
+      };
+    }
+
     next();
   });
 };

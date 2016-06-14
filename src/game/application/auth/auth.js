@@ -1,10 +1,10 @@
 'use strict';
 
 import options from './auth.json';
-import hexcraft from '../../application.js';
-import http from '../http.js';
-import GUI from '../gui.js';
-import Lobby from '../lobby/lobby.js';
+import hexcraft from '../../application';
+import http from '../http';
+import GUI from '../gui';
+import Lobby from '../lobby/lobby';
 
 export default class Auth extends PIXI.Container {
   constructor() {

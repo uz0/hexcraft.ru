@@ -1,7 +1,7 @@
 'use strict';
 
-import Load from './application/load/load.js';
-import WaterField from '../_shared/water.js';
+import Load from './application/load/load';
+import WaterField from '../_shared/water';
 
 class Hexcraft {
   constructor() {

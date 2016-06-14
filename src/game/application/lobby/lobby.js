@@ -1,10 +1,10 @@
 'use strict';
 
-import hexcraft from '../../application.js';
-import http from '../http.js';
-import GUI from '../gui.js';
-import Board from '../board/board.js';
-import Panel from '../panel/panel.js';
+import hexcraft from '../../application';
+import http from '../http';
+import GUI from '../gui';
+import Board from '../board/board';
+import Panel from '../panel/panel';
 import options from './lobby.json';
 
 export default class Lobby extends PIXI.Container {

@@ -1,8 +1,8 @@
 'use strict';
 
-const stepValidation = require('./stepValidation');
-const rebuildMap = require('./rebuildMap');
-const winValidation = require('./winValidation');
+const stepValidation = require('../../_shared/game/stepValidation');
+const rebuildMap = require('../../_shared/game/rebuildMap');
+const winValidation = require('../../_shared/game/winValidation');
 const models = require('../models');
 const uuid = require('node-uuid');
 const events = require('events');
@@ -42,7 +42,7 @@ Game.create = function(user, callback) {
     game = new Game(user, callback);
   }
 
-  if (game.data.player1.id !== user.id) {
+  if (game.data && game.data.player1.id !== user.id) {
     game.data.player2 = user;
     game.data.stage = 'started';
 
@@ -90,34 +90,35 @@ Game.on = function(id, callback) {
 
 Game.prototype.step = function(step, user, errorCallback) {
   step.userId = user.id;
+  let player = (this.data.player1.id === user.id) ? 'player1' : 'player2';
 
   stepValidation(this.data, step, errorCallback);
+
+  emitter.emit(this.data.id, {
+    event: 'step',
+    data: step,
+    user: user,
+    player: player
+  });
 
   rebuildMap(this.data, step, event => {
     emitter.emit(this.data.id, {
       event: event.name,
       data: event.data,
-      user: user
+      user: user,
+      player: player
     });
   });
 
-  winValidation(this);
-
+  winValidation(this.data.Map.MapData, this.over.bind(this));
+  console.log(this.over);
 
   this.data.gameSteps.push(step);
-
-  emitter.emit(this.data.id, {
-    event: 'step',
-    data: step,
-    user: user
-  });
-
   return;
 };
 
 
-Game.prototype.over = function(loserUser) {
-  let winner = (this.data.player1.id !== loserUser.id) ? 'player1' : 'player2';
+Game.prototype.over = function(winner) {
   this.data.stage = `over ${winner}`;
 
   emitter.emit(this.data.id, {

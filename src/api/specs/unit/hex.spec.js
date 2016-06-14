@@ -1,7 +1,7 @@
 'use strict';
 
 const expect = require('expect.js');
-const Hex = require('../../game/hex.js');
+const Hex = require('../../../_shared/hex');
 
 const array = [{
   i: 4,
@@ -55,14 +55,14 @@ describe('Hex', () => {
   });
 
   it('findNeighbors', () => {
-    let neighbors = Hex.findNeighbors(array, array[0].i, array[0].j);
+    let neighbors = Hex.findNeighborsByIndex(array, array[0].i, array[0].j);
 
     // I GUARANTEE IT!!!
     expect(neighbors.length).to.be(4);
   });
 
   it('findNeighborsNeighbors', () => {
-    let neighborsNeighbors = Hex.findNeighborsNeighbors(array, array[0].i, array[0].j);
+    let neighborsNeighbors = Hex.findNeighborsNeighborsByIndex(array, array[0].i, array[0].j);
 
     expect(neighborsNeighbors.length).to.be.above(array.length-1);
   });

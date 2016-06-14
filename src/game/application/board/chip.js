@@ -1,8 +1,8 @@
 'use strict';
 
-import hexcraft from '../../application.js';
-import Hex from './hex.js';
-import random from '../../../_shared/random.js';
+import hexcraft from '../../application';
+import Hex from '../../../_shared/game/hex';
+import random from '../../../_shared/random';
 
 export default class Chip extends PIXI.Container {
   constructor(i, j, player){

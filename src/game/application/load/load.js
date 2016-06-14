@@ -1,9 +1,9 @@
 'use strict';
 
 import resources from '../../resources.json';
-import hexcraft from '../../application.js';
-import Auth from '../auth/auth.js';
-import GUI from '../gui.js';
+import hexcraft from '../../application';
+import Auth from '../auth/auth';
+import GUI from '../gui';
 
 // load all from resources.json
 class Loader extends PIXI.loaders.Loader {

@@ -28,7 +28,7 @@ class WaterHex extends PIXI.Sprite {
   }
 }
 
-export default class WaterField extends PIXI.Container {
+class WaterField extends PIXI.Container {
   constructor(texture) {
     super();
 
@@ -40,3 +40,5 @@ export default class WaterField extends PIXI.Container {
     }
   }
 }
+
+module.exports = WaterField;

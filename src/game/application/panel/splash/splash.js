@@ -1,6 +1,6 @@
 'use strict';
 
-import GUI from '../../gui.js';
+import GUI from '../../gui';
 import startConf from './start.json';
 import stepConf from './step.json';
 import overConf from './over.json';

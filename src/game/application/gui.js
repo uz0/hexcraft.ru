@@ -1,7 +1,7 @@
 'use strict';
 
-import hexcraft from '../application.js';
-import Rectangle from './rectangle.js';
+import hexcraft from '../application';
+import Rectangle from './rectangle';
 
 export default class GUI extends PIXI.Container {
   constructor(options) {

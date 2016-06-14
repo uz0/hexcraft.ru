@@ -1,7 +1,7 @@
 'use strict';
 
-import hexcraft from '../../application.js';
-import Hex from './hex.js';
+import hexcraft from '../../application';
+import Hex from '../../../_shared/game/hex';
 
 export default class Field extends PIXI.Container {
   constructor() {

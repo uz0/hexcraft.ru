@@ -1,6 +1,6 @@
 'use strict';
 
-import WaterField from '../../_shared/water.js';
+import WaterField from '../../_shared/water';
 
 export default class WaterDirective {
   constructor() {

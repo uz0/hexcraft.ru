@@ -1,7 +1,7 @@
 'use strict';
 
 const expect = require('expect.js');
-const stepValidation = require('../../game/stepValidation.js');
+const stepValidation = require('../../../_shared/game/stepValidation');
 
 
 describe('stepValidation', () => {

@@ -41,10 +41,10 @@ export default class Field extends PIXI.Container {
   }
 
   findNeighbors(x, y) {
-    return Hex.findNeighbors(this.children, x, y);
+    return Hex.findNeighborsByCoords(this.children, x, y);
   }
 
   findNeighborsNeighbors(x, y) {
-    return Hex.findNeighborsNeighbors(this.children, x, y);
+    return Hex.findNeighborsNeighborsByCoords(this.children, x, y);
   }
 }

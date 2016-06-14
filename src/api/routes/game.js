@@ -1,6 +1,6 @@
 'use strict';
 
-const Game = require('../game/game.class');
+const Game = require('../game');
 const isAuthed = require('../middlewares/isAuthed');
 const express = require('express');
 const router = module.exports = express.Router();

@@ -121,8 +121,6 @@ export default class editorCtrl {
       }]).then(id => {q.bulkInsert('MapData',[${mapData.join()}]).then(()=>{d();});});}};
     `;
 
-    console.log(template);
-
     let blob = new window.Blob([template], {type:'text/plain'});
     let link = document.createElement('a');
     link.download = `${this.map.description}.js`;

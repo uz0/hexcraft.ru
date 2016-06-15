@@ -15,7 +15,7 @@ export default class Online {
 
     let userId = window.localStorage.getItem('userId');
     this.board.userId = parseInt(userId);
-    this.board.player = (this.player1.id === userId)? 'player1' : 'player2';
+    this.board.player = (this.player1.id === this.board.userId)? 'player1' : 'player2';
 
     this.loop = new window.EventSource(`/api/games/${this.id}/loop`);
     this.loop.addEventListener('message', this.onEvent.bind(this));
@@ -91,9 +91,9 @@ export default class Online {
   }
 
   overEvent(winner) {
-    let text = (winner === 'over player1') ? `${this.player1.username} победил` :
-                                             `${this.player2.username} победил`;
     this.loop.close();
+    let text = (winner === 'player1') ? `${this.player1.username} победил` :
+                                        `${this.player2.username} победил`;
 
     this.board.panel.splash('over', {
       winner: text,

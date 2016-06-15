@@ -111,18 +111,24 @@ Game.prototype.step = function(step, user, errorCallback) {
   });
 
   winValidation(this.data.Map.MapData, this.over.bind(this));
-  console.log(this.over);
 
   this.data.gameSteps.push(step);
   return;
 };
 
 
-Game.prototype.over = function(winner) {
+Game.prototype.over = function(user) {
+  let winner = (this.data.player1.id === user.id) ? 'player1' : 'player2';
   this.data.stage = `over ${winner}`;
 
   emitter.emit(this.data.id, {
     event: 'over',
-    winner: '${winner}'
+    data: winner
   });
+};
+
+
+Game.prototype.surrender = function(user) {
+  let winner = (this.data.player1.id === user.id) ? this.data.player2 : this.data.player1;
+  this.over(winner);
 };

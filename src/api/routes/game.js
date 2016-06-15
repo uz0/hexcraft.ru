@@ -315,7 +315,7 @@ router.post('/:id/surrender', isAuthed, function(req, res, next) {
     return next(error);
   }
 
-  game.over(req.user);
+  game.surrender(req.user);
 
   res.send({});
 });

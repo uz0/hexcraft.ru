@@ -42,7 +42,6 @@ export default class Panel extends PIXI.Container {
   }
 
   showSurrender() {
-    console.log(this.surrender);
     this.GUI.surrender.visible = true;
     this.GUI.surrender.on('click', this.surrender);
     this.GUI.surrender.on('touchstart', this.surrender);

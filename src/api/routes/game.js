@@ -107,8 +107,9 @@ const sse = require('server-sent-events');
  */
 
 router.get('/', function(req, res) {
-  let games = Game.findAll();
-  res.send(games);
+  Game.findAll(games => {
+    res.send(games);
+  });
 });
 
 

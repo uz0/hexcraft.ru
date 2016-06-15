@@ -61,26 +61,15 @@ Game.findOne = function(condition) {
   });
 };
 
-Game.findAll = function() {
-
-  let games = [];
-  storage.forEach(game => {
-
-    games.push(game.data);
-
-  });
+Game.findAll = function(callback) {
+  let gameList = [];
+  storage.forEach(game => gameList.push(game.data));
 
   models.Game.findAll().then(games => {
+    games.forEach(game => gameList.push(game));
 
-    let strippedGame = {};
-    strippedGame.player1 = games.player1;
-    strippedGame.player2 = games.player2;
-    strippedGame.stage = games.stage;
-    games.push(strippedGame);
-
+    callback(gameList);
   });
-
-  return games;
 };
 
 Game.on = function(id, callback) {
@@ -120,6 +109,13 @@ Game.prototype.step = function(step, user, errorCallback) {
 Game.prototype.over = function(user) {
   let winner = (this.data.player1.id === user.id) ? 'player1' : 'player2';
   this.data.stage = `over ${winner}`;
+
+  models.Game.create({
+    MapId: this.data.Map.id,
+    stage: this.data.stage,
+    player1: this.data.player1.username,
+    player2: this.data.player2.username
+  })
 
   emitter.emit(this.data.id, {
     event: 'over',

@@ -3,9 +3,10 @@
 import hexcraft from '../../application';
 import http from '../http';
 import GUI from '../gui';
-import Board from '../board/board';
 import Panel from '../panel/panel';
 import options from './lobby.json';
+import Board from '../game/board';
+import Online from '../game/modes/online';
 
 export default class Lobby extends PIXI.Container {
   constructor(message) {
@@ -109,16 +110,24 @@ export default class Lobby extends PIXI.Container {
         return;
       }
 
-      hexcraft.setStage(Board, game);
+      hexcraft.setStage(Board, {
+        builder: Online,
+        data: game
+      });
     });
   }
 
   waitGame(event) {
     let data = JSON.parse(event.data);
+
     if(data.event === 'started') {
       this.game.player2 = data.user;
-      hexcraft.setStage(Board, this.game);
+
       this.loop.close();
+      hexcraft.setStage(Board, {
+        builder: Online,
+        data: this.game
+      });
     }
   }
 

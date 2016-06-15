@@ -1,21 +1,18 @@
 'use strict';
 
 import options from './panel.json';
-import hexcraft from '../../application';
 import http from '../http';
 import GUI from '../gui';
 import Splash from './splash/splash';
 
 export default class Panel extends PIXI.Container {
-  constructor(gameId) {
+  constructor() {
     super();
     this.GUI = new GUI(options);
     this.addChild(this.GUI);
 
-    this.gameId = gameId;
-
     const username = window.localStorage.getItem('username');
-    this.GUI.username.text = username;
+    this.GUI.username.text = username || '';
   }
 
   splash(type, data) {
@@ -28,7 +25,8 @@ export default class Panel extends PIXI.Container {
   logout () {
     const token = window.localStorage.getItem('token');
 
-    window.localStorage.removeItem('user');
+    window.localStorage.removeItem('username');
+    window.localStorage.removeItem('userId');
     window.localStorage.removeItem('token');
     http.post('/api/auth/logout', {
       token: token
@@ -43,19 +41,11 @@ export default class Panel extends PIXI.Container {
     this.GUI.logout.on('touchstart', this.logout);
   }
 
-  showCapitulation() {
+  showSurrender() {
+    console.log(this.surrender);
     this.GUI.surrender.visible = true;
-    this.GUI.surrender.on('click', this.surrender.bind(this));
-    this.GUI.surrender.on('touchstart', this.surrender.bind(this));
-  }
-
-  surrender() {
-    const token = window.localStorage.getItem('token');
-    http.post(`/api/games/${this.gameId}/surrender`, {
-      token: token
-    });
-
-    new window.Audio(hexcraft.resources.buttonClick.blobUrl).play();
+    this.GUI.surrender.on('click', this.surrender);
+    this.GUI.surrender.on('touchstart', this.surrender);
   }
 
   log(text) {

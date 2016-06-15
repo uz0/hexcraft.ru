@@ -5,6 +5,8 @@ import hexcraft from '../../application';
 import http from '../http';
 import GUI from '../gui';
 import Lobby from '../lobby/lobby';
+import Board from '../game/board';
+import OfflineVsPlayer from '../game/modes/offlineVsPlayer';
 
 export default class Auth extends PIXI.Container {
   constructor() {
@@ -48,7 +50,11 @@ export default class Auth extends PIXI.Container {
 
   offlineVsPlayer() {
     new window.Audio(hexcraft.resources.buttonClick.blobUrl).play();
-    console.log('vsPlayer');
+
+    hexcraft.setStage(Board, {
+      builder: OfflineVsPlayer,
+      data: {}
+    });
   }
 
   offlineVsAi() {

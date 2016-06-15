@@ -9,8 +9,8 @@ export default class Splash extends PIXI.Container{
     constructor(type, data){
       super();
 
-      this[`${type}Init`](data);
       this.timer = 3000;
+      this[`${type}Init`](data);
     }
 
     startInit(data) {
@@ -18,7 +18,10 @@ export default class Splash extends PIXI.Container{
       this.GUI.player1.text = data.player1;
       this.GUI.player2.text = data.player2;
       this.addChild(this.GUI);
-      setTimeout(this.close.bind(this), this.timer);
+
+      setTimeout(() => {
+        this.close();
+      }, this.timer);
     }
 
     stepInit(data) {
@@ -29,8 +32,10 @@ export default class Splash extends PIXI.Container{
 
     overInit(data) {
       this.GUI = new GUI(overConf);
+      this.GUI.gameover.text = data.winner;
       this.addChild(this.GUI);
-      setTimeout(data, this.timer);
+
+      setTimeout(data.callback, this.timer);
     }
 
     close() {

@@ -3,33 +3,16 @@
 import Panel from '../panel/panel';
 import Field from './field';
 import Chip from './chip';
-import Online from './online';
 import stepValidation from '../../../_shared/game/stepValidation';
 import rebuildMap from '../../../_shared/game/rebuildMap';
 import Hex from '../../../_shared/game/hex';
 
 export default class Board extends PIXI.Container {
-  constructor(gameData) {
+  constructor(game) {
     super();
-    this.game = new Online(gameData, this);
 
-    this.field = new Field();
-    this.addChild(this.field);
-
-    this.chips = new PIXI.Container();
-    this.addChild(this.chips);
-
-    this.panel = new Panel(this.game.id);
-    this.panel.showCapitulation();
-    this.panel.splash('start', {
-      player1: this.game.player1.username,
-      player2: this.game.player2.username
-    });
-    this.addChild(this.panel);
-
-    this.userId = window.localStorage.getItem('userId');
-    this.userId = parseInt(this.userId);
-    this.player = (this.game.player1.id === this.userId)? 'player1' : 'player2';
+    game.data.board = this;
+    this.game = new game.builder(game.data);
 
     this.colors = {
       old: '0xFFCCBC',
@@ -38,6 +21,21 @@ export default class Board extends PIXI.Container {
       current: '0xCFD8DC',
       clear: '0xFFFFFF'
     };
+
+    this.field = new Field();
+    this.addChild(this.field);
+
+    this.chips = new PIXI.Container();
+    this.addChild(this.chips);
+
+    this.panel = new Panel();
+    this.panel.surrender = this.game.surrender.bind(this.game);
+    this.panel.showSurrender();
+    this.panel.splash('start', {
+      player1: this.game.player1.username,
+      player2: this.game.player2.username
+    });
+    this.addChild(this.panel);
 
     this.game.Map.MapData.forEach(element => {
       this.field.findByIndex(element.i, element.j).alpha = 0.75;
@@ -102,28 +100,21 @@ export default class Board extends PIXI.Container {
   }
 
   onStep(current, old) {
+    if(this.game.beforeStep) {
+      this.game.beforeStep(current, old);
+    }
+
     rebuildMap(this.game, {
       current: Hex.coordinatesToIndex(current.x, current.y),
       old: Hex.coordinatesToIndex(old.x, old.y),
       userId: this.userId
-    }, this.game.mapUpdated);
+    }, this.game.mapUpdated.bind(this.game));
 
     this.game.onStep(current, old);
   }
 
   changeMode(player) {
-    const log = `Ходит ${this.game[player].username}`;
-
-    if(this.splash) {
-      this.splash.close();
-      delete this.splash;
-    }
-
-    if(this.player !== player) {
-      this.splash = this.panel.splash('step', log);
-    }
-
-    this.panel.log(log);
+    this.panel.log(`Ходит ${this.game[player].username}`);
 
     this.chips.children.forEach(chip => {
       let mode = (this.player === player && player === chip.player);

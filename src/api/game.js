@@ -101,8 +101,7 @@ module.exports = class Game {
     return;
   }
 
-  over(user) {
-    let winner = (this.data.player1.id === user.id) ? 'player1' : 'player2';
+  over(winner) {
     this.data.stage = `over ${winner}`;
 
     models.Game.create({
@@ -119,7 +118,7 @@ module.exports = class Game {
   }
 
   surrender(user) {
-    let winner = (this.data.player1.id === user.id) ? this.data.player2 : this.data.player1;
+    let winner = (this.data.player1.id === user.id) ? 'player2' : 'player1';
     this.over(winner);
   }
 };

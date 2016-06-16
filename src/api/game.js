@@ -9,125 +9,117 @@ const events = require('events');
 var emitter = new events.EventEmitter();
 var storage = [];
 
-function Game(user, callback) {
-  models.Map.findOne({
-    // order: [
-    //   models.Sequelize.fn('RANDOM')
-    // ],
-    include: models.MapData
-  }).then(map => {
-    this.data = {
-      id: uuid.v4(),
-      stage: 'not started',
-      Map: map.dataValues,
-      player1: user,
-      player2: null,
-      gameSteps: []
-    };
+module.exports = class Game {
+  constructor(user, callback) {
+    models.Map.findOne({
+      // order: [
+      //   models.Sequelize.fn('RANDOM')
+      // ],
+      include: models.MapData
+    }).then(map => {
+      this.data = {
+        id: uuid.v4(),
+        stage: 'not started',
+        Map: map.dataValues,
+        player1: user,
+        player2: null,
+        gameSteps: []
+      };
 
-    storage.unshift(this);
-    callback(this.data);
-  });
-}
-
-module.exports = Game;
-
-// static methods
-Game.create = function(user, callback) {
-  let game = Game.findOne(element => {
-    return !element.data.player2;
-  });
-
-  if (!game) {
-    game = new Game(user, callback);
+      storage.unshift(this);
+      callback(this.data);
+    });
   }
 
-  if (game.data && game.data.player1.id !== user.id) {
-    game.data.player2 = user;
-    game.data.stage = 'started';
+  static create(user, callback) {
+    let game = Game.findOne(element => !element.data.player2);
 
-    emitter.emit(game.data.id, {
-      event: 'started',
-      user: user
-    });
+    if (!game) {
+      game = new Game(user, callback);
+    }
 
-    callback(game.data);
+    if (game.data && game.data.player1.id !== user.id) {
+      game.data.player2 = user;
+      game.data.stage = 'started';
+
+      emitter.emit(game.data.id, {
+        event: 'started',
+        user: user
+      });
+
+      callback(game.data);
+    }
   }
-};
 
-Game.findOne = function(condition) {
-  return storage.find(element => {
-    return condition(element);
-  });
-};
+  static findOne(condition) {
+    return storage.find(element => condition(element));
+  }
 
-Game.findAll = function(callback) {
-  let gameList = [];
-  models.Game.findAll().then(games => {
-    storage.forEach(game => {
-      if(!(game.data.stage.indexOf('over')+1)) {
-        gameList.push(game.data);
-      }
+  static findAll(callback) {
+    let gameList = [];
+    models.Game.findAll().then(games => {
+      storage.forEach(game => {
+        if(!(game.data.stage.indexOf('over')+1)) { // jshint ignore:line
+          gameList.push(game.data);
+        }
+      });
+      games.forEach(game => gameList.push(game));
+
+      callback(gameList);
     });
-    games.forEach(game => gameList.push(game));
+  }
 
-    callback(gameList);
-  });
-};
+  static onUpdate(id, callback) {
+    emitter.on(id, callback);
+  }
 
-Game.on = function(id, callback) {
-  emitter.on(id, callback);
-};
+  step(step, user, errorCallback) {
+    step.userId = user.id;
+    let player = (this.data.player1.id === user.id) ? 'player1' : 'player2';
 
+    stepValidation(this.data, step, errorCallback);
 
-Game.prototype.step = function(step, user, errorCallback) {
-  step.userId = user.id;
-  let player = (this.data.player1.id === user.id) ? 'player1' : 'player2';
-
-  stepValidation(this.data, step, errorCallback);
-
-  emitter.emit(this.data.id, {
-    event: 'step',
-    data: step,
-    user: user,
-    player: player
-  });
-
-  rebuildMap(this.data, step, event => {
     emitter.emit(this.data.id, {
-      event: event.name,
-      data: event.data,
+      event: 'step',
+      data: step,
       user: user,
       player: player
     });
-  });
 
-  winValidation(this.data.Map.MapData, this.over.bind(this));
+    rebuildMap(this.data, step, event => {
+      emitter.emit(this.data.id, {
+        event: event.name,
+        data: event.data,
+        user: user,
+        player: player
+      });
+    });
 
-  this.data.gameSteps.push(step);
-  return;
-};
+    winValidation(this.data.Map.MapData, this.over.bind(this));
 
+    this.data.gameSteps.push(step);
+    return;
+  }
 
-Game.prototype.over = function(user) {
-  let winner = (this.data.player1.id === user.id) ? 'player1' : 'player2';
-  this.data.stage = `over ${winner}`;
+  over(user) {
+    let winner = (this.data.player1.id === user.id) ? 'player1' : 'player2';
+    this.data.stage = `over ${winner}`;
 
-  models.Game.create({
-    MapId: this.data.Map.id,
-    stage: this.data.stage,
-    player1: this.data.player1.username,
-    player2: this.data.player2.username
-  })
+    models.Game.create({
+      MapId: this.data.Map.id,
+      stage: this.data.stage,
+      player1: this.data.player1.username,
+      player2: this.data.player2.username
+    });
 
-  emitter.emit(this.data.id, {
-    event: 'over',
-    data: winner
-  });
-};
+    emitter.emit(this.data.id, {
+      event: 'over',
+      data: winner
+    });
+  }
 
-
-Game.prototype.surrender = function(user) {
-  let winner = (this.data.player1.id === user.id) ? this.data.player2 : this.data.player1;
-  this.over(winner);
+  surrender(user) {
+    let winner = (this.data.player1.id === user.id) ? this.data.player2 : this.data.player1;
+    this.over(winner);
+  }
 };

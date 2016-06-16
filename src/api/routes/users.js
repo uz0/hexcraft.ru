@@ -4,10 +4,55 @@ const config = require('../configuration');
 
 const bcrypt = require('bcrypt-nodejs');
 const isAdmin = require('../middlewares/isAdmin');
+const isAuthed = require('../middlewares/isAuthed');
 const models = require('../models');
 const express = require('express');
+const sse = require('server-sent-events');
+
+const events = require('events');
+var emitter = new events.EventEmitter();
+var onlineUsers = [];
 
 const router = module.exports = express.Router();
+
+
+/**
+ * @api {get} /users/stream Online users stream
+ * @apiName userStream
+ * @apiDescription Server Sent Events stream, returns an
+ * array of online user names. User is online when listen this stream.
+ *
+ * @apiGroup User
+ * @apiPermission user
+ *
+ * @apiParam {String} token Token
+ *
+ * @apiSuccessExample Userlist:
+   [
+     "versus",
+     "acy",
+     "test"
+   ]
+ *
+ */
+
+router.get('/stream', sse, isAuthed, function(req, res) {
+  let user = req.user.username;
+  emitter.on('update', () => {
+    let data = JSON.stringify(onlineUsers);
+    res.sse(`data: ${data}\n\n`);
+  });
+
+  onlineUsers.push(user);
+  emitter.emit('update');
+
+  req.on('close', () => {
+    let index = onlineUsers.indexOf(user);
+    onlineUsers.splice(index, 1);
+
+    emitter.emit('update');
+  });
+});
 
 
 /**

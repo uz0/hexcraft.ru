@@ -6,6 +6,9 @@ const express = require('express');
 const router = module.exports = express.Router();
 const sse = require('server-sent-events');
 
+const events = require('events');
+var emitter = new events.EventEmitter();
+
 /**
  * @apiDefine gameDetails
  *
@@ -95,6 +98,30 @@ const sse = require('server-sent-events');
     }
  */
 
+
+/**
+ * @api {get} /games/stream Game list stream
+ * @apiName gameStream
+ * @apiDescription Server Sent Events stream,
+ * when game stage update events fire.
+ *
+ * @apiGroup Game
+ *
+ * @apiSuccess {Object[]} Games array (see getGame)
+ */
+
+router.get('/stream', sse, function(req, res) {
+  emitter.on('update', () => {
+    Game.findAll(games => {
+      let data = JSON.stringify(games);
+      res.sse(`data: ${data}\n\n`);
+    });
+  });
+
+  emitter.emit('update');
+});
+
+
 /**
  * @api {get} /games All games
  * @apiName getGames
@@ -103,7 +130,7 @@ const sse = require('server-sent-events');
  *
  * @apiGroup Game
  *
- * @apiSuccess {Object[]} All games
+ * @apiSuccess {Object[]} Games array (see getGame)
  */
 
 router.get('/', function(req, res) {
@@ -129,6 +156,8 @@ router.get('/', function(req, res) {
 
 router.post('/', isAuthed, function(req, res) {
   Game.create(req.user, game => {
+    emitter.emit('update');
+
     res.send(game);
   });
 });
@@ -187,6 +216,10 @@ router.post('/:id', isAuthed, function(req, res, next) {
     error.status = 400;
     next(error);
   });
+
+  if(game.data.stage !== 'started') {
+    emitter.emit('update');
+  }
 
   res.send({});
 });
@@ -317,6 +350,7 @@ router.post('/:id/surrender', isAuthed, function(req, res, next) {
   }
 
   game.surrender(req.user);
+  emitter.emit('update');
 
   res.send({});
 });

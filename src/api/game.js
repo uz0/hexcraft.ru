@@ -25,7 +25,7 @@ function Game(user, callback) {
       gameSteps: []
     };
 
-    storage.push(this);
+    storage.unshift(this);
     callback(this.data);
   });
 }
@@ -63,9 +63,12 @@ Game.findOne = function(condition) {
 
 Game.findAll = function(callback) {
   let gameList = [];
-  storage.forEach(game => gameList.push(game.data));
-
   models.Game.findAll().then(games => {
+    storage.forEach(game => {
+      if(!(game.data.stage.indexOf('over')+1)) {
+        gameList.push(game.data);
+      }
+    });
     games.forEach(game => gameList.push(game));
 
     callback(gameList);

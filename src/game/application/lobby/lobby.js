@@ -1,3 +1,4 @@
+
 'use strict';
 
 import hexcraft from '../../application';
@@ -31,18 +32,28 @@ export default class Lobby extends PIXI.Container {
   }
 
   getUsers() {
-    http.get('/api/users').then(users => {
-      let counter = 0;
-      users.forEach(user => {
-        counter++;
+    let token = window.localStorage.getItem('token');
+    let users = [];
 
-        let label = new PIXI.Text(user.username, {
+    this.usersStream = new window.EventSource(`/api/users/stream?token=${token}`);
+    this.usersStream.addEventListener('message', event => {
+      users = JSON.parse(event.data);
+
+      // clear container
+      while(this.GUI.players.children.length > 0){
+        let child = this.GUI.players.getChildAt(0);
+        this.GUI.players.removeChild(child);
+      }
+
+      // fill container
+      users.forEach((user, index) => {
+        let label = new PIXI.Text(user, {
           font : '24px Arial',
           fill : '#fff',
           align : 'right'
         });
 
-        label.y = 30*counter;
+        label.y = 30 * (index + 1);
         label.x = 284;
         label.anchor.set(1,0);
 
@@ -52,20 +63,30 @@ export default class Lobby extends PIXI.Container {
   }
 
   getGames(){
-    http.get('/api/games/').then(games => {
-      let counter = 0;
-      games.forEach(game => {
-        counter++;
+    let token = window.localStorage.getItem('token');
+    let games = [];
 
+    this.gamesStream = new window.EventSource(`/api/games/stream?token=${token}`);
+    this.gamesStream.addEventListener('message', event => {
+      games = JSON.parse(event.data);
+
+      // clear container
+      while(this.GUI.games.children.length > 0){
+        let child = this.GUI.games.getChildAt(0);
+        this.GUI.games.removeChild(child);
+      }
+
+      // fill container
+      games.forEach((game, index) => {
         let label = new PIXI.Text(this.labelFormater(game), {
           font : '24px Arial',
           fill : '#fff',
           align : 'left'
         });
 
-        label.y = 30*counter;
-        label.x = 16;
-        label.anchor.set(0);
+        label.y = 30 * (index + 1);
+        label.x = 0;
+        label.anchor.set(0,0);
 
         this.GUI.games.addChild(label);
       });
@@ -110,6 +131,8 @@ export default class Lobby extends PIXI.Container {
         return;
       }
 
+      this.usersStream.close();
+      this.gamesStream.close();
       hexcraft.setStage(Board, {
         builder: Online,
         data: game
@@ -124,6 +147,8 @@ export default class Lobby extends PIXI.Container {
       this.game.player2 = data.user;
 
       this.loop.close();
+      this.usersStream.close();
+      this.gamesStream.close();
       hexcraft.setStage(Board, {
         builder: Online,
         data: this.game

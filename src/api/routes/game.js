@@ -113,7 +113,7 @@ var emitter = new events.EventEmitter();
 router.get('/stream', sse, function(req, res) {
   emitter.on('update', () => {
     Game.findAll(games => {
-      let data = JSON.stringify(games);
+      let data = JSON.stringify(games.slice(0, 10));
       res.sse(`data: ${data}\n\n`);
     });
   });

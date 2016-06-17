@@ -1,89 +1,91 @@
 [{
-  component: "Sprite",
-  id: "sprite1",
-  alpha: 0.90,
-  textureName: "hex",
-  scale: {
-    x:0.60,
-    y:0.60
+  "component": "Sprite",
+  "id": "sprite1",
+  "alpha": 0.9,
+  "textureName": "hex",
+  "scale": {
+    "x": 0.6,
+    "y": 0.6
   },
-  position: {
-    x: 45,
-    y: 240
-  }
+  "position": {
+    "x": 45,
+    "y": 240
+  },
+  "childs": [{
+    "id": "player1",
+    "text":  "",
+    "component": "Text",
+    "style": {
+      "fill": "#0b93aa",
+      "font": "32px Arial"
+    },
+    "position": {
+      "x": 190,
+      "y": 200
+    },
+    "anchor": {
+      "x": 0.5,
+      "y": 0.5
+    }
+  }]
 },{
-  component: "Sprite",
-  id: "sprite2",
-  alpha: 0.90,
-  textureName: "hex",
-  scale: {
-    x:0.60,
-    y:0.60
+  "component": "Sprite",
+  "id": "sprite2",
+  "alpha": 0.90,
+  "textureName": "hex",
+  "scale": {
+    "x": 0.6,
+    "y": 0.6
   },
-  position: {
-    x: 525,
-    y: 240
-  }
+  "position": {
+    "x": 525,
+    "y": 240
+  },
+  "childs": [{
+    "id": "player2",
+    "text":  "",
+    "component": "Text",
+    "style": {
+      "fill": "#0b93aa",
+      "font": "32px Arial"
+    },
+    "position": {
+      "x": 190,
+      "y": 200
+    },
+    "anchor": {
+      "x": 0.5,
+      "y": 0.5
+    }
+  }]
 },{
-  component: "Sprite",
-  id: "sprite3",
-  alpha: 0.90,
-  textureName: "hex",
-  scale: {
-    x:0.30,
-    y:0.30
+  "component": "Sprite",
+  "id": "sprite3",
+  "alpha": 0.9,
+  "textureName": "hex",
+  "scale": {
+    "x": 0.3,
+    "y": 0.3
   },
-  position: {
-    x: 340,
-    y: 300
-  }
-},{
-  id: "player1",
-  text:  "",
-  component: "Text",
-  style: {
-    fill: "#0b93aa",
-    font: "32px Arial"
+  "position": {
+    "x": 340,
+    "y": 300
   },
-  position: {
-    x: 115,
-    y: 340
-  },
-  anchor: {
-    x: 0,
-    y: 0
-  }
- },{
-  id: "player2",
-  text:  "",
-  component: "Text",
-  style: {
-    fill: "#0b93aa",
-    font: "32px Arial"
-  },
-  position: {
-    x: 605,
-    y: 340
-  },
-  anchor: {
-    x: 0,
-    y: 0
-  }
- },{
-  id: "versus",
-  text:  "VS",
-  component: "Text",
-  style: {
-    fill: "#0b93aa",
-    font: "48px Arial"
-  },
-  position: {
-    x: 365,
-    y: 335
-  },
-  anchor: {
-    x: 0,
-    y: 0
-  }
- }
-];
+  "childs": [{
+    "id": "versus",
+    "text":  "против",
+    "component": "Text",
+    "style": {
+      "fill": "#0b93aa",
+      "font": "48px Arial"
+    },
+    "position": {
+      "x": 190,
+      "y": 200
+    },
+    "anchor": {
+      "x": 0.5,
+      "y": 0.5
+    }
+  }]
+}]

@@ -1,30 +1,27 @@
 [{
-  component: "Sprite",
-  id: "sprite1",
-  alpha: 1,
-  textureName: "hex",
-  scale: {
-    x:0.95,
-    y:0.95
+  "component": "Sprite",
+  "id": "sprite1",
+  "alpha": 1,
+  "textureName": "hex",
+  "position": {
+    "x": 200,
+    "y": 140
   },
-  position: {
-    x: 205,
-    y: 140
-  }
- },{
-  id: "gameover",
-  text:  "",
-  component: "Text",
-  style: {
-    fill: "#0b93aa",
-    font: "32px Arial"
-  },
-  position: {
-    x: 265,
-    y: 310
-  },
-  anchor: {
-    x: 0,
-    y: 0
-  }
- }];
+  "childs": [{
+    "id": "gameover",
+    "text":  "",
+    "component": "Text",
+    "style": {
+      "fill": "#0b93aa",
+      "font": "32px Arial"
+    },
+    "position": {
+      "x": 190,
+      "y": 200
+    },
+    "anchor": {
+      "x": 0.5,
+      "y": 0.5
+    }
+  }]
+}]

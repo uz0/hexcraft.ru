@@ -1,25 +1,30 @@
 [{
-  component: "Sprite",
-  id: "sprite",
-  alpha: 1,
-  textureName: "hex",
-  scale: {
-    x:0.70,
-    y:0.70
+  "component": "Sprite",
+  "id": "sprite",
+  "alpha": 1,
+  "textureName": "hex",
+  "scale": {
+    "x": 0.70,
+    "y": 0.70
   },
-  position: {
-    x: 267,
-    y: 220
-  }
-},{
-  component: "Text",
-  id: "enemyName",
-  text: "",
-  position: {
-    x: 315,
-    y: 340
+  "position": {
+    "x": 267,
+    "y": 220
   },
-  style: {
-    fill: "#0b93aa"
-  }
+  "childs": [{
+    "component": "Text",
+    "id": "enemyName",
+    "text": "",
+    "style": {
+      "fill": "#0b93aa"
+    },
+    "position": {
+      "x": 190,
+      "y": 200
+    },
+    "anchor": {
+      "x": 0.5,
+      "y": 0.5
+    }
+  }]
 }];

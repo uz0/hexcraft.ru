@@ -2,6 +2,348 @@
 
 const Hex = require('./hex');
 
+
+module.exports = function(MapData, player) {
+  let step;
+
+  MapData.forEach(cell => {
+    if (cell.cellstate === player) {
+      Hex.findNeighborsByIndex(MapData, cell.i, cell.j).forEach(hex => {
+        if (hex.cellstate === 'empty') {
+          step = {
+            old: {
+              i: cell.i,
+              j: cell.j
+            },
+            current: {
+              i: hex.i,
+              j: hex.j
+            }
+          }
+        }
+      });
+    }
+  });
+
+  return step;
+}
+
+/*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function Bot() {};
 
 Bot.user = {
@@ -17,8 +359,8 @@ Bot.step = function(game) {
   game.step(step, Bot.user);
 }
 
-Bot.toStep = function(cell){
-   let step = {
+Bot.toStep = function(cell) {
+  let step = {
     "event": "step",
     "data": {
       "current": {
@@ -69,23 +411,23 @@ Bot.move = function(data) {
   for (var i = 0, i < cells.length, i++) {
     let cells[i].bestMove = cells[i].validSteps[0];
 
-    for (var j = 0, j < cells[i].validSteps.length, j++){
-      if (cells[i].validSteps[j].count>cells[i].bestMove.count){
+    for (var j = 0, j < cells[i].validSteps.length, j++) {
+      if (cells[i].validSteps[j].count > cells[i].bestMove.count) {
         cells[i].bestMove = cells[i].validSteps[j];
       }
     }
   }
-  
+
   let bestMove = cells[0];
-  
+
   for (var i = 0, i < cells.length, i++) {
-    if (cells[i].bestMove.count>bestMove.count){
+    if (cells[i].bestMove.count > bestMove.count) {
       bestMove = cells[i];
     }
   }
 
   return Bot.toStep(bestMove);
-
 }
 
 module.exports = Bot;
+*/

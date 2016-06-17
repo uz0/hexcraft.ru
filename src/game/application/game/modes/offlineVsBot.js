@@ -1,12 +1,14 @@
 'use strict';
 
+import bot from '../../../../_shared/game/bot';
 import Hex from '../../../../_shared/game/hex';
 import hexcraft from '../../../application';
 import Auth from '../../auth/auth';
 import singleMap from './singleMap.json';
+import rebuildMap from '../../../../_shared/game/rebuildMap';
 import winValidation from '../../../../_shared/game/winValidation';
 
-export default class OfflineVsPlayer {
+export default class OfflineVsBot {
   constructor(gameData) {
     this.board = gameData.board;
     this.board.player = 'player1';
@@ -14,31 +16,33 @@ export default class OfflineVsPlayer {
 
     this.player1 = {
       id: 1,
-      username: 'Красные'
+      username: 'Человек'
     };
 
     this.player2 = {
       id: 2,
-      username: 'Синие'
+      username: 'Робот'
     };
 
     this.Map = {
       MapData: JSON.parse(JSON.stringify(singleMap))
     };
+
+
   }
 
-  changeUser(player) {
-    let user = (player === 'player1') ? 'player2' : 'player1';
-    let userId = (player === 'player1') ? 2 : 1;
+  // changeUser(player) {
+  //   let user = (player === 'player1') ? 'player2' : 'player1';
+  //   let userId = (player === 'player1') ? 2 : 1;
 
-    this.board.player = user;
-    this.board.userId = userId;
-    this.board.changeMode(user);
-  }
+    // this.board.player = user;
+    // this.board.userId = userId;
+    // this.board.changeMode(user);
+  // }
 
   surrender() {
     new window.Audio(hexcraft.resources.buttonClick.blobUrl).play();
-    this.changeUser(this.board.player);
+    // this.changeUser(this.board.player);
     this.overEvent(this.board.player);
   }
 
@@ -53,10 +57,18 @@ export default class OfflineVsPlayer {
   }
 
   onStep() {
-    let player = this.board.player;
+    // let player = this.board.player;
     winValidation(this.Map.MapData, this.overEvent.bind(this));
 
-    this.changeUser(player);
+    this.board.player = 'player2';
+    let step = bot(this.Map.MapData,'player2');
+    rebuildMap(this, {
+      current: step.current,
+      old: step.old,
+      userId: 2
+    }, this.mapUpdated.bind(this));
+    this.board.player = 'player1';
+    // this.changeUser(player);
   }
 
   mapUpdated(data) {
@@ -91,5 +103,7 @@ export default class OfflineVsPlayer {
       }
     });
   }
+
+
 
 }

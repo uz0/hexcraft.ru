@@ -7,6 +7,7 @@ import GUI from '../gui';
 import Lobby from '../lobby/lobby';
 import Board from '../game/board';
 import OfflineVsPlayer from '../game/modes/offlineVsPlayer';
+import OfflineVsBot from '../game/modes/offlineVsBot';
 
 export default class Auth extends PIXI.Container {
   constructor() {
@@ -24,7 +25,7 @@ export default class Auth extends PIXI.Container {
     this.GUI.vsAI.on('touchstart', this.offlineVsAi.bind(this));
 
     let username = window.localStorage.getItem('username');
-    if(username) {
+    if (username) {
       this.GUI.username.value = username;
     }
   }
@@ -59,7 +60,11 @@ export default class Auth extends PIXI.Container {
 
   offlineVsAi() {
     new window.Audio(hexcraft.resources.buttonClick.blobUrl).play();
-    console.log('offlineVsAi');
+
+    hexcraft.setStage(Board, {
+      builder: OfflineVsBot,
+      data: {}
+    });
   }
 
   update() {}

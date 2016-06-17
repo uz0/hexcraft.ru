@@ -81,8 +81,7 @@ export default class OfflineVsPlayer {
   }
 
   overEvent(winner) {
-    let text = (winner === 'player1') ? `${this.player1.username} победил` :
-                                        `${this.player2.username} победил`;
+    let text = `${this[winner].username} победил`;
 
     this.board.panel.splash('over', {
       winner: text,

@@ -27,8 +27,6 @@ export default class OfflineVsBot {
     this.Map = {
       MapData: JSON.parse(JSON.stringify(singleMap))
     };
-
-
   }
 
   surrender() {
@@ -50,9 +48,8 @@ export default class OfflineVsBot {
     winValidation(this.Map.MapData, this.overEvent.bind(this));
 
     this.board.player = 'player2';
-    let step = bot(this.Map.MapData,'player2');
+    let step = bot(this.Map.MapData, 'player2');
 
-    // colors
     Hex.findByIndex(this.Map.MapData, step.current.i, step.current.j).cellstate = 'player2';
     let hex = Hex.findByIndex(this.board.chips.children, step.old.i, step.old.j);
     hex.i = step.current.i;
@@ -95,8 +92,7 @@ export default class OfflineVsBot {
   }
 
   overEvent(winner) {
-    let text = (winner === 'player1') ? `${this.player1.username} победил` :
-                                        `${this.player2.username} победил`;
+    let text = `${this[winner].username} победил`;
 
     this.board.panel.splash('over', {
       winner: text,

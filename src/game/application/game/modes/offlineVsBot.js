@@ -31,18 +31,8 @@ export default class OfflineVsBot {
 
   }
 
-  // changeUser(player) {
-  //   let user = (player === 'player1') ? 'player2' : 'player1';
-  //   let userId = (player === 'player1') ? 2 : 1;
-
-    // this.board.player = user;
-    // this.board.userId = userId;
-    // this.board.changeMode(user);
-  // }
-
   surrender() {
     new window.Audio(hexcraft.resources.buttonClick.blobUrl).play();
-    // this.changeUser(this.board.player);
     this.overEvent(this.board.player);
   }
 
@@ -57,26 +47,30 @@ export default class OfflineVsBot {
   }
 
   onStep() {
-    // let player = this.board.player;
     winValidation(this.Map.MapData, this.overEvent.bind(this));
 
     this.board.player = 'player2';
     let step = bot(this.Map.MapData,'player2');
 
+    // colors
+    Hex.findByIndex(this.Map.MapData, step.current.i, step.current.j).cellstate = 'player2';
     let hex = Hex.findByIndex(this.board.chips.children, step.old.i, step.old.j);
     hex.i = step.current.i;
     hex.j = step.current.j;
     hex.position = Hex.indexToCoordinates(step.current.i, step.current.j);
-    // hex.onStep(hex.position, Hex.indexToCoordinates(step.old.i, step.old.j));
-    Hex.findByIndex(this.Map.MapData, step.current.i, step.current.j).cellstate = 'player2';
+
+    // mark bot step (tint it)
+    this.board.field.findByIndex(step.old.i, step.old.j).tint = this.board.colors.old;
+    this.board.field.findByIndex(step.current.i, step.current.j).tint = this.board.colors.current;
+
     rebuildMap(this, {
       current: step.current,
       old: step.old,
       userId: 2
     }, this.mapUpdated.bind(this));
-    this.board.player = 'player1';
 
-    // this.changeUser(player);
+    this.board.player = 'player1';
+    this.board.changeMode('player1');
   }
 
   mapUpdated(data) {

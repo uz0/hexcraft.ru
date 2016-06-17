@@ -62,12 +62,20 @@ export default class OfflineVsBot {
 
     this.board.player = 'player2';
     let step = bot(this.Map.MapData,'player2');
+
+    let hex = Hex.findByIndex(this.board.chips.children, step.old.i, step.old.j);
+    hex.i = step.current.i;
+    hex.j = step.current.j;
+    hex.position = Hex.indexToCoordinates(step.current.i, step.current.j);
+    // hex.onStep(hex.position, Hex.indexToCoordinates(step.old.i, step.old.j));
+    Hex.findByIndex(this.Map.MapData, step.current.i, step.current.j).cellstate = 'player2';
     rebuildMap(this, {
       current: step.current,
       old: step.old,
       userId: 2
     }, this.mapUpdated.bind(this));
     this.board.player = 'player1';
+
     // this.changeUser(player);
   }
 

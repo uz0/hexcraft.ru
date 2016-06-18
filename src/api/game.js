@@ -57,7 +57,9 @@ module.exports = class Game {
 
   static findAll(callback) {
     let gameList = [];
-    models.Game.findAll().then(games => {
+    models.Game.findAll({
+      order: 'id DESC'
+    }).then(games => {
       storage.forEach(game => {
         if(!(game.data.stage.indexOf('over')+1)) { // jshint ignore:line
           gameList.push(game.data);

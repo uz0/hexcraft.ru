@@ -1,0 +1,39 @@
+/* TEAM */
+  Master: Vasiliy Versus
+  Contact: dcversus [at] gmail.com
+  Twitter: @dcversus
+  From: Rostov-on-Don, Russia
+
+  Developer: Erokhin Anton
+  Contact: er.ant14 [at] yandex.ru
+  From: Rostov-on-Don, Russia
+
+  Developer: Yefimov Roman
+  Contact: efim1382 [at] gmail.com
+  From: Makiivka, Ukraine
+
+  Developer: Vsevolod Malcev
+  Contact: sevamaltsev [at] gmail.com
+  From: Taganrog, Russia
+
+  Developer: Danil Stojanov
+  Contact: danya.bright@yandex.ru
+  From: Donetsk, Ukraine
+
+  Designer: Liza Kuharenko
+  Contact: Lisa97.mgd@yandex.ru
+  From: Magadan, Russia
+
+
+/* THANKS */
+  Analytics: Olga Kramarchenko
+  Contact: kramarchenko96 [at] mail.ru
+  From: Rostov-on-Don, Russia
+
+  QC: Acy Dobrynina
+  Contact: dcnastya [at] gmail.com
+  From: Rostov-on-Don, Russia
+
+  Developer: Khalitov Evgeny
+  Contact: karmagen9 [at] gmail.com
+  From: Belaya Kalitva, Russia

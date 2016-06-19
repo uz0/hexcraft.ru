@@ -71,8 +71,9 @@
   }
 },{
   "component": "Sprite",
-  "id": "sprite",
+  "id": "spritered",
   "alpha": 0.75,
+  "visible": false,
   "textureName": "hex",
   "scale": {
     "x": 0.10,
@@ -107,6 +108,7 @@
   "component": "Sprite",
   "id": "sprite",
   "alpha": 0.75,
+  "visible": false,
   "textureName": "hex",
   "scale": {
     "x": 0.10,

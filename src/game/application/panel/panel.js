@@ -47,6 +47,9 @@ export default class Panel extends PIXI.Container {
       }
     });
 
+    this.GUI.spritered.visible = true;
+    this.GUI.sprite.visible = true;
+
     this.GUI.redChipAmount.text = firstChip;
     this.GUI.blueChipAmount.text = secondChip;
   }

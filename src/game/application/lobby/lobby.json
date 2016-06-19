@@ -1,80 +1,80 @@
 [{
-  component: "Container",
-  id: "games",
-  position: {
-    x: 0,
-    y: 100
+  "component": "Container",
+  "id": "games",
+  "position": {
+    "x": 0,
+    "y": 100
   },
-  configuration: null,
-  width: 280
+  "configuration": null,
+  "width": 280
 }, {
-  component: "Text",
-  id: "auth",
-  text: "ИГРЫ",
-  position: {
-    x: 16,
-    y: 80
+  "component": "Text",
+  "id": "auth",
+  "text": "ИГРЫ",
+  "position": {
+    "x": 16,
+    "y": 80
   },
-  style: {
-    font: "bold 24px Arial",
-    fill: "#fff"
+  "style": {
+    "font": "bold 24px Arial",
+    "fill": "#fff"
   }
 }, {
-  component: "Container",
-  id: "players",
-  position: {
-    x: 500,
-    y: 100
+  "component": "Container",
+  "id": "players",
+  "position": {
+    "x": 500,
+    "y": 100
   },
-  width: 300
+  "width": 300
 }, {
-  component: "Text",
-  id: "auth",
-  text: "ИГРОКИ",
-  position: {
-    x: 684,
-    y: 80
+  "component": "Text",
+  "id": "auth",
+  "text": "ИГРОКИ",
+  "position": {
+    "x": 684,
+    "y": 80
   },
-  style: {
-    font: "bold 24px Arial",
-    fill: "#fff"
+  "style": {
+    "font": "bold 24px Arial",
+    "fill": "#fff"
   }
 }, {
-  component: "Sprite",
-  id: "sprite",
-  textureName: "hex",
-  alpha: 0.85,
-  position: {
-    x: 400,
-    y: 300
+  "component": "Sprite",
+  "id": "sprite",
+  "textureName": "hex",
+  "alpha": 0.85,
+  "position": {
+    "x": 400,
+    "y": 300
   },
-  scale: {
-    x: 0.6,
-    y: 0.6
+  "scale": {
+    "x": 0.6,
+    "y": 0.6
   },
-  anchor: {
-    x: 0.5,
-    y: 0.5
+  "anchor": {
+    "x": 0.5,
+    "y": 0.5
   }
 }, {
-  id: "play",
-  value: "В БОЙ",
-  component: "Button",
-  configuration: {
-    padding: 40,
-    borderWidth: 0,
-    value: "Вход",
-    borderRadius: 0,
-    boxShadow: null,
-    innerShadow: null,
-    backgroundColor: "transparent",
-    text: {
-      font: "bold 24px Arial",
-      fill: "#0b93aa",
+  "id": "play",
+  "value": "В БОЙ",
+  "component": "Button",
+  "configuration": {
+    "padding": 40,
+    "borderWidth": 0,
+    "value": "Вход",
+    "borderRadius": 0,
+    "boxShadow": null,
+    "innerShadow": null,
+    "backgroundColor": "transparent",
+    "text": {
+      "font": "bold 24px Arial",
+      "fill": "#0b93aa",
     }
   },
-  position: {
-    x: 265,
-    y: 245
+  "position": {
+    "x": 265,
+    "y": 245
   }
 }];

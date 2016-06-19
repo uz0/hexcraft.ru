@@ -41,7 +41,7 @@ export default class Load extends PIXI.Container {
     this.loading.skeleton.setToSetupPose();
     this.loading.autoUpdate = false;
 
-    this.loading.scale.set(0.06);
+    this.loading.scale.set(0.15);
     this.loading.alpha = 0.9;
     this.loading.position.set(400, 320);
 

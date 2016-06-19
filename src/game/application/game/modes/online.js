@@ -4,6 +4,7 @@ import http from '../../http';
 import Hex from '../../../../_shared/game/hex';
 import hexcraft from '../../../application';
 import Lobby from '../../lobby/lobby';
+import Splash from '../../splash/splash';
 
 export default class Online {
   constructor(gameData) {
@@ -57,14 +58,10 @@ export default class Online {
     let nextUserStep = (player === 'player1') ? 'player2' : 'player1';
     this.board.changeMode(nextUserStep);
 
-    if(this.splash) {
-      this.splash.close();
-      delete this.splash;
-    }
-
-    if(this.board.player !== nextUserStep) {
-      this.splash = this.board.panel.splash('step', `Ходит ${this[nextUserStep].username}`);
-    }
+    let text = (this.board.player === nextUserStep) ? `Ваш ход`:
+                                                      `Ходит ${this[nextUserStep].username}`;
+    let splash = new Splash(text);
+    this.board.addChild(splash);
 
     if(this.board.player === player) {
       return;
@@ -92,17 +89,13 @@ export default class Online {
 
   overEvent(winner) {
     this.loop.close();
-    let text = (winner === 'player1') ? `${this.player1.username} победил` :
-                                        `${this.player2.username} победил`;
 
-    this.board.panel.splash('over', {
-      winner: text,
-      callback: () => {
-        hexcraft.setStage(Lobby, 'Игра окончена');
-      }
+    let text = `${this[winner].username} победил`;
+    let splash = new Splash(text, () => {
+      hexcraft.setStage(Lobby, 'Игра окончена');
     });
+    this.board.addChild(splash);
   }
 
   mapUpdated (){}
-  update (){}
 }

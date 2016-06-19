@@ -7,6 +7,7 @@ import Auth from '../../auth/auth';
 import singleMap from './singleMap.json';
 import rebuildMap from '../../../../_shared/game/rebuildMap';
 import winValidation from '../../../../_shared/game/winValidation';
+import Splash from '../../splash/splash';
 
 export default class OfflineVsBot {
   constructor(gameData) {
@@ -94,14 +95,9 @@ export default class OfflineVsBot {
   overEvent(winner) {
     let text = `${this[winner].username} победил`;
 
-    this.board.panel.splash('over', {
-      winner: text,
-      callback: () => {
-        hexcraft.setStage(Auth);
-      }
+    let splash = new Splash(text, () => {
+      hexcraft.setStage(Auth);
     });
+    this.board.addChild(splash);
   }
-
-
-
 }

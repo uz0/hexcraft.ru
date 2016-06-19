@@ -1,19 +1,23 @@
 [{
   "component": "Sprite",
-  "id": "sprite1",
-  "alpha": 1,
+  "id": "sprite",
+  "alpha": 0.75,
   "textureName": "hex",
+  "scale": {
+    "x": 0.70,
+    "y": 0.70
+  },
   "position": {
-    "x": 200,
-    "y": 140
+    "x": 267,
+    "y": 220
   },
   "childs": [{
-    "id": "gameover",
-    "text":  "",
     "component": "Text",
+    "id": "splash",
+    "text": "",
     "style": {
       "fill": "#0b93aa",
-      "font": "32px Arial"
+      "align": "center"
     },
     "position": {
       "x": 190,
@@ -24,4 +28,4 @@
       "y": 0.5
     }
   }]
-}]
+}];

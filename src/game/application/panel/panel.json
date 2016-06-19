@@ -9,7 +9,7 @@
     "width": 800,
     "height": 5
   }
-},{
+}, {
   "id": "background",
   "component": "Rectangle",
   "configuration": {
@@ -19,22 +19,6 @@
     "y": 10,
     "width": 800,
     "height": 55
-  }
-},{
-  "id": "username",
-  "text":  "",
-  "component": "Text",
-  "style": {
-    "fill": "#fff",
-    "font": "24px Arial"
-  },
-  "position": {
-    "x": 500,
-    "y": 25
-  },
-  "anchor": {
-    "x": 0,
-    "y": 0
   }
 }, {
   "id": "status",
@@ -47,118 +31,5 @@
   "position": {
     "x": 16,
     "y": 25
-  }
-},{
-  "id": "surrender",
-  "component": "Button",
-  "visible": false,
-  "position": {
-    "x": 606,
-    "y": 11
-  },
-  "configuration": {
-    "value": "СДАТЬСЯ",
-    "padding": 12,
-    "borderWidth": 0,
-    "borderRadius": 0,
-    "boxShadow": null,
-    "innerShadow": null,
-    "backgroundColor": "rgba(255, 255, 255, 0.15)",
-    "text": {
-      "font": "bold 24px Arial",
-      "fill": "#fff",
-    }
-  }
-},{
-  "component": "Sprite",
-  "id": "spritered",
-  "alpha": 0.75,
-  "visible": false,
-  "textureName": "hex",
-  "scale": {
-    "x": 0.10,
-    "y": 0.10
-  },
-  "position": {
-    "x": 315,
-    "y": 20
-  },
-  "childs": [{
-    "component": "Text",
-    "id": "redChipAmount",
-    "text": "",
-    "style": {
-      "fill": "#ff0006",
-      "font": "48px Arial"
-    },
-    "scale": {
-      "x": 4,
-      "y": 4
-   },
-    "position": {
-      "x": 190,
-      "y": 200
-    },
-    "anchor": {
-      "x": 0.5,
-      "y": 0.5
-    }
-  }]
-},{
-  "component": "Sprite",
-  "id": "sprite",
-  "alpha": 0.75,
-  "visible": false,
-  "textureName": "hex",
-  "scale": {
-    "x": 0.10,
-    "y": 0.10
-  },
-  "position": {
-    "x": 360,
-    "y": 20
-  },
-  "childs": [{
-    "component": "Text",
-    "id": "blueChipAmount",
-    "text": "",
-    "style": {
-      "fill": "#0057ab",
-      "font": "48px Arial"
-    },
-    "scale": {
-      "x": 4,
-      "y": 4
-   },
-    "position": {
-      "x": 190,
-      "y": 200
-    },
-    "anchor": {
-      "x": 0.5,
-      "y": 0.5
-    }
-  }]
-},{
-  "id": "logout",
-  "component": "Button",
-  "visible": false,
-  "position": {
-    "x": 604,
-    "y": 11
-  },
-  "configuration": {
-    "value": "ВЫЙТИ",
-    "padding": 12,
-    "borderWidth": 0,
-    "borderRadius": 0,
-    "boxShadow": null,
-    "innerShadow": null,
-    "backgroundColor": "rgba(255, 255, 255, 0.15)",
-    // innerShadow: "0px -4px 1px rgba(255, 255, 255, 0.5)",
-    "text": {
-      "font": "bold 24px Arial",
-      "fill": "#fff",
-    }
   }
 }];

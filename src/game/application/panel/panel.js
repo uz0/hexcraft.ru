@@ -1,74 +1,48 @@
 'use strict';
 
 import options from './panel.json';
-import http from '../http';
+// import http from '../http';
 import GUI from '../gui';
-import Splash from './splash/splash';
+// import Splash from './splash/splash';
 
 export default class Panel extends PIXI.Container {
   constructor() {
     super();
+
     this.GUI = new GUI(options);
     this.addChild(this.GUI);
-
-    const username = window.localStorage.getItem('username');
-    this.GUI.username.text = username || '';
   }
 
-  splash(type, data) {
-    let splash = new Splash(type, data);
-    this.addChild(splash);
-
-    return splash;
-  }
-
-  logout () {
-    const token = window.localStorage.getItem('token');
-
-    window.localStorage.removeItem('username');
-    window.localStorage.removeItem('userId');
-    window.localStorage.removeItem('token');
-    http.post('/api/auth/logout', {
-      token: token
-    });
-
-    document.location.href = '/';
-  }
-
-  showPlayersChips(chiplist) {
-    let firstChip = 0;
-    let secondChip = 0;
-
-    chiplist.forEach(element => {
-      if(element.player === 'player1'){
-        firstChip++;
-      } else {
-        secondChip++;
+  addButton(name, callback) {
+    let container = new GUI([{
+      id: 'button',
+      component: 'Button',
+      position: {
+        x: 606,
+        y: 11
+      },
+      configuration: {
+        value: name,
+        padding: 12,
+        borderWidth: 0,
+        borderRadius: 0,
+        boxShadow: null,
+        innerShadow: null,
+        backgroundColor: 'rgba(255, 255, 255, 0.15)',
+        text: {
+          font: 'bold 24px Arial',
+          fill: '#fff',
+        }
       }
-    });
+    }]);
 
-    this.GUI.spritered.visible = true;
-    this.GUI.sprite.visible = true;
-
-    this.GUI.redChipAmount.text = firstChip;
-    this.GUI.blueChipAmount.text = secondChip;
-  }
-
-  showExit() {
-    this.GUI.logout.visible = true;
-    this.GUI.logout.on('click', this.logout);
-    this.GUI.logout.on('touchstart', this.logout);
-  }
-
-  showSurrender() {
-    this.GUI.surrender.visible = true;
-    this.GUI.surrender.on('click', this.surrender);
-    this.GUI.surrender.on('touchstart', this.surrender);
+    this.GUI.addChild(container);
+    container.button.on('click', callback);
+    container.button.on('touchstart', callback);
   }
 
   log(text) {
     this.GUI.status.text = text;
   }
 
-  update(){}
 }

@@ -5,6 +5,7 @@ import hexcraft from '../../../application';
 import Auth from '../../auth/auth';
 import singleMap from './singleMap.json';
 import winValidation from '../../../../_shared/game/winValidation';
+import Splash from '../../splash/splash';
 
 export default class OfflineVsPlayer {
   constructor(gameData) {
@@ -53,10 +54,12 @@ export default class OfflineVsPlayer {
   }
 
   onStep() {
-    let player = this.board.player;
     winValidation(this.Map.MapData, this.overEvent.bind(this));
+    this.changeUser(this.board.player);
 
-    this.changeUser(player);
+    let text = `Ходит ${this[this.board.player].username}`;
+    let splash = new Splash(text);
+    this.board.addChild(splash);
   }
 
   mapUpdated(data) {
@@ -83,12 +86,9 @@ export default class OfflineVsPlayer {
   overEvent(winner) {
     let text = `${this[winner].username} победил`;
 
-    this.board.panel.splash('over', {
-      winner: text,
-      callback: () => {
-        hexcraft.setStage(Auth);
-      }
+    let splash = new Splash(text, () => {
+      hexcraft.setStage(Auth);
     });
+    this.board.addChild(splash);
   }
-
 }

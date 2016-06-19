@@ -18,9 +18,21 @@ export default class Lobby extends PIXI.Container {
     this.addChild(this.GUI);
 
     this.panel = new Panel();
+    this.panel.addButton('Выйти', () => {
+      const token = window.localStorage.getItem('token');
+
+      window.localStorage.removeItem('username');
+      window.localStorage.removeItem('userId');
+      window.localStorage.removeItem('token');
+      http.post('/api/auth/logout', {
+        token: token
+      });
+
+      document.location.href = '/';
+    });
     this.panel.log(message || 'Нажмите "В БОЙ"');
-    this.panel.showExit();
     this.addChild(this.panel);
+
     this.getUsers();
     this.getGames();
 

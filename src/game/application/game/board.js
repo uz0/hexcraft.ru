@@ -1,6 +1,7 @@
 'use strict';
 
 import Panel from '../panel/panel';
+import Splash from '../splash/splash';
 import Field from './field';
 import Chip from './chip';
 import stepValidation from '../../../_shared/game/stepValidation';
@@ -29,13 +30,12 @@ export default class Board extends PIXI.Container {
     this.addChild(this.chips);
 
     this.panel = new Panel();
-    this.panel.surrender = this.game.surrender.bind(this.game);
-    this.panel.showSurrender();
-    this.panel.splash('start', {
-      player1: this.game.player1.username,
-      player2: this.game.player2.username
-    });
+    this.panel.addButton('Сдаться', this.game.surrender.bind(this.game))
     this.addChild(this.panel);
+
+    let text = `${this.game.player1.username}\n\nПРОТИВ\n\n${this.game.player2.username}`;
+    let splash = new Splash(text);
+    this.addChild(splash);
 
     this.game.Map.MapData.forEach(element => {
       this.field.findByIndex(element.i, element.j).alpha = 0.75;
@@ -111,17 +111,22 @@ export default class Board extends PIXI.Container {
     }, this.game.mapUpdated.bind(this.game));
 
     this.game.onStep(current, old);
-
-    this.panel.showPlayersChips(this.chips.children);
   }
 
   changeMode(player) {
-    this.panel.log(`Ходит ${this.game[player].username}`);
+    let count = {
+      player1: 0,
+      player2: 0
+    }
 
     this.chips.children.forEach(chip => {
       let mode = (this.player === player && player === chip.player);
       chip.changeMode(mode);
+
+      count[chip.player]++;
     });
+
+    this.panel.log(`${count.player1}:${count.player2}`);
   }
 
   update(){}

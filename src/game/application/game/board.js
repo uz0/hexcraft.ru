@@ -111,6 +111,8 @@ export default class Board extends PIXI.Container {
     }, this.game.mapUpdated.bind(this.game));
 
     this.game.onStep(current, old);
+
+    this.panel.showPlayersChips(this.chips.children);
   }
 
   changeMode(player) {

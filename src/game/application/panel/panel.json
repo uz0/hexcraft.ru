@@ -70,6 +70,74 @@
     }
   }
 },{
+  "component": "Sprite",
+  "id": "sprite",
+  "alpha": 0.75,
+  "textureName": "hex",
+  "scale": {
+    "x": 0.10,
+    "y": 0.10
+  },
+  "position": {
+    "x": 315,
+    "y": 20
+  },
+  "childs": [{
+    "component": "Text",
+    "id": "redChipAmount",
+    "text": "",
+    "style": {
+      "fill": "#ff0006",
+      "font": "48px Arial"
+    },
+    "scale": {
+      "x": 4,
+      "y": 4
+   },
+    "position": {
+      "x": 190,
+      "y": 200
+    },
+    "anchor": {
+      "x": 0.5,
+      "y": 0.5
+    }
+  }]
+},{
+  "component": "Sprite",
+  "id": "sprite",
+  "alpha": 0.75,
+  "textureName": "hex",
+  "scale": {
+    "x": 0.10,
+    "y": 0.10
+  },
+  "position": {
+    "x": 360,
+    "y": 20
+  },
+  "childs": [{
+    "component": "Text",
+    "id": "blueChipAmount",
+    "text": "",
+    "style": {
+      "fill": "#0057ab",
+      "font": "48px Arial"
+    },
+    "scale": {
+      "x": 4,
+      "y": 4
+   },
+    "position": {
+      "x": 190,
+      "y": 200
+    },
+    "anchor": {
+      "x": 0.5,
+      "y": 0.5
+    }
+  }]
+},{
   id: "logout",
   component: "Button",
   visible: false,

@@ -35,6 +35,22 @@ export default class Panel extends PIXI.Container {
     document.location.href = '/';
   }
 
+  showPlayersChips(chiplist) {
+    let firstChip = 0;
+    let secondChip = 0;
+
+    chiplist.forEach(element => {
+      if(element.player === 'player1'){
+        firstChip++;
+      } else {
+        secondChip++;
+      }
+    });
+
+    this.GUI.redChipAmount.text = firstChip;
+    this.GUI.blueChipAmount.text = secondChip;
+  }
+
   showExit() {
     this.GUI.logout.visible = true;
     this.GUI.logout.on('click', this.logout);

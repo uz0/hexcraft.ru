@@ -71,6 +71,7 @@ export default class Online {
 
     Hex.findByIndex(this.Map.MapData, step.old.i, step.old.j).cellstate = 'empty';
     Hex.findByIndex(this.Map.MapData, step.current.i, step.current.j).cellstate = player;
+
   }
 
   chipEvent(coordinates, player) {

@@ -81,13 +81,6 @@ module.exports = class Game {
 
     stepValidation(this.data, step, errorCallback);
 
-    emitter.emit(this.data.id, {
-      event: 'step',
-      data: step,
-      user: user,
-      player: player
-    });
-
     rebuildMap(this.data, step, event => {
       emitter.emit(this.data.id, {
         event: event.name,
@@ -95,6 +88,13 @@ module.exports = class Game {
         user: user,
         player: player
       });
+    });
+
+    emitter.emit(this.data.id, {
+      event: 'step',
+      data: step,
+      user: user,
+      player: player
     });
 
     winValidation(this.data.Map.MapData, this.over.bind(this));

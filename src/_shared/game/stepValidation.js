@@ -7,7 +7,7 @@ module.exports = function(game, step, error) {
     return error('Неправильный пользователь!', 1);
   }
 
-  if (game.gameSteps && game.gameSteps.length % 2 !== 0 && step.userId === game.player1.id) {
+  if (game.gameSteps && (game.gameSteps.length % 2 !== 0 && step.userId === game.player1.id)) {
     return error('Не ваш ход!', 2);
   }
 

@@ -32,6 +32,7 @@ export default class OfflineVsBot {
 
   surrender() {
     new window.Audio(hexcraft.resources.buttonClick.blobUrl).play();
+    this.board.player = 'player2';
     this.overEvent(this.board.player);
   }
 

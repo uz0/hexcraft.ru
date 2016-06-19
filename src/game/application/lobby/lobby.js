@@ -97,7 +97,7 @@ export default class Lobby extends PIXI.Container {
         });
 
         label.y = 30 * (index + 1);
-        label.x = 0;
+        label.x = 15;
         label.anchor.set(0,0);
 
         this.GUI.games.addChild(label);

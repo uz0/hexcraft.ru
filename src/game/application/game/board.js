@@ -30,7 +30,7 @@ export default class Board extends PIXI.Container {
     this.addChild(this.chips);
 
     this.panel = new Panel();
-    this.panel.addButton('Сдаться', this.game.surrender.bind(this.game))
+    this.panel.addButton('Сдаться', this.game.surrender.bind(this.game));
     this.addChild(this.panel);
 
     let text = `${this.game.player1.username}\n\nПРОТИВ\n\n${this.game.player2.username}`;
@@ -117,7 +117,7 @@ export default class Board extends PIXI.Container {
     let count = {
       player1: 0,
       player2: 0
-    }
+    };
 
     this.chips.children.forEach(chip => {
       let mode = (this.player === player && player === chip.player);

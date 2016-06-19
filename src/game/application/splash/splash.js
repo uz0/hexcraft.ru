@@ -21,7 +21,7 @@ export default class Splash extends PIXI.Container {
     setTimeout(() => {
       window.addEventListener('touchend', this.close);
       window.addEventListener('click', this.close);
-    }, 100)
+    }, 100);
   }
 
   close() {

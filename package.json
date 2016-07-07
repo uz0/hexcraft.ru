@@ -28,7 +28,6 @@
     "bower": "^1.7.7",
     "browserify": "^13.0.0",
     "express": "~4.13.1",
-    "ftp-deploy": "^1.1.0",
     "gulp": "^3.9.1",
     "gulp-apidoc": "^0.2.3",
     "gulp-jade": "^1.1.0",

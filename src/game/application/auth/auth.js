@@ -47,6 +47,8 @@ export default class Auth extends PIXI.Container {
       window.localStorage.setItem('token', response.token);
       hexcraft.setStage(Lobby);
     });
+
+    this.clearInput();
   }
 
   offlineVsPlayer() {
@@ -56,6 +58,8 @@ export default class Auth extends PIXI.Container {
       builder: OfflineVsPlayer,
       data: {}
     });
+
+    this.clearInput();
   }
 
   offlineVsAi() {
@@ -65,6 +69,17 @@ export default class Auth extends PIXI.Container {
       builder: OfflineVsBot,
       data: {}
     });
+
+    this.clearInput();
+  }
+
+  clearInput() {
+    // WORKAROUND: remove input, to prevent show keyboard on mobile
+    let input = document.getElementsByTagName('input')[0];
+
+    if(input) {
+      input.remove();
+    }
   }
 
   update() {}
